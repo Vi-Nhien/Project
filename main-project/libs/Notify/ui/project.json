@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/notify/ui",
+  "sourceRoot": "libs/notify/ui/src",
+  "prefix": "main-project",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/notify/ui"],
+      "options": {
+        "jestConfig": "libs/notify/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/notify/ui/src/**/*.ts",
+          "libs/notify/ui/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

@@ -1,0 +1,64 @@
+<div class="container-list">
+  <nz-table #basicTable [nzData]="listOfData">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Tiêu đề</th>
+        <th>Ngày hết hạn</th>
+        <th>Người tạo</th>
+        <th>Ngày tạo</th>
+        <th>Đã xem</th>
+        <th>Chưa xem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <!-- <td> {{ data.quantrong }}</td> -->
+        <td class="btn">
+          <label nz-checkbox [(ngModel)]="data.checked"></label>
+          <span class="btn-star"><i class='bx bxs-star active'></i></span>
+          <a class="btn-dropdown" nz-dropdown [nzDropdownMenu]="menu">
+            <span><i class='bx bxs-inbox'></i></span>
+          </a>
+          <nz-dropdown-menu #menu="nzDropdownMenu" class = "dropdownMenu">
+            <ul nz-menu nzSelectable>
+              <li nz-menu-item>Chỉnh sửa</li>
+              <li nz-menu-item>Xóa</li>
+            </ul>
+          </nz-dropdown-menu>
+        </td>
+        <td>{{ data.tieude }}</td>
+        <td>{{ data.ngayHetHan }}</td>
+        <td>{{ data.nguoiTao }}</td>
+        <td>{{ data.ngayTao }}</td>
+        <td class = "list-views">[{{ data.daXem }}]</td>
+        <td class = "list-views">[{{ data.chuaXem }}]</td>
+
+      </tr>
+    </tbody>
+  </nz-table>
+
+
+
+
+
+</div>
+<ng-template #contentTemplate>
+  <div>
+    <p>Chỉnh sửa</p>
+    <p>Xóa</p>
+  </div>
+</ng-template>
+
+
+
+
+
+
+<div class="container-list">
+  <div class="inbox-list">
+    <div class="inbox-list__head">
+
+    </div>
+  </div>
+</div>

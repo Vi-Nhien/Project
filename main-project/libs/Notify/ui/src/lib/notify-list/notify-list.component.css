@@ -1,0 +1,40 @@
+.container-list{
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 20px;
+}
+
+.btn-star {
+  border: none;
+  background: inherit;
+  font-size: 16px;
+}
+
+.btn-popover {
+  border: none;
+  background: inherit;
+}
+
+.btn-dropdown{
+  color:inherit;
+}
+
+.ant-dropdown-menu-item{
+  padding: 0 32px;
+}
+
+.list-views{
+  color:rgb(0, 111, 201);
+}
+
+
+.active{
+  color: yellow;
+}
+

@@ -1,0 +1,36 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@main-project/login/data-access": [
+        "libs/login/data-access/src/index.ts"
+      ],
+      "@main-project/login/feature": ["libs/login/feature/src/index.ts"],
+      "@main-project/notify/data-access/models": [
+        "libs/notify/data-access/models/src/index.ts"
+      ],
+      "@main-project/notify/data-access/services": [
+        "libs/notify/data-access/services/src/index.ts"
+      ],
+      "@main-project/notify/data-access/state": [
+        "libs/notify/data-access/state/src/index.ts"
+      ],
+      "@main-project/notify/feature": ["libs/notify/feature/src/index.ts"],
+      "@main-project/notify/ui": ["libs/notify/ui/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

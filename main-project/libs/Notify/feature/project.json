@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/notify/feature",
+  "sourceRoot": "libs/notify/feature/src",
+  "prefix": "main-project",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/notify/feature"],
+      "options": {
+        "jestConfig": "libs/notify/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/notify/feature/src/**/*.ts",
+          "libs/notify/feature/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
