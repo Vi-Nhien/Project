@@ -1,0 +1,141 @@
+.container-sidebar {
+  height: 100vh;
+  width: 320px;
+  margin: 0;
+  display: flex;
+}
+
+.sidebar-primary {
+  flex: 50px;
+  background-color: #ef5d08;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar-primary .sidebar-primary_icon {
+  font-size: 24px;
+  color: white;
+  margin: 12px 0;
+
+}
+
+.sidebar-secondary {
+  flex: 80%;
+  padding: 15px;
+}
+
+.sidebar-secondary .side-user {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  margin-bottom: 20px;
+
+}
+
+.sidebar-secondary .side-user .avata-user {
+  width: 40px;
+  height: 40px;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: 50%;
+  background-color: #ddd;
+  line-height: 40px;
+  text-align: center;
+}
+
+.sidebar-secondary .side-user .side-infor {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+
+.sidebar-secondary .side-user .side-infor .name-user {
+  line-height: 1.5;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.sidebar-secondary .side-btn-modal {
+  background-color: #ef5d08;
+  color: white;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  line-height: 1;
+}
+
+
+
+.sidebar-secondary .side-btn-modal .btn-modal-compose {
+  background-color: #ef5d08;
+  color: white;
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+
+
+
+.sidebar-secondary .side-menu .lables {
+  color: #222;
+  font-size: 15px;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.sidebar-secondary .side-menu .menu-list {
+  display: flex;
+  align-items: flex-start;
+  text-decoration: none;
+  flex-direction: column;
+  margin-bottom: 20px;
+  justify-content: flex-start;
+
+}
+
+.sidebar-secondary .side-menu .menu-list .menu-list_tb {
+  display: flex;
+  color: #202124;
+  padding: 6px 15px;
+  column-gap: 12px;
+  align-items: center;
+}
+
+
+
+.sidebar-secondary .side-menu .menu-list .menu-list_tb .bx {
+  color: #ef5d08;
+  font-size: 20px;
+}
+
+
+.sidebar-secondary .side-menu .menu-list .menu-list_tc {
+  display: flex;
+  color: #202124;
+  padding: 6px 15px;
+  column-gap: 12px;
+  align-items: center;
+
+}
+
+.sidebar-secondary .side-menu .menu-list .menu-list_tc .bx {
+
+  font-size: 24px;
+}
+
+
+
+.sidebar-secondary .side-menu .menu-list .menu-list_ql {
+  display: flex;
+  align-items: center;
+  padding: 6px 15px;
+  color: #202124;
+  text-decoration: none;
+  column-gap: 12px;
+}

@@ -1,13 +1,9 @@
-.container-list{
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-}
-.btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  column-gap: 20px;
+
+
+.btn-modal {
+  border: none;
+  background: initial;
+  padding: 4px 40px;
 }
 
 .btn-star {
@@ -21,20 +17,84 @@
   background: inherit;
 }
 
-.btn-dropdown{
-  color:inherit;
-}
-
-.ant-dropdown-menu-item{
-  padding: 0 32px;
-}
-
-.list-views{
-  color:rgb(0, 111, 201);
+.btn-dropdown {
+  color: inherit;
 }
 
 
-.active{
+.btn-form {
+  border: none;
+  background: initial;
+  margin: 0 12px;
+  padding: 8 12px;
+}
+
+.btn-cancel:hover {
+  color: red;
+}
+
+.btn-save {
+  background-color: rgb(0, 111, 201);
+  color: white;
+  padding: 8px 20px;
+}
+
+
+.list-views {
+  color: rgb(0, 111, 201);
+
+}
+
+
+.active {
   color: yellow;
 }
 
+.input-row__form {
+  margin-bottom: 24px;
+}
+
+nz-select {
+  position: inherit;
+  display: block;
+}
+
+
+.btn-upload__file {
+  display: flex;
+  justify-content: center;
+}
+
+
+
+
+
+.btn-upload__file .custom-file__input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+
+}
+
+.btn-upload__file .custom-file__input::before {
+  content: 'Đính Kèm';
+  display: inline-block;
+  border: 1px dashed rgb(0, 111, 201);
+  padding: 12px 0;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 10pt;
+}
+
+/* .custom-file__input:hover::before {
+  border-color: black;
+} */
+/* .custom-file__input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+} */
