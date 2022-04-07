@@ -1,0 +1,54 @@
+<div class="container-table_property">
+
+  <div class="tools-bar">
+    <div class="btn">
+      <div class="btn-inbox_checkbox">
+        <label nz-checkbox></label>
+      </div>
+      <button type="button" class="btn-add">
+        <i class='bx bx-add-to-queue'></i>
+        Thêm mới
+      </button>
+    </div>
+    <div class="tool-pagination">
+      <nz-pagination [nzPageIndex]="2" [nzTotal]="50" nzSimple></nz-pagination>
+    </div>
+  </div>
+
+
+  <div class="list-title">
+
+    <div class="list-title_header">
+      <div class="inbox-list_checkbox inbox-title"></div>
+      <div class="inbox-list_action inbox-title"></div>
+      <div class="inbox-list_code inbox-title">Mã tính chất</div>
+      <div class="inbox-list_title inbox-title">Tên tính chất</div>
+      <div class="inbox-list_note inbox-title">Ghi chú</div>
+      <div class="inbox-list_status inbox-title">Hiển thị</div>
+    </div>
+    <div class="list-title_body">
+
+      <div class="inbox-list_checkbox"><label nz-checkbox ></label></div>
+      <div class="inbox-list_action">
+        <a class="btn-dropdown" nz-dropdown [nzDropdownMenu]="menu">
+          <span><i class='bx bxs-inbox'></i></span>
+        </a>
+        <nz-dropdown-menu #menu="nzDropdownMenu" class="dropdownMenu">
+          <ul nz-menu nzSelectable>
+            <!-- <li nz-menu-item> <button class="btn-modal" (click)="showModal()">Chỉnh sửa</button></li>
+            <li nz-menu-item><button class="btn-modal" (click)="showDeleteConfirm()">Delete</button></li> -->
+            <li nz-menu-item> <button class="btn-modal" >Chỉnh sửa</button></li>
+            <li nz-menu-item><button class="btn-modal">Delete</button></li>
+
+          </ul>
+        </nz-dropdown-menu>
+      </div>
+      <div class="inbox-list_code">Mã tính chất</div>
+      <div class="inbox-list_title">Tên tính chất</div>
+      <div class="inbox-list_note">Ghi chú</div>
+      <div class="inbox-list_status">Hiển thị</div>
+
+    </div>
+  </div>
+</div>
+

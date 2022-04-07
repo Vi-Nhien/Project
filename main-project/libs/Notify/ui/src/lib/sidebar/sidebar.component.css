@@ -3,6 +3,7 @@
   width: 320px;
   margin: 0;
   display: flex;
+  border-right: 1px solid #ddd;
 }
 
 .sidebar-primary {
@@ -138,4 +139,9 @@
   color: #202124;
   text-decoration: none;
   column-gap: 12px;
+}
+
+
+.router-link-active {
+  color: #ef5d08;
 }

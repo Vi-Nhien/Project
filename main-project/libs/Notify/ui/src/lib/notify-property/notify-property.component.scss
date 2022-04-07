@@ -1,0 +1,161 @@
+* {
+  line-height: 1.5;
+  text-align: left;
+}
+
+
+.container-table_property {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .tools-bar {
+
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #2125291a;
+    padding: .5rem 1.25rem;
+    height: 53px;
+    justify-content: space-between;
+
+
+    .btn {
+      display: flex;
+      padding: 0;
+
+      .btn-inbox_checkbox {
+        align-items: center;
+        border-radius: .125rem;
+        display: flex;
+        font-size: .875rem;
+        height: 2.25rem;
+        justify-content: center;
+        padding: 0 .625rem;
+        transition: color .12s ease-in-out,
+          background-color .12s ease-in-out,
+          border-color .12s ease-in-out,
+          box-shadow .12s ease-in-out;
+      }
+
+    }
+
+
+    .btn-add {
+      display: flex;
+      align-items: center;
+      border: none;
+      background-color: inherit;
+      display: inline-flex;
+      justify-content: center;
+      padding: .25rem;
+      font-size: 1rem;
+      background: transparent;
+      color: #6c757d;
+
+    }
+  }
+
+}
+
+
+.container-table_property {
+
+  .list-title {
+
+    .list-title_header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      border-bottom: 1px solid #2125291a;
+      cursor: pointer;
+      display: flex;
+      padding: .75rem 1.25rem;
+      background: #f0f2f580;
+    }
+
+    .list-title_body {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #2125291a;
+      cursor: pointer;
+      padding: .75rem 1.25rem;
+
+
+      .btn-dropdown {
+        color: inherit;
+      }
+
+
+
+
+
+    }
+
+
+
+
+  }
+
+  .inbox-title {
+    font-weight: 700;
+  }
+
+  .inbox-list_checkbox {
+    align-items: center;
+    align-self: stretch;
+    display: flex;
+    flex-shrink: 0;
+    font-size: 1rem;
+    justify-content: center;
+    -webkit-user-select: none;
+    user-select: none;
+    width: 2.25rem;
+  }
+
+  .inbox-list_action {
+    flex-shrink: 0;
+    width: 2.5rem;
+    text-align: center;
+  }
+
+  .inbox-list_code {
+    align-items: center;
+    display: flex;
+    flex-shrink: 0;
+    width: 12rem;
+    margin-left: .75rem;
+    margin-right: .75rem;
+  }
+
+  .inbox-list_title {
+    align-items: center;
+    display: flex;
+    flex-grow: 1;
+  }
+
+  .inbox-list_note {
+    flex-shrink: 0;
+    margin-left: .75rem;
+    margin-right: .75rem;
+    min-width: 30rem;
+  }
+
+  .inbox-list_status {
+    flex-shrink: 0;
+    margin-left: .75rem;
+    margin-right: .75rem;
+    text-align: center;
+    width: 4rem;
+  }
+
+}
+
+
+.dropdownMenu{
+  
+  .btn-modal {
+    border: none;
+    background: initial;
+    padding: 4px 40px;
+  }
+}

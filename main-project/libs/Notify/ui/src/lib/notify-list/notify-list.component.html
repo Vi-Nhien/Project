@@ -1,140 +1,59 @@
+<div class="inbox-tools">
+  <div class="btn">
+    <div class="btn-inbox_checkbox">
+      <label nz-checkbox></label>
+    </div>
+    <button type="button" class="btn-star">
+      <i class='bx bxs-star btn-list_star'></i>
+    </button>
 
-  <nz-table #basicTable [nzData]="listOfData" >
-    <thead>
-      <tr>
-        <th nzWidth="32px"></th>
-        <th nzWidth="32px"></th>
-        <th nzWidth="32px"></th>
-        <th>Tiêu đề</th>
-        <th nzWidth="120px">Ngày hết hạn</th>
-        <th nzWidth="200px">Người tạo</th>
-        <th nzWidth="100px">Ngày tạo</th>
-        <th nzWidth="100px">Đã xem</th>
-        <th nzWidth="100px">Chưa xem</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let data of basicTable.data">
-        <!-- <td> {{ data.quantrong }}</td> -->
-        <td> <label nz-checkbox [(ngModel)]="data.checked"></label></td>
-        <td> <span class="btn-star"><i class='bx bxs-star active'></i></span></td>
-        <td >
-          <a class="btn-dropdown" nz-dropdown [nzDropdownMenu]="menu">
-            <span><i class='bx bxs-inbox'></i></span>
-          </a>
-          <nz-dropdown-menu #menu="nzDropdownMenu" class="dropdownMenu">
-            <ul nz-menu nzSelectable>
-              <li nz-menu-item> <button class="btn-modal" (click)="showModal()">Chỉnh sửa</button></li>
-              <li nz-menu-item><button class="btn-modal" (click)="showDeleteConfirm()">Delete</button></li>
-            </ul>
-          </nz-dropdown-menu>
-        </td>
-        <td>{{ data.tieude }}</td>
-        <td>{{ data.ngayHetHan }}</td>
-        <td>{{ data.nguoiTao }}</td>
-        <td>{{ data.ngayTao }}</td>
-        <td class="list-views " nzAlign='center'>[{{ data.daXem }}]</td>
-        <td class="list-views " nzAlign='center'>[{{ data.chuaXem }}]</td>
-
-      </tr>
-    </tbody>
-  </nz-table>
+  </div>
+  <div class="tool-pagination">
+    <nz-pagination [nzPageIndex]="2" [nzTotal]="50" nzSimple></nz-pagination>
+  </div>
+</div>
 
 
+<div class="notify-list">
+  <div class="list-titles">
+    <div class="row-list_title inbox-list_checkbox"></div>
+    <div class="row-list_title inbox-list_star"></div>
+    <div class="row-list_title inbox-list_action"></div>
+    <div class="row-list_title inbox-list_title">Tiêu đề</div>
+    <div class="row-list_title inbox-list_attachments"></div>
+    <div class="row-list_title inbox-list_date">Ngày hết hạn</div>
+    <div class="row-list_title inbox-list_author">Người tạo</div>
+    <div class="row-list_title inbox-list_date">Ngày tạo</div>
+    <div class="row-list_title inbox-list_views">Đã xem</div>
+    <div class="row-list_title inbox-list_views">Chưa xem</div>
+  </div>
+
+  <div class="list-content" *ngFor="let data of listOfData">
+    <div class="row-list_content inbox-list_checkbox"> <label nz-checkbox [(ngModel)]="data.checked"></label></div>
+    <div class="row-list_content inbox-list_star"> <span class="btn-star"><i class='bx bxs-star active'></i></span>
+    </div>
+    <div class="row-list_content inbox-list_action align-items-center">
+
+        <a class="btn-dropdown" nz-dropdown [nzDropdownMenu]="menu">
+          <i class='bx bxs-inbox'></i>
+        </a>
+        <nz-dropdown-menu #menu="nzDropdownMenu" class="dropdownMenu">
+          <ul nz-menu nzSelectable>
+            <li nz-menu-item> <button class="btn-modal" (click)="updateComponentModal()">Chỉnh sửa</button></li>
+            <li nz-menu-item><button class="btn-modal" (click)="showDeleteConfirm()">Delete</button></li>
+
+          </ul>
+        </nz-dropdown-menu>
 
 
+    </div>
+    <div class="row-list_content inbox-list_title">{{ data.tieude }}</div>
+    <div class="row-list_content inbox-list_attachments"></div>
+    <div class="row-list_content inbox-list_date">{{ data.ngayHetHan }}</div>
+    <div class="row-list_content inbox-list_author">{{ data.nguoiTao }}</div>
+    <div class="row-list_content inbox-list_date">{{ data.ngayTao }}</div>
+    <div class="row-list_content list-views inbox-list_views">[{{ data.daXem }}]</div>
+    <div class="row-list_content list-views inbox-list_views">[{{ data.chuaXem }}]</div>
+  </div>
+</div>
 
-
-<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
-  (nzOnCancel)="handleCancel()" nzWidth="700px">
-
-
-  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
-    <ng-template #modalTitle><b> Cập nhật</b></ng-template>
-
-    <ng-template #modalContent style="width: 100%;">
-
-
-      <div class="row input-row__form">
-        <div class="col-sm-3">
-          <label nzRequired nzFor="tieude">Tiêu đề</label>
-        </div>
-        <div class="col-sm-9">
-          <nz-form-control nzErrorTip="The input is not valid" [nzSpan]="30" class="mw-100">
-            <input nz-input formControlName="tieude" id="tieude" />
-          </nz-form-control>
-        </div>
-      </div>
-
-      <div class="row input-row__form">
-        <div class="col-sm-3">
-          <label nzFor="">Nội dung</label>
-        </div>
-        <div class="col-sm-9">
-          <nz-form-control class="mw-100 ">
-            <angular-editor formControlName="noidung" id="noidung" [config]="editorConfig"></angular-editor>
-          </nz-form-control>
-        </div>
-      </div>
-
-      <div class="row input-row__form">
-        <div class="col-sm-3">
-          <label nzRequired nzFor="tieude">Mã tra cứu</label>
-        </div>
-        <div class="col-sm-3">
-          <nz-form-control class="mw-100">
-            <input nz-input formControlName="tieude" id="tieude" placeholder="Mã tra cứu"/>
-          </nz-form-control>
-        </div>
-        <div class="col-sm-3">
-          <label nzFor="tieude">Ngày hết hạn</label>
-        </div>
-        <div class="col-sm-3">
-          <nz-form-control class="mw-100">
-            <nz-date-picker nzFormat="dd/MM/yyyy" nzPlaceHolder="ngày hết hạn"></nz-date-picker>
-          </nz-form-control>
-        </div>
-      </div>
-
-      <div class="row input-row__form">
-        <div class="col-sm-3">
-          <label nzFor="">Tính chất</label>
-        </div>
-        <div class="col-sm-9">
-          <nz-form-control class="mw-100">
-            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Chọn" [(ngModel)]="selectedValue">
-              <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-              <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-              <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-            </nz-select>
-          </nz-form-control>
-
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-3">
-          <label nzFor="">Tính chất</label>
-        </div>
-        <div class="col-sm-9">
-          <div class="form-group btn-upload__file">
-            <input type="file" id="file" class = "custom-file__input" >
-            <label class = "label-input__file"for="file">Choose a file</label>
-        </div>
-        </div>
-      </div>
-
-
-
-
-
-
-    </ng-template>
-    <ng-template #modalFooter>
-      <button class="btn-form btn-cancel" (click)="handleCancel()">Cancel</button>
-      <button class="btn-form btn-save" [disabled]="!validateForm.valid" (click)="handleOk()">Save</button>
-    </ng-template>
-  </form>
-
-
-</nz-modal>

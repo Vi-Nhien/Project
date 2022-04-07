@@ -20,7 +20,11 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NotifyHeaderComponent } from './notify-header/notify-header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NotifyPropertyComponent } from './notify-property/notify-property.component';
+import { NotifyModalComponent } from './notify-modal/notify-modal.component';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
 
 @NgModule({
   imports: [
@@ -37,18 +41,28 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     HttpClientModule,
     NzInputModule,
     NzDatePickerModule,
-    NzSelectModule
+    NzSelectModule,
+    NzPaginationModule,
+    NzRadioModule,
+    NzUploadModule
+
+
+
 
   ],
   declarations: [
     NotifyListComponent,
     NotifyHeaderComponent,
     SidebarComponent,
+    NotifyPropertyComponent,
+    NotifyModalComponent,
   ],
   exports: [
     NotifyListComponent,
     NotifyHeaderComponent,
     SidebarComponent,
+    NotifyPropertyComponent,
+    NotifyModalComponent
   ],
 
   providers: [{ provide: NzMessageService }]

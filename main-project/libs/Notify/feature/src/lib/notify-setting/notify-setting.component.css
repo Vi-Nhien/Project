@@ -1,0 +1,6 @@
+.left-side{
+  flex:auto
+}
+.right-side{
+  flex: 100%;
+}

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NotifyComponent } from './notify.component';
+import { NotifyPropertyComponent } from './notify-property.component';
 
-describe('NotifyComponent', () => {
-  let component: NotifyComponent;
-  let fixture: ComponentFixture<NotifyComponent>;
+describe('NotifyPropertyComponent', () => {
+  let component: NotifyPropertyComponent;
+  let fixture: ComponentFixture<NotifyPropertyComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NotifyComponent ]
+      declarations: [ NotifyPropertyComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NotifyComponent);
+    fixture = TestBed.createComponent(NotifyPropertyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

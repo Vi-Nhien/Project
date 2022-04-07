@@ -1,2 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~ng-zorro-antd/ng-zorro-antd.min.css";
+
+.ant-modal-body,
+.ant-modal-footer {
+  padding: 0;
+}
+
+.ant-modal-header{
+  border: none;
+}
+
+.modal-header_update{
+  border: none;
+}

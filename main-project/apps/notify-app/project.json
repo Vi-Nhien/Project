@@ -18,6 +18,7 @@
           "apps/notify-app/src/assets"
         ],
         "styles": [
+          "node_modules/ng-zorro-antd/ng-zorro-antd.css",
           "apps/notify-app/src/styles.css"],
         "scripts": []
       },
