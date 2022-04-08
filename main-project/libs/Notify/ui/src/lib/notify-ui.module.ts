@@ -28,6 +28,7 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NotifyModalComponent } from './notify-modal/notify-modal.component';
 import { PropertyModalComponent } from './property-modal/property-modal.component';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NotifyAddModalComponent } from './notify-add-modal/notify-add-modal.component';
 
 @NgModule({
   imports: [
@@ -58,6 +59,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
     NotifyPropertyComponent,
     NotifyModalComponent,
     PropertyModalComponent,
+    NotifyAddModalComponent,
   ],
   exports: [
     NotifyListComponent,
@@ -66,6 +68,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
     NotifyPropertyComponent,
     NotifyModalComponent,
     PropertyModalComponent,
+    NotifyAddModalComponent
   ],
 
   providers: [

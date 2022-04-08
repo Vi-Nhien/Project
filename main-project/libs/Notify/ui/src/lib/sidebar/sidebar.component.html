@@ -1,7 +1,10 @@
 <div class="container-sidebar">
   <div class="sidebar-primary">
     <div class="sidebar-primary_icon">
-      <span><i class='bx bx-home'></i></span>
+      <a routerLink = "/login" style ="color: white; text-decoration: none;">
+        <span><i class='bx bx-home'></i></span>
+
+      </a>
     </div>
     <div class="sidebar-primary_icon">
       <span><i class='bx bx-bell'></i></span>
@@ -32,8 +35,8 @@
         Quản lý thông báo
       </div>
       <div class="menu-list">
-        <a href="" class="menu-list_tb active" routerLink="/notify/page" routerLinkActive="router-link-active" ><i class='bx bx-notification'></i>Danh sách thông báo</a>
-        <a href="" class="menu-list_tb" ><i class='bx bxs-star' ></i>Đánh dấu sao</a>
+        <a class="menu-list_tb active" routerLink="/notify/page" routerLinkActive="active" ><i class='bx bx-notification'></i>Danh sách thông báo</a>
+        <a class="menu-list_tb" ><i class='bx bxs-star' ></i>Đánh dấu sao</a>
       </div>
       <div class="lables">
         Tính chất
@@ -51,7 +54,7 @@
         Quản lý cài đặt
       </div>
       <div class="menu-list">
-        <a class="menu-list_ql" routerLink="/notify/tb-tc" routerLinkActive="router-link-active" >
+        <a class="menu-list_ql" routerLink="/notify/tb-tc" routerLinkActive="active" >
           <i class='bx bxs-purchase-tag'style = "color: #ef5d08; font-size:24px;"></i>
           Tính chất
         </a>
