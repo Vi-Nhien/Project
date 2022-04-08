@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'main-project-notify-setting',
   templateUrl: './notify-setting.component.html',
   styleUrls: ['./notify-setting.component.css']
 })
-export class NotifySettingComponent implements OnInit {
+export class NotifySettingComponent {
 
-  constructor() { }
 
-  ngOnInit(): void {
-  }
 
 }

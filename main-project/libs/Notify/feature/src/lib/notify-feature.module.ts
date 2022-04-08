@@ -16,13 +16,18 @@ const routes: Routes = [
     path: 'page', component: NotifyAllComponent
   },
   {
-    path : 'tb-tinh-chat', component: NotifySettingComponent
+    path : 'tb-tc', component: NotifySettingComponent
   }
 ];
 
 @NgModule({
-  imports: [CommonModule, NotifyUiModule,
-    RouterModule.forRoot(routes)],
+  imports: [
+    CommonModule,
+    NotifyUiModule,
+    RouterModule.forChild(routes)
+  ],
+
+
   declarations: [
     NotifyAllComponent,
     NotifySettingComponent,
@@ -31,7 +36,7 @@ const routes: Routes = [
    exports: [
     NotifyAllComponent,
     NotifySettingComponent,
-    RouterModule
+
    ]
 })
 export class NotifyFeatureModule {}

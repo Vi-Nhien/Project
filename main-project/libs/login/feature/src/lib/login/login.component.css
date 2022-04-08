@@ -1,0 +1,16 @@
+.container-login{
+  display: flex;
+
+}
+
+.notify-btn{
+  margin: auto;
+  border: none;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 20px;
+  background-color: coral;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+}

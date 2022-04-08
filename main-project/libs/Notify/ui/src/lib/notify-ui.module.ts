@@ -45,10 +45,6 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
     NzPaginationModule,
     NzRadioModule,
     NzUploadModule
-
-
-
-
   ],
   declarations: [
     NotifyListComponent,
