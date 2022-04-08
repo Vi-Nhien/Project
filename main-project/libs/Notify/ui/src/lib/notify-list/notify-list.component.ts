@@ -101,7 +101,7 @@ export class NotifyListComponent implements OnInit {
       nzTitle: 'Are you sure delete this task?',
       nzContent: '<b style="color: red;">Some descriptions</b>',
       nzAutofocus: null,
-      nzBodyStyle: { padding: '0' },
+      nzBodyStyle: { padding: '20px' },
       nzStyle: { padding: '0' },
       nzOkText: 'Yes',
       nzOkType: 'primary',
@@ -124,10 +124,9 @@ export class NotifyListComponent implements OnInit {
       nzClosable: true,
       nzAutofocus: null,
       nzWidth: '700px',
-      nzOnOk: () =>this.updateMessage(),
-      nzOnCancel: () => console.log('Cancel'),
-      nzMaskStyle: {padding: '0'},
-      nzMaskClosable: false
+      // nzOnOk: () =>this.updateMessage(),
+      // nzOnOk: () => new Promise(resolve => setTimeout(resolve, 1000)),
+      // nzOnCancel: () => console.log('Cancel'),
     });
 
   }
