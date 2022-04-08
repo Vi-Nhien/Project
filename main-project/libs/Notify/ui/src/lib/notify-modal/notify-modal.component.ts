@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message'
-import { NzModalService } from 'ng-zorro-antd/modal';
+
 
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
+
+
+
 
 @Component({
   selector: 'main-project-notify-modal',
@@ -14,7 +17,6 @@ import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 export class NotifyModalComponent {
 
   selectedValue = null;
-  isVisible = true;
 
 
   editorConfig : AngularEditorConfig = {
@@ -58,33 +60,8 @@ export class NotifyModalComponent {
 
   validateForm!: FormGroup;
   constructor(
-    private modal: NzModalService,
-    private fb: FormBuilder,
     private message: NzMessageService,
-
   ) { }
-
-
-  handleOk(): void {
-    console.log('Button ok clicked!');
-    this.updateMessage();
-    this.isVisible = false;
-  }
-
-  handleCancel(): void {
-    console.log('Button cancel clicked!');
-    this.isVisible = false;
-  }
-
-  updateMessage(): void {
-    this.message.success('Update successfully', {
-      nzDuration: 3000
-    });
-  }
-
-
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  submitForm():void{}
 
 
 

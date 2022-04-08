@@ -1,3 +1,4 @@
+import vi from '@angular/common/locales/vi';
 import { NotifyModalComponent } from './../notify-modal/notify-modal.component';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,7 +8,6 @@ import { NzMessageService } from 'ng-zorro-antd/message'
 
 
 import { registerLocaleData } from '@angular/common';
-import zh from '@angular/common/locales/zh';
 
 interface ListThongBao {
   key: string;
@@ -77,7 +77,7 @@ export class NotifyListComponent implements OnInit {
 
   ngOnInit(): void {
 
-    registerLocaleData(zh);
+    registerLocaleData(vi);
 
   }
 
@@ -101,8 +101,8 @@ export class NotifyListComponent implements OnInit {
       nzTitle: 'Are you sure delete this task?',
       nzContent: '<b style="color: red;">Some descriptions</b>',
       nzAutofocus: null,
-      nzBodyStyle: { padding: '20px' },
-      nzStyle: { padding: '0' },
+      nzBodyStyle: { padding: '20px', outline:'none' },
+      nzMaskClosable: true,
       nzOkText: 'Yes',
       nzOkType: 'primary',
       nzOkDanger: true,
@@ -124,9 +124,10 @@ export class NotifyListComponent implements OnInit {
       nzClosable: true,
       nzAutofocus: null,
       nzWidth: '700px',
-      // nzOnOk: () =>this.updateMessage(),
-      // nzOnOk: () => new Promise(resolve => setTimeout(resolve, 1000)),
-      // nzOnCancel: () => console.log('Cancel'),
+      nzOkText: 'Save',
+      nzOnOk: () =>this.updateMessage(),
+      nzCancelText: 'Cancel',
+      nzOnCancel: () => console.log('Cancel'),
     });
 
   }

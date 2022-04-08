@@ -1,75 +1,81 @@
+<ng-template [nzModalTitle] class="modal-header_update">Cập nhật</ng-template>
 
-  <ng-template [nzModalTitle] class = "modal-header_update">Cập nhật</ng-template>
-
-  <div class="form-update scroll-bar">
-    <div class="row form-group">
-      <label class="col-sm-3 form-label">
-        Tiêu đề
-        <sup>(*)</sup>
-      </label>
-      <div class="col-sm-9">
-        <input type="text" placeholder="Tiêu đề" class='form-control'>
-      </div>
+<div class="form-update scroll-bar">
+  <div class="row form-group">
+    <label class="col-sm-3 form-label">
+      Tiêu đề
+      <sup>(*)</sup>
+    </label>
+    <div class="col-sm-9">
+      <input type="text" placeholder="Tiêu đề" class='form-control'>
     </div>
-    <div class="row form-group">
-      <div class="col-sm-3 form-label">
-        Nội dung
-      </div>
-      <div class="col-sm-9">
-        <angular-editor [placeholder]="'Enter text here...'" [config]="editorConfig"></angular-editor>
-      </div>
+  </div>
+  <div class="row form-group">
+    <div class="col-sm-3 form-label">
+      Nội dung
     </div>
-
-    <div class="row form-group">
-      <div class="col-sm-3 form-label">
-        Loại thông báo
-      </div>
-      <div class="col-sm-9">
-        <nz-radio-group>
-          <label nz-radio nzValue="A">Chung</label>
-          <label nz-radio nzValue="B">Cơ sở</label>
-          <label nz-radio nzValue="C">Phòng ban</label>
-        </nz-radio-group>
-      </div>
-    </div>
-
-    <div class="row form-group">
-      <div class="col-sm-3 form-label">Mã tra cứu</div>
-      <div class="col-sm-3"> <input type="text" placeholder="Mã tra cứu" class="form-control"> </div>
-      <div class="col-sm-3 form-label">Ngày hết hạn</div>
-      <div class="col-sm-3">
-        <nz-date-picker class="form-control"></nz-date-picker>
-      </div>
-    </div>
-    <div class="row form-group">
-      <label class="col-sm-3 form-label">
-        Tính chất
-      </label>
-      <div class="col-sm-9">
-        <nz-select ngModel="null" class="form-control" nzPlaceHolder="Chọn">
-          <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
-          <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
-        </nz-select>
-      </div>
-    </div>
-
-
-    <div class="row form-group">
-      <div class="col-sm-3  form-label">
-        Đính kèm
-      </div>
-      <div class="col-sm-9">
-        <nz-upload nzType="drag" [nzMultiple]="true" (nzChange)="handleChange($event)" class="form-control">
-          <p class="ant-upload-drag-icon d-flex align-items-center justify-content-center">
-            <i class='bx bx-upload'></i>
-            <span>Đính kèm</span>
-          </p>
-        </nz-upload>
-      </div>
+    <div class="col-sm-9">
+      <angular-editor [placeholder]="'Enter text here...'" [config]="editorConfig"></angular-editor>
     </div>
   </div>
 
-<div *nzModalFooter class = " modal-footer_update" >
-  <button class = "btn-cancel" (click)="handleCancel()">Đóng</button>
-  <button class = "btn-save" (click)="handleOk()">Lưu thay đổi</button>
+  <div class="row form-group">
+    <div class="col-sm-3 form-label">
+      Loại thông báo
+    </div>
+    <div class="col-sm-9">
+      <nz-radio-group>
+        <label nz-radio nzValue="A">Chung</label>
+        <label nz-radio nzValue="B">Cơ sở</label>
+        <label nz-radio nzValue="C">Phòng ban</label>
+      </nz-radio-group>
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <div class="col-sm-3 form-label">Mã tra cứu</div>
+    <div class="col-sm-3"> <input type="text" placeholder="Mã tra cứu" class="form-control"> </div>
+    <div class="col-sm-3 form-label">Ngày hết hạn</div>
+    <div class="col-sm-3">
+      <nz-date-picker class="form-control" nzPlaceHolder='Ngày hết hạn'></nz-date-picker>
+    </div>
+  </div>
+  <div class="row form-group">
+    <label class="col-sm-3 form-label">
+      Tính chất
+    </label>
+    <div class="col-sm-9">
+      <nz-select nzShowSearch ngModel="null" class="form-control" nzPlaceHolder="Chọn" [(ngModel)]="selectedValue">
+
+        <nz-option nzCustomContent nzLabel="QT" nzValue="QT"> <a href="" class="menu-list_tc"><i class='bx bx-radio-circle-marked'
+              style="color: rgb(230, 0, 0);"></i> Quan trọng</a></nz-option>
+        <nz-option nzCustomContent nzLabel="CV" nzValue="CV"> <a href="" class="menu-list_tc"><i class='bx bx-radio-circle-marked'
+              style="color: rgb(70, 81, 164);"></i>Công Văn </a></nz-option>
+        <nz-option nzCustomContent nzLabel="BC" nzValue="BC"> <a href="" class="menu-list_tc"><i class='bx bx-radio-circle-marked'
+              style="color: rgb(104, 253, 107);"></i> Báo cáo</a></nz-option>
+        <nz-option nzCustomContent nzLabel="BCCD" nzValue="BCCD"><a href="" class="menu-list_tc"><i class='bx bx-radio-circle-marked'
+              style="color: rgb(131, 33, 33);"></i> Báo cáo chuyên đề</a></nz-option>
+      </nz-select>
+    </div>
+  </div>
+
+
+  <div class="row form-group">
+    <div class="col-sm-3  form-label">
+      Đính kèm
+    </div>
+    <div class="col-sm-9">
+      <nz-upload [nzMultiple]="true" (nzChange)="handleChange($event)" class="form-control">
+        <p class="ant-upload-drag-icon d-flex align-items-center justify-content-center">
+          <i class='bx bx-upload btn-upload' style="font-size: 14px;"></i>
+          <span class="text-upload" style="margin-left: 8px; font-size: 14px;">Đính kèm</span>
+        </p>
+      </nz-upload>
+    </div>
+  </div>
 </div>
+
+<!-- <div *nzModalFooter class = " modal-footer_update" >
+  <button  nz-button class = "btn-cancel" (click)="handleCancel()">Đóng</button>
+  <button  nz-button class = "btn-save" (click)="handleOk()">Lưu thay đổi</button>
+</div> -->

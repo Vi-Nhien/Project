@@ -1,3 +1,5 @@
+
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -7,6 +9,7 @@ import { AppComponent } from './app.component';
 
 import { RouterModule, Routes } from '@angular/router';
 
+import { NzI18nModule, NZ_I18N, vi_VN } from 'ng-zorro-antd/i18n';
 ;
 
 const routes: Routes = [
@@ -15,26 +18,29 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('@main-project/login/feature').then(login => login.LoginFeatureModule)
+    loadChildren:  async () => await import('@main-project/login/feature').then(login => login.LoginFeatureModule)
   },
   {
     path: 'notify',
-    loadChildren: () => import('@main-project/notify/feature').then(notify => notify.NotifyFeatureModule)
+    loadChildren: async () => await import('@main-project/notify/feature').then(notify => notify.NotifyFeatureModule)
   }
+
 ];
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    NzI18nModule
+
   ],
 
-  providers: [],
-  bootstrap: [AppComponent,RouterModule],
+  providers: [    { provide: NZ_I18N, useValue: vi_VN },],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

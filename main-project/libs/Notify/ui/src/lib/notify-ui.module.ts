@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NotifyListComponent } from './notify-list/notify-list.component';
@@ -22,9 +23,11 @@ import { NotifyHeaderComponent } from './notify-header/notify-header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NotifyPropertyComponent } from './notify-property/notify-property.component';
-import { NotifyModalComponent } from './notify-modal/notify-modal.component';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NotifyModalComponent } from './notify-modal/notify-modal.component';
+import { PropertyModalComponent } from './property-modal/property-modal.component';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 
 @NgModule({
   imports: [
@@ -44,7 +47,9 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
     NzSelectModule,
     NzPaginationModule,
     NzRadioModule,
-    NzUploadModule
+    NzUploadModule,
+    NzInputNumberModule,
+    RouterModule
   ],
   declarations: [
     NotifyListComponent,
@@ -52,15 +57,18 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
     SidebarComponent,
     NotifyPropertyComponent,
     NotifyModalComponent,
+    PropertyModalComponent,
   ],
   exports: [
     NotifyListComponent,
     NotifyHeaderComponent,
     SidebarComponent,
     NotifyPropertyComponent,
-    NotifyModalComponent
+    NotifyModalComponent,
+    PropertyModalComponent,
   ],
 
-  providers: [{ provide: NzMessageService }]
+  providers: [
+    { provide: NzMessageService }]
 })
 export class NotifyUiModule { }

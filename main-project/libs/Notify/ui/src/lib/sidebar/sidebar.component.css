@@ -68,14 +68,15 @@
   line-height: 1;
 }
 
-
-
-.sidebar-secondary .side-btn-modal .btn-modal-compose {
+.sidebar-secondary .side-btn-modal .btn-modal-add {
   background-color: #ef5d08;
   color: white;
   display: flex;
   align-items: center;
   column-gap: 20px;
+  border: none;
+  padding: 12px 0;
+  outline: none;
 }
 
 
