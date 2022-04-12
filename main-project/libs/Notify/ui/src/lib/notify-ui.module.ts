@@ -30,6 +30,7 @@ import { PropertyModalComponent } from './property-modal/property-modal.componen
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NotifyAddModalComponent } from './notify-add-modal/notify-add-modal.component';
 import { PropertyAddModalComponent } from './property-add-modal/property-add-modal.component';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 
 @NgModule({
   imports: [
@@ -51,7 +52,8 @@ import { PropertyAddModalComponent } from './property-add-modal/property-add-mod
     NzRadioModule,
     NzUploadModule,
     NzInputNumberModule,
-    RouterModule
+    RouterModule,
+    NzDrawerModule
   ],
   declarations: [
     NotifyListComponent,

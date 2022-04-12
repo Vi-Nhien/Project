@@ -24,7 +24,7 @@ export class NotifyService {
   private apiUrlThongBaos: string;
 
   constructor(private httpClient: HttpClient) {
-    this.apiUrlThongBaoTinhChats = environment.apiUrlServer + '/ThongBaoTinhChats';
+    this.apiUrlThongBaoTinhChats = environment.apiUrlServer + 'ThongBaoTinhChats';
     this.apiUrlThongBaos = environment.apiUrlServer + '/ThongBaos';
   }
   getAllThongBaoTinhChats() :Observable<ThongBaoTinhChat[]> {

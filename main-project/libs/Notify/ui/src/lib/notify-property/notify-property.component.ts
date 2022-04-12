@@ -15,7 +15,7 @@ export class NotifyPropertyComponent implements OnInit {
 
   form ?: FormGroup;
   thongBaoTinhChatsList: ThongBaoTinhChat[] | undefined ;
-  isVisible = false;
+
   constructor(private modal: NzModalService,
     private message: NzMessageService,
     private notifyService : NotifyService) { }
@@ -37,31 +37,23 @@ export class NotifyPropertyComponent implements OnInit {
     )
   }
 
-
-
-
-  showModal(): void {
-    this.isVisible = true;
-
-  }
-
   // ---modal delete------
 
-  showDeleteConfirm(): void {
-    this.modal.confirm({
-      nzTitle: 'Are you sure delete this task?',
-      nzContent: '<b style="color: red;">Some descriptions</b>',
-      nzAutofocus: null,
-      nzBodyStyle: { padding: '20px', outline:'none' },
-      nzMaskClosable: true,
-      nzOkText: 'Yes',
-      nzOkType: 'primary',
-      nzOkDanger: true,
-      nzOnOk: () => this.deleteMessage(),
-      nzCancelText: 'No',
-      nzOnCancel: () => console.log('Cancel')
-    });
-  }
+  // showDeleteConfirm( thongBaoTinhChat : ThongBaoTinhChat): void {
+  //   this.modal.confirm({
+  //     nzTitle: 'Are you sure delete this task?',
+  //     nzContent: '<b style="color: red;">Some descriptions</b>',
+  //     nzAutofocus: null,
+  //     nzBodyStyle: { padding: '20px', outline:'none' },
+  //     nzMaskClosable: true,
+  //     nzOkText: 'Yes',
+  //     nzOkType: 'primary',
+  //     nzOkDanger: true,
+  //     nzOnOk: () => this.deleteMessage(),
+  //     nzCancelText: 'No',
+  //     nzOnCancel: () => console.log('Cancel')
+  //   });
+  // }
 
   deleteMessage(): void {
     this.message.success('Delete successfully', {
@@ -92,15 +84,6 @@ export class NotifyPropertyComponent implements OnInit {
   }
 
 
-  // onSubmit(){
-  //   console.log(this.form);
-  //   this.notifyService. createThongBaoTinhChat(this.form?.value).subscribe(
-  //     Response =>{
-  //       console.log(Response);
-  //     }
-  //   )
-  // }
-
   propertyAddModal(){
     this.modal.create({
       nzContent: PropertyAddModalComponent,
@@ -111,7 +94,24 @@ export class NotifyPropertyComponent implements OnInit {
       // nzOnOk: () =>this.onSubmit(),
       // nzCancelText: 'Cancel',
       // nzOnCancel: () => console.log('Cancel'),
+      nzFooter: null
     });
+  }
+
+  deleteThongBaoTinhChat(thongBaoTinhChat: ThongBaoTinhChat) {
+    if (thongBaoTinhChat) {
+      this.notifyService.deleteThongBaoTinhChat(thongBaoTinhChat.id).subscribe(
+        res => {
+          this.deleteMessage()
+          console.log('complete');
+          const index = this.thongBaoTinhChatsList?.findIndex(m => m.id === thongBaoTinhChat.id) || -1;
+          if (index >= 0) {
+            this.thongBaoTinhChatsList?.splice(index, 1);
+          }
+
+        }
+      )
+    }
   }
 
 }

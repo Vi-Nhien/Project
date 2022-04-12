@@ -24,7 +24,7 @@
       <div class="inbox-list_status inbox-title">Hiển thị</div>
     </div>
     <div class="list-title_body" *ngFor="let thongBaoTinhChat of thongBaoTinhChatsList">
-      <div class="inbox-list_checkbox"><label nz-checkbox ></label></div>
+      <div class="inbox-list_checkbox"><label nz-checkbox></label></div>
       <div class="inbox-list_action">
         <a class="btn-dropdown" nz-dropdown [nzDropdownMenu]="menu">
           <span><i class='bx bxs-inbox'></i></span>
@@ -33,8 +33,8 @@
           <ul nz-menu nzSelectable>
 
             <li nz-menu-item> <button class="btn-modal" (click)="updateComponentModal()">Chỉnh sửa</button></li>
-            <li nz-menu-item><button class="btn-modal" (click)="showDeleteConfirm()">Delete</button></li>
-
+            <li nz-menu-item><button class="btn-modal"
+                (click)="deleteThongBaoTinhChat(thongBaoTinhChat)">Delete</button></li>
           </ul>
         </nz-dropdown-menu>
       </div>
@@ -43,9 +43,7 @@
       <div class="inbox-list_note">{{thongBaoTinhChat.ghiChu}}</div>
       <div class="inbox-list_status">{{thongBaoTinhChat.isVisible}}</div>
 
+
     </div>
   </div>
 </div>
-
-
-

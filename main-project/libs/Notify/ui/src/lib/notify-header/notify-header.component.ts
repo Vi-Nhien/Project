@@ -7,5 +7,13 @@ import { Component } from '@angular/core';
 })
 export class NotifyHeaderComponent  {
 
+  visible = false;
 
+  open(): void {
+    this.visible = true;
+  }
+
+  close(): void {
+    this.visible = false;
+  }
 }

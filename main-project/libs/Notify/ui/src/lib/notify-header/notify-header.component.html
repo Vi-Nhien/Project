@@ -6,7 +6,24 @@
       <div class="search-box">
         <span><i class='bx bx-search-alt-2'></i></span>
         <input type="text" placeholder="Tìm Kiếm thông báo" class ="input-search">
-        <span><i class='bx bx-slider'></i></span>
+        <button nz-button nzType="primary" (click)="open()">
+          <span><i class='bx bx-slider'></i></span>
+        </button>
       </div>
     </div>
 </div>
+
+
+<nz-drawer
+  [nzClosable]="true"
+  [nzVisible]="visible"
+  nzPlacement="right"
+  nzTitle="Basic Drawer"
+  (nzOnClose)="close()"
+>
+  <ng-container *nzDrawerContent>
+    <p>Some contents...</p>
+    <p>Some contents...</p>
+    <p>Some contents...</p>
+  </ng-container>
+</nz-drawer>

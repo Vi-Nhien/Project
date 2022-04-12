@@ -1,5 +1,4 @@
-.modal-header_update
-{
+.modal-header_update {
   color: #222;
   font-weight: 700;
   font-size: 20px;
@@ -7,9 +6,10 @@
 
 
 
-.form-create_new{
+.form-create_new {
   padding: 0 20px;
   line-height: 26px;
+
   .form-label {
     font-weight: 500;
     font-size: 13px;
@@ -19,5 +19,24 @@
     sup {
       color: red;
     }
+  }
+}
+
+.add-btn_footer {
+  padding: 12px 20px;
+  background: #f1f2f5;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  .btn-footer_modal {
+    outline: none;
+    border: none;
+    padding: 8px 20px;
+  }
+
+
+  .btn-submit{
+    background-color: #40a9ff;
+    color: white;
   }
 }
