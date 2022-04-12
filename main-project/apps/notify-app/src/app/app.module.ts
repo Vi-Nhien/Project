@@ -1,4 +1,3 @@
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -39,10 +38,7 @@ const routes: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     NzI18nModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule
-
+    HttpClientModule
   ],
 
   providers: [    { provide: NZ_I18N, useValue: vi_VN },],

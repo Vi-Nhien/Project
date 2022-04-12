@@ -143,6 +143,10 @@
 }
 
 
-.active {
+.menu-list .active {
+  color: #ef5d08 !important;
+}
+
+.menu-list a:hover {
   color: #ef5d08;
 }

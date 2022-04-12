@@ -1,3 +1,4 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -10,8 +11,6 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzModalModule } from 'ng-zorro-antd/modal';
-
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { AngularEditorModule } from '@kolkov/angular-editor';
@@ -36,13 +35,13 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     NzTableModule,
     NzDividerModule,
     NzCheckboxModule,
     NzDropDownModule,
     NzModalModule,
     NzFormModule,
-    ReactiveFormsModule,
     AngularEditorModule,
     HttpClientModule,
     NzInputModule,

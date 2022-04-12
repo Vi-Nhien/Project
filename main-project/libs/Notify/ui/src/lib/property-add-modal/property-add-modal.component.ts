@@ -10,7 +10,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 })
 export class PropertyAddModalComponent implements OnInit {
 
-  newThongBaoTinhChat ?: FormGroup;
+  newThongBaoTinhChat !: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -21,8 +21,7 @@ export class PropertyAddModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.newThongBaoTinhChat = this.fb.group({
-
-      maTinhChat: ['', Validators.required],
+      maTinhChat: [''],
       tenTinhChat: ['', Validators.required],
       maMau: ['', Validators.required],
       ghiChu: ['' ],
@@ -44,11 +43,7 @@ export class PropertyAddModalComponent implements OnInit {
       Response =>{
         console.log(Response);
         this.completeMessage();
-      },
-      error =>{
-        this.errorMessage();
       }
     )
   }
-
 }
