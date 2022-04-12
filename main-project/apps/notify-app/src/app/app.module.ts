@@ -1,3 +1,5 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 import { NgModule } from '@angular/core';
@@ -36,7 +38,10 @@ const routes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
-    NzI18nModule
+    NzI18nModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
 
   ],
 

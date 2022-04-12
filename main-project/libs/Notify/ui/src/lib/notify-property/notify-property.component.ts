@@ -1,18 +1,42 @@
-import { Component } from '@angular/core';
+import { PropertyAddModalComponent } from './../property-add-modal/property-add-modal.component';
+import { Component, OnInit } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message'
 import { PropertyModalComponent } from '../property-modal/property-modal.component';
+import { NotifyService, ThongBaoTinhChat } from 'libs/Notify/data-access/services/src/lib/notify.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'main-project-notify-property',
   templateUrl: './notify-property.component.html',
   styleUrls: ['./notify-property.component.scss']
 })
-export class NotifyPropertyComponent  {
+export class NotifyPropertyComponent implements OnInit {
 
+  form ?: FormGroup;
+  thongBaoTinhChatsList: ThongBaoTinhChat[] | undefined ;
   isVisible = false;
   constructor(private modal: NzModalService,
-    private message: NzMessageService) { }
+    private message: NzMessageService,
+    private notifyService : NotifyService) { }
+
+    ngOnInit(): void {
+      this.getThongBaoTinhChats();
+    }
+
+
+  getThongBaoTinhChats(){
+    this.notifyService.getAllThongBaoTinhChats().subscribe(
+      res =>{
+        this.thongBaoTinhChatsList = res;
+        console.log(this.thongBaoTinhChatsList)
+      },
+      (err) =>{
+        console.log(err)
+      }
+    )
+  }
+
 
 
 
@@ -64,6 +88,29 @@ export class NotifyPropertyComponent  {
   updateMessage(): void {
     this.message.success('Update successfully', {
       nzDuration: 3000
+    });
+  }
+
+
+  // onSubmit(){
+  //   console.log(this.form);
+  //   this.notifyService. createThongBaoTinhChat(this.form?.value).subscribe(
+  //     Response =>{
+  //       console.log(Response);
+  //     }
+  //   )
+  // }
+
+  propertyAddModal(){
+    this.modal.create({
+      nzContent: PropertyAddModalComponent,
+      nzClosable: true,
+      nzAutofocus: null,
+      nzWidth: '700px',
+      // nzOkText: 'Save',
+      // nzOnOk: () =>this.onSubmit(),
+      // nzCancelText: 'Cancel',
+      // nzOnCancel: () => console.log('Cancel'),
     });
   }
 

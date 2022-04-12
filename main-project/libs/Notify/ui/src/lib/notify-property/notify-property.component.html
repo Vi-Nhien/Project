@@ -5,7 +5,7 @@
       <div class="btn-inbox_checkbox">
         <label nz-checkbox></label>
       </div>
-      <button type="button" class="btn-add">
+      <button type="button" class="btn-add" (click)="propertyAddModal()">
         <i class='bx bx-add-to-queue'></i>
         Thêm mới
       </button>
@@ -14,10 +14,7 @@
       <nz-pagination [nzPageIndex]="2" [nzTotal]="50" nzSimple></nz-pagination>
     </div>
   </div>
-
-
   <div class="list-title">
-
     <div class="list-title_header">
       <div class="inbox-list_checkbox inbox-title"></div>
       <div class="inbox-list_action inbox-title"></div>
@@ -26,8 +23,7 @@
       <div class="inbox-list_note inbox-title">Ghi chú</div>
       <div class="inbox-list_status inbox-title">Hiển thị</div>
     </div>
-    <div class="list-title_body">
-
+    <div class="list-title_body" *ngFor="let thongBaoTinhChat of thongBaoTinhChatsList">
       <div class="inbox-list_checkbox"><label nz-checkbox ></label></div>
       <div class="inbox-list_action">
         <a class="btn-dropdown" nz-dropdown [nzDropdownMenu]="menu">
@@ -42,12 +38,14 @@
           </ul>
         </nz-dropdown-menu>
       </div>
-      <div class="inbox-list_code">Mã tính chất</div>
-      <div class="inbox-list_title">Tên tính chất</div>
-      <div class="inbox-list_note">Ghi chú</div>
-      <div class="inbox-list_status">Hiển thị</div>
+      <div class="inbox-list_code">{{thongBaoTinhChat.maTinhChat}}</div>
+      <div class="inbox-list_title">{{thongBaoTinhChat.tenTinhChat}}</div>
+      <div class="inbox-list_note">{{thongBaoTinhChat.ghiChu}}</div>
+      <div class="inbox-list_status">{{thongBaoTinhChat.isVisible}}</div>
 
     </div>
   </div>
 </div>
+
+
 

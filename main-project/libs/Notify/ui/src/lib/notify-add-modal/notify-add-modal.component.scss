@@ -1,0 +1,15 @@
+.scroll-bar{
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.form-update {
+  position: relative;
+  padding: 0 20px;
+  line-height: 26px;
+  max-height: 75vh;
+  
+  sup {
+    color: red;
+  }
+}

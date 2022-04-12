@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { NotifyAddModalComponent } from './../notify-add-modal/notify-add-modal.component';
+import { Component, ViewContainerRef } from '@angular/core';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'main-project-sidebar',
@@ -7,5 +9,16 @@ import { Component } from '@angular/core';
 })
 export class SidebarComponent  {
 
+  constructor(private modal: NzModalService, private viewContainerRef: ViewContainerRef) {}
+  createComponentModal(): void {
+    const modal = this.modal.create({
+      nzTitle: 'Modal Title',
+      nzContent: NotifyAddModalComponent,
+      nzWidth: '700px',
+      nzViewContainerRef: this.viewContainerRef,
+      nzOnOk: () => new Promise(resolve => setTimeout(resolve, 1000)),
+
+    });
+  }
 
 }

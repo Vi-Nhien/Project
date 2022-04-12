@@ -1,0 +1,23 @@
+.modal-header_update
+{
+  color: #222;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+
+
+.form-create_new{
+  padding: 0 20px;
+  line-height: 26px;
+  .form-label {
+    font-weight: 500;
+    font-size: 13px;
+    color: #201e1e;
+    margin-bottom: 0;
+
+    sup {
+      color: red;
+    }
+  }
+}
