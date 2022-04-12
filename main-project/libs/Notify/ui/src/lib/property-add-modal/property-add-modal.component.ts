@@ -46,4 +46,8 @@ export class PropertyAddModalComponent implements OnInit {
       }
     )
   }
+
+  get a(){
+    return this.newThongBaoTinhChat.controls;
+  }
 }

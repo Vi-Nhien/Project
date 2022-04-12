@@ -10,6 +10,9 @@
       </div>
       <div class="col-sm-9 ">
         <input type="text" class="form-control" id="maTinhChat" name = "maTinhChat" formControlName="maTinhChat" required>
+        <div *ngIf="a['maTinhChat'].touched && a['maTinhChat'].invalid" class="alert alert-danger">
+          <div *ngIf="a['maTinhChat'].errors && a['maTinhChat'].errors['required']">Mã tính chất is required.</div>
+      </div>
       </div>
     </div>
     <div class="row form-group">
@@ -19,6 +22,9 @@
       </label>
       <div class="col-sm-9 ">
         <input type="text" class="form-control" formControlName="tenTinhChat">
+        <div *ngIf="a['tenTinhChat'].touched && a['tenTinhChat'].invalid" class="alert alert-danger">
+          <div *ngIf="a['tenTinhChat'].errors && a['tenTinhChat'].errors['required']">Tên tính chất is required.</div>
+      </div>
       </div>
     </div>
     <div class="row form-group d-flex align-items-center">
@@ -52,6 +58,6 @@
   </div>
   <div class="add-btn_footer right">
     <button class="btn-footer_modal btn-cancel" type="button">Trở về</button>
-    <button class="btn-footer_modal btn-submit" type="submit" (click)="onSubmit()">Lưu</button>
+    <button class="btn-footer_modal btn-submit" type="submit" (click)="onSubmit()" [disabled]="!newThongBaoTinhChat.valid">Lưu</button>
   </div>
 </form>
