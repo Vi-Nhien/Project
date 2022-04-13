@@ -52,7 +52,8 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
     NzUploadModule,
     NzInputNumberModule,
     RouterModule,
-    NzDrawerModule
+    NzDrawerModule,
+
   ],
   declarations: [
     NotifyListComponent,

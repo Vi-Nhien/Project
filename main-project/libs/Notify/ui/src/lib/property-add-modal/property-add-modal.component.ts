@@ -1,8 +1,9 @@
-import { NotifyService } from 'libs/Notify/data-access/services/src/lib/notify.service';
+import { NotifyService, ThongBaoTinhChat } from 'libs/Notify/data-access/services/src/lib/notify.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzModalRef } from 'ng-zorro-antd/modal';
+
 @Component({
   selector: 'main-project-property-add-modal',
   templateUrl: './property-add-modal.component.html',
@@ -11,12 +12,12 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 export class PropertyAddModalComponent implements OnInit {
 
   newThongBaoTinhChat !: FormGroup;
-
+  thongBaoTinhChatsList: ThongBaoTinhChat[] | undefined;
   constructor(
     private fb: FormBuilder,
-    private notifyService : NotifyService,
-    private router: Router,
-    private message: NzMessageService
+    private notifyService: NotifyService,
+    private message: NzMessageService,
+    private modalRef: NzModalRef
   ) { }
 
   ngOnInit(): void {
@@ -24,30 +25,40 @@ export class PropertyAddModalComponent implements OnInit {
       maTinhChat: [''],
       tenTinhChat: ['', Validators.required],
       maMau: ['', Validators.required],
-      ghiChu: ['' ],
+      ghiChu: [''],
       soThuTu: [''],
       isVisible: false
     })
   }
-
-  completeMessage(): void {
-    this.message.success('tạo thành công!!!');
-  }
-  errorMessage(): void {
-    this.message.error('tạo không thành công!!!');
-  }
-
-  onSubmit(){
-    console.log(this.newThongBaoTinhChat);
-    this.notifyService. createThongBaoTinhChat(this.newThongBaoTinhChat?.value).subscribe(
-      Response =>{
-        console.log(Response);
-        this.completeMessage();
+  getThongBaoTinhChats() {
+    this.notifyService.getAllThongBaoTinhChats().subscribe(
+      res => {
+        this.thongBaoTinhChatsList = res;
+        console.log(this.thongBaoTinhChatsList)
+      },
+      (err) => {
+        console.log(err)
       }
     )
   }
+  onSubmit() {
+    console.log(this.newThongBaoTinhChat);
+    this.notifyService.createThongBaoTinhChat(this.newThongBaoTinhChat?.value).subscribe(
+      Response => {
+        console.log(Response);
+        this.message.success('tạo thành công !!!');
+        this.modalRef.close();
+        this.cancel();
+        // this.getThongBaoTinhChats()
+        window.location.reload()
 
-  get a(){
+      },
+    )
+  }
+  get a() {
     return this.newThongBaoTinhChat.controls;
+  }
+  cancel() {
+    this.modalRef.destroy()
   }
 }

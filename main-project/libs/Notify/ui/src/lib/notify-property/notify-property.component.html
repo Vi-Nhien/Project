@@ -1,5 +1,4 @@
 <div class="container-table_property">
-
   <div class="tools-bar">
     <div class="btn">
       <div class="btn-inbox_checkbox">
@@ -32,17 +31,23 @@
         <nz-dropdown-menu #menu="nzDropdownMenu" class="dropdownMenu">
           <ul nz-menu nzSelectable>
 
-            <li nz-menu-item> <button class="btn-modal" (click)="updateComponentModal()">Chỉnh sửa</button></li>
+            <li nz-menu-item> <button class="btn-modal" (click)="updateThongBaoTinhChat(thongBaoTinhChat)"  >Chỉnh sửa</button></li>
             <li nz-menu-item><button class="btn-modal"
-                (click)="deleteThongBaoTinhChat(thongBaoTinhChat)">Delete</button></li>
+                (click)="deleteThongBaoTinhChat(thongBaoTinhChat, tplContent)">Delete</button></li>
+                <ng-template #tplContent let-params>
+                  <!-- <p>some contents...</p>
+                  <p>some contents...</p> -->
+                  <p style = "padding-top: 12px">Bạn có chắc muốn  <b>{{ params.item }}</b> không?</p>
+                </ng-template>
           </ul>
         </nz-dropdown-menu>
       </div>
       <div class="inbox-list_code">{{thongBaoTinhChat.maTinhChat}}</div>
       <div class="inbox-list_title">{{thongBaoTinhChat.tenTinhChat}}</div>
+      <!-- <div class="inbox-list_title">{{thongBaoTinhChat.id}}</div> -->
       <div class="inbox-list_note">{{thongBaoTinhChat.ghiChu}}</div>
+      <!-- <div class="inbox-list_note" [style.color]="thongBaoTinhChat.maMau">{{thongBaoTinhChat.maMau}}</div> -->
       <div class="inbox-list_status">{{thongBaoTinhChat.isVisible}}</div>
-
 
     </div>
   </div>

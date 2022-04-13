@@ -1,5 +1,5 @@
 import { PropertyAddModalComponent } from './../property-add-modal/property-add-modal.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef  } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message'
 import { PropertyModalComponent } from '../property-modal/property-modal.component';
@@ -13,105 +13,85 @@ import { FormGroup } from '@angular/forms';
 })
 export class NotifyPropertyComponent implements OnInit {
 
-  form ?: FormGroup;
-  thongBaoTinhChatsList: ThongBaoTinhChat[] | undefined ;
+  form?: FormGroup;
+  thongBaoTinhChatsList: ThongBaoTinhChat[] | undefined;
 
   constructor(private modal: NzModalService,
     private message: NzMessageService,
-    private notifyService : NotifyService) { }
+    private notifyService: NotifyService,
+    ) { }
 
-    ngOnInit(): void {
-      this.getThongBaoTinhChats();
-    }
-
-
-  getThongBaoTinhChats(){
+  ngOnInit(): void {
+    this.getThongBaoTinhChats();
+  }
+  getThongBaoTinhChats() {
     this.notifyService.getAllThongBaoTinhChats().subscribe(
-      res =>{
+      res => {
         this.thongBaoTinhChatsList = res;
         console.log(this.thongBaoTinhChatsList)
       },
-      (err) =>{
+      (err) => {
         console.log(err)
       }
     )
   }
-
-  // ---modal delete------
-
-  // showDeleteConfirm( thongBaoTinhChat : ThongBaoTinhChat): void {
-  //   this.modal.confirm({
-  //     nzTitle: 'Are you sure delete this task?',
-  //     nzContent: '<b style="color: red;">Some descriptions</b>',
-  //     nzAutofocus: null,
-  //     nzBodyStyle: { padding: '20px', outline:'none' },
-  //     nzMaskClosable: true,
-  //     nzOkText: 'Yes',
-  //     nzOkType: 'primary',
-  //     nzOkDanger: true,
-  //     nzOnOk: () => this.deleteMessage(),
-  //     nzCancelText: 'No',
-  //     nzOnCancel: () => console.log('Cancel')
-  //   });
-  // }
-
+  updateThongBaoTinhChat(thongBaoTinhChat: ThongBaoTinhChat){
+    if(thongBaoTinhChat){
+      this.modal.create({
+        nzContent: PropertyModalComponent,
+        nzComponentParams: {
+          item: thongBaoTinhChat
+        },
+        nzClosable: true,
+        nzAutofocus: null,
+        nzWidth: '700px',
+        nzFooter: null
+      });
+    }
+  }
+  propertyAddModal() {
+    this.modal.create({
+      nzContent: PropertyAddModalComponent,
+      nzClosable: true,
+      nzAutofocus: null,
+      nzWidth: '700px',
+      nzFooter: null
+    });
+  }
   deleteMessage(): void {
     this.message.success('Delete successfully', {
       nzDuration: 3000
     });
   }
 
-  updateComponentModal(): void {
-    this.modal.create({
-      nzContent: PropertyModalComponent,
-      nzClosable: true,
-      nzAutofocus: null,
-      nzWidth: '700px',
-      nzOkText: 'Save',
-      nzOnOk: () =>this.updateMessage(),
-      nzCancelText: 'Cancel',
-      nzOnCancel: () => console.log('Cancel'),
-    });
-
-  }
-
-
-
-  updateMessage(): void {
-    this.message.success('Update successfully', {
-      nzDuration: 3000
-    });
-  }
-
-
-  propertyAddModal(){
-    this.modal.create({
-      nzContent: PropertyAddModalComponent,
-      nzClosable: true,
-      nzAutofocus: null,
-      nzWidth: '700px',
-      // nzOkText: 'Save',
-      // nzOnOk: () =>this.onSubmit(),
-      // nzCancelText: 'Cancel',
-      // nzOnCancel: () => console.log('Cancel'),
-      nzFooter: null
-    });
-  }
-
-  deleteThongBaoTinhChat(thongBaoTinhChat: ThongBaoTinhChat) {
+  deleteThongBaoTinhChat(thongBaoTinhChat: ThongBaoTinhChat, tplContent: TemplateRef<{}>) {
     if (thongBaoTinhChat) {
-      this.notifyService.deleteThongBaoTinhChat(thongBaoTinhChat.id).subscribe(
-        res => {
-          this.deleteMessage()
-          console.log('complete');
-          const index = this.thongBaoTinhChatsList?.findIndex(m => m.id === thongBaoTinhChat.id) || -1;
-          if (index >= 0) {
-            this.thongBaoTinhChatsList?.splice(index, 1);
+      this.modal.confirm({
+        nzTitle: 'Bạn có muốn xóa không ???',
+        nzContent: tplContent,
+        nzComponentParams: {
+          item: thongBaoTinhChat.tenTinhChat
+        },
+        nzAutofocus: null,
+        nzBodyStyle: { padding: '20px', outline: 'none'},
+        nzMaskClosable: true,
+        nzOkText: 'Yes',
+        nzOkType: 'primary',
+        nzOkDanger: true,
+        nzOnOk: () => this.notifyService.deleteThongBaoTinhChat(thongBaoTinhChat.id).subscribe(
+          res => {
+            this.deleteMessage()
+            console.log('complete');
+            window.location.reload();
+            const index = this.thongBaoTinhChatsList?.findIndex(m => m.id === thongBaoTinhChat.id) || -1;
+            if (index >= 0) {
+              this.thongBaoTinhChatsList?.splice(index, 1);
+            }
           }
-
-        }
-      )
+        ),
+        nzCancelText: 'Cancel',
+        nzOnCancel: () => console.log('Cancel'),
+      });
     }
   }
-
 }

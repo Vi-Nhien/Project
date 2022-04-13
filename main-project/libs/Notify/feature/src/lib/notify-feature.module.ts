@@ -1,3 +1,4 @@
+import { PropertyModalComponent } from './../../../ui/src/lib/property-modal/property-modal.component';
 
 import { NotifyUiModule } from '@main-project/notify/ui';
 
@@ -18,7 +19,7 @@ const routes: Routes = [
   },
   {
     path : 'tb-tc', component: NotifySettingComponent
-  }
+  },
 ];
 
 @NgModule({

@@ -1,49 +1,55 @@
 <ng-template [nzModalTitle] class="modal-header_update">Cập nhật</ng-template>
+<form [formGroup] ="formUpdateThongBaoTinhChat!" (ngSubmit)="onSubmit()">
 
-<div class="form-create_new">
-  <div class="row form-group">
-    <div class="col-sm-3 form-label">
-      Mã Tính chất
-      <sup>(*)</sup>
+  <div class="form-create_new" >
+    <div class="row form-group">
+      <div class="col-sm-3 form-label">
+        Mã Tính chất
+        <sup>(*)</sup>
+      </div>
+      <div class="col-sm-9 ">
+        <input type="text" class = "form-control" formControlName="maTinhChat" >
+      </div>
     </div>
-    <div class="col-sm-9 ">
-      <input type="text" class = "form-control">
+    <div class="row form-group">
+      <label class="col-sm-3 form-label">
+        Tên tính chất
+        <sup>(*)</sup>
+      </label>
+      <div class="col-sm-9 ">
+        <input type="text" class = "form-control" formControlName="tenTinhChat"  >
+      </div>
     </div>
-  </div>
-  <div class="row form-group">
-    <label class="col-sm-3 form-label">
-      Tên tính chất
-      <sup>(*)</sup>
-    </label>
-    <div class="col-sm-9 ">
-      <input type="text" class = "form-control">
+    <div class="row form-group d-flex align-items-center">
+      <label class="col-sm-3 form-label">
+        Mã màu
+      </label>
+      <div class="col-sm-2">
+        <input type="color" class = "form-control"name="" id=""  style ="height: 35px;" formControlName="maMau" >
+      </div>
+      <label class="col-sm-3 form-label">
+        Số thứ tự
+      </label>
+      <div class="col-sm-2">
+        <nz-input-number  [nzMin]="1" [nzMax]="10" [nzStep]="1" formControlName="soThuTu" ></nz-input-number>
+      </div>
+      <div class="col-sm-2">
+        <label nz-checkbox formControlName="isVisible"  >Hiển thị</label>
+      </div>
     </div>
-  </div>
-  <div class="row form-group d-flex align-items-center">
-    <label class="col-sm-3 form-label">
-      Mã màu
-    </label>
-    <div class="col-sm-2">
-      <input type="color" class = "form-control"name="" id=""  style ="height: 35px;">
-    </div>
-    <label class="col-sm-3 form-label">
-      Số thứ tự
-    </label>
-    <div class="col-sm-2">
-      <nz-input-number  [nzMin]="1" [nzMax]="10" [nzStep]="1"></nz-input-number>
-    </div>
-    <div class="col-sm-2">
-      <label nz-checkbox>Hiển thị</label>
-    </div>
-  </div>
 
 
-  <div class="row form-group">
-    <div class="col-sm-3 form-label">
-      Ghi chú
-    </div>
-    <div class="col-sm-9">
-      <textarea name="" id="" cols="30" rows="4" class="form-control"></textarea>
+    <div class="row form-group">
+      <div class="col-sm-3 form-label">
+        Ghi chú
+      </div>
+      <div class="col-sm-9">
+        <textarea name="" id="" cols="30" rows="4" class="form-control"  formControlName="ghiChu" ></textarea>
+      </div>
     </div>
   </div>
-</div>
+  <div class="edit-btn_footer right">
+    <button class="btn-footer_modal btn-cancel" type="button" (click) = "cancel()">Trở về</button>
+    <button class="btn-footer_modal btn-submit" type="submit" >Lưu</button>
+  </div>
+</form>

@@ -33,8 +33,8 @@ export class NotifyService {
   getThongBaoThinhChatById(id: string){
       return this.httpClient.get<ThongBaoTinhChat>(`${this.apiUrlThongBaoTinhChats}/${id}`);
   }
-  updateThongBaoTinhChat(thongBaoTinhChat : ThongBaoTinhChat) :Observable<ThongBaoTinhChat>{
-    return this.httpClient.put<ThongBaoTinhChat>(`${this.apiUrlThongBaoTinhChats}/${thongBaoTinhChat.id}`,thongBaoTinhChat);
+  updateThongBaoTinhChat(thongBaoTinhChat : ThongBaoTinhChat) {
+    return this.httpClient.put(`${this.apiUrlThongBaoTinhChats}/${thongBaoTinhChat.id}`,thongBaoTinhChat);
   }
   createThongBaoTinhChat(thongBaoTinhChat : ThongBaoTinhChat){
     return this.httpClient.post(this.apiUrlThongBaoTinhChats, thongBaoTinhChat);

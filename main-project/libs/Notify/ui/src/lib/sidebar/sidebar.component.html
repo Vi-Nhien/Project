@@ -1,7 +1,7 @@
 <div class="container-sidebar">
   <div class="sidebar-primary">
     <div class="sidebar-primary_icon">
-      <a routerLink = "/" style ="color: white; text-decoration: none;">
+      <a routerLink="/" style="color: white; text-decoration: none;">
         <span><i class='bx bx-home'></i></span>
 
       </a>
@@ -35,27 +35,25 @@
         Quản lý thông báo
       </div>
       <div class="menu-list">
-        <a class="menu-list_tb" routerLink="/notify/page" routerLinkActive="active" ><i class='bx bx-notification'></i>Danh sách thông báo</a>
-        <a class="menu-list_tb" ><i class='bx bxs-star' ></i>Đánh dấu sao</a>
+        <a class="menu-list_tb" routerLink="/notify/page" routerLinkActive="active"><i
+            class='bx bx-notification'></i>Danh sách thông báo</a>
+        <a class="menu-list_tb"><i class='bx bxs-star'></i>Đánh dấu sao</a>
       </div>
       <div class="lables">
         Tính chất
       </div>
       <div class="menu-list">
-        <a href="" class = "menu-list_tc"><i class='bx bx-radio-circle-marked' style = "color: rgb(230, 0, 0);"></i> Quan trọng</a>
-        <a href="" class = "menu-list_tc"><i class='bx bx-radio-circle-marked' style = "color: rgb(70, 81, 164);"></i>Công Văn </a>
-        <a href="" class = "menu-list_tc"><i class='bx bx-radio-circle-marked' style = "color: rgb(104, 253, 107);"></i> Báo cáo</a>
-        <a href="" class = "menu-list_tc"><i class='bx bx-radio-circle-marked' style = "color: rgb(131, 33, 33);"></i> Báo cáo chuyên đề</a>
-        <a href="" routerLinkActive="router-link-active" >
-
-        </a>
+        <div *ngFor="let thongBaoTinhChat of thongBaoTinhChatsList">
+          <a href="" class="menu-list_tc"><i class='bx bx-radio-circle-marked'
+              [style.color]="thongBaoTinhChat.maMau"></i> {{thongBaoTinhChat.tenTinhChat}}</a>
+        </div>
       </div>
       <div class="lables">
         Quản lý cài đặt
       </div>
       <div class="menu-list">
-        <a class="menu-list_ql" routerLink="/notify/tb-tc" routerLinkActive="active" >
-          <i class='bx bxs-purchase-tag'style = "color: #ef5d08; font-size:24px;"></i>
+        <a class="menu-list_ql" routerLink="/notify/tb-tc" routerLinkActive="active">
+          <i class='bx bxs-purchase-tag' style="color: #ef5d08; font-size:24px;"></i>
           Tính chất
         </a>
       </div>
