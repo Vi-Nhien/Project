@@ -8,19 +8,7 @@ import { NzMessageService } from 'ng-zorro-antd/message'
 
 
 import { registerLocaleData } from '@angular/common';
-
-interface ListThongBao {
-  key: string;
-  tieude: string;
-  quantrong: boolean;
-  ngayHetHan: string;
-  nguoiTao: string;
-  ngayTao: string;
-  daXem: number;
-  chuaXem: number;
-  checked: boolean
-}
-
+import { NotifyService, ThongBao } from 'libs/Notify/data-access/services/src/lib/notify.service';
 @Component({
   selector: 'main-project-notify-list',
   templateUrl: './notify-list.component.html',
@@ -30,58 +18,30 @@ export class NotifyListComponent implements OnInit {
 
   selectedValue = null;
 
-  listOfData: ListThongBao[] = [
-    {
-      key: '1',
-      tieude: 'hello world',
-      quantrong: true,
-      ngayHetHan: '22/12/2021',
-      nguoiTao: 'alex',
-      ngayTao: '22/10/2021',
-      daXem: 2,
-      chuaXem: 20,
-      checked: true
-    },
-    {
-      key: '2',
-      tieude: 'Thử nghiệm',
-      quantrong: true,
-      ngayHetHan: '22/2/2022',
-      nguoiTao: 'admin',
-      ngayTao: '22/10/2021',
-      daXem: 24,
-      chuaXem: 10,
-      checked: false
-    },
-    {
-      key: '3',
-      tieude: 'thông báo V/v',
-      quantrong: true,
-      ngayHetHan: '2/3/2022',
-      nguoiTao: 'alex',
-      ngayTao: '22/10/2021',
-      daXem: 2,
-      chuaXem: 20,
-      checked: true
-    }
-
-  ];
 
 
-
-
+  thongBaosList : ThongBao[] | undefined
 
   constructor(
     private modal: NzModalService,
-    private message: NzMessageService) { }
+    private message: NzMessageService,
+    private notifyService : NotifyService) { }
 
   ngOnInit(): void {
-
+    this.getThongBaos()
     registerLocaleData(vi);
 
   }
 
+  getThongBaos(){
+    this.notifyService.getAllThongBaos().subscribe(
+      res =>{
+        this.thongBaosList = res;
+        console.log(this.thongBaosList)
+      }
 
+    )
+  }
 
 
   // -----modal edit------

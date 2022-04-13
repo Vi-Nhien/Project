@@ -13,6 +13,10 @@ import { FormGroup } from '@angular/forms';
 })
 export class NotifyPropertyComponent implements OnInit {
 
+
+
+
+
   form?: FormGroup;
   thongBaoTinhChatsList: ThongBaoTinhChat[] | undefined;
 
@@ -94,4 +98,5 @@ export class NotifyPropertyComponent implements OnInit {
       });
     }
   }
+
 }

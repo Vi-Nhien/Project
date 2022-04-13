@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   // apiUrlServer : 'http://192.168.0.246:5357/api/v1/',
   apiUrlServer: 'https://621ec563849220b1fca0f860.mockapi.io/project/',
+  apiUrlSelect : 'http://192.168.0.246:5355/api/v1/'
 
 };
 

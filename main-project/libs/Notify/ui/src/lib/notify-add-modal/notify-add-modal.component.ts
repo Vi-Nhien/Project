@@ -1,16 +1,18 @@
-import { Component  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { NzMessageService } from 'ng-zorro-antd/message'
+import { NotifyService, ThongBaoTinhChat } from 'libs/Notify/data-access/services/src/lib/notify.service';
 
 @Component({
   selector: 'main-project-notify-add-modal',
   templateUrl: './notify-add-modal.component.html',
   styleUrls: ['./notify-add-modal.component.scss']
 })
-export class NotifyAddModalComponent {
+export class NotifyAddModalComponent implements OnInit {
 
-
+  selectValue = null;
+  radioValue = 'A'
   editorConfig : AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -49,7 +51,40 @@ export class NotifyAddModalComponent {
     ],
   };
 
-  constructor( private message: NzMessageService,) { }
+  thongBaoTinhChatsList: ThongBaoTinhChat[] | undefined;
+  phongBanList: any;
+
+  constructor( private message: NzMessageService,
+    private notifyService : NotifyService) { }
+
+    ngOnInit(): void {
+      this.getThongBaoTinhChats();
+      this.getPhongBanList();
+    }
+
+    getThongBaoTinhChats() {
+      this.notifyService.getAllThongBaoTinhChats().subscribe(
+        res => {
+          this.thongBaoTinhChatsList = res;
+          console.log(this.thongBaoTinhChatsList)
+        },
+        (err) => {
+          console.log(err)
+        }
+      )
+    }
+
+    getPhongBanList() {
+      this.notifyService.getAllPhongBan().subscribe(
+        res => {
+          this.phongBanList = res;
+          console.log(this.phongBanList)
+        },
+        (err) => {
+          console.log(err)
+        }
+      )
+    }
 
 
   handleChange({ file, fileList }: NzUploadChangeParam): void {

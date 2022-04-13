@@ -28,8 +28,8 @@
     <div class="row-list_title inbox-list_views">Chưa xem</div>
   </div>
 
-  <div class="list-content" *ngFor="let data of listOfData">
-    <div class="row-list_content inbox-list_checkbox"> <label nz-checkbox [(ngModel)]="data.checked"></label></div>
+  <div class="list-content" *ngFor="let data of thongBaosList">
+    <div class="row-list_content inbox-list_checkbox"> <label ></label></div>
     <div class="row-list_content inbox-list_star"> <span class="btn-star"><i class='bx bxs-star active'></i></span>
     </div>
     <div class="row-list_content inbox-list_action align-items-center">
@@ -47,13 +47,13 @@
 
 
     </div>
-    <div class="row-list_content inbox-list_title">{{ data.tieude }}</div>
+    <div class="row-list_content inbox-list_title">{{ data.tieuDe }}</div>
     <div class="row-list_content inbox-list_attachments"></div>
-    <div class="row-list_content inbox-list_date">{{ data.ngayHetHan }}</div>
-    <div class="row-list_content inbox-list_author">{{ data.nguoiTao }}</div>
-    <div class="row-list_content inbox-list_date">{{ data.ngayTao }}</div>
-    <div class="row-list_content list-views inbox-list_views">[{{ data.daXem }}]</div>
-    <div class="row-list_content list-views inbox-list_views">[{{ data.chuaXem }}]</div>
+    <div class="row-list_content inbox-list_date">{{ data.ngayHetHan | date : 'mediumDate' }}</div>
+    <!-- <div class="row-list_content inbox-list_author">{{ data.nguoiTao }}</div> -->
+    <!-- <div class="row-list_content inbox-list_date">{{ data.ngayTao }}</div> -->
+    <!-- <div class="row-list_content list-views inbox-list_views">[{{ data.daXem }}]</div> -->
+    <!-- <div class="row-list_content list-views inbox-list_views">[{{ data.chuaXem }}]</div> -->
   </div>
 </div>
 

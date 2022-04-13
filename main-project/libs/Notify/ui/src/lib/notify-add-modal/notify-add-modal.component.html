@@ -24,13 +24,42 @@
       Loại thông báo
     </div>
     <div class="col-sm-9">
-      <nz-radio-group>
+      <nz-radio-group [(ngModel)]="radioValue">
         <label nz-radio nzValue="A">Chung</label>
         <label nz-radio nzValue="B">Cơ sở</label>
         <label nz-radio nzValue="C">Phòng ban</label>
       </nz-radio-group>
     </div>
   </div>
+
+  <div class="row form-group" *ngIf="radioValue === 'C'">
+    <div class="col-sm-3 form-label">
+      Phòng ban
+    </div>
+    <div class="col-sm-9 ">
+      <nz-select nzShowSearch [(ngModel)]="selectValue" class="form-control" nzPlaceHolder="Chọn">
+        <nz-option *ngFor="let itemPhongBan of phongBanList" nzCustomContent [nzValue]="itemPhongBan.maLoaiPhongBan"
+          [nzLabel]="itemPhongBan.tenLoaiPhongBan">
+
+        </nz-option>
+      </nz-select>
+    </div>
+  </div>
+
+  <div class="row form-group" *ngIf="radioValue === 'B'">
+    <div class="col-sm-3 form-label">
+     Cơ sở
+    </div>
+    <div class="col-sm-9 ">
+      <nz-select nzShowSearch [(ngModel)]="selectValue" class="form-control" nzPlaceHolder="Chọn">
+        <nz-option *ngFor="let item of thongBaoTinhChatsList" nzCustomContent [nzValue]="item.maTinhChat"
+          [nzLabel]="item.tenTinhChat">
+          <i class='bx bx-radio-circle-marked' [style.color]="item.maMau"></i> {{item.tenTinhChat}}
+        </nz-option>
+      </nz-select>
+    </div>
+  </div>
+
 
   <div class="row form-group">
     <div class="col-sm-3 form-label">Mã tra cứu</div>
@@ -45,21 +74,14 @@
       Tính chất
     </label>
     <div class="col-sm-9">
-      <nz-select nzShowSearch ngModel="null" class="form-control" nzPlaceHolder="Chọn" >
-
-        <nz-option nzCustomContent nzLabel="QT" nzValue="QT"> <a href="" class="menu-list_tc"><i class='bx bx-radio-circle-marked'
-              style="color: rgb(230, 0, 0);"></i> Quan trọng</a></nz-option>
-        <nz-option nzCustomContent nzLabel="CV" nzValue="CV"> <a href="" class="menu-list_tc"><i class='bx bx-radio-circle-marked'
-              style="color: rgb(70, 81, 164);"></i>Công Văn </a></nz-option>
-        <nz-option nzCustomContent nzLabel="BC" nzValue="BC"> <a href="" class="menu-list_tc"><i class='bx bx-radio-circle-marked'
-              style="color: rgb(104, 253, 107);"></i> Báo cáo</a></nz-option>
-        <nz-option nzCustomContent nzLabel="BCCD" nzValue="BCCD"><a href="" class="menu-list_tc"><i class='bx bx-radio-circle-marked'
-              style="color: rgb(131, 33, 33);"></i> Báo cáo chuyên đề</a></nz-option>
+      <nz-select nzShowSearch [(ngModel)]="selectValue" class="form-control" nzPlaceHolder="Chọn">
+        <nz-option *ngFor="let itemTinhChat of thongBaoTinhChatsList" nzCustomContent [nzValue]="itemTinhChat.maTinhChat"
+          [nzLabel]="itemTinhChat.tenTinhChat">
+          <i class='bx bx-radio-circle-marked' [style.color]="itemTinhChat.maMau"></i> {{itemTinhChat.tenTinhChat}}
+        </nz-option>
       </nz-select>
     </div>
   </div>
-
-
   <div class="row form-group">
     <div class="col-sm-3  form-label">
       Đính kèm
