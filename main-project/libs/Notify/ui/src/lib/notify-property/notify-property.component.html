@@ -2,18 +2,28 @@
   <div class="tools-bar">
     <div class="btn">
       <div class="btn-inbox_checkbox">
-        <label nz-checkbox></label>
+        <label nz-checkbox
+        [(ngModel)]="allChecked"
+        (ngModelChange)="updateAllChecked()"
+        [nzIndeterminate]="indeterminate"
+        nzValue="All"
+        >
+
+
+      </label>
       </div>
       <button type="button" class="btn-add" (click)="propertyAddModal()">
         <i class='bx bx-add-to-queue'></i>
         Thêm mới
       </button>
+
+      <button *ngIf="allChecked" class = "btn-delete_all" (click) = " deleteAll_confirm()"><i class='bx bx-trash-alt'></i>Xóa</button>
     </div>
     <div class="tool-pagination">
       <nz-pagination [nzPageIndex]="2" [nzTotal]="50" nzSimple></nz-pagination>
     </div>
   </div>
-  <div class="list-title">
+  <div class="list-title"  >
     <div class="list-title_header">
       <div class="inbox-list_checkbox inbox-title"></div>
       <div class="inbox-list_action inbox-title"></div>
@@ -22,8 +32,8 @@
       <div class="inbox-list_note inbox-title">Ghi chú</div>
       <div class="inbox-list_status inbox-title">Hiển thị</div>
     </div>
-    <div class="list-title_body" *ngFor="let thongBaoTinhChat of thongBaoTinhChatsList">
-      <div class="inbox-list_checkbox"><label nz-checkbox></label></div>
+    <div class="list-title_body" *ngFor="let thongBaoTinhChat of thongBaoTinhChatsList.result.items">
+      <div class="inbox-list_checkbox"><label nz-checkbox [(ngModel)]="thongBaoTinhChat.checked" (ngModelChange)="updateSingleChecked()" ></label></div>
       <div class="inbox-list_action">
         <a class="btn-dropdown" nz-dropdown [nzDropdownMenu]="menu">
           <span><i class='bx bxs-inbox'></i></span>
@@ -47,7 +57,8 @@
       <!-- <div class="inbox-list_title">{{thongBaoTinhChat.id}}</div> -->
       <div class="inbox-list_note">{{thongBaoTinhChat.ghiChu}}</div>
       <!-- <div class="inbox-list_note" [style.color]="thongBaoTinhChat.maMau">{{thongBaoTinhChat.maMau}}</div> -->
-      <div class="inbox-list_status">{{thongBaoTinhChat.isVisible}}</div>
+      <div class="inbox-list_status" *ngIf="thongBaoTinhChat.isVisible"><span><i class='bx bxs-check-circle' style = "font-size: 18px; color: rgb(40, 167, 69);"></i></span></div>
+
 
     </div>
   </div>

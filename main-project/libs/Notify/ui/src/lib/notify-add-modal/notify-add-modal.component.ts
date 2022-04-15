@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { NzMessageService } from 'ng-zorro-antd/message'
-import { NotifyService, ThongBaoTinhChat } from 'libs/Notify/data-access/services/src/lib/notify.service';
+// import { NotifyService, ThongBaoTinhChat } from 'libs/Notify/data-access/services/src/lib/notify.service';
+import { NotifyService  } from '@main-project/notify/data-access/services'
 
 @Component({
   selector: 'main-project-notify-add-modal',
@@ -11,9 +12,11 @@ import { NotifyService, ThongBaoTinhChat } from 'libs/Notify/data-access/service
 })
 export class NotifyAddModalComponent implements OnInit {
 
-  selectValue = null;
+
+
+  selectValue = [];
   radioValue = 'A'
-  editorConfig : AngularEditorConfig = {
+  editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
     height: '180px',
@@ -51,40 +54,45 @@ export class NotifyAddModalComponent implements OnInit {
     ],
   };
 
-  thongBaoTinhChatsList: ThongBaoTinhChat[] | undefined;
+  thongBaoTinhChatsList: any;
   phongBanList: any;
+  coSoList: any;
 
-  constructor( private message: NzMessageService,
-    private notifyService : NotifyService) { }
+  constructor(private message: NzMessageService,
+    private notifyService: NotifyService) { }
 
-    ngOnInit(): void {
-      this.getThongBaoTinhChats();
-      this.getPhongBanList();
-    }
+  ngOnInit(): void {
+    this.getThongBaoTinhChats();
+    this.getPhongBanList();
+    this.getCoSoList();
+  }
 
-    getThongBaoTinhChats() {
-      this.notifyService.getAllThongBaoTinhChats().subscribe(
-        res => {
-          this.thongBaoTinhChatsList = res;
-          console.log(this.thongBaoTinhChatsList)
-        },
-        (err) => {
-          console.log(err)
-        }
-      )
-    }
+  getThongBaoTinhChats() {
+    this.notifyService.getAllThongBaoTinhChats().subscribe(
+      res => {
+        this.thongBaoTinhChatsList = res;
+        console.log(this.thongBaoTinhChatsList)
+      },
+      (err) => {
+        console.log(err)
+      });
+  }
 
-    getPhongBanList() {
-      this.notifyService.getAllPhongBan().subscribe(
-        res => {
-          this.phongBanList = res;
-          console.log(this.phongBanList)
-        },
-        (err) => {
-          console.log(err)
-        }
-      )
-    }
+  getPhongBanList() {
+    this.notifyService.getAllPhongBan().subscribe(
+      (res: any[]) => {
+        this.phongBanList = res;
+        console.log(this.phongBanList.result.items);
+      });
+  }
+
+  getCoSoList() {
+    this.notifyService.getAllCoSo().subscribe(
+      (res: any[]) => {
+        this.coSoList = res;
+        console.log(this.coSoList.result.items);
+      });
+  }
 
 
   handleChange({ file, fileList }: NzUploadChangeParam): void {

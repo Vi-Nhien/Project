@@ -37,10 +37,10 @@
       Phòng ban
     </div>
     <div class="col-sm-9 ">
-      <nz-select nzShowSearch [(ngModel)]="selectValue" class="form-control" nzPlaceHolder="Chọn">
-        <nz-option *ngFor="let itemPhongBan of phongBanList" nzCustomContent [nzValue]="itemPhongBan.maLoaiPhongBan"
+      <nz-select  nzMode="tags" nzShowSearch [(ngModel)]="selectValue" class="form-control" nzPlaceHolder="Chọn">
+        <nz-option *ngFor="let itemPhongBan of phongBanList.result.items" nzCustomContent [nzValue]="itemPhongBan.maLoaiPhongBan"
           [nzLabel]="itemPhongBan.tenLoaiPhongBan">
-
+            {{itemPhongBan.tenLoaiPhongBan}}
         </nz-option>
       </nz-select>
     </div>
@@ -51,10 +51,10 @@
      Cơ sở
     </div>
     <div class="col-sm-9 ">
-      <nz-select nzShowSearch [(ngModel)]="selectValue" class="form-control" nzPlaceHolder="Chọn">
-        <nz-option *ngFor="let item of thongBaoTinhChatsList" nzCustomContent [nzValue]="item.maTinhChat"
-          [nzLabel]="item.tenTinhChat">
-          <i class='bx bx-radio-circle-marked' [style.color]="item.maMau"></i> {{item.tenTinhChat}}
+      <nz-select  nzMode="tags"  nzShowSearch [(ngModel)]="selectValue" class="form-control" nzPlaceHolder="Chọn">
+        <nz-option *ngFor="let itemCoSo of coSoList.result.items" nzCustomContent [nzValue]="itemCoSo.maCoSo"
+          [nzLabel]="itemCoSo.tenCoSo">
+         {{itemCoSo.tenCoSo}}
         </nz-option>
       </nz-select>
     </div>
@@ -75,7 +75,7 @@
     </label>
     <div class="col-sm-9">
       <nz-select nzShowSearch [(ngModel)]="selectValue" class="form-control" nzPlaceHolder="Chọn">
-        <nz-option *ngFor="let itemTinhChat of thongBaoTinhChatsList" nzCustomContent [nzValue]="itemTinhChat.maTinhChat"
+        <nz-option *ngFor="let itemTinhChat of thongBaoTinhChatsList.result.items" nzCustomContent [nzValue]="itemTinhChat.maTinhChat"
           [nzLabel]="itemTinhChat.tenTinhChat">
           <i class='bx bx-radio-circle-marked' [style.color]="itemTinhChat.maMau"></i> {{itemTinhChat.tenTinhChat}}
         </nz-option>

@@ -1,4 +1,5 @@
-import { NotifyService, ThongBaoTinhChat } from 'libs/Notify/data-access/services/src/lib/notify.service';
+
+import { NotifyService } from '@main-project/notify/data-access/services'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -12,7 +13,7 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
 export class PropertyAddModalComponent implements OnInit {
 
   newThongBaoTinhChat !: FormGroup;
-  thongBaoTinhChatsList: ThongBaoTinhChat[] | undefined;
+  thongBaoTinhChatsList: any;
   constructor(
     private fb: FormBuilder,
     private notifyService: NotifyService,
@@ -49,15 +50,14 @@ export class PropertyAddModalComponent implements OnInit {
         this.message.success('tạo thành công !!!');
         this.modalRef.close();
         this.cancel();
-        // this.getThongBaoTinhChats()
-        window.location.reload()
-
-      },
+      }
     )
   }
   get a() {
     return this.newThongBaoTinhChat.controls;
   }
+
+
   cancel() {
     this.modalRef.destroy()
   }

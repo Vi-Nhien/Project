@@ -89,6 +89,7 @@
 
     .list-views {
       color: rgb(0, 111, 201);
+      cursor: pointer;
     }
 
   }
@@ -168,8 +169,36 @@
 
 
 
+.container-body_modal{
+  padding: 20px;
 
+  .item-user{
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    column-gap: 12px;
+  }
 
+  .image-user{
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-weight: 600;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    margin: 0px 5px 0px 0px;
+    background: rgb(221, 221, 221);
+    border-radius: 50%;
+  }
+
+  .name-user{
+    line-height: 1;
+    font-weight: bolder;
+    display: flex;
+    flex-direction: column;
+  }
+}
 
 
 

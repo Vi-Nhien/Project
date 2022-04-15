@@ -1,0 +1,47 @@
+import {
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpRequest,
+} from '@angular/common/http';
+import { HttpInterceptor } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { EMPTY, Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+
+@Injectable()
+export class ServiceInterceptor implements HttpInterceptor {
+  // auth_token = 'eyJhbGciOiJSU0EtT0FFUCIsImVuYyI6IkEyNTZDQkMtSFM1MTIiLCJraWQiOiIyM0VBOTUxMkY2NjZCMDA1MUY3Q0QzN0NFMjkzMkIxN0NFMkNCODhBIiwidHlwIjoiYXQrand0In0.Muqw_jpqizYwT7YNv80T2AhplyRqxM9l6N6Hp7eTSdczSFIybwkI0--7sA2BCSBduHWmICQLcSKfFDaDqV9YfAex76drJvktuD6uO2_ZH1xgezuQaooFpBSqE0I6X3QkoelMulGHVr0b3gLYaTrKHXEbNgqJ84iGCt0RJQ74Ms-TMubC-4uuFbbbPHG27T8PfcTNOn8M0tNzsMEw3MkMvzOAGWgOFZBfakoyZoER2P6hk7lvyd9CEOUAzaRv891w4CWx7MLkXuApzk13XhLseuszaF5vsMQ0EUvlNwzldqT40sDZvbb6z7UQ-S6Oii3UDkUo0PZAFheCLRe4fNoQ-A.CLZt_LdtIUFvd_3ejkfF4Q.OfNWFvAZg_7CcFLC6Chzh7Ujhwa33aNkIWjPU76davhHl5xRCsSZEbfQQW2Y2EXlb4eQT34lhpahzrINDQwQ6jibdG_cluClMyaTTTlrpUmZNIrRNp5fWZINJBpdOSpTYl7-XZvr3dHriuWeOjQVbbSzYwd_4GI8jLwgf-qz2DC_vRV10SKh5ZBIDF2btk9HuXX1otrasyJd7Z0m4gHA-PnbGHgL2juvQ0ARwiqoC6NYKrtmbo3klxKNOvk0fTGRmzbQJTIuQ-o5-UK2e5kCFGEEySk7RIolePOZQ2B0D2Yj-Cl5Dn7mIT7IUUiBLc5tJFYplZoUClRSy3h1oY2eh3oAMCR6nhzpgaiC-o55eB9Z-m7S_-y_fvh1XLAzP3QqiDnS_7ol-HFyx7Lv_VvIfh5jB4N9EFu20VwBDLokCGqSwQ5jtCl9e5hNeV6VyULRyuTUJ0Y0GqeQBXxZKZnutFNiqrJb_y-Wt67mjf624L8yn7ZEOUYud_sqR9v-RFxTKd-TS42Q9sRawqIW1ozG-nTBGZtswRR6IJf1WY6E2xzQodEmdYM6Ihb4BrbrRN19OnSY6hfpC-CurLT0hOPK4xiG0kGUf0siIe8bu9I3JdQJxRCvTuMAxisoctzZvJBKbXLmmYYMF3pmvjUBDoso1VnoY1-mITlLSNhogDOTy9evq3bQBUYO-IMhu2sA9NniPwjR_LfOUQZ9Taz7BtkWxKWtcMjtdLBdMYH59doC388jtbXzSO0hYTbxB-YN3eBx0VmC_oboBRpJsNhdtXBFqItD0HMQruVDa93bdztdTXK2sBhvDeSHVjz-UM3DUs93OO1QXpNXm6LG6QXOt4XtruuCaINL5l3rfEihjzG-AlPVKZRMiQz3bCL0tGiP1rWHGLbcebAkNwE1weEAHCb-kcVqHU8G_hy-JJdM-VIBaVe3TgpJntiD7tywSAAZFwO5nDjx1PKPCD_WcWQTzQELi5eR0Ukd4ZHLrKUI4PiBjNaKgb5lxUN3sP7Ez0sK0PihFg-UX265HudDGfzckeJ6b99_G56bDiMnBXeITAx96O-l4E6nluH1M6Hgm1nhyrmzMGXhTcWSf9cBRaEqo7yb_3LinQdswzFzgyo8nnuC8aZZbhjNIXZW_Tp320jRhEs3gRCuB1IjrgAaMgg7EAIS0x09GOw_3bWtr9B7TVppIMlP0QV5A9nKhg4DBbu3CnCIKZyyN6kkCS6YpSfj9KS7M4UGTsdJzUGa6KE8aY3cwriRr6C4mcdk5Pb443SdC6ezWS5uSNcZUzsECllMdAhRoEvkEiAdlyRQL1S9jaUpO8NQ4C2gOi3_0B4dAMqsaNBaYTvntvv0KkPESsUhYorHTQOSkaFHjR2ndlofLn0E_3ThBiIu8qTAd8onXercxZYSN2w0NbpsIlmp9Efe2SD9HniPKPw00-ejVY57LEiiPb0kH-a2IMLQQ0qS4F-y2j1Y.rF5-ZTz71RsGWtcHP_e9sAy_2IYTJU2wNPH1e2_njlI'
+  intercept(
+    req: HttpRequest<unknown>,
+    next: HttpHandler
+  ): Observable<HttpEvent<unknown>> {
+
+
+      req = req.clone({
+        setHeaders: { Authorization: `Bearer eyJhbGciOiJSU0EtT0FFUCIsImVuYyI6IkEyNTZDQkMtSFM1MTIiLCJraWQiOiIyM0VBOTUxMkY2NjZCMDA1MUY3Q0QzN0NFMjkzMkIxN0NFMkNCODhBIiwidHlwIjoiYXQrand0In0.Bwib-e-gdCc0yt4phSYHDlrKkxosz_DRsB0iu0__TubuT-xSk-b44xhDbDAIK7duyTndf6hv1p9jEGXMdJcVzAt77iUFUput54VlJNdJCjKBzxb_e1SgRm__1pFWL_Xc93bxVB1HA5wbZCqlpxr-vuscq5InOUA8reQMNsj1Rgp5Cu3erPYx_aLEcWWRrmvEAREhmiafE8KR_wG8RPL9O4rVeXIk3StQG95F9AJ_o5mbJYMuZtg_DM8WNfcUX7k4eeRmBXlaJE73NkeC7ImbYPgfPyrZjpguXJ_E2PbKYB-s1L170kVnU7KO73DukreCjDFsm_hiclMzMxh7rkgSmg.OPCX-FCV10A0Z2TyUHBo_g.-EWmhQ_Gp6EWj4yZzNXO3KfzDPrs_louDlSe0QcraJmo7PZ2RCCLMWM3NdmeX-QWbMoU30VA8BNOH74qMICWz2pCx35oM_2butEtLxkOGvRvs1JpHU7B1l0f6TOaDW-9pi35Q5pOpwjYCS0MDPLmJwDSjmynndEjAYX0iPgmgD6nDzwyzyZdZEXb5xAe6rFVgAVW2IWJaBExewJ5Jgvh1MA7eNhsvNIoc3HJ5ey5XkeB2cKLuT4n9szlQ8OP2MzGcyhfXsgoNAI7ryCqkgfcuEkc8DjymGkgJW7oYX2fcoOjatHIDbV49CH0AZ9vknNmraVP0AWXyK_HIgRPJNqwfRNwLCHqdGTUfWLxp_YB8dhkZk00ZSZeDmnXY-l0RTOAYb7xyHN62osgtKp5XqwDnLbMWS3hMEuulqN7cLeL1WrVvFb5duC5KHHT-w7tgXkyjutuRWp9KaPaTePz8i6_8ZsGuqhmeKxw1aLhEn4rUfm0rVmbIbNo_U7JbYbEPCVXi6PM4_v5kBQlZg_6evg0LS4ceP4LXBJm7KUGTX2vKup-5zy_S2n2NwSlstACHlXxqc57j1B3_9A8VtAYhmVqnNpwNJGG6SzQsGILhTlmVfLT6Huo8oTDT7AZlL3_epofaUfAlqM28wskYtDyDOmSJRimG6umrUKYbbip9B9HEuIYiE0enMzos5vyZnendTcp2_a2V4FAfzrYz0jedTbwvTx18ts4BLaULaiJzh5QyZlhCrC-yw_8HUPYNfpfNFLTLZyObuJ-Ugu_u5LEVPQaeAQMpEwV1BgkWgZq5SIQ-CfArJfKQHSUHGbmsvaPFDgAXVLHM2ZX29wzzvmZo8s9oAXRcnQ-9Lzrc9p2CxjeasnWTVKqVcXldwbVfUTlUFV9BgNqHdhFEaM6aP8_9pwo7vAqCagIg0AySaUKlzEryVN2vEOqaR6XiIihKDSuNeTAQ_BLAlMdvhQcj4tyOsApAx_A6qqc5qQgnA2HmzLetqayMtZg7-hhLhkX30yOmAr-FctMHfuqau3yuHOhWbRZM5ScvD457AdWgPRgD0k9MKr3WFTtjjTtstzsRJz-Yz52LVZZ7kIwcE7vCGOFDEOX7HKkCInZPVJHwdSWPK7RuexxZAFXxgrGSiit3VdiawHce9BsldFBr5SutUVUFzTFmtoXjyfsLo17eBQG1fO-fvQ-U9_OgAoIiotnXV3v31kMG63uDTwgzVU-W7vjNfk67Zk1h7YJthyRXJyAELRN7H3nMhrfWPJoFudB8Pn2cGUfgrRg60HKS05OvSxDG7IYszamyxErOLnOCcmgnS6WQtu5QLHZSa0Tnsp0--gU0sddRMeJmYSMDaLj0NXgYSRqGUwtPYUncyJn76HMk03jHfuUTl0IjzpgHoJWvwMYjti2iR1vcjBSpbcYmk-gi0KmTi3pAx1kySqAiAJHdU0kA5iGuRmjZMZfmlaKOsYjUESg.ijc84Och5uZ6Zs19tAmq2d0LKYbsSpgKp6pIzhudDUE` },
+      });
+
+
+    return next.handle(req).pipe(s => this.handleErrors(s, req.url));
+  }
+  private handleErrors(
+    source: Observable<HttpEvent<unknown>>,
+    urlPath: string
+  ): Observable<HttpEvent<unknown>> {
+    return source.pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 401 && !urlPath.includes('/auth/')) {
+          return this.handle401();
+        }
+
+        // rethrow error
+        return throwError(() => error);
+      })
+    );
+  }
+
+  private handle401() {
+    return EMPTY;
+  }
+}

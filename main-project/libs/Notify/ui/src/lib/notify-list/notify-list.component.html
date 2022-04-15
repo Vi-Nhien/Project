@@ -1,7 +1,10 @@
 <div class="inbox-tools">
   <div class="btn">
     <div class="btn-inbox_checkbox">
-      <label nz-checkbox></label>
+      <label nz-checkbox
+      [(ngModel)]="allChecked"
+      (ngModelChange)="updateAllChecked()"
+      [nzIndeterminate]="indeterminate"></label>
     </div>
     <button type="button" class="btn-star">
       <i class='bx bxs-star btn-list_star'></i>
@@ -28,8 +31,10 @@
     <div class="row-list_title inbox-list_views">Chưa xem</div>
   </div>
 
-  <div class="list-content" *ngFor="let data of thongBaosList">
-    <div class="row-list_content inbox-list_checkbox"> <label ></label></div>
+  <div class="list-content" *ngFor="let data of thongBaosList.result.items">
+    <div class="row-list_content inbox-list_checkbox">
+      <label nz-checkbox [(ngModel)]="data.flag" (ngModelChange)="updateSingleChecked()"></label>
+    </div>
     <div class="row-list_content inbox-list_star"> <span class="btn-star"><i class='bx bxs-star active'></i></span>
     </div>
     <div class="row-list_content inbox-list_action align-items-center">
@@ -47,13 +52,28 @@
 
 
     </div>
-    <div class="row-list_content inbox-list_title">{{ data.tieuDe }}</div>
+    <div class="row-list_content inbox-list_title" [ngStyle]="{'font-weight': data.isXem ? 'normal' : '700' }">{{ data.tieuDe }}</div>
     <div class="row-list_content inbox-list_attachments"></div>
-    <div class="row-list_content inbox-list_date">{{ data.ngayHetHan | date : 'mediumDate' }}</div>
-    <!-- <div class="row-list_content inbox-list_author">{{ data.nguoiTao }}</div> -->
-    <!-- <div class="row-list_content inbox-list_date">{{ data.ngayTao }}</div> -->
-    <!-- <div class="row-list_content list-views inbox-list_views">[{{ data.daXem }}]</div> -->
-    <!-- <div class="row-list_content list-views inbox-list_views">[{{ data.chuaXem }}]</div> -->
+    <div class="row-list_content inbox-list_date">{{ data.ngayHetHan | date :'dd/MM/yyyy HH:mm'}}</div>
+    <div class="row-list_content inbox-list_author" [ngStyle]="{'font-weight': data.isXem ? 'normal' : '700' }">{{ data.nguoiTao }}</div>
+    <div class="row-list_content inbox-list_date">{{ data.ngayTao | date :'dd/MM/yyyy HH:mm'}}</div>
+    <div class="row-list_content list-views inbox-list_views" (click)="showModal()">[{{ data.soLuongDaXem }}]</div>
+    <div class="row-list_content list-views inbox-list_views">[{{ data.soLuongChuaXem }}]</div>
   </div>
 </div>
 
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Danh sách đã xem" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <ng-container *nzModalContent >
+    <div class = "container-body_modal">
+      <div class = "item-user" *ngFor="let itemUser of nguoiDungXemThongBaoList.result.items">
+        <div class="image-user">A</div>
+        <div class="name-user">
+            {{itemUser.hoDem}} {{itemUser.ten}}
+          <small>{{itemUser.tenPhongBan}</small>
+        </div>
+      </div>
+    </div>
+
+  </ng-container>
+</nz-modal>

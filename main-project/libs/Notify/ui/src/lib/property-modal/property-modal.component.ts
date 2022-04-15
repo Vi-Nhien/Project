@@ -1,4 +1,5 @@
-import { NotifyService, ThongBaoTinhChat } from 'libs/Notify/data-access/services/src/lib/notify.service';
+
+import { NotifyService } from '@main-project/notify/data-access/services'
 import { FormBuilder, FormGroup  } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -8,12 +9,12 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
 @Component({
   selector: 'main-project-property-modal',
   templateUrl: './property-modal.component.html',
-  styleUrls: ['./property-modal.component.scss']
-})
+    styleUrls: ['./property-modal.component.scss']
+  })
 export class PropertyModalComponent implements OnInit {
 
-  @Input() item!: ThongBaoTinhChat;
-  thongBaoTinhChatsList: ThongBaoTinhChat[] | undefined;
+  @Input() item : any;
+  thongBaoTinhChatsList: any[] | undefined;
   formUpdateThongBaoTinhChat?: FormGroup;
   constructor(
     private notifyService: NotifyService,
@@ -37,13 +38,12 @@ export class PropertyModalComponent implements OnInit {
 
   getThongBaoTinhChatDetail(id: string): void {
     this.notifyService.getThongBaoThinhChatById(id)
-      .subscribe({
-        next: (data) => {
-          this.item = data;
-          console.log(data);
-        },
-        error: (e) => console.error(e)
-      });
+      .subscribe(
+        res  =>{
+          this.item = res;
+          console.log(res);
+        }
+      )
   }
 
   getThongBaoTinhChats() {

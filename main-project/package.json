@@ -21,6 +21,7 @@
     "@angular/router": "~13.2.0",
     "@kolkov/angular-editor": "^2.0.0",
     "@nrwl/angular": "13.9.6",
+    "jwt-decode": "^3.1.2",
     "ng-zorro-antd": "^13.1.1",
     "rxjs": "~7.4.0",
     "tslib": "^2.0.0",

@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import vi from '@angular/common/locales/vi';
 import { NotifyModalComponent } from './../notify-modal/notify-modal.component';
 import { Component, OnInit } from '@angular/core';
@@ -8,7 +9,8 @@ import { NzMessageService } from 'ng-zorro-antd/message'
 
 
 import { registerLocaleData } from '@angular/common';
-import { NotifyService, ThongBao } from 'libs/Notify/data-access/services/src/lib/notify.service';
+import { NotifyService  } from '@main-project/notify/data-access/services'
+
 @Component({
   selector: 'main-project-notify-list',
   templateUrl: './notify-list.component.html',
@@ -18,9 +20,11 @@ export class NotifyListComponent implements OnInit {
 
   selectedValue = null;
 
+  allChecked = 0;
+  indeterminate = true;
 
-
-  thongBaosList : ThongBao[] | undefined
+  thongBaosList :any = [];
+  nguoiDungXemThongBaoList: any = [];
 
   constructor(
     private modal: NzModalService,
@@ -28,19 +32,28 @@ export class NotifyListComponent implements OnInit {
     private notifyService : NotifyService) { }
 
   ngOnInit(): void {
-    this.getThongBaos()
+    this.getThongBaos();
     registerLocaleData(vi);
+    // this.getNguoiDungXemThongBaoList();
 
   }
 
   getThongBaos(){
     this.notifyService.getAllThongBaos().subscribe(
-      res =>{
+      (res: any = []) =>{
         this.thongBaosList = res;
         console.log(this.thongBaosList)
       }
+    );
+  }
 
-    )
+  getNguoiDungXemThongBaoList(){
+    this.notifyService.getNguoiDungXemThongBao().subscribe(
+      (res: any = []) =>{
+        this.nguoiDungXemThongBaoList = res;
+        console.log(this.nguoiDungXemThongBaoList)
+      }
+    );
   }
 
 
@@ -51,7 +64,17 @@ export class NotifyListComponent implements OnInit {
 
   showModal(): void {
     this.isVisible = true;
+    this.getNguoiDungXemThongBaoList();
 
+  }
+  handleOk(): void {
+    console.log('Button ok clicked!');
+    this.isVisible = false;
+  }
+
+  handleCancel(): void {
+    console.log('Button cancel clicked!');
+    this.isVisible = false;
   }
 
   // ---modal delete------
@@ -98,6 +121,34 @@ export class NotifyListComponent implements OnInit {
     this.message.success('Update successfully', {
       nzDuration: 3000
     });
+  }
+
+
+  updateAllChecked(): void {
+    this.indeterminate = false;
+    if (this.allChecked) {
+      this.thongBaosList = this.thongBaosList.map((item: any) => ({
+        ...item,
+        flag: 1
+      }));
+    } else {
+      this.thongBaosList = this.thongBaosList.map((item: any) => ({
+        ...item,
+        flag: 0
+      }));
+    }
+  }
+
+  updateSingleChecked(): void {
+    if (this.thongBaosList.every((item: { flag: any; }) => !item.flag)) {
+      this.allChecked = 0;
+      this.indeterminate = false;
+    } else if (this.thongBaosList.every((item: { flag: any; }) => item.flag)) {
+      this.allChecked = 0;
+      this.indeterminate = false;
+    } else {
+      this.indeterminate = true;
+    }
   }
 
 }

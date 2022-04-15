@@ -1,4 +1,5 @@
-import { NotifyService, ThongBaoTinhChat } from 'libs/Notify/data-access/services/src/lib/notify.service';
+
+import { NotifyService } from '@main-project/notify/data-access/services'
 import { NotifyAddModalComponent } from './../notify-add-modal/notify-add-modal.component';
 import { Component, ViewContainerRef, OnInit } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
@@ -10,7 +11,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 })
 export class SidebarComponent implements OnInit {
 
-  thongBaoTinhChatsList: ThongBaoTinhChat[] | undefined;
+  thongBaoTinhChatsList: any;
 
   constructor(private modal: NzModalService, private viewContainerRef: ViewContainerRef, private notifyService: NotifyService) { }
   createComponentModal(): void {
@@ -31,12 +32,9 @@ export class SidebarComponent implements OnInit {
 
   getThongBaoTinhChats() {
     this.notifyService.getAllThongBaoTinhChats().subscribe(
-      res => {
+      (res : any[]) => {
         this.thongBaoTinhChatsList = res;
-        console.log(this.thongBaoTinhChatsList)
-      },
-      (err) => {
-        console.log(err)
+        console.log(this.thongBaoTinhChatsList.result.items)
       }
     )
   }
