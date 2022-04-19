@@ -13,6 +13,7 @@
     display: flex;
     flex-direction: row;
     cursor: pointer;
+    align-items: center;
 
     .btn-inbo_checkbox {
       border-radius: .125rem;
@@ -34,10 +35,12 @@
       font-size: 1rem;
       background: transparent;
       color: #6c757d;
-      .bx {
-        color: yellow;
-        cursor: pointer;
-      }
+      // .bx {
+      //   // color: yellow;
+      //   cursor: pointer;
+      //   border: yellow;
+      // }
+
     }
 
 
@@ -230,9 +233,7 @@
 
 
 
-.active {
-  color: yellow;
-}
+
 
 .input-row__form {
   margin-bottom: 24px;
@@ -301,3 +302,19 @@ nz-select {
   background: inherit;
   font-size: 16px;
 }
+button{
+  outline: none;
+}
+
+
+.bx-star{
+  color: #6c757d;
+}
+.bxs-star
+{
+  color: #ffb44c;
+}
+
+
+
+

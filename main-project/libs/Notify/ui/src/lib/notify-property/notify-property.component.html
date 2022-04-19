@@ -1,65 +1,69 @@
-<div class="container-table_property">
-  <div class="tools-bar">
-    <div class="btn">
-      <div class="btn-inbox_checkbox">
-        <label nz-checkbox
-        [(ngModel)]="allChecked"
-        (ngModelChange)="updateAllChecked()"
-        [nzIndeterminate]="indeterminate"
-        nzValue="All"
+
+
+  <div class="container-table_property">
+    <div class="tools-bar">
+      <div class="btn">
+        <div class="btn-inbox_checkbox">
+          <input type = "checkbox" [(ngModel)]="checkAll" (change)="updateCheckBox($event)"
         >
+        </div>
+        <button type="button" class="btn-add" (click)="propertyAddModal()">
+          <i class='bx bx-add-to-queue'></i>
+          Thêm mới
+        </button>
 
-
-      </label>
+        <button *ngIf="checkAll"  class="btn-delete_all" (click)=" deleteAll_confirm()"><i
+            class='bx bx-trash-alt'></i>Xóa</button>
+            <button *ngIf="check"  class="btn-delete_all" (click)=" deleteAll_confirm()"><i
+              class='bx bx-trash-alt'></i>Xóa</button>
       </div>
-      <button type="button" class="btn-add" (click)="propertyAddModal()">
-        <i class='bx bx-add-to-queue'></i>
-        Thêm mới
-      </button>
-
-      <button *ngIf="allChecked" class = "btn-delete_all" (click) = " deleteAll_confirm()"><i class='bx bx-trash-alt'></i>Xóa</button>
+      <div class="tool-pagination">
+        <nz-pagination [nzPageIndex]="2" [nzTotal]="50" nzSimple></nz-pagination>
+      </div>
     </div>
-    <div class="tool-pagination">
-      <nz-pagination [nzPageIndex]="2" [nzTotal]="50" nzSimple></nz-pagination>
+    <div class="list-title">
+      <div class="list-title_header">
+        <div class="inbox-list_checkbox inbox-title"></div>
+        <div class="inbox-list_action inbox-title"></div>
+        <div class="inbox-list_code inbox-title">Mã tính chất</div>
+        <div class="inbox-list_title inbox-title">Tên tính chất</div>
+        <div class="inbox-list_note inbox-title">Ghi chú</div>
+        <div class="inbox-list_status inbox-title">Hiển thị</div>
+      </div>
+      <div class="list-title_body" *ngFor="let thongBaoTinhChat of thongBaoTinhChatArray ; let i = index">
+        <div class="inbox-list_checkbox">
+            <input type="checkbox"  [id] = "thongBaoTinhChat.id" (change) ="singleBox($event)">
+        </div>
+        <div class="inbox-list_action">
+          <a class="btn-dropdown" nz-dropdown [nzDropdownMenu]="menu">
+            <span><i class='bx bxs-inbox'></i></span>
+          </a>
+          <nz-dropdown-menu #menu="nzDropdownMenu" class="dropdownMenu">
+            <ul nz-menu nzSelectable>
+
+              <li nz-menu-item>
+                <button class="btn-modal" (click)="updateThongBaoTinhChat(thongBaoTinhChat)">Chỉnh sửa</button>
+              </li>
+              <li nz-menu-item>
+                <button class="btn-modal" (click)="deleteThongBaoTinhChat(thongBaoTinhChat, tplContent)">Delete</button>
+              </li>
+              <ng-template #tplContent let-params>
+                <!-- <p>some contents...</p>
+                    <p>some contents...</p> -->
+                <p style="padding-top: 12px">Bạn có chắc muốn <b>{{ params.item }}</b> không?</p>
+              </ng-template>
+            </ul>
+          </nz-dropdown-menu>
+        </div>
+        <div class="inbox-list_code">{{thongBaoTinhChat.maTinhChat}}</div>
+        <div class="inbox-list_title">{{thongBaoTinhChat.tenTinhChat}}</div>
+        <!-- <div class="inbox-list_title">{{thongBaoTinhChat.id}}</div> -->
+        <div class="inbox-list_note">{{thongBaoTinhChat.ghiChu}}</div>
+        <!-- <div class="inbox-list_note" [style.color]="thongBaoTinhChat.maMau">{{thongBaoTinhChat.maMau}}</div> -->
+        <div class="inbox-list_status" *ngIf="thongBaoTinhChat.isVisible"><span><i class='bx bxs-check-circle'
+              style="font-size: 18px; color: rgb(40, 167, 69);"></i></span></div>
+
+
+      </div>
     </div>
   </div>
-  <div class="list-title"  >
-    <div class="list-title_header">
-      <div class="inbox-list_checkbox inbox-title"></div>
-      <div class="inbox-list_action inbox-title"></div>
-      <div class="inbox-list_code inbox-title">Mã tính chất</div>
-      <div class="inbox-list_title inbox-title">Tên tính chất</div>
-      <div class="inbox-list_note inbox-title">Ghi chú</div>
-      <div class="inbox-list_status inbox-title">Hiển thị</div>
-    </div>
-    <div class="list-title_body" *ngFor="let thongBaoTinhChat of thongBaoTinhChatsList.result.items">
-      <div class="inbox-list_checkbox"><label nz-checkbox [(ngModel)]="thongBaoTinhChat.checked" (ngModelChange)="updateSingleChecked()" ></label></div>
-      <div class="inbox-list_action">
-        <a class="btn-dropdown" nz-dropdown [nzDropdownMenu]="menu">
-          <span><i class='bx bxs-inbox'></i></span>
-        </a>
-        <nz-dropdown-menu #menu="nzDropdownMenu" class="dropdownMenu">
-          <ul nz-menu nzSelectable>
-
-            <li nz-menu-item> <button class="btn-modal" (click)="updateThongBaoTinhChat(thongBaoTinhChat)"  >Chỉnh sửa</button></li>
-            <li nz-menu-item><button class="btn-modal"
-                (click)="deleteThongBaoTinhChat(thongBaoTinhChat, tplContent)">Delete</button></li>
-                <ng-template #tplContent let-params>
-                  <!-- <p>some contents...</p>
-                  <p>some contents...</p> -->
-                  <p style = "padding-top: 12px">Bạn có chắc muốn  <b>{{ params.item }}</b> không?</p>
-                </ng-template>
-          </ul>
-        </nz-dropdown-menu>
-      </div>
-      <div class="inbox-list_code">{{thongBaoTinhChat.maTinhChat}}</div>
-      <div class="inbox-list_title">{{thongBaoTinhChat.tenTinhChat}}</div>
-      <!-- <div class="inbox-list_title">{{thongBaoTinhChat.id}}</div> -->
-      <div class="inbox-list_note">{{thongBaoTinhChat.ghiChu}}</div>
-      <!-- <div class="inbox-list_note" [style.color]="thongBaoTinhChat.maMau">{{thongBaoTinhChat.maMau}}</div> -->
-      <div class="inbox-list_status" *ngIf="thongBaoTinhChat.isVisible"><span><i class='bx bxs-check-circle' style = "font-size: 18px; color: rgb(40, 167, 69);"></i></span></div>
-
-
-    </div>
-  </div>
-</div>

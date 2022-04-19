@@ -9,6 +9,7 @@ import { NotifyAllComponent } from './notify-all/notify-all.component';
 
 import { RouterModule, Routes } from '@angular/router';
 import { NotifySettingComponent } from './notify-setting/notify-setting.component';
+import { NotifyDetailComponent } from './notify-detail/notify-detail.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,9 @@ const routes: Routes = [
   },
   {
     path: 'page', component: NotifyAllComponent
+  },
+  {
+    path: 'page/:id' , component: NotifyDetailComponent
   },
   {
     path : 'tb-tc', component: NotifySettingComponent

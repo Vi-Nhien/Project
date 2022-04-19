@@ -3,8 +3,9 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message'
 import { PropertyModalComponent } from '../property-modal/property-modal.component';
-import { NotifyService  } from '@main-project/notify/data-access/services'
-import { FormGroup } from '@angular/forms';
+import { NotifyService } from '@main-project/notify/data-access/services'
+import { FormBuilder, FormGroup } from '@angular/forms';
+
 
 @Component({
   selector: 'main-project-notify-property',
@@ -13,25 +14,35 @@ import { FormGroup } from '@angular/forms';
 })
 export class NotifyPropertyComponent implements OnInit {
 
-  allChecked = false;
+  check = false;
+  checkAll = false;
   indeterminate = true;
+  ids : string[] = [];
+
   form?: FormGroup;
-  thongBaoTinhChatsList : any;
+  thongBaoTinhChatsList: any;
+  thongBaoTinhChatArray: any = [];
   selectThongBaoTinhChats: any;
-  arrayIds : any;
+
   constructor(private modal: NzModalService,
     private message: NzMessageService,
     private notifyService: NotifyService,
-  ) { }
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.getThongBaoTinhChats();
+
   }
+
+
+
   getThongBaoTinhChats() {
     this.notifyService.getAllThongBaoTinhChats().subscribe(
-      (res : any[]) => {
+      (res: any[]) => {
         this.thongBaoTinhChatsList = res;
-        console.log(this.thongBaoTinhChatsList)
+        this.thongBaoTinhChatArray = this.thongBaoTinhChatsList.result.items
+        console.log(this.thongBaoTinhChatArray)
       }
     )
   }
@@ -47,7 +58,7 @@ export class NotifyPropertyComponent implements OnInit {
         nzWidth: '700px',
         nzFooter: null
       });
-      this.modal.afterAllClose.subscribe(()=> this.getThongBaoTinhChats())
+      this.modal.afterAllClose.subscribe(() => this.getThongBaoTinhChats())
     }
   }
   propertyAddModal() {
@@ -58,7 +69,7 @@ export class NotifyPropertyComponent implements OnInit {
       nzWidth: '700px',
       nzFooter: null,
     });
-    this.modal.afterAllClose.subscribe(()=> this.getThongBaoTinhChats())
+    this.modal.afterAllClose.subscribe(() => this.getThongBaoTinhChats())
 
   }
 
@@ -85,7 +96,7 @@ export class NotifyPropertyComponent implements OnInit {
   }
 
 
-  deleteThongBaoTinhChatByIds(thongBaoTinhChat:any){
+  deleteThongBaoTinhChatByIds(thongBaoTinhChat: any) {
     this.notifyService.deleteThongBaoTinhChat(thongBaoTinhChat).subscribe(
       res => {
         this.message.success('Delete successfully', { nzDuration: 3000 });
@@ -95,32 +106,6 @@ export class NotifyPropertyComponent implements OnInit {
   }
 
 
-  updateAllChecked(): void {
-    this.indeterminate = false;
-    if (this.allChecked) {
-      this.thongBaoTinhChatsList = this.thongBaoTinhChatsList?.map((item: any) => ({
-        ...item,
-        checked: true
-      }));
-    } else {
-      this.thongBaoTinhChatsList = this.thongBaoTinhChatsList?.map((item: any) => ({
-        ...item,
-        checked: false
-      }));
-    }
-  }
-
-  updateSingleChecked(): void {
-    if (this.thongBaoTinhChatsList?.every((item: { checked: any; }) => !item.checked)) {
-      this.allChecked = false;
-      this.indeterminate = false;
-    } else if (this.thongBaoTinhChatsList?.every((item: { checked: any; }) => item.checked)) {
-      this.allChecked = true;
-      this.indeterminate = false;
-    } else {
-      this.indeterminate = true;
-    }
-  }
 
 
   deleteAll_confirm(): void {
@@ -149,4 +134,60 @@ export class NotifyPropertyComponent implements OnInit {
       )
     }
   }
+
+
+  updateCheckBox(event: any){
+
+    this.checkAll = event.target.checked;
+    console.log(this.checkAll);
+    // if(checkAll){
+    //   this.ids = this.thongBaoTinhChatArray.filter(item =>item.checked).
+    // }
+  }
+
+  singleBox(event: any){
+    this.check =  event.target.checked;
+    console.log(event.target.id)
+
+    if(this.check){
+      console.log("check box",this.check);
+      this.ids.push(event.target.id);
+      console.log(this.ids)
+    }
+    else{
+      console.log("check box", this.check)
+      this.ids.pop();
+      console.log(this.ids);
+    }
+  }
+
+  // updateAllChecked(): void {
+
+  //   this.indeterminate = false;
+  //   if (this.allChecked) {
+  //     this.thongBaoTinhChatArray = this.thongBaoTinhChatArray.map((item:any) => ({
+  //       ...item,
+  //       checked: true
+  //     }));
+  //   } else {
+  //     this.thongBaoTinhChatArray = this.thongBaoTinhChatArray.map((item:any) => ({
+  //       ...item,
+  //       checked: false
+  //     }));
+  //   }
+  // }
+
+  // updateSingleChecked(): void {
+  //   if (this.thongBaoTinhChatArray.every((item:any) => !item.id)) {
+  //     this.allChecked = false;
+  //     this.indeterminate = false;
+  //   } else if (this.thongBaoTinhChatArray.every((item:any) => item.id)) {
+  //     this.allChecked = true;
+  //     this.indeterminate = false;
+  //   } else {
+  //     this.indeterminate = true;
+  //   }
+  // }
+
+
 }

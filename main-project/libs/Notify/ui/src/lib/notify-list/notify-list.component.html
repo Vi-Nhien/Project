@@ -1,18 +1,15 @@
-<div class="inbox-tools">
+<!-- <div class="inbox-tools">
   <div class="btn">
     <div class="btn-inbox_checkbox">
-      <label nz-checkbox
-      [(ngModel)]="allChecked"
-      (ngModelChange)="updateAllChecked()"
-      [nzIndeterminate]="indeterminate"></label>
+      <label for="">
+        <input type="checkbox" name="checkboxes" id="">
+      </label>
     </div>
-    <button type="button" class="btn-star">
-      <i class='bx bxs-star btn-list_star'></i>
-    </button>
-
+    <div class= "btn-star" (click)="btnStyleStar = !btnStyleStar" [ngClass]="{'bx bx-star' :btnStyleStar === true , 'bx bxs-star': btnStyleStar === false}">
+    </div>
   </div>
   <div class="tool-pagination">
-    <nz-pagination [nzPageIndex]="2" [nzTotal]="50" nzSimple></nz-pagination>
+
   </div>
 </div>
 
@@ -33,29 +30,33 @@
 
   <div class="list-content" *ngFor="let data of thongBaosList.result.items">
     <div class="row-list_content inbox-list_checkbox">
-      <label nz-checkbox [(ngModel)]="data.flag" (ngModelChange)="updateSingleChecked()"></label>
+
     </div>
-    <div class="row-list_content inbox-list_star"> <span class="btn-star"><i class='bx bxs-star active'></i></span>
+    <div class="row-list_content inbox-list_star">
+      <div (click)="this.data.flag = !this.data.flag" [ngClass]="{' bx bx-star ':data.flag == 1 , ' bx bxs-star ': data.flag == 0}">
+      </div>
     </div>
     <div class="row-list_content inbox-list_action align-items-center">
 
-        <a class="btn-dropdown" nz-dropdown [nzDropdownMenu]="menu">
-          <i class='bx bxs-inbox'></i>
-        </a>
-        <nz-dropdown-menu #menu="nzDropdownMenu" class="dropdownMenu">
-          <ul nz-menu nzSelectable>
-            <li nz-menu-item> <button class="btn-modal" (click)="updateComponentModal()">Chỉnh sửa</button></li>
-            <li nz-menu-item><button class="btn-modal" (click)="showDeleteConfirm()">Delete</button></li>
+      <a class="btn-dropdown" nz-dropdown [nzDropdownMenu]="menu">
+        <i class='bx bxs-inbox'></i>
+      </a>
+      <nz-dropdown-menu #menu="nzDropdownMenu" class="dropdownMenu">
+        <ul nz-menu nzSelectable>
+          <li nz-menu-item> <button class="btn-modal" (click)="updateComponentModal()">Chỉnh sửa</button></li>
+          <li nz-menu-item><button class="btn-modal" (click)="showDeleteConfirm()">Delete</button></li>
 
-          </ul>
-        </nz-dropdown-menu>
+        </ul>
+      </nz-dropdown-menu>
 
 
     </div>
-    <div class="row-list_content inbox-list_title" [ngStyle]="{'font-weight': data.isXem ? 'normal' : '700' }">{{ data.tieuDe }}</div>
-    <div class="row-list_content inbox-list_attachments"></div>
+    <div class="row-list_content inbox-list_title" [ngStyle]="{'font-weight': data.isXem ? 'normal' : '700' }">{{
+      data.tieuDe }}</div>
+    <div class="row-list_content inbox-list_attachments" [ngClass]="{'bx bx-link-alt': data.isFileAttach === true}"></div>
     <div class="row-list_content inbox-list_date">{{ data.ngayHetHan | date :'dd/MM/yyyy HH:mm'}}</div>
-    <div class="row-list_content inbox-list_author" [ngStyle]="{'font-weight': data.isXem ? 'normal' : '700' }">{{ data.nguoiTao }}</div>
+    <div class="row-list_content inbox-list_author" [ngStyle]="{'font-weight': data.isXem ? 'normal' : '700' }">{{
+      data.nguoiTao }}</div>
     <div class="row-list_content inbox-list_date">{{ data.ngayTao | date :'dd/MM/yyyy HH:mm'}}</div>
     <div class="row-list_content list-views inbox-list_views" (click)="showModal()">[{{ data.soLuongDaXem }}]</div>
     <div class="row-list_content list-views inbox-list_views">[{{ data.soLuongChuaXem }}]</div>
@@ -64,16 +65,15 @@
 
 
 <nz-modal [(nzVisible)]="isVisible" nzTitle="Danh sách đã xem" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
-  <ng-container *nzModalContent >
-    <div class = "container-body_modal">
-      <div class = "item-user" *ngFor="let itemUser of nguoiDungXemThongBaoList.result.items">
+  <ng-container *nzModalContent>
+    <div class="container-body_modal">
+      <div class="item-user" *ngFor="let itemUser of nguoiDungXemThongBaoList.result.items">
         <div class="image-user">A</div>
         <div class="name-user">
-            {{itemUser.hoDem}} {{itemUser.ten}}
+          {{itemUser.hoDem}} {{itemUser.ten}}
           <small>{{itemUser.tenPhongBan}</small>
         </div>
       </div>
     </div>
-
   </ng-container>
-</nz-modal>
+</nz-modal> -->

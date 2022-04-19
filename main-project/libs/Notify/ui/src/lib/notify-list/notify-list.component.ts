@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+
 import vi from '@angular/common/locales/vi';
 import { NotifyModalComponent } from './../notify-modal/notify-modal.component';
 import { Component, OnInit } from '@angular/core';
@@ -9,7 +9,7 @@ import { NzMessageService } from 'ng-zorro-antd/message'
 
 
 import { registerLocaleData } from '@angular/common';
-import { NotifyService  } from '@main-project/notify/data-access/services'
+import { NotifyService } from '@main-project/notify/data-access/services'
 
 @Component({
   selector: 'main-project-notify-list',
@@ -18,18 +18,17 @@ import { NotifyService  } from '@main-project/notify/data-access/services'
 })
 export class NotifyListComponent implements OnInit {
 
+  btnStyleStar: boolean = false;
+
   selectedValue = null;
 
-  allChecked = 0;
-  indeterminate = true;
-
-  thongBaosList :any = [];
+  thongBaosList: any = [];
   nguoiDungXemThongBaoList: any = [];
 
   constructor(
     private modal: NzModalService,
     private message: NzMessageService,
-    private notifyService : NotifyService) { }
+    private notifyService: NotifyService) { }
 
   ngOnInit(): void {
     this.getThongBaos();
@@ -38,18 +37,18 @@ export class NotifyListComponent implements OnInit {
 
   }
 
-  getThongBaos(){
+  getThongBaos() {
     this.notifyService.getAllThongBaos().subscribe(
-      (res: any = []) =>{
+      (res: any = []) => {
         this.thongBaosList = res;
         console.log(this.thongBaosList)
       }
     );
   }
 
-  getNguoiDungXemThongBaoList(){
+  getNguoiDungXemThongBaoList() {
     this.notifyService.getNguoiDungXemThongBao().subscribe(
-      (res: any = []) =>{
+      (res: any = []) => {
         this.nguoiDungXemThongBaoList = res;
         console.log(this.nguoiDungXemThongBaoList)
       }
@@ -84,7 +83,7 @@ export class NotifyListComponent implements OnInit {
       nzTitle: 'Are you sure delete this task?',
       nzContent: '<b style="color: red;">Some descriptions</b>',
       nzAutofocus: null,
-      nzBodyStyle: { padding: '20px', outline:'none' },
+      nzBodyStyle: { padding: '20px', outline: 'none' },
       nzMaskClosable: true,
       nzOkText: 'Yes',
       nzOkType: 'primary',
@@ -108,7 +107,7 @@ export class NotifyListComponent implements OnInit {
       nzAutofocus: null,
       nzWidth: '700px',
       nzOkText: 'Save',
-      nzOnOk: () =>this.updateMessage(),
+      nzOnOk: () => this.updateMessage(),
       nzCancelText: 'Cancel',
       nzOnCancel: () => console.log('Cancel'),
     });
@@ -123,32 +122,5 @@ export class NotifyListComponent implements OnInit {
     });
   }
 
-
-  updateAllChecked(): void {
-    this.indeterminate = false;
-    if (this.allChecked) {
-      this.thongBaosList = this.thongBaosList.map((item: any) => ({
-        ...item,
-        flag: 1
-      }));
-    } else {
-      this.thongBaosList = this.thongBaosList.map((item: any) => ({
-        ...item,
-        flag: 0
-      }));
-    }
-  }
-
-  updateSingleChecked(): void {
-    if (this.thongBaosList.every((item: { flag: any; }) => !item.flag)) {
-      this.allChecked = 0;
-      this.indeterminate = false;
-    } else if (this.thongBaosList.every((item: { flag: any; }) => item.flag)) {
-      this.allChecked = 0;
-      this.indeterminate = false;
-    } else {
-      this.indeterminate = true;
-    }
-  }
 
 }

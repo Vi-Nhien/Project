@@ -64,11 +64,10 @@ export class NotifyService   {
     const headers = { 'content-type': 'application/json'};
     return this.httpClient.post<any[]>(this.apiUrlThongBaos+'/List', {headers: headers});
   }
-
-  // getThongBaoById(id: string) {
-  //   return this.httpClient.get(`${this.apiUrlThongBaos}/${id}`)
-  // }
-
+  getThongBaoById(id: string) {
+    const headers = { 'content-type': 'application/json'};
+    return this.httpClient.post(`${this.apiUrlThongBaos}/${id}`, {headers: headers})
+  }
   getNguoiDungXemThongBao(){
     const headers = { 'content-type': 'application/json'};
     return this.httpClient.post<any[]>(this.apiUrlNguoiDungXemThongBao, {headers : headers});

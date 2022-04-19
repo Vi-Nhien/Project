@@ -11,7 +11,9 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 })
 export class SidebarComponent implements OnInit {
 
-  thongBaoTinhChatsList: any;
+  thongBaoTinhChatsList  : any;
+
+  ThongBaoTinhChatArray: any =  [];
 
   constructor(private modal: NzModalService, private viewContainerRef: ViewContainerRef, private notifyService: NotifyService) { }
   createComponentModal(): void {
@@ -32,11 +34,11 @@ export class SidebarComponent implements OnInit {
 
   getThongBaoTinhChats() {
     this.notifyService.getAllThongBaoTinhChats().subscribe(
-      (res : any[]) => {
+      res=> {
         this.thongBaoTinhChatsList = res;
-        console.log(this.thongBaoTinhChatsList.result.items)
-      }
+        this.ThongBaoTinhChatArray = this.thongBaoTinhChatsList.result.items      }
     )
   }
+
 
 }
