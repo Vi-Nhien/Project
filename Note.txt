@@ -1,0 +1,9 @@
+------------ Angular pagination--------- 
+https://github.com/navanathjadhav/pagination-angular
+-------------------------------------------
+
+-----------Angular checkedboxselect-----
+https://www.itsolutionstuff.com/post/how-to-check-all-and-uncheck-all-checkboxes-in-angularexample.html
+
+https://www.freakyjolly.com/check-uncheck-all-checkbox-list-in-angular/
+-------------------------------------------
