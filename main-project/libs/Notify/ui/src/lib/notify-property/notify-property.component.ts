@@ -15,9 +15,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class NotifyPropertyComponent implements OnInit {
 
   check = false;
-  checkAll = false;
-  indeterminate = true;
-  ids : string[] = [];
+  setOfCheckedId = new Set<number>();
+  idn : number[] = [];
+  // ids: string[] = []
 
   form?: FormGroup;
   thongBaoTinhChatsList: any;
@@ -32,6 +32,47 @@ export class NotifyPropertyComponent implements OnInit {
 
   ngOnInit(): void {
     this.getThongBaoTinhChats();
+  }
+
+
+  onItemChecked( id: number, event: any){
+    const checked = event.target.checked
+    if(checked){
+      this.setOfCheckedId.add(id);
+      // this.refreshCheckedStatus();
+      // let checkItem = [... new Set(this.ids)];
+      this.idn = Array.from(this.setOfCheckedId);
+      console.log("array add id", this.idn);
+
+
+      // console.log(checkItem)
+    }
+
+    else{
+      this.setOfCheckedId.delete(id);
+      this.idn = Array.from(this.setOfCheckedId);
+      console.log("array add id", this.idn);
+    }
+  }
+
+
+  checkAllBox(event:any)
+  {
+    const checkedAll = event.target.checked;
+    if(checkedAll){
+      for (let i = 0; i < this.thongBaoTinhChatArray.length; i++) {
+        this.setOfCheckedId.add(this.thongBaoTinhChatArray[i].id);
+        // this.check = true;
+      }
+      console.log("array add all: ", this.setOfCheckedId);
+    }
+    else{
+      for (let i = 0; i < this.thongBaoTinhChatArray.length; i++) {
+          this.setOfCheckedId.delete(this.thongBaoTinhChatArray[i].id);
+          // this.check = false;
+      }
+      console.log("array delete all: ", this.setOfCheckedId);
+    }
 
   }
 
@@ -74,33 +115,45 @@ export class NotifyPropertyComponent implements OnInit {
   }
 
 
-  deleteThongBaoTinhChat(thongBaoTinhChat: any, tplContent: TemplateRef<{}>) {
-    if (thongBaoTinhChat) {
-      this.modal.confirm({
-        nzTitle: 'Bạn có muốn xóa không ???',
-        nzContent: tplContent,
-        nzComponentParams: {
-          item: thongBaoTinhChat.tenTinhChat
-        },
-        nzAutofocus: null,
-        nzBodyStyle: { padding: '20px', outline: 'none' },
-        nzMaskClosable: true,
-        nzOkText: 'Yes',
-        nzOkType: 'primary',
-        nzOkDanger: true,
-        nzOnOk: () => this.deleteThongBaoTinhChatByIds(thongBaoTinhChat),
-        nzCancelText: 'Cancel',
-        nzOnCancel: () => console.log('Cancel'),
-      });
+  deleteThongBaoTinhChat(thongBaoTinhChat: any, id: number, tplContent: TemplateRef<{}>) {
+    if(id){
+      this.setOfCheckedId.add(id);
+      this.idn = Array.from(this.setOfCheckedId);
+      console.log("array add id", this.idn);
+      if (id) {
+        this.modal.confirm({
+          nzTitle: 'Bạn có muốn xóa không ???',
+          nzContent: tplContent,
+          nzComponentParams: {
+            item: thongBaoTinhChat.tenTinhChat
+          },
+          nzAutofocus: null,
+          nzBodyStyle: { padding: '20px', outline: 'none' },
+          nzMaskClosable: true,
+          nzOkText: 'Yes',
+          nzOkType: 'primary',
+          nzOkDanger: true,
+          nzOnOk: () => this.deleteThongBaoTinhChatByIds(this.idn),
+          nzCancelText: 'Cancel',
+          nzOnCancel: () => this.cancel(),
+        });
+      }
     }
   }
 
+  cancel(){
+    this.setOfCheckedId.clear();
+    this.idn = Array.from(this.setOfCheckedId);
+  }
 
-  deleteThongBaoTinhChatByIds(thongBaoTinhChat: any) {
-    this.notifyService.deleteThongBaoTinhChat(thongBaoTinhChat).subscribe(
+
+
+  deleteThongBaoTinhChatByIds(idn: number[]) {
+    this.notifyService.deleteThongBaoTinhChat(idn).subscribe(
       res => {
         this.message.success('Delete successfully', { nzDuration: 3000 });
         console.log('complete');
+        this.getThongBaoTinhChats();
       }
     )
   }
@@ -115,79 +168,10 @@ export class NotifyPropertyComponent implements OnInit {
       nzOkText: 'Có, xóa dữ liệu',
       nzOkType: 'primary',
       nzOkDanger: true,
-      nzOnOk: () => this.deleteThongBaoTinhChatSelect(),
+      nzOnOk: () => this.deleteThongBaoTinhChatByIds(this.idn),
       nzCancelText: 'trở lại',
       nzOnCancel: () => console.log('Cancel')
     });
   }
-
-
-  deleteThongBaoTinhChatSelect() {
-    this.selectThongBaoTinhChats = this.thongBaoTinhChatsList?.filter((s: { checked: any; }) => s.checked);
-    for (const selectItem in this.selectThongBaoTinhChats) {
-      this.notifyService.deleteThongBaoTinhChat(this.selectThongBaoTinhChats[selectItem as unknown as number].id).subscribe(
-        res => {
-          this.getThongBaoTinhChats();
-          console.log(res);
-          this.message.success('Xóa dữ liệu thành công!!!')
-        }
-      )
-    }
-  }
-
-
-  updateCheckBox(event: any){
-
-    this.checkAll = event.target.checked;
-    console.log(this.checkAll);
-    // if(checkAll){
-    //   this.ids = this.thongBaoTinhChatArray.filter(item =>item.checked).
-    // }
-  }
-
-  singleBox(event: any){
-    this.check =  event.target.checked;
-    console.log(event.target.id)
-
-    if(this.check){
-      console.log("check box",this.check);
-      this.ids.push(event.target.id);
-      console.log(this.ids)
-    }
-    else{
-      console.log("check box", this.check)
-      this.ids.pop();
-      console.log(this.ids);
-    }
-  }
-
-  // updateAllChecked(): void {
-
-  //   this.indeterminate = false;
-  //   if (this.allChecked) {
-  //     this.thongBaoTinhChatArray = this.thongBaoTinhChatArray.map((item:any) => ({
-  //       ...item,
-  //       checked: true
-  //     }));
-  //   } else {
-  //     this.thongBaoTinhChatArray = this.thongBaoTinhChatArray.map((item:any) => ({
-  //       ...item,
-  //       checked: false
-  //     }));
-  //   }
-  // }
-
-  // updateSingleChecked(): void {
-  //   if (this.thongBaoTinhChatArray.every((item:any) => !item.id)) {
-  //     this.allChecked = false;
-  //     this.indeterminate = false;
-  //   } else if (this.thongBaoTinhChatArray.every((item:any) => item.id)) {
-  //     this.allChecked = true;
-  //     this.indeterminate = false;
-  //   } else {
-  //     this.indeterminate = true;
-  //   }
-  // }
-
 
 }

@@ -1,6 +1,10 @@
 {
   "version": 2,
   "projects": {
+    "catalog-data-access-models": "libs/catalog/data-access/models",
+    "catalog-data-access-services": "libs/catalog/data-access/services",
+    "catalog-feature": "libs/catalog/feature",
+    "catalog-ui": "libs/catalog/ui",
     "login-data-access": "libs/login/data-access",
     "login-feature": "libs/login/feature",
     "notify-app": "apps/notify-app",

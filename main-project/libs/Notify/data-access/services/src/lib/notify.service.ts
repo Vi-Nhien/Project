@@ -1,9 +1,9 @@
 import { environment } from './../../../../../../apps/notify-app/src/environments/environment';
 
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, JsonpClientBackend } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-// import { Http, Headers, Response } from '@angular/http'
+
 
 
 @Injectable({
@@ -53,11 +53,16 @@ export class NotifyService   {
   createThongBaoTinhChat(thongBaoTinhChat : any) {
     return this.httpClient.post(this.apiUrlThongBaoTinhChats, thongBaoTinhChat);
   }
-  deleteThongBaoTinhChat(thongBaoTinhChat: any)  {
-    let params = new HttpParams();
-    params = params.append('',thongBaoTinhChat.id);
-    return this.httpClient.delete(this.apiUrlThongBaoTinhChats, {params});
+  deleteThongBaoTinhChat(ids: number[])  {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body:{ids}
+    };
+    return this.httpClient.delete(this.apiUrlThongBaoTinhChats, options);
   }
+
 
 
   getAllThongBaos(): Observable<any[]> {

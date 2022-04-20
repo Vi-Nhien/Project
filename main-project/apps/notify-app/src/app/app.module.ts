@@ -24,6 +24,10 @@ const routes: Routes = [
   {
     path: 'notify',
     loadChildren: async () => await import('@main-project/notify/feature').then(notify => notify.NotifyFeatureModule)
+  },
+  {
+    path: 'catalog',
+    loadChildren: async () =>await import ('@main-project/catalog/feature').then(catalog => catalog.CatalogFeatureModule)
   }
 
 ];

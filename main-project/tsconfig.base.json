@@ -15,6 +15,14 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@main-project/catalog/data-access/models": [
+        "libs/catalog/data-access/models/src/index.ts"
+      ],
+      "@main-project/catalog/data-access/services": [
+        "libs/catalog/data-access/services/src/index.ts"
+      ],
+      "@main-project/catalog/feature": ["libs/catalog/feature/src/index.ts"],
+      "@main-project/catalog/ui": ["libs/catalog/ui/src/index.ts"],
       "@main-project/login/data-access": [
         "libs/login/data-access/src/index.ts"
       ],

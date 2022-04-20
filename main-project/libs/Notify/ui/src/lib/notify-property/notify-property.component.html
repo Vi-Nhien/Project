@@ -4,7 +4,7 @@
     <div class="tools-bar">
       <div class="btn">
         <div class="btn-inbox_checkbox">
-          <input type = "checkbox" [(ngModel)]="checkAll" (change)="updateCheckBox($event)"
+          <input type = "checkbox"  (change)="checkAllBox($event)"
         >
         </div>
         <button type="button" class="btn-add" (click)="propertyAddModal()">
@@ -12,10 +12,10 @@
           Thêm mới
         </button>
 
-        <button *ngIf="checkAll"  class="btn-delete_all" (click)=" deleteAll_confirm()"><i
+        <button *ngIf="setOfCheckedId.size != 0 "  class="btn-delete_all" (click)=" deleteAll_confirm()"><i
             class='bx bx-trash-alt'></i>Xóa</button>
-            <button *ngIf="check"  class="btn-delete_all" (click)=" deleteAll_confirm()"><i
-              class='bx bx-trash-alt'></i>Xóa</button>
+            <!-- <button *ngIf="checked"  class="btn-delete_all" (click)=" deleteAll_confirm()"><i
+              class='bx bx-trash-alt'></i>Xóa</button> -->
       </div>
       <div class="tool-pagination">
         <nz-pagination [nzPageIndex]="2" [nzTotal]="50" nzSimple></nz-pagination>
@@ -32,8 +32,8 @@
       </div>
       <div class="list-title_body" *ngFor="let thongBaoTinhChat of thongBaoTinhChatArray ; let i = index">
         <div class="inbox-list_checkbox">
-            <input type="checkbox"  [id] = "thongBaoTinhChat.id" (change) ="singleBox($event)">
-        </div>
+            <input type="checkbox" [checked]="setOfCheckedId.has(thongBaoTinhChat.id)" (change) ="onItemChecked(thongBaoTinhChat.id, $event)">
+          </div>
         <div class="inbox-list_action">
           <a class="btn-dropdown" nz-dropdown [nzDropdownMenu]="menu">
             <span><i class='bx bxs-inbox'></i></span>
@@ -45,7 +45,7 @@
                 <button class="btn-modal" (click)="updateThongBaoTinhChat(thongBaoTinhChat)">Chỉnh sửa</button>
               </li>
               <li nz-menu-item>
-                <button class="btn-modal" (click)="deleteThongBaoTinhChat(thongBaoTinhChat, tplContent)">Delete</button>
+                <button class="btn-modal" (click)="deleteThongBaoTinhChat(thongBaoTinhChat, thongBaoTinhChat.id, tplContent)">Delete</button>
               </li>
               <ng-template #tplContent let-params>
                 <!-- <p>some contents...</p>
