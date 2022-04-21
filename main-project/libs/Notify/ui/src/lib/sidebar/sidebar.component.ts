@@ -22,9 +22,11 @@ export class SidebarComponent implements OnInit {
       nzContent: NotifyAddModalComponent,
       nzWidth: '700px',
       nzViewContainerRef: this.viewContainerRef,
-      nzOnOk: () => new Promise(resolve => setTimeout(resolve, 1000)),
+      // nzOnOk: () => new Promise(resolve => setTimeout(resolve, 1000)),
+      nzFooter: null
 
     });
+    modal.afterClose.subscribe(result => console.log(result), this.getThongBaoTinhChats);
   }
 
   ngOnInit(): void {

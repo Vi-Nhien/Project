@@ -4,6 +4,9 @@ import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { NzMessageService } from 'ng-zorro-antd/message'
 // import { NotifyService, ThongBaoTinhChat } from 'libs/Notify/data-access/services/src/lib/notify.service';
 import { NotifyService  } from '@main-project/notify/data-access/services'
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NzModalRef  } from 'ng-zorro-antd/modal';
+
 
 @Component({
   selector: 'main-project-notify-add-modal',
@@ -15,7 +18,7 @@ export class NotifyAddModalComponent implements OnInit {
 
 
   selectValue = [];
-  radioValue = 'A'
+  radioValue = 1
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -57,14 +60,31 @@ export class NotifyAddModalComponent implements OnInit {
   thongBaoTinhChatsList: any;
   phongBanList: any;
   coSoList: any;
+  form?: FormGroup;
 
-  constructor(private message: NzMessageService,
-    private notifyService: NotifyService) { }
+  constructor(
+    private message: NzMessageService,
+    private notifyService: NotifyService,
+    private fb: FormBuilder,
+    private modalRef: NzModalRef
+    ) { }
 
   ngOnInit(): void {
     this.getThongBaoTinhChats();
     this.getPhongBanList();
     this.getCoSoList();
+
+    this.form = this.fb.group({
+      tieuDe : new FormControl('', Validators.required),
+      loaiThongBao: new FormControl(''),
+      maTraCuu:new FormControl(''),
+      noiDung:new FormControl(''),
+      ngayHetHan:new FormControl(''),
+      idTinhChat:new FormControl(''),
+      idsCoSo:new FormControl([]),
+      idsPhongBan:new FormControl([]),
+      fileAttaches:new FormControl('')
+    })
   }
 
   getThongBaoTinhChats() {
@@ -107,5 +127,10 @@ export class NotifyAddModalComponent implements OnInit {
     }
   }
 
+  submit(){
 
+  }
+  cancel() {
+    this.modalRef.destroy()
+  }
 }

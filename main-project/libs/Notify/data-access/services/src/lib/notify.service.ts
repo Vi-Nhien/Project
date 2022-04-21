@@ -79,15 +79,22 @@ export class NotifyService   {
   }
   getThongBaoClickViews(idGuid: string){
     const url = 'http://192.168.0.246:5357/api/v1/ThongBaos/ClickView'
-    // const options = {
-    //   headers: new HttpHeaders({
-    //     'Content-Type': 'application/json',
-    //   }),
-    //   body:{idGuid }
-    // };
-    // return this.httpClient.post(this.apiUrlThongBaos+'/ClickView', options)
-    // return this.httpClient.post(url , options);
     return this.httpClient.post(url, {idGuid})
+  }
+
+  deleteThongBaos(idsGuid: string[]){
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body:{idsGuid}
+    };
+    return this.httpClient.delete(this.apiUrlThongBaos, options);
+  }
+
+  updateViewed(idsGuidThongBao: string[], trangThaiXemThongBao: number ){
+    const url =  'http://192.168.0.246:5357/api/v1/ThongBaos/Viewed';
+    return this.httpClient.post(url, {idsGuidThongBao, trangThaiXemThongBao})
   }
 
 

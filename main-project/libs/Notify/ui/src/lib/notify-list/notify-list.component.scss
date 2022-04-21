@@ -25,6 +25,14 @@
       padding: 0 .625rem;
 
     }
+    .hover-btn{
+      padding:4px 8px;
+      display: flex;
+      align-items: center;
+      column-gap: 4px;
+      border-radius: 8px;
+    }
+
 
     .btn-star {
       align-items: center;
@@ -34,17 +42,12 @@
       width: 3.5rem;
       font-size: 1rem;
       background: transparent;
-      color: #6c757d;
-      // .bx {
-      //   // color: yellow;
-      //   cursor: pointer;
-      //   border: yellow;
-      // }
-
     }
 
 
-
+    .hover-btn:hover{
+      background-color: rgba(108, 117, 125, 0.2);
+    }
   }
 
 }
@@ -82,16 +85,16 @@
     display: flex;
     flex-direction: row;
 
-    .content {
+    .content-row {
 
       display: flex;
       flex-direction: row;
       border-bottom: 1px solid #2125291a;
       cursor: pointer;
-      display: flex;
       padding: .75rem 1.25rem;
       color: black;
-      
+      max-width: 100%;
+
 
       .row-list_content {
         display: flex;
@@ -110,7 +113,7 @@
 
 
 
-    .content:hover {
+    .content-row:hover {
       background-color: #f0f2f580;
     }
 

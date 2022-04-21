@@ -1,10 +1,14 @@
 <div class="inbox-tools">
   <div class="btn">
     <div class="btn-inbox_checkbox">
-        <input type="checkbox" name="checkboxes" id="">
+        <input type="checkbox"  (change) ="chooseAll($event)">
     </div>
-    <div class= "btn-star " (click)="btnStyleStar = !btnStyleStar" [ngClass]="{ 'bx bx-star' :btnStyleStar == true , 'bx bxs-star': btnStyleStar == false}">
+    <div class= "btn-star bx"  (click)="btnStyleStar = !btnStyleStar" [ngClass]="{ 'bx-star' :btnStyleStar == true , 'bxs-star': btnStyleStar == false}">
     </div>
+
+    <div *ngIf="chooseIdThongBao.size != 0" class = "hover-btn" style = "color: red"> <i class='bx bx-trash-alt'></i> Xóa</div>
+    <div *ngIf="chooseIdThongBao.size != 0" class = "hover-btn" > <i class='bx bx-envelope-open'></i> Đánh dấu đã đọc</div>
+
   </div>
   <div class="tool-pagination">
   </div>
@@ -24,12 +28,12 @@
     <div class="row-list_title inbox-list_views" style ="width: 80px">Chưa xem</div>
   </div>
   <div class="list-content" *ngFor="let data of thongBaosList">
-    <a (click)="notifyDetail(data)" class="content">
+    <div class="content-row">
       <div class="row-list_content inbox-list_checkbox" style ="width: 36px">
-        <input type="checkbox" name="checkboxes" id="">
+        <input type="checkbox"  [checked] = "chooseIdThongBao.has(data.idGuid)" [id] = "data.idGuid" (change) ="chooseSingle($event, data.idGuid) ">
       </div>
       <div class="row-list_content inbox-list_star" style ="width: 36px">
-        <div (click)="this.data.flag = !this.data.flag" [ngClass]="{' bx bx-star ':data.flag === 1 , ' bx bxs-star ': data.flag === 0}">
+        <div (click)="changeflag(data.flag)" class ="" [ngClass]="{' bx bx-star ':data.flag === 1 , ' bx bxs-star ': data.flag === 0}">
         </div>
       </div>
       <div class="row-list_content inbox-list_action align-items-center" style ="width: 40px">
@@ -39,20 +43,25 @@
         <nz-dropdown-menu #menu="nzDropdownMenu" class="dropdownMenu">
           <ul nz-menu nzSelectable>
             <li nz-menu-item> <button class="btn-modal" (click)="updateComponentModal()">Chỉnh sửa</button></li>
-            <li nz-menu-item><button class="btn-modal" (click)="showDeleteConfirm()">Delete</button></li>
+            <li nz-menu-item><button class="btn-modal" (click)="showDeleteConfirm(data.idGuid)">Delete</button></li>
           </ul>
         </nz-dropdown-menu>
       </div>
-      <div class="row-list_content inbox-list_title" style ="flex-grow: 1;" style ="width: 178px" [ngStyle]="{'font-weight': data.isXem ? 'normal' : '700' }">{{
-        data.tieuDe }}</div>
-      <div class="row-list_content inbox-list_attachments" style = "width: 16px" [ngClass]="{'bx bx-link-alt': data.isFileAttach === true}"></div>
-      <div class="row-list_content inbox-list_date" style = "width: 128px">{{ data.ngayHetHan | date :'dd/MM/yyyy HH:mm'}}</div>
-      <div class="row-list_content inbox-list_author"  style = " width: 192px"[ngStyle]="{'font-weight': data.isXem ? 'normal' : '700' }">{{
-        data.nguoiTao }}</div>
-      <div class="row-list_content inbox-list_date"  style = "width: 128px">{{ data.ngayTao | date :'dd/MM/yyyy HH:mm'}}</div>
-      <div class="row-list_content list-views inbox-list_views" style = "width: 80px"(click)="showModal()">[{{ data.soLuongDaXem }}]</div>
-      <div class="row-list_content list-views inbox-list_views"  style = "width: 80px">[{{ data.soLuongChuaXem }}]</div>
-    </a>
+      <a (click)="notifyDetail(data)" style ="display: flex;">
+        <div class="row-list_content inbox-list_title" style ="flex-grow: 1; display: flex; align-items: center;" style ="width: 178px" [ngStyle]="{'font-weight': data.isXem ? 'normal' : '700' }">
+        <div [ngStyle]="{color: data.maMau}"> <i class='bx bx-radio-circle-marked' style ="font-size: 20px;"></i> </div>
+        <div> {{data.tieuDe }}</div>
+
+        </div>
+        <div class="row-list_content inbox-list_attachments" style = "width: 16px" [ngClass]="{'bx bx-link-alt': data.isFileAttach === true}"></div>
+        <div class="row-list_content inbox-list_date" style = "width: 128px">{{ data.ngayHetHan | date :'dd/MM/yyyy HH:mm'}}</div>
+        <div class="row-list_content inbox-list_author"  style = " width: 192px"[ngStyle]="{'font-weight': data.isXem ? 'normal' : '700' }">{{
+          data.nguoiTao }}</div>
+        <div class="row-list_content inbox-list_date"  style = "width: 128px">{{ data.ngayTao | date :'dd/MM/yyyy HH:mm'}}</div>
+        <div class="row-list_content list-views inbox-list_views" style = "width: 80px"(click)="showModal()">[{{ data.soLuongDaXem }}]</div>
+        <div class="row-list_content list-views inbox-list_views"  style = "width: 80px">[{{ data.soLuongChuaXem }}]</div>
+      </a>
+    </div>
   </div>
 </div>
 

@@ -25,6 +25,9 @@ export class NotifyListComponent implements OnInit {
 
   thongBaosList: any = [];
   nguoiDungXemThongBaoList: any = [];
+  checked = false;
+  chooseIdThongBao = new Set<string>();
+  listChooseThongBaos: string[] = [];
 
   constructor(
     private modal: NzModalService,
@@ -40,7 +43,7 @@ export class NotifyListComponent implements OnInit {
   }
 
   getThongBaos() {
-    let ThongBaos: any =[]
+    let ThongBaos: any = []
     this.notifyService.getAllThongBaos().subscribe(
       res => {
         ThongBaos = res;
@@ -51,20 +54,17 @@ export class NotifyListComponent implements OnInit {
   }
 
   getNguoiDungXemThongBaoList() {
-    let NguoiDungXemThongBao : any =[];
+    let NguoiDungXemThongBao: any = [];
     this.notifyService.getNguoiDungXemThongBao().subscribe(
       (res: any = []) => {
         NguoiDungXemThongBao = res;
-        this.nguoiDungXemThongBaoList =  NguoiDungXemThongBao.result.items;
+        this.nguoiDungXemThongBaoList = NguoiDungXemThongBao.result.items;
         console.log(this.nguoiDungXemThongBaoList)
       }
     );
   }
 
 
-  // -----modal edit------
-
-  // eslint-disable-next-line @typescript-eslint/member-ordering
   isVisible = false;
 
   showModal(): void {
@@ -84,20 +84,24 @@ export class NotifyListComponent implements OnInit {
 
   // ---modal delete------
 
-  showDeleteConfirm(): void {
-    this.modal.confirm({
-      nzTitle: 'Are you sure delete this task?',
-      nzContent: '<b style="color: red;">Some descriptions</b>',
-      nzAutofocus: null,
-      nzBodyStyle: { padding: '20px', outline: 'none' },
-      nzMaskClosable: true,
-      nzOkText: 'Yes',
-      nzOkType: 'primary',
-      nzOkDanger: true,
-      nzOnOk: () => this.deleteMessage(),
-      nzCancelText: 'No',
-      nzOnCancel: () => console.log('Cancel')
-    });
+  showDeleteConfirm(id: string): void {
+    if (id) {
+      this.chooseIdThongBao.add(id);
+      this.modal.confirm({
+        nzTitle: 'Are you sure delete this task?',
+        nzContent: '<b style="color: red;">Some descriptions</b>',
+        nzAutofocus: null,
+        nzBodyStyle: { padding: '20px', outline: 'none' },
+        nzMaskClosable: true,
+        nzOkText: 'Yes',
+        nzOkType: 'primary',
+        nzOkDanger: true,
+        nzOnOk: () => this.deleteThongBaos(),
+        nzCancelText: 'No',
+        nzOnCancel: () => console.log('Cancel')
+      });
+    }
+
   }
 
   deleteMessage(): void {
@@ -128,10 +132,59 @@ export class NotifyListComponent implements OnInit {
     });
   }
 
-  notifyDetail(data: any){
-    if(data){
+  notifyDetail(data: any) {
+    if (data) {
       this.router.navigate(['/notify/page', data.idGuid])
     }
   }
+
+  deleteThongBaos() {
+    this.listChooseThongBaos = Array.from(this.chooseIdThongBao);
+    this.notifyService.deleteThongBaos(this.listChooseThongBaos).subscribe(
+      res => {
+        this.deleteMessage();
+      }
+    )
+  }
+
+
+  chooseAll(event: any) {
+    const checkedAll = event.target.checked;
+    if (checkedAll) {
+      for (let i = 0; i < this.thongBaosList.length; i++) {
+        this.chooseIdThongBao.add(this.thongBaosList[i].idGuid);
+        this.checked = true;
+      }
+      console.log("array add all: ", this.chooseIdThongBao);
+    }
+    else {
+      for (let i = 0; i < this.thongBaosList.length; i++) {
+        this.chooseIdThongBao.delete(this.thongBaosList[i].idGuid);
+        this.checked = false;
+      }
+      console.log("array delete all: ", this.chooseIdThongBao);
+    }
+  }
+
+  chooseSingle(event: any, id: string) {
+    const check = event.target.checked;
+    if (check) {
+      this.chooseIdThongBao.add(id);
+      console.log(this.chooseIdThongBao);
+    }
+    else {
+      this.chooseIdThongBao.delete(id);
+      console.log(this.chooseIdThongBao);
+
+    }
+  }
+
+  changeflag(flag: number){
+    if(flag == 1)
+      this.thongBaosList.flag = 0
+    }
+    if(flag = 0){
+      this.thongBaosList.flag = 1
+    }
 
 }

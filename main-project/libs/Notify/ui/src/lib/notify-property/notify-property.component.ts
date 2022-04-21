@@ -17,7 +17,6 @@ export class NotifyPropertyComponent implements OnInit {
   check = false;
   setOfCheckedId = new Set<number>();
   idn : number[] = [];
-  // ids: string[] = []
 
   form?: FormGroup;
   thongBaoTinhChatsList: any;
