@@ -1,9 +1,12 @@
-<div class="d-flex">
-  <div class="left-side">
+<div class="d-flex" style ="overflow: hidden; max-height: 100%;">
+  <div class="left-side" >
     <main-project-sidebar></main-project-sidebar>
   </div>
   <div class="right-side">
     <main-project-notify-header></main-project-notify-header>
-    <main-project-notify-list></main-project-notify-list>
+    <div style ="overflow: scroll; height: 100vh; width: auto;">
+
+      <main-project-notify-list></main-project-notify-list>
+    </div>
   </div>
 </div>

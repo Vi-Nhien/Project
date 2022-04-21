@@ -1,7 +1,6 @@
 .left-side{
-  flex:auto;
+  flex:auto
 }
 .right-side{
   flex: 100%;
 }
-

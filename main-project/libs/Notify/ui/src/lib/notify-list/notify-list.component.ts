@@ -10,6 +10,7 @@ import { NzMessageService } from 'ng-zorro-antd/message'
 
 import { registerLocaleData } from '@angular/common';
 import { NotifyService } from '@main-project/notify/data-access/services'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'main-project-notify-list',
@@ -28,7 +29,8 @@ export class NotifyListComponent implements OnInit {
   constructor(
     private modal: NzModalService,
     private message: NzMessageService,
-    private notifyService: NotifyService) { }
+    private notifyService: NotifyService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.getThongBaos();
@@ -38,18 +40,22 @@ export class NotifyListComponent implements OnInit {
   }
 
   getThongBaos() {
+    let ThongBaos: any =[]
     this.notifyService.getAllThongBaos().subscribe(
-      (res: any = []) => {
-        this.thongBaosList = res;
+      res => {
+        ThongBaos = res;
+        this.thongBaosList = ThongBaos.result.items;
         console.log(this.thongBaosList)
       }
     );
   }
 
   getNguoiDungXemThongBaoList() {
+    let NguoiDungXemThongBao : any =[];
     this.notifyService.getNguoiDungXemThongBao().subscribe(
       (res: any = []) => {
-        this.nguoiDungXemThongBaoList = res;
+        NguoiDungXemThongBao = res;
+        this.nguoiDungXemThongBaoList =  NguoiDungXemThongBao.result.items;
         console.log(this.nguoiDungXemThongBaoList)
       }
     );
@@ -122,5 +128,10 @@ export class NotifyListComponent implements OnInit {
     });
   }
 
+  notifyDetail(data: any){
+    if(data){
+      this.router.navigate(['/notify/page', data.idGuid])
+    }
+  }
 
 }

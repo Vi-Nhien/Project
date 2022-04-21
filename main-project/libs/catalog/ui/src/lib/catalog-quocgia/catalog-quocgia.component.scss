@@ -57,6 +57,9 @@
 }
 
 .gird-item_subheader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
   .area-action_left {
     width: 340px;
@@ -94,11 +97,33 @@
   display: flex;
   align-items: center;
   justify-content: end;
-  .btn{
+
+  .btn {
     background: #fff;
     border-color: #e0e0e0;
     margin-left: 5px;
     margin-right: 5px;
     min-height: 35px;
   }
+}
+
+
+
+.gird-table {
+
+  .gird-table_header {
+    font-weight: 500 !important;
+    white-space: normal;
+    border-width: 0 0 1px 1px;
+    height: 40px;
+    color: #222;
+    font-size: 14px;
+    padding: 4px 8px;
+
+  }
+
+  // th{
+  //   text-align: center;
+  // }
+
 }

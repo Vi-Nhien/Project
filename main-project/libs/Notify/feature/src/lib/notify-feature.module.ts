@@ -1,15 +1,12 @@
-import { PropertyModalComponent } from './../../../ui/src/lib/property-modal/property-modal.component';
 
 import { NotifyUiModule } from '@main-project/notify/ui';
-
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NotifyAllComponent } from './notify-all/notify-all.component';
 
 import { RouterModule, Routes } from '@angular/router';
 import { NotifySettingComponent } from './notify-setting/notify-setting.component';
-import { NotifyDetailComponent } from './notify-detail/notify-detail.component';
+import { NotifyDetailingComponent } from './notify-detailing/notify-detailing.component';
 
 const routes: Routes = [
   {
@@ -19,7 +16,7 @@ const routes: Routes = [
     path: 'page', component: NotifyAllComponent
   },
   {
-    path: 'page/:id' , component: NotifyDetailComponent
+    path: 'page/:id' , component: NotifyDetailingComponent
   },
   {
     path : 'tb-tc', component: NotifySettingComponent
@@ -36,14 +33,16 @@ const routes: Routes = [
 
   declarations: [
     NotifyAllComponent,
-    NotifySettingComponent
+    NotifySettingComponent,
+    NotifyDetailingComponent
+
 
   ],
 
    exports: [
     NotifyAllComponent,
-    NotifySettingComponent
-
+    NotifySettingComponent,
+    NotifyDetailingComponent
    ]
 })
 export class NotifyFeatureModule {}

@@ -4,10 +4,13 @@ import { CatalogHeaderComponent } from './catalog-header/catalog-header.componen
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { CatalogMenuComponent } from './catalog-menu/catalog-menu.component';
 import { CatalogQuocgiaComponent } from './catalog-quocgia/catalog-quocgia.component';
+import { NzTableModule } from 'ng-zorro-antd/table';
+
 @NgModule({
   imports: [
     CommonModule,
-    NzMenuModule
+    NzMenuModule,
+    NzTableModule
   ],
 
   declarations:[

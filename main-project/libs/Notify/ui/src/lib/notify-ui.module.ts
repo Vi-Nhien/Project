@@ -30,6 +30,8 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NotifyAddModalComponent } from './notify-add-modal/notify-add-modal.component';
 import { PropertyAddModalComponent } from './property-add-modal/property-add-modal.component';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NotifyDetailComponent } from './notify-detail/notify-detail.component';
+import { NzProgressModule } from 'ng-zorro-antd/progress';
 
 @NgModule({
   imports: [
@@ -53,6 +55,7 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
     NzInputNumberModule,
     RouterModule,
     NzDrawerModule,
+    NzProgressModule
 
   ],
   declarations: [
@@ -64,6 +67,7 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
     PropertyModalComponent,
     NotifyAddModalComponent,
     PropertyAddModalComponent,
+    NotifyDetailComponent
   ],
   exports: [
     NotifyListComponent,
@@ -72,7 +76,8 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
     NotifyPropertyComponent,
     NotifyModalComponent,
     PropertyModalComponent,
-    NotifyAddModalComponent
+    NotifyAddModalComponent,
+    NotifyDetailComponent
   ],
 
   providers: [

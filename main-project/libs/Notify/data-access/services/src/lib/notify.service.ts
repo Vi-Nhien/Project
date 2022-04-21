@@ -77,7 +77,18 @@ export class NotifyService   {
     const headers = { 'content-type': 'application/json'};
     return this.httpClient.post<any[]>(this.apiUrlNguoiDungXemThongBao, {headers : headers});
   }
-
+  getThongBaoClickViews(idGuid: string){
+    const url = 'http://192.168.0.246:5357/api/v1/ThongBaos/ClickView'
+    // const options = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type': 'application/json',
+    //   }),
+    //   body:{idGuid }
+    // };
+    // return this.httpClient.post(this.apiUrlThongBaos+'/ClickView', options)
+    // return this.httpClient.post(url , options);
+    return this.httpClient.post(url, {idGuid})
+  }
 
 
 }

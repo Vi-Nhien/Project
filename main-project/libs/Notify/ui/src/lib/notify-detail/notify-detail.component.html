@@ -1,0 +1,46 @@
+<div class="container-notify_detail">
+  <div class="inbox-toolbar">
+    <a routerLink="/notify/page" routerLinkActive="router-link-active" class = " btn-icon" style ="padding: .25rem; border-radius: 8px;" >
+      <i class='bx bx-left-arrow-alt' style ="color: #6c757d;"></i>
+    </a>
+    <button class = " btn-icon"><i class='bx bx-trash-alt '></i> Xóa</button>
+    <button class = " btn-icon"><i class='bx bx-envelope ' ></i>Đánh dấu chưa đọc</button>
+  </div>
+  <div class="notify-content-detail">
+    <div class="notify-row">
+      <div class=" notify-content">
+        <div class="notify-head">
+          <div class="title"></div>
+        </div>
+        <div class="notify-body">
+          <div class="notify-body-top">
+            <div class="notify-body-left">
+              <div class="user">
+                <div class="avatar-user">A</div>
+                <div class="infor-user">Á Đù</div>
+              </div>
+            </div>
+            <div class="notify-body-right">
+              <span>08:12 12/12/2012</span>
+              <i class = "bx bx-star"></i>
+            </div>
+          </div>
+
+          <div class="pl-edit" style="padding: 15px 0;">
+            <p>Á đù somethings bla bla bla</p>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+          <div class="card-head">Trạng thái xem thông báo</div>
+          <div class="card-body">
+            <div class="">[69/96] Đã xem thông báo</div>
+            <nz-progress [nzPercent]="30"></nz-progress>
+            <div class="user-status">
+              <div class="avatar-user">A</div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
