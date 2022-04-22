@@ -12,6 +12,7 @@ import { registerLocaleData } from '@angular/common';
 import { NotifyService } from '@main-project/notify/data-access/services'
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'main-project-notify-list',
   templateUrl: './notify-list.component.html',
@@ -19,15 +20,16 @@ import { Router } from '@angular/router';
 })
 export class NotifyListComponent implements OnInit {
 
-  btnStyleStar: boolean = false;
-
   selectedValue = null;
-
   thongBaosList: any = [];
   nguoiDungXemThongBaoList: any = [];
-  checked = false;
   chooseIdThongBao = new Set<string>();
   listChooseThongBaos: string[] = [];
+  arrayIdDanhDau: string[] = []
+  btnStar?: boolean = false;
+  thongBaosPagination?: number;
+  pageNumbers: number = 1;
+  totalPages?: number;
 
   constructor(
     private modal: NzModalService,
@@ -38,21 +40,54 @@ export class NotifyListComponent implements OnInit {
   ngOnInit(): void {
     this.getThongBaos();
     registerLocaleData(vi);
-    // this.getNguoiDungXemThongBaoList();
-
   }
-
   getThongBaos() {
-    let ThongBaos: any = []
-    this.notifyService.getAllThongBaos().subscribe(
+    let ThongBaos: any = [];
+    this.notifyService.getAllThongBaos(this.pageNumbers, 20).subscribe(
+      res => {
+        ThongBaos = res;
+        this.thongBaosPagination = ThongBaos.result.pagingInfo.totalItems;
+        this.thongBaosList = ThongBaos.result.items;
+        this.getTotalPage()
+      });
+  }
+  nextPage() {
+    this.pageNumbers = this.pageNumbers + 1;
+    let ThongBaos: any = [];
+    this.notifyService.getAllThongBaos(this.pageNumbers, 20).subscribe(
       res => {
         ThongBaos = res;
         this.thongBaosList = ThongBaos.result.items;
-        console.log(this.thongBaosList)
       }
     );
   }
 
+  prevPage() {
+    this.pageNumbers = this.pageNumbers - 1;
+    let ThongBaos: any = [];
+    this.notifyService.getAllThongBaos(this.pageNumbers, 20).subscribe(
+      res => {
+        ThongBaos = res;
+        this.thongBaosList = ThongBaos.result.items;
+      }
+    );
+  }
+
+  getTotalPage() {
+    let num = this.thongBaosPagination
+    this.totalPages = num! / 20;
+    if (num! % 20 == 0) {
+    }
+    else {
+      this.totalPages = Math.floor(this.totalPages) + 1;
+    }
+  }
+  getThongBaoByID(id: string) {
+    this.notifyService.getThongBaoById(id).subscribe(
+      res => {
+        console.log('sucess')
+      });
+  }
   getNguoiDungXemThongBaoList() {
     let NguoiDungXemThongBao: any = [];
     this.notifyService.getNguoiDungXemThongBao().subscribe(
@@ -143,8 +178,7 @@ export class NotifyListComponent implements OnInit {
     this.notifyService.deleteThongBaos(this.listChooseThongBaos).subscribe(
       res => {
         this.deleteMessage();
-      }
-    )
+      });
   }
 
 
@@ -153,14 +187,12 @@ export class NotifyListComponent implements OnInit {
     if (checkedAll) {
       for (let i = 0; i < this.thongBaosList.length; i++) {
         this.chooseIdThongBao.add(this.thongBaosList[i].idGuid);
-        this.checked = true;
       }
       console.log("array add all: ", this.chooseIdThongBao);
     }
     else {
       for (let i = 0; i < this.thongBaosList.length; i++) {
         this.chooseIdThongBao.delete(this.thongBaosList[i].idGuid);
-        this.checked = false;
       }
       console.log("array delete all: ", this.chooseIdThongBao);
     }
@@ -179,12 +211,32 @@ export class NotifyListComponent implements OnInit {
     }
   }
 
-  changeflag(flag: number){
-    if(flag == 1)
-      this.thongBaosList.flag = 0
+  changeflag(flag: number, id: string) {
+    if (flag === 1) {
+      this.arrayIdDanhDau.push(id);
+      const number = 2;
+      this.notifyService.flagThongBao(this.arrayIdDanhDau, number).subscribe(
+        res => {
+          console.log('fag = 2');
+          this.arrayIdDanhDau.pop();
+          this.getThongBaoByID(id);
+        });
     }
-    if(flag = 0){
-      this.thongBaosList.flag = 1
-    }
+    else {
+      this.arrayIdDanhDau.push(id);
+      const number = 1;
+      this.notifyService.flagThongBao(this.arrayIdDanhDau, number).subscribe(
+        res => {
+          console.log('fag = 1');
+          this.arrayIdDanhDau.pop();
+          this.getThongBaoByID(id);
+        });
 
+    }
+  }
 }
+
+
+
+
+

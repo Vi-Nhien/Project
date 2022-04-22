@@ -65,7 +65,6 @@ export class PropertyModalComponent implements OnInit {
         this.message.success('Cập nhật thành công !!!');
         this.modalRef.close();
         this.cancel();
-        window.location.reload()
       }
     )
   }

@@ -1,6 +1,13 @@
+.container-property{
+  display: flex;
+  /* align-items: center; */
+  max-width: auto;
+overflow-x: hidden;
+}
+
 .left-side{
-  flex:auto
+  flex:25%;
 }
 .right-side{
-  flex: 100%;
+  flex: 75%;
 }

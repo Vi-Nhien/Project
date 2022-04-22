@@ -3,14 +3,17 @@
     <div class="btn-inbox_checkbox">
         <input type="checkbox"  (change) ="chooseAll($event)">
     </div>
-    <div class= "btn-star bx"  (click)="btnStyleStar = !btnStyleStar" [ngClass]="{ 'bx-star' :btnStyleStar == true , 'bxs-star': btnStyleStar == false}">
-    </div>
+    <div class= "btn-star bx"  (click) = "btnStar = ! btnStar" [ngClass]="{ 'bx-star' :btnStar ===true , 'bxs-star': btnStar === false}">
+     </div>
 
     <div *ngIf="chooseIdThongBao.size != 0" class = "hover-btn" style = "color: red"> <i class='bx bx-trash-alt'></i> Xóa</div>
     <div *ngIf="chooseIdThongBao.size != 0" class = "hover-btn" > <i class='bx bx-envelope-open'></i> Đánh dấu đã đọc</div>
 
   </div>
   <div class="tool-pagination">
+    <div class = "page-number"> {{pageNumbers}} / {{totalPages}} - {{thongBaosPagination}}</div>
+      <button class = "btn btn-arrow_pagination"    (click) = "prevPage()" [disabled]="pageNumbers === 1"><i class='bx bxs-chevron-left'></i></button>
+      <button class = "btn btn-arrow_pagination"  (click) ="nextPage()" [disabled]="pageNumbers === totalPages"><i class='bx bxs-chevron-right' ></i></button>
   </div>
 </div>
 
@@ -33,7 +36,7 @@
         <input type="checkbox"  [checked] = "chooseIdThongBao.has(data.idGuid)" [id] = "data.idGuid" (change) ="chooseSingle($event, data.idGuid) ">
       </div>
       <div class="row-list_content inbox-list_star" style ="width: 36px">
-        <div (click)="changeflag(data.flag)" class ="" [ngClass]="{' bx bx-star ':data.flag === 1 , ' bx bxs-star ': data.flag === 0}">
+        <div (click)="changeflag(data.flag, data.idGuid)" class ="bx" [ngClass]="{'bx-star ':data.flag === 1 , 'bxs-star ': data.flag === 2}">
         </div>
       </div>
       <div class="row-list_content inbox-list_action align-items-center" style ="width: 40px">
@@ -48,8 +51,8 @@
         </nz-dropdown-menu>
       </div>
       <a (click)="notifyDetail(data)" style ="display: flex;">
-        <div class="row-list_content inbox-list_title" style ="flex-grow: 1; display: flex; align-items: center;" style ="width: 178px" [ngStyle]="{'font-weight': data.isXem ? 'normal' : '700' }">
-        <div [ngStyle]="{color: data.maMau}"> <i class='bx bx-radio-circle-marked' style ="font-size: 20px;"></i> </div>
+        <div class="row-list_content inbox-list_title" style ="flex-grow: 1; display: flex; align-items: center; column-gap: 8px;" style ="width: 178px" [ngStyle]="{'font-weight': data.isXem ? 'normal' : '700' }">
+        <i class='bx bx-radio-circle-marked' [ngStyle]="{'color': data.maMau ? data.maMau: 'transparent'}" style ="font-size: 20px;"></i>
         <div> {{data.tieuDe }}</div>
 
         </div>

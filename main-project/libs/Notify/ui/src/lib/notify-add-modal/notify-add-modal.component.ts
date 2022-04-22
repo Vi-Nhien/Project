@@ -17,8 +17,11 @@ export class NotifyAddModalComponent implements OnInit {
 
 
 
-  selectValue = [];
-  radioValue = 1
+  SelectedPhongBans : number[] = [];
+  SelectedCoSos : number [] =[];
+  SelectedTinhChat : number[] = [];
+  // addAttaches : any[] = [];
+  radioValue  : number = 1;
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -75,42 +78,54 @@ export class NotifyAddModalComponent implements OnInit {
     this.getCoSoList();
 
     this.form = this.fb.group({
-      tieuDe : new FormControl('', Validators.required),
-      loaiThongBao: new FormControl(''),
-      maTraCuu:new FormControl(''),
-      noiDung:new FormControl(''),
-      ngayHetHan:new FormControl(''),
-      idTinhChat:new FormControl(''),
-      idsCoSo:new FormControl([]),
-      idsPhongBan:new FormControl([]),
-      fileAttaches:new FormControl('')
-    })
+      loaiThongBao: this.radioValue,
+      maTraCuu: [''],
+      tieuDe : ['', Validators.required],
+      noiDung: [''],
+      ngayHetHan: [''],
+      idTinhChat: this.SelectedTinhChat,
+      forWeb: 0,
+      idsCoSo: this.SelectedCoSos,
+      idsPhongBan: this.SelectedPhongBans,
+      // fileAttaches: [
+      //   {
+      //     fileType: null,
+      //     fileName: null,
+      //     filePath: null,
+      //     fileSize: 0
+      //   }
+      // ],
+    });
+  }
+
+  show(num: number){
+    console.log(num)
   }
 
   getThongBaoTinhChats() {
+    let thongBaoTinhChatResult : any;
     this.notifyService.getAllThongBaoTinhChats().subscribe(
       res => {
-        this.thongBaoTinhChatsList = res;
+        thongBaoTinhChatResult = res
+        this.thongBaoTinhChatsList = thongBaoTinhChatResult.result.items;
         console.log(this.thongBaoTinhChatsList)
-      },
-      (err) => {
-        console.log(err)
       });
   }
 
   getPhongBanList() {
+    let phongBanResult : any;
     this.notifyService.getAllPhongBan().subscribe(
-      (res: any[]) => {
-        this.phongBanList = res;
-        console.log(this.phongBanList.result.items);
+      (res) => {
+        phongBanResult = res;
+        this.phongBanList = phongBanResult.result.items;
       });
   }
 
-  getCoSoList() {
+  getCoSoList() {let coSoResult : any;
     this.notifyService.getAllCoSo().subscribe(
       (res: any[]) => {
-        this.coSoList = res;
-        console.log(this.coSoList.result.items);
+        coSoResult = res
+        this.coSoList = coSoResult.result.items;
       });
   }
 
@@ -128,7 +143,13 @@ export class NotifyAddModalComponent implements OnInit {
   }
 
   submit(){
-
+    this.notifyService.createThongBao(this.form?.value).subscribe(
+      res => {
+        console.log('sucess');
+        this.modalRef.destroy()
+      }
+    )
+    // console.log(this.radioValue)
   }
   cancel() {
     this.modalRef.destroy()

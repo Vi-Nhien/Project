@@ -30,7 +30,7 @@
         <div class="inbox-list_note inbox-title">Ghi chú</div>
         <div class="inbox-list_status inbox-title">Hiển thị</div>
       </div>
-      <div class="list-title_body" *ngFor="let thongBaoTinhChat of thongBaoTinhChatArray ; let i = index">
+      <div class="list-title_body" *ngFor="let thongBaoTinhChat of thongBaoTinhChatsList ; let i = index">
         <div class="inbox-list_checkbox">
             <input type="checkbox" [checked]="setOfCheckedId.has(thongBaoTinhChat.id)" (change) ="onItemChecked(thongBaoTinhChat.id, $event)">
           </div>

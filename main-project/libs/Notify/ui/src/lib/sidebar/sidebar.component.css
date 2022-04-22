@@ -1,13 +1,13 @@
 .container-sidebar {
   height: 100vh;
-  width: 320px;
+  width: 300px;
   margin: 0;
   display: flex;
   border-right: 1px solid #ddd;
 }
 
 .sidebar-primary {
-  flex: 50px;
+  flex: 15%;
   background-color: #ef5d08;
   display: flex;
   flex-direction: column;
@@ -22,7 +22,7 @@
 }
 
 .sidebar-secondary {
-  flex: 80%;
+  flex: 85%;
   padding: 15px;
 }
 

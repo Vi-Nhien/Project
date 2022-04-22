@@ -11,6 +11,7 @@ import { ServiceInterceptor } from '@main-project/notify/data-access/services'
 import { RouterModule, Routes } from '@angular/router';
 
 import { NzI18nModule, NZ_I18N, vi_VN } from 'ng-zorro-antd/i18n';
+import { ReactiveFormsModule } from '@angular/forms';
 ;
 
 const routes: Routes = [
@@ -42,7 +43,8 @@ const routes: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     NzI18nModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
   ],
 
   providers: [

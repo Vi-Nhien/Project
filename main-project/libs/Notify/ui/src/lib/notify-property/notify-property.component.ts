@@ -3,7 +3,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message'
 import { PropertyModalComponent } from '../property-modal/property-modal.component';
-import { NotifyService } from '@main-project/notify/data-access/services'
+import { NotifyService, ThongBaoTinhChat } from '@main-project/notify/data-access/services'
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 
@@ -19,8 +19,7 @@ export class NotifyPropertyComponent implements OnInit {
   idn : number[] = [];
 
   form?: FormGroup;
-  thongBaoTinhChatsList: any;
-  thongBaoTinhChatArray: any = [];
+  thongBaoTinhChatsList ?: ThongBaoTinhChat[] = [];
   selectThongBaoTinhChats: any;
 
   constructor(private modal: NzModalService,
@@ -38,8 +37,6 @@ export class NotifyPropertyComponent implements OnInit {
     const checked = event.target.checked
     if(checked){
       this.setOfCheckedId.add(id);
-      // this.refreshCheckedStatus();
-      // let checkItem = [... new Set(this.ids)];
       this.idn = Array.from(this.setOfCheckedId);
       console.log("array add id", this.idn);
 
@@ -59,15 +56,15 @@ export class NotifyPropertyComponent implements OnInit {
   {
     const checkedAll = event.target.checked;
     if(checkedAll){
-      for (let i = 0; i < this.thongBaoTinhChatArray.length; i++) {
-        this.setOfCheckedId.add(this.thongBaoTinhChatArray[i].id);
+      for (let i = 0; i < this.thongBaoTinhChatsList!.length; i++) {
+        this.setOfCheckedId.add(this.thongBaoTinhChatsList![i].id);
         // this.check = true;
       }
       console.log("array add all: ", this.setOfCheckedId);
     }
     else{
-      for (let i = 0; i < this.thongBaoTinhChatArray.length; i++) {
-          this.setOfCheckedId.delete(this.thongBaoTinhChatArray[i].id);
+      for (let i = 0; i < this.thongBaoTinhChatsList!.length; i++) {
+          this.setOfCheckedId.delete(this.thongBaoTinhChatsList![i].id);
           // this.check = false;
       }
       console.log("array delete all: ", this.setOfCheckedId);
@@ -78,11 +75,13 @@ export class NotifyPropertyComponent implements OnInit {
 
 
   getThongBaoTinhChats() {
+    let thongBaoTinhChatArray : any;
     this.notifyService.getAllThongBaoTinhChats().subscribe(
-      (res: any[]) => {
-        this.thongBaoTinhChatsList = res;
-        this.thongBaoTinhChatArray = this.thongBaoTinhChatsList.result.items
-        console.log(this.thongBaoTinhChatArray)
+      res => {
+        thongBaoTinhChatArray = res;
+        this.thongBaoTinhChatsList = thongBaoTinhChatArray.result.items;
+        console.log(this.thongBaoTinhChatsList)
+        // console.log(thongBaoTinhChatArray)
       }
     )
   }

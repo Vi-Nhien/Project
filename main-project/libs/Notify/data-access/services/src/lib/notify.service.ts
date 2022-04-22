@@ -3,6 +3,8 @@ import { environment } from './../../../../../../apps/notify-app/src/environment
 import { HttpClient, HttpHeaders, HttpParams, JsonpClientBackend } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { ThongBao, ThongBaoList } from './notify';
+import { ThongBaoTinhChat } from './thongBaoTinhChat';
 
 
 
@@ -40,17 +42,17 @@ export class NotifyService   {
     const headers = { 'content-type': 'application/json'}
     return this.httpClient.post(this.apiUrlCoSo, {headers : headers});
   }
-  getAllThongBaoTinhChats(): Observable<any[]> {
+  getAllThongBaoTinhChats(): Observable<ThongBaoTinhChat[]> {
     const headers = { 'content-type': 'application/json'}
-    return this.httpClient.post<any[]>(this.apiUrlThongBaoTinhChatsList, {headers : headers});
+    return this.httpClient.post<ThongBaoTinhChat[]>(this.apiUrlThongBaoTinhChatsList, {headers : headers});
   }
   getThongBaoThinhChatById(id: string) {
     return this.httpClient.post(this.apiUrlThongBaoTinhChatsById, {id});
   }
-  updateThongBaoTinhChat(thongBaoTinhChat: any) {
+  updateThongBaoTinhChat(thongBaoTinhChat: ThongBaoTinhChat) {
     return this.httpClient.put(this.apiUrlThongBaoTinhChats, thongBaoTinhChat);
   }
-  createThongBaoTinhChat(thongBaoTinhChat : any) {
+  createThongBaoTinhChat(thongBaoTinhChat : ThongBaoTinhChat) {
     return this.httpClient.post(this.apiUrlThongBaoTinhChats, thongBaoTinhChat);
   }
   deleteThongBaoTinhChat(ids: number[])  {
@@ -64,14 +66,21 @@ export class NotifyService   {
   }
 
 
-
-  getAllThongBaos(): Observable<any[]> {
-    const headers = { 'content-type': 'application/json'};
-    return this.httpClient.post<any[]>(this.apiUrlThongBaos+'/List', {headers: headers});
+  createThongBao(thongBao : ThongBao){
+    const url = 'http://192.168.0.246:5357/api/v1/ThongBaos';
+    return this.httpClient.post(url, thongBao)
   }
-  getThongBaoById(id: string) {
-    const headers = { 'content-type': 'application/json'};
-    return this.httpClient.post(`${this.apiUrlThongBaos}/${id}`, {headers: headers})
+
+
+  getAllThongBaos(pageNumber: number, pageSize: number): Observable<ThongBaoList[]> {
+    let body = {pageNumber, pageSize}
+    return this.httpClient.post<ThongBaoList[]>(this.apiUrlThongBaos+'/List', body );
+  }
+
+
+  getThongBaoById(idGuid: string) {
+    const url = 'http://192.168.0.246:5357/api/v1/ThongBaos/ById'
+    return this.httpClient.post(url, {idGuid})
   }
   getNguoiDungXemThongBao(){
     const headers = { 'content-type': 'application/json'};
@@ -97,5 +106,9 @@ export class NotifyService   {
     return this.httpClient.post(url, {idsGuidThongBao, trangThaiXemThongBao})
   }
 
+  flagThongBao(idsGuidThongBao: string[], flag : number){
+    const url = 'http://192.168.0.246:5357/api/v1/ThongBaos/Flag'
+    return this.httpClient.post(url, {idsGuidThongBao, flag})
+  }
 
 }
