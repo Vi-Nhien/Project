@@ -74,7 +74,7 @@ export class NotifyHeaderComponent implements OnInit {
     //     console.log(this.filterList);
     //   }
     // )
-    this.filterList = this.filterForm?.value;
+    this.filterList = this.filterForm;
     // console.log("search: ", this.filterList)
     this.router.navigate(['/notify/page', this.filterList]);
     this.visible = false;

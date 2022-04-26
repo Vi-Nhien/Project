@@ -64,15 +64,13 @@ export class NotifyListComponent implements OnInit {
 
   search() {
     // let params: any;
-    // this.route.queryParams.subscribe(
-    //   (res: any) => {
-    //     this.filterList = res['idTinhChat']
-    //     // this.filterList = res;
-    //     console.log(this.filterList)
-    //   }
-    // )
-    let str = this.route.snapshot.pathFromRoot
-    console.log(str);
+    this.route.params.subscribe(
+      (res: any) => {
+        this.filterList = res
+        // this.filterList = res;
+        console.log(this.filterList)
+      }
+    )
 
   }
 
