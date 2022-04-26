@@ -2,7 +2,7 @@ import { environment } from './../../../../../../apps/notify-app/src/environment
 
 import { HttpClient, HttpHeaders, HttpParams, JsonpClientBackend } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ThongBao, ThongBaoList } from './notify';
 import { ThongBaoTinhChat } from './thongBaoTinhChat';
 
@@ -66,12 +66,22 @@ export class NotifyService   {
   }
 
 
+  filterThongBao(thongBao: any){
+    let body = thongBao
+    return this.httpClient.post(this.apiUrlThongBaos+'/List', body)
+  }
+  // filterThongBao(idTinhChat: number){
+  //   const url ='http://192.168.0.246:5357/api/v1/ThongBaos/List'
+  //   let body = {idTinhChat}
+  //   return this.httpClient.post(url, {idTinhChat})
+  // }
+
+
+
   createThongBao(thongBao : ThongBao){
     const url = 'http://192.168.0.246:5357/api/v1/ThongBaos';
     return this.httpClient.post(url, thongBao)
   }
-
-
   getAllThongBaos(pageNumber: number, pageSize: number): Observable<ThongBaoList[]> {
     let body = {pageNumber, pageSize}
     return this.httpClient.post<ThongBaoList[]>(this.apiUrlThongBaos+'/List', body );

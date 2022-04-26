@@ -87,14 +87,6 @@ export class NotifyAddModalComponent implements OnInit {
       forWeb: 0,
       idsCoSo: this.SelectedCoSos,
       idsPhongBan: this.SelectedPhongBans,
-      // fileAttaches: [
-      //   {
-      //     fileType: null,
-      //     fileName: null,
-      //     filePath: null,
-      //     fileSize: 0
-      //   }
-      // ],
     });
   }
 

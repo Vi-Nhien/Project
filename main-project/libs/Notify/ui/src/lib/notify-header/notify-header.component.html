@@ -1,29 +1,109 @@
 <div class="container-header">
-    <div class="navbar-title">
-      Báo cáo Chuyên đề
+  <div class="navbar-title">
+    Báo cáo Chuyên đề
+  </div>
+  <div class="navbar-search">
+    <div class="search-box">
+      <span><i class='bx bx-search-alt-2'></i></span>
+      <input type="text" placeholder="Tìm Kiếm thông báo" class="input-search"  [(ngModel)]="filterBy" (keyup)="filter()">
+      <button nz-button nzType="primary" (click)="open()">
+        <span><i class='bx bx-slider'></i></span>
+      </button>
     </div>
-    <div class="navbar-search">
-      <div class="search-box">
-        <span><i class='bx bx-search-alt-2'></i></span>
-        <input type="text" placeholder="Tìm Kiếm thông báo" class ="input-search">
-        <button nz-button nzType="primary" (click)="open()">
-          <span><i class='bx bx-slider'></i></span>
-        </button>
-      </div>
-    </div>
+  </div>
 </div>
 
 
-<nz-drawer
-  [nzClosable]="true"
-  [nzVisible]="visible"
-  nzPlacement="right"
-  nzTitle="Basic Drawer"
-  (nzOnClose)="close()"
->
-  <ng-container *nzDrawerContent>
-    <p>Some contents...</p>
-    <p>Some contents...</p>
-    <p>Some contents...</p>
-  </ng-container>
-</nz-drawer>
+<form [formGroup]="filterForm!" (ngSubmit)="searchSubmit()">
+  <nz-drawer [nzClosable]="true" [nzVisible]="visible" nzPlacement="right" nzTitle="Bộ lọc tìm kiếm"
+    (nzOnClose)="close()" nzWidth="560px" [nzFooter]="footerTpl" [nzBodyStyle]="{ overflow: 'auto' }"
+    [nzMaskClosable]="false">
+    <ng-container *nzDrawerContent>
+      <div class="form-group row">
+        <div class="col-4">
+          <label for="">Mã tra cứu</label>
+        </div>
+        <div class="col-8">
+          <input type="text" class="form-control" formControlName="maTraCuu">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-4">
+          <label for="">Từ ngày</label>
+        </div>
+        <div class="col-8">
+          <nz-date-picker class="form-control" formControlName="ngayTaoTu"></nz-date-picker>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-4">
+          <label for="">Đến ngày</label>
+        </div>
+        <div class="col-8">
+          <nz-date-picker class="form-control" formControlName="ngayTaoDen"></nz-date-picker>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4">
+          <label for="">Hết hạn từ ngày</label>
+        </div>
+        <div class="col-8">
+          <nz-date-picker class="form-control" formControlName="ngayHetHanTu"></nz-date-picker>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-4">
+          <label for="">Hết hạn đến ngày</label>
+        </div>
+        <div class="col-8">
+          <nz-date-picker class="form-control" formControlName="ngayHetHanDen"></nz-date-picker>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-4">
+          <label for="">Trạng thái xem</label>
+        </div>
+        <div class="col-8">
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Trạng thái xem" formControlName="trangThaiXem">
+            <nz-option nzLabel="Đã xem" [nzValue]=2>Đã xem</nz-option>
+            <nz-option nzLabel="Chưa xem" [nzValue]=1>Chưa xem</nz-option>
+          </nz-select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-4">
+          <label for="">Trạng thái hết hạn</label>
+        </div>
+        <div class="col-8">
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Trạng thái hết hạn" formControlName="trangThaiHetHan">
+            <nz-option nzLabel="Có hạn" [nzValue]=1>Có hạn</nz-option>
+            <nz-option nzLabel="Hết hạn" [nzValue]=2>Hết hạn</nz-option>
+          </nz-select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-4">
+          <label for="">Tính chất</label>
+        </div>
+        <div class="col-8">
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Tính chất" formControlName="idTinhChat">
+            <nz-option nzCustomContent *ngFor="let data of ThongBaoTinhChatList" [nzValue]="data.id"
+              [nzLabel]="data.tenTinhChat">{{data.tenTinhChat}}</nz-option>
+          </nz-select>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #footerTpl>
+      <div class="footer-fillter">
+        <button type="button" class="btn-fillter" (click)="close()">Đóng</button>
+        <button type="submit" class="btn-fillter btn-search" (click) = "searchSubmit()">Tìm kiếm</button>
+      </div>
+    </ng-template>
+  </nz-drawer>
+</form>

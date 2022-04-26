@@ -1,7 +1,7 @@
 
 import vi from '@angular/common/locales/vi';
 import { NotifyModalComponent } from './../notify-modal/notify-modal.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message'
@@ -9,9 +9,8 @@ import { NzMessageService } from 'ng-zorro-antd/message'
 
 
 import { registerLocaleData } from '@angular/common';
-import { NotifyService } from '@main-project/notify/data-access/services'
-import { Router } from '@angular/router';
-
+import { NotifyService, ThongBaoList } from '@main-project/notify/data-access/services'
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'main-project-notify-list',
@@ -30,17 +29,53 @@ export class NotifyListComponent implements OnInit {
   thongBaosPagination?: number;
   pageNumbers: number = 1;
   totalPages?: number;
+  flagStar = new Set<string>();
+  flagIdThongBao: string[] = [];
+
+  filterList?: any;
+
+
 
   constructor(
     private modal: NzModalService,
     private message: NzMessageService,
     private notifyService: NotifyService,
-    private router: Router) { }
+    private router: Router,
+    private route: ActivatedRoute) {
+
+  }
 
   ngOnInit(): void {
     this.getThongBaos();
     registerLocaleData(vi);
   }
+
+
+
+  // searchSubmit() {
+  //   this.notifyService.filterThongBao(this.filterForm?.value).subscribe(
+  //     (res: any= []) => {
+  //       this.filterList = res.result.items;
+  //       console.log(this.filterList);
+  //     }
+  //   )
+  // }
+
+
+  search() {
+    // let params: any;
+    // this.route.queryParams.subscribe(
+    //   (res: any) => {
+    //     this.filterList = res['idTinhChat']
+    //     // this.filterList = res;
+    //     console.log(this.filterList)
+    //   }
+    // )
+    let str = this.route.snapshot.pathFromRoot
+    console.log(str);
+
+  }
+
   getThongBaos() {
     let ThongBaos: any = [];
     this.notifyService.getAllThongBaos(this.pageNumbers, 20).subscribe(
@@ -188,13 +223,11 @@ export class NotifyListComponent implements OnInit {
       for (let i = 0; i < this.thongBaosList.length; i++) {
         this.chooseIdThongBao.add(this.thongBaosList[i].idGuid);
       }
-      console.log("array add all: ", this.chooseIdThongBao);
     }
     else {
       for (let i = 0; i < this.thongBaosList.length; i++) {
         this.chooseIdThongBao.delete(this.thongBaosList[i].idGuid);
       }
-      console.log("array delete all: ", this.chooseIdThongBao);
     }
   }
 
@@ -220,6 +253,7 @@ export class NotifyListComponent implements OnInit {
           console.log('fag = 2');
           this.arrayIdDanhDau.pop();
           this.getThongBaoByID(id);
+          this.getThongBaos();
         });
     }
     else {
@@ -230,13 +264,32 @@ export class NotifyListComponent implements OnInit {
           console.log('fag = 1');
           this.arrayIdDanhDau.pop();
           this.getThongBaoByID(id);
+          this.getThongBaos();
         });
 
     }
   }
+
+  flagAllThongBao(flag: number) {
+    if (flag === 1) {
+      for (let i = 0; i < this.thongBaosList.length; i++) {
+        this.flagStar.add(this.thongBaosList[i].idsGuidThongBao);
+        this.flagIdThongBao = Array.from(this.flagStar);
+        this.notifyService.flagThongBao(this.arrayIdDanhDau, 1).subscribe(
+          res => {
+            this.getThongBaos();
+          });
+      }
+      for (let i = 0; i < this.thongBaosList.length; i++) {
+        this.flagStar.delete(this.thongBaosList[i].idsGuidThongBao);
+        this.flagIdThongBao = Array.from(this.flagStar);
+        this.notifyService.flagThongBao(this.arrayIdDanhDau, 2).subscribe(
+          res => {
+            this.getThongBaos();
+          });
+      }
+    }
+  }
 }
-
-
-
 
 

@@ -1,4 +1,4 @@
-button{
+button {
   outline: none;
   border: none;
   background-color: initial;
@@ -24,7 +24,7 @@ button{
 }
 
 
-.container-header .search-box{
+.container-header .search-box {
   display: flex;
   align-items: center;
   background: #f1f3f4;
@@ -34,15 +34,63 @@ button{
 
 }
 
-.container-header .search-box span{
+.container-header .search-box span {
   font-size: 16px;
   padding: 8px;
 }
 
 
 
-.container-header .search-box .input-search{
+.container-header .search-box .input-search {
   border: none;
   height: 35px;
   background: #f1f3f4;
+}
+
+nz-date-picker {
+  border-radius: 8px;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+nz-select {
+  width: 100%;
+}
+
+
+.footer-fillter {
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: end;
+  padding: .25rem 10px;
+}
+
+.btn-fillter {
+  cursor: pointer;
+  font-size: .8rem;
+  background: transparent;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  font-size: 14px;
+  line-height: 1.5;
+  border-radius: 8px;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.btn-search {
+  background-color: #006fc9;
+  color: white;
+}
+
+ng-template {
+  padding: 0;
 }
