@@ -3,39 +3,40 @@
     <a routerLink="/notify/page" routerLinkActive="router-link-active" class = " btn-icon" style ="padding: .25rem; border-radius: 8px;" >
       <i class='bx bx-left-arrow-alt' style ="color: #6c757d;"></i>
     </a>
-    <button class = " btn-icon" (click)="xacNhanXoa(thongBaoClickView.idGuid)"><i class='bx bx-trash-alt '></i> Xóa</button>
+    <button class = " btn-icon" (click)="xacNhanXoa(thongBaoClickView.idGuid)"  noSanitize><i class='bx bx-trash-alt '></i> Xóa</button>
     <button class = " btn-icon" (click) ="danhDauChuaDoc(thongBaoClickView.idGuid )"><i class='bx bx-envelope ' ></i>Đánh dấu chưa đọc</button>
   </div>
   <div class="notify-content-detail">
     <div class="notify-row">
       <div class=" notify-content">
         <div class="notify-head">
-          <div class="title">{{thongBaoClickView.tieuDe}}</div>
+          <div class="title">{{thongBaoClickView?.tieuDe}}</div>
         </div>
         <div class="notify-body">
           <div class="notify-body-top">
             <div class="notify-body-left">
               <div class="user">
                 <div class="avatar-user">A</div>
-                <div class="infor-user">{{thongBaoClickView.nguoiTao}}</div>
+                <div class="infor-user">{{thongBaoClickView?.nguoiTao}}</div>
               </div>
             </div>
             <div class="notify-body-right">
-              <span>{{thongBaoClickView.ngayTao | date: 'dd/MM/yyy HH:mm'}}</span>
-              <i class = "bx bx-star"></i>
+              <span>{{thongBaoClickView?.ngayTao | date: 'dd/MM/yyy HH:mm'}}</span>
+              <div (click)="changeflag(thongBaoClickView?.flag, thongBaoClickView?.idGuid)" class ="bx" [ngClass]="{'bx-star ':thongBaoClickView?.flag === 1 , 'bxs-star ': thongBaoClickView?.flag === 2}">
+              </div>
             </div>
           </div>
 
           <div class="pl-edit" style="padding: 15px 0;">
-            <p [outerHTML] = "thongBaoClickView.noiDung"></p>
+            <div [innerHTML] = "thongBaoClickView?.noiDung | noSanitize"></div>
           </div>
         </div>
       </div>
       <div class="card">
           <div class="card-head">Trạng thái xem thông báo</div>
           <div class="card-body">
-            <div class="">[{{thongBaoClickView.soLuongDaXem}}/{{thongBaoClickView.tongSoNguoiNhan}}] Đã xem thông báo</div>
-            <nz-progress [nzPercent]="(thongBaoClickView.soLuongDaXem * 100)/thongBaoClickView.tongSoNguoiNhan" [nzShowInfo]="false"></nz-progress>
+            <div class="">[{{thongBaoClickView?.soLuongDaXem}}/{{thongBaoClickView?.tongSoNguoiNhan}}] Đã xem thông báo</div>
+            <nz-progress [nzPercent]="(thongBaoClickView?.soLuongDaXem * 100)/thongBaoClickView?.tongSoNguoiNhan" [nzShowInfo]="false"></nz-progress>
             <div class="user-status">
               <div class="avatar-user">A</div>
             </div>

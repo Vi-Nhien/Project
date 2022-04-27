@@ -14,13 +14,9 @@ import { NzModalRef  } from 'ng-zorro-antd/modal';
   styleUrls: ['./notify-add-modal.component.scss']
 })
 export class NotifyAddModalComponent implements OnInit {
-
-
-
   SelectedPhongBans : number[] = [];
   SelectedCoSos : number [] =[];
-  SelectedTinhChat : number[] = [];
-  // addAttaches : any[] = [];
+  SelectedTinhChat ?: number;
   radioValue  : number = 1;
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -76,7 +72,6 @@ export class NotifyAddModalComponent implements OnInit {
     this.getThongBaoTinhChats();
     this.getPhongBanList();
     this.getCoSoList();
-
     this.form = this.fb.group({
       loaiThongBao: this.radioValue,
       maTraCuu: [''],
@@ -87,41 +82,31 @@ export class NotifyAddModalComponent implements OnInit {
       forWeb: 0,
       idsCoSo: this.SelectedCoSos,
       idsPhongBan: this.SelectedPhongBans,
+      flag: 1,
     });
   }
-
   show(num: number){
     console.log(num)
   }
-
   getThongBaoTinhChats() {
-    let thongBaoTinhChatResult : any;
     this.notifyService.getAllThongBaoTinhChats().subscribe(
-      res => {
-        thongBaoTinhChatResult = res
-        this.thongBaoTinhChatsList = thongBaoTinhChatResult.result.items;
+      (res: any) => {
+        this.thongBaoTinhChatsList = res.result.items;
         console.log(this.thongBaoTinhChatsList)
       });
   }
-
   getPhongBanList() {
-    let phongBanResult : any;
     this.notifyService.getAllPhongBan().subscribe(
       (res) => {
-        phongBanResult = res;
-        this.phongBanList = phongBanResult.result.items;
+        this.phongBanList = res.result.items;
       });
   }
-
-  getCoSoList() {let coSoResult : any;
+  getCoSoList() {
     this.notifyService.getAllCoSo().subscribe(
-      (res: any[]) => {
-        coSoResult = res
-        this.coSoList = coSoResult.result.items;
+      (res) => {
+        this.coSoList = res.result.items;
       });
   }
-
-
   handleChange({ file, fileList }: NzUploadChangeParam): void {
     const status = file.status;
     if (status !== 'uploading') {
@@ -133,17 +118,15 @@ export class NotifyAddModalComponent implements OnInit {
       this.message.error(`${file.name} file upload failed.`);
     }
   }
-
   submit(){
+    console.log(this.form?.value)
     this.notifyService.createThongBao(this.form?.value).subscribe(
       res => {
         console.log('sucess');
-        this.modalRef.destroy()
-      }
-    )
-    // console.log(this.radioValue)
+        this.modalRef.destroy();
+      });
   }
   cancel() {
-    this.modalRef.destroy()
+    this.modalRef.destroy();
   }
 }

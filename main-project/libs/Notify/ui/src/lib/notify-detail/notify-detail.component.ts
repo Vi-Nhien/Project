@@ -13,11 +13,10 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 })
 export class NotifyDetailComponent implements OnInit {
 
-  form ?: FormGroup;
-
-  thongBaoClickView ?: any;
-  listDeleteThongBao : string[] = [];
-  xacNhanChuaXem : string[] =[];
+  form?: FormGroup;
+  thongBaoClickView?: any;
+  listDeleteThongBao: string[] = [];
+  xacNhanChuaXem: string[] = [];
   constructor(
     private notifyService: NotifyService,
     private route: ActivatedRoute,
@@ -26,60 +25,61 @@ export class NotifyDetailComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder
   ) { }
-
   ngOnInit() {
     this.getThongBaoView(this.route.snapshot.params["id"]);
   }
-
   getThongBaoView(id: string): void {
-  let thongBaoClick :any;
-  this.notifyService.getThongBaoClickViews(id)
-    .subscribe(
-      (data: any) => {
-        thongBaoClick = data;
-        this.thongBaoClickView = thongBaoClick.result
-        console.log(this.thongBaoClickView);
-      }
-    );
+    this.notifyService.getThongBaoClickViews(id)
+      .subscribe(
+        (data: any) => {
+          this.thongBaoClickView = data.result;
+        });
   }
-
-  xacNhanXoa(id: string){
-    if(id){
+  xacNhanXoa(id: string) {
+    if (id) {
       this.listDeleteThongBao.push(id);
       this.modal.confirm({
         nzTitle: 'Bạn muốn xóa thông báo này?',
         nzContent: '<b style="color: red;">Xác nhận xóa</b>',
-        nzOkText: 'Yes',
+        nzOkText: 'Xóa',
         nzOkType: 'primary',
         nzOkDanger: true,
         nzOnOk: () => this.deleteThongBao(this.listDeleteThongBao),
-        nzCancelText: 'No',
+        nzCancelText: 'Trở lại',
         nzOnCancel: () => this.listDeleteThongBao.pop()
       });
     }
   }
-
-  deleteThongBao(listDeleteThongBao: string[]){
+  deleteThongBao(listDeleteThongBao: string[]) {
     this.notifyService.deleteThongBaos(listDeleteThongBao).subscribe(
-      res => {
+      () => {
         this.message.success('Xóa thành công!!!', { nzDuration: 3000 })
         console.log('complete');
-        this.router.navigate(['/notify/page'])
-      }
-      )
-
+        this.router.navigate(['/notify/page']);
+      });
   }
-
-  danhDauChuaDoc(id: string){
+  danhDauChuaDoc(id: string) {
     this.xacNhanChuaXem.push(id);
     this.notifyService.updateViewed(this.xacNhanChuaXem, 0).subscribe(
-      res=>{
-        console.log(res);
-      }
-    )
-
+      () => {});
   }
-
-
-
+  changeflag(flag: number, id: string) {
+    let arrayIdDanhDau : string[] = [];
+    if (flag === 1) {
+      arrayIdDanhDau.push(id);
+      this.notifyService.flagThongBao(arrayIdDanhDau, 2).subscribe(
+        () => {
+          arrayIdDanhDau.pop();
+          this.getThongBaoView(id);
+        });
+    }
+    else {
+      arrayIdDanhDau.push(id);
+      this.notifyService.flagThongBao(arrayIdDanhDau, 1).subscribe(
+        () => {
+          arrayIdDanhDau.pop();
+          this.getThongBaoView(id);
+        });
+    }
+  }
 }

@@ -37,7 +37,7 @@
       <div class="menu-list">
         <a class="menu-list_tb" routerLink="/notify/page" routerLinkActive="active"><i
             class='bx bx-notification'></i>Danh sách thông báo</a>
-        <a class="menu-list_tb"><i class='bx bxs-star'></i>Đánh dấu sao</a>
+        <a class="menu-list_tb" (click)="thongBaoFlag()" routerLink="/notify/star" routerLinkActive="active" ><i class='bx bxs-star'></i>Đánh dấu sao</a>
       </div>
       <div class="lables">
         Tính chất

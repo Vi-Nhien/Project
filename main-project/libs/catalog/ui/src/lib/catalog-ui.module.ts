@@ -5,24 +5,29 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { CatalogMenuComponent } from './catalog-menu/catalog-menu.component';
 import { CatalogQuocgiaComponent } from './catalog-quocgia/catalog-quocgia.component';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { CatalogTongiaoComponent } from './catalog-tongiao/catalog-tongiao.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
     NzMenuModule,
-    NzTableModule
+    NzTableModule,
+    RouterModule
   ],
 
   declarations:[
     CatalogHeaderComponent,
     CatalogMenuComponent,
-    CatalogQuocgiaComponent
+    CatalogQuocgiaComponent,
+    CatalogTongiaoComponent
   ],
 
   exports:[
     CatalogHeaderComponent,
     CatalogMenuComponent,
-    CatalogQuocgiaComponent
+    CatalogQuocgiaComponent,
+    CatalogTongiaoComponent
   ]
 })
 export class CatalogUiModule {}

@@ -12,7 +12,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { NzI18nModule, NZ_I18N, vi_VN } from 'ng-zorro-antd/i18n';
 import { ReactiveFormsModule } from '@angular/forms';
-;
 
 const routes: Routes = [
   {

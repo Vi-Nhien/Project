@@ -1,4 +1,5 @@
 export interface ThongBao {
+  idGuid: string,
   loaiThongBao: number,
   maTraCuu: string,
   tieuDe: string,

@@ -42,8 +42,7 @@ export class PropertyModalComponent implements OnInit {
         res  =>{
           this.item = res;
           console.log(res);
-        }
-      )
+        });
   }
 
   getThongBaoTinhChats() {
@@ -54,8 +53,7 @@ export class PropertyModalComponent implements OnInit {
       },
       (err) => {
         console.log(err)
-      }
-    )
+      });
   }
   onSubmit() {
     console.log(this.formUpdateThongBaoTinhChat)
@@ -65,12 +63,9 @@ export class PropertyModalComponent implements OnInit {
         this.message.success('Cập nhật thành công !!!');
         this.modalRef.close();
         this.cancel();
-      }
-    )
+      });
   }
-
   cancel() {
     this.modalRef.destroy()
   }
-
 }

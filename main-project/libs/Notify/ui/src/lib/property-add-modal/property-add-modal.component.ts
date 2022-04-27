@@ -23,13 +23,13 @@ export class PropertyAddModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.newThongBaoTinhChat = this.fb.group({
-      maTinhChat: [''],
+      maTinhChat: ['', Validators.required],
       tenTinhChat: ['', Validators.required],
-      maMau: ['', Validators.required],
+      maMau: [''],
       ghiChu: [''],
-      soThuTu: [''],
+      soThuTu: null,
       isVisible: false
-    })
+    });
   }
   getThongBaoTinhChats() {
     this.notifyService.getAllThongBaoTinhChats().subscribe(
@@ -39,8 +39,7 @@ export class PropertyAddModalComponent implements OnInit {
       },
       (err) => {
         console.log(err)
-      }
-    )
+      });
   }
   onSubmit() {
     console.log(this.newThongBaoTinhChat);
@@ -50,14 +49,11 @@ export class PropertyAddModalComponent implements OnInit {
         this.message.success('tạo thành công !!!');
         this.modalRef.close();
         this.cancel();
-      }
-    )
+      });
   }
   get a() {
     return this.newThongBaoTinhChat.controls;
   }
-
-
   cancel() {
     this.modalRef.destroy()
   }

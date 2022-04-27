@@ -21,6 +21,9 @@ const routes: Routes = [
   {
     path : 'tb-tc', component: NotifySettingComponent
   },
+  {
+    path: 'star', component: NotifyAllComponent
+  }
 ];
 
 @NgModule({

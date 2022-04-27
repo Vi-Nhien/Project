@@ -1,23 +1,20 @@
 
 import vi from '@angular/common/locales/vi';
 import { NotifyModalComponent } from './../notify-modal/notify-modal.component';
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message'
-
-
-
 import { registerLocaleData } from '@angular/common';
-import { NotifyService, ThongBaoList } from '@main-project/notify/data-access/services'
-import { ActivatedRoute, Router } from '@angular/router';
+import { NotifyService } from '@main-project/notify/data-access/services'
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'main-project-notify-list',
   templateUrl: './notify-list.component.html',
   styleUrls: ['./notify-list.component.scss']
 })
-export class NotifyListComponent implements OnInit {
+export class NotifyListComponent implements OnInit,  OnDestroy {
 
   selectedValue = null;
   thongBaosList: any = [];
@@ -25,55 +22,34 @@ export class NotifyListComponent implements OnInit {
   chooseIdThongBao = new Set<string>();
   listChooseThongBaos: string[] = [];
   arrayIdDanhDau: string[] = []
-  btnStar?: boolean = false;
+  btnStar?: boolean;
   thongBaosPagination?: number;
   pageNumbers: number = 1;
   totalPages?: number;
   flagStar = new Set<string>();
   flagIdThongBao: string[] = [];
-
-  filterList?: any;
-
-
+  subscription: Subscription | undefined;
 
   constructor(
     private modal: NzModalService,
     private message: NzMessageService,
     private notifyService: NotifyService,
-    private router: Router,
-    private route: ActivatedRoute) {
-
+    private router: Router) {
+      this.subscription = this.notifyService.getFilter().subscribe(data => {
+        console.log("list: ",data.filterThongBao);
+        this.notifyService.filterThongBaos(data.filterThongBao).subscribe(
+          (res: any) =>{
+              this.thongBaosList = res.result.items;
+              console.log(this.thongBaosList);
+          })
+      });
   }
-
   ngOnInit(): void {
     this.getThongBaos();
     registerLocaleData(vi);
   }
-
-
-
-  // searchSubmit() {
-  //   this.notifyService.filterThongBao(this.filterForm?.value).subscribe(
-  //     (res: any= []) => {
-  //       this.filterList = res.result.items;
-  //       console.log(this.filterList);
-  //     }
-  //   )
-  // }
-
-
-  search() {
-    // let params: any;
-    // this.route.queryParams.subscribe(
-    //   (res: any) => {
-    //     this.filterList = res['idTinhChat']
-    //     // this.filterList = res;
-    //     console.log(this.filterList)
-    //   }
-    // )
-    let str = this.route.snapshot.pathFromRoot
-    console.log(str);
-
+  ngOnDestroy() {
+    this.subscription?.unsubscribe();
   }
 
   getThongBaos() {
@@ -96,7 +72,6 @@ export class NotifyListComponent implements OnInit {
       }
     );
   }
-
   prevPage() {
     this.pageNumbers = this.pageNumbers - 1;
     let ThongBaos: any = [];
@@ -107,7 +82,6 @@ export class NotifyListComponent implements OnInit {
       }
     );
   }
-
   getTotalPage() {
     let num = this.thongBaosPagination
     this.totalPages = num! / 20;
@@ -130,30 +104,22 @@ export class NotifyListComponent implements OnInit {
         NguoiDungXemThongBao = res;
         this.nguoiDungXemThongBaoList = NguoiDungXemThongBao.result.items;
         console.log(this.nguoiDungXemThongBaoList)
-      }
-    );
+      });
   }
-
-
   isVisible = false;
 
   showModal(): void {
     this.isVisible = true;
     this.getNguoiDungXemThongBaoList();
-
   }
   handleOk(): void {
     console.log('Button ok clicked!');
     this.isVisible = false;
   }
-
   handleCancel(): void {
     console.log('Button cancel clicked!');
     this.isVisible = false;
   }
-
-  // ---modal delete------
-
   showDeleteConfirm(id: string): void {
     if (id) {
       this.chooseIdThongBao.add(id);
@@ -171,31 +137,27 @@ export class NotifyListComponent implements OnInit {
         nzOnCancel: () => console.log('Cancel')
       });
     }
-
   }
-
   deleteMessage(): void {
-    this.message.success('Delete successfully', {
+    this.message.success('Delete successfully',{
       nzDuration: 3000
     });
   }
-
-  updateComponentModal(): void {
-    this.modal.create({
-      nzContent: NotifyModalComponent,
-      nzClosable: true,
-      nzAutofocus: null,
-      nzWidth: '700px',
-      nzOkText: 'Save',
-      nzOnOk: () => this.updateMessage(),
-      nzCancelText: 'Cancel',
-      nzOnCancel: () => console.log('Cancel'),
-    });
-
+  updateComponentModal(thongBao: any ){
+    if(thongBao){
+      this.modal.create({
+        nzContent: NotifyModalComponent,
+        nzComponentParams: {
+          item: thongBao
+        },
+        nzClosable: true,
+        nzAutofocus: null,
+        nzWidth: '700px',
+        nzFooter: null,
+      });
+      this.modal.afterAllClose.subscribe(() => this.getThongBaos());
+    }
   }
-
-
-
   updateMessage(): void {
     this.message.success('Update successfully', {
       nzDuration: 3000
@@ -211,11 +173,35 @@ export class NotifyListComponent implements OnInit {
   deleteThongBaos() {
     this.listChooseThongBaos = Array.from(this.chooseIdThongBao);
     this.notifyService.deleteThongBaos(this.listChooseThongBaos).subscribe(
-      res => {
+      () => {
         this.deleteMessage();
+        this.getThongBaos();
       });
   }
 
+  danhDauChuaDoc(){
+    this.listChooseThongBaos = Array.from(this.chooseIdThongBao);
+    this.notifyService.updateViewed(this.listChooseThongBaos, 1).subscribe(
+      () => {
+        this.getThongBaos();
+      });
+  }
+
+  showComfirmDelete(){
+    this.modal.confirm({
+      nzTitle: 'Are you sure delete this task?',
+      nzContent: '<b style="color: red;">Some descriptions</b>',
+      nzAutofocus: null,
+      nzBodyStyle: { padding: '20px', outline: 'none' },
+      nzMaskClosable: true,
+      nzOkText: 'Yes',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: () => this.deleteThongBaos(),
+      nzCancelText: 'No',
+      nzOnCancel: () => console.log('Cancel')
+    });
+  }
 
   chooseAll(event: any) {
     const checkedAll = event.target.checked;
@@ -247,47 +233,48 @@ export class NotifyListComponent implements OnInit {
   changeflag(flag: number, id: string) {
     if (flag === 1) {
       this.arrayIdDanhDau.push(id);
-      const number = 2;
-      this.notifyService.flagThongBao(this.arrayIdDanhDau, number).subscribe(
-        res => {
-          console.log('fag = 2');
+      this.notifyService.flagThongBao(this.arrayIdDanhDau, 2).subscribe(
+        () => {
           this.arrayIdDanhDau.pop();
-          this.getThongBaoByID(id);
           this.getThongBaos();
         });
     }
     else {
       this.arrayIdDanhDau.push(id);
-      const number = 1;
-      this.notifyService.flagThongBao(this.arrayIdDanhDau, number).subscribe(
-        res => {
-          console.log('fag = 1');
+      this.notifyService.flagThongBao(this.arrayIdDanhDau, 1).subscribe(
+        () => {
           this.arrayIdDanhDau.pop();
-          this.getThongBaoByID(id);
           this.getThongBaos();
         });
 
     }
   }
 
-  flagAllThongBao(flag: number) {
-    if (flag === 1) {
-      for (let i = 0; i < this.thongBaosList.length; i++) {
-        this.flagStar.add(this.thongBaosList[i].idsGuidThongBao);
-        this.flagIdThongBao = Array.from(this.flagStar);
-        this.notifyService.flagThongBao(this.arrayIdDanhDau, 1).subscribe(
-          res => {
-            this.getThongBaos();
-          });
-      }
-      for (let i = 0; i < this.thongBaosList.length; i++) {
-        this.flagStar.delete(this.thongBaosList[i].idsGuidThongBao);
-        this.flagIdThongBao = Array.from(this.flagStar);
-        this.notifyService.flagThongBao(this.arrayIdDanhDau, 2).subscribe(
-          res => {
-            this.getThongBaos();
-          });
-      }
+  flagAllThongBao(flag: any) {
+    if (flag.target.checked == true) {
+      // for (let i = 0; i < this.thongBaosList.length; i++) {
+      //   this.flagStar.add(this.thongBaosList[i].idsGuidThongBao);
+      //   this.flagIdThongBao = Array.from(this.flagStar);
+      //   this.notifyService.flagThongBao(this.arrayIdDanhDau, 1).subscribe(
+      //     () => {
+      //       console.log("win")
+      //       this.getThongBaos();
+      //     });
+      // }
+      console.log("true")
+
+    }
+    else{
+      // for (let i = 0; i < this.thongBaosList.length; i++) {
+      //   this.flagStar.delete(this.thongBaosList[i].idsGuidThongBao);
+      //   this.flagIdThongBao = Array.from(this.flagStar);
+      //   this.notifyService.flagThongBao(this.arrayIdDanhDau, 2).subscribe(
+      //     () => {
+      //       console.log("win+ 1")
+      //       this.getThongBaos();
+      //     });
+      // }
+      console.log("false")
     }
   }
 }

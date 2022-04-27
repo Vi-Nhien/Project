@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message'
-
-
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
-
+import { NotifyService } from '@main-project/notify/data-access/services';
+import { NzModalRef  } from 'ng-zorro-antd/modal';
 
 
 
@@ -14,12 +13,12 @@ import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
   templateUrl: './notify-modal.component.html',
   styleUrls: ['./notify-modal.component.scss']
 })
-export class NotifyModalComponent {
+export class NotifyModalComponent implements OnInit {
 
   selectedValue = null;
+  @Input() item: any;
 
-
-  editorConfig : AngularEditorConfig = {
+  editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
     height: '180px',
@@ -56,15 +55,38 @@ export class NotifyModalComponent {
       },
     ],
   };
+  SelectedPhongBans: number[] = [];
+  SelectedCoSos: number[] = [];
+  SelectedTinhChat ?: number;
+  radioValue?: number = 1
+  updateForm!: FormGroup;
 
-
-  validateForm!: FormGroup;
+  phongBanList: any;
+  coSoList: any;
+  thongBaoTinhChatsList : any;
   constructor(
     private message: NzMessageService,
+    private fb: FormBuilder,
+    private notifyService: NotifyService,
+    private modalRef: NzModalRef
   ) { }
-
-
-
+  ngOnInit(): void {
+    this.getThongBaoTinhChats();
+    this.getPhongBanList();
+    this.getCoSoList();
+    this.updateForm = this.fb.group({
+      idGuid: this.item.idGuid,
+      loaiThongBao: this.item.loaiThongBao,
+      maTraCuu: this.item.maTraCuu,
+      tieuDe: this.item.tieuDe,
+      noiDung: this.item.noiDung,
+      ngayHetHan: this.item.ngayHetHan,
+      idTinhChat: this.item.idTinhChat,
+      forWeb: 0,
+      idsCoSo: this.SelectedCoSos,
+      idsPhongBan: this.SelectedPhongBans,
+    });
+  }
   ////handle upload file
   handleChange({ file, fileList }: NzUploadChangeParam): void {
     const status = file.status;
@@ -77,5 +99,37 @@ export class NotifyModalComponent {
       this.message.error(`${file.name} file upload failed.`);
     }
   }
-
+  getPhongBanList() {
+    this.notifyService.getAllPhongBan().subscribe(
+      (res) => {
+        this.phongBanList = res.result.items;
+      });
+  }
+  getCoSoList() {
+    this.notifyService.getAllCoSo().subscribe(
+      (res) => {
+        this.coSoList = res.result.items;
+      });
+  }
+  getThongBaoTinhChats() {
+    this.notifyService.getAllThongBaoTinhChats().subscribe(
+      (res: any) => {
+        this.thongBaoTinhChatsList = res.result.items
+        console.log(this.thongBaoTinhChatsList)
+      });
+  }
+  onSubmit() {
+    console.log(this.updateForm?.value)
+    this.notifyService.updateThongBao(this.updateForm?.value).subscribe(
+      response => {
+        console.log(response);
+        this.message.success('Cập nhật thành công !!!');
+        this.modalRef.close();
+        this.cancel();
+      }
+    )
+  }
+  cancel() {
+    this.modalRef.destroy()
+  }
 }

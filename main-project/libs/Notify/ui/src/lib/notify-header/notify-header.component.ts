@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
 import { NotifyService } from '@main-project/notify/data-access/services';
 import { ThongBaoList } from '@main-project/notify/data-access/services';
-
+import vi from '@angular/common/locales/vi';
+import { registerLocaleData } from '@angular/common';
 @Component({
   selector: 'main-project-notify-header',
   templateUrl: './notify-header.component.html',
@@ -20,15 +20,12 @@ export class NotifyHeaderComponent implements OnInit {
   selectTrangThaiHetHan = null;
   selectTrangThaiXem = null;
   filterBy : any;
-
   constructor(
     private notifyService: NotifyService,
-    private fb: FormBuilder,
-    private router : Router
-  ) {
-
-  }
+    private fb: FormBuilder
+  ) {}
   ngOnInit(): void {
+    registerLocaleData(vi);
     this.getThongBaoTinhChat();
     this.filterForm = this.fb.group({
       pageNumber: 1,
@@ -43,40 +40,22 @@ export class NotifyHeaderComponent implements OnInit {
       idTinhChat: this.selectThongBaoTinhChat,
     });
   }
-
-  filter() {
-    // this.filteredUsers = [...this.users.filter(user => user.name.includes(this.filterBy))];
-  }
-
-
   getThongBaoTinhChat() {
     let thongBaoTinhChat: any;
     this.notifyService.getAllThongBaoTinhChats().subscribe(
       res => {
         thongBaoTinhChat = res;
         this.ThongBaoTinhChatList = thongBaoTinhChat.result.items;
-      }
-    )
+      });
   }
   open(): void {
     this.visible = true;
-
   }
-
   close(): void {
     this.visible = false;
   }
-
   searchSubmit() {
-    // this.notifyService.filterThongBao(this.filterForm?.value).subscribe(
-    //   (res: any= []) => {
-    //     this.filterList = res.result.items;
-    //     console.log(this.filterList);
-    //   }
-    // )
-    this.filterList = this.filterForm?.value;
-    // console.log("search: ", this.filterList)
-    this.router.navigate(['/notify/page', this.filterList]);
+    this.notifyService.filterThongBao(this.filterForm?.value)
     this.visible = false;
   }
 }

@@ -32,6 +32,8 @@ import { PropertyAddModalComponent } from './property-add-modal/property-add-mod
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NotifyDetailComponent } from './notify-detail/notify-detail.component';
 import { NzProgressModule } from 'ng-zorro-antd/progress';
+import { NzI18nModule, NZ_I18N, vi_VN } from 'ng-zorro-antd/i18n';
+import { NoSanitizePipe  } from '@main-project/notify/data-access/services'
 
 @NgModule({
   imports: [
@@ -55,7 +57,8 @@ import { NzProgressModule } from 'ng-zorro-antd/progress';
     NzInputNumberModule,
     RouterModule,
     NzDrawerModule,
-    NzProgressModule
+    NzProgressModule,
+    NzI18nModule,
 
   ],
   declarations: [
@@ -67,7 +70,8 @@ import { NzProgressModule } from 'ng-zorro-antd/progress';
     PropertyModalComponent,
     NotifyAddModalComponent,
     PropertyAddModalComponent,
-    NotifyDetailComponent
+    NotifyDetailComponent,
+    NoSanitizePipe
   ],
   exports: [
     NotifyListComponent,
@@ -81,6 +85,7 @@ import { NzProgressModule } from 'ng-zorro-antd/progress';
   ],
 
   providers: [
-    { provide: NzMessageService }]
+    { provide: NzMessageService },
+    { provide: NZ_I18N, useValue: vi_VN }]
 })
 export class NotifyUiModule { }

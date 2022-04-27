@@ -26,9 +26,9 @@
       </div>
       <div class="col-sm-9">
         <nz-radio-group [(ngModel)]="radioValue" formControlName="loaiThongBao">
-          <label nz-radio [nzValue] = 1>Chung</label>
-          <label nz-radio [nzValue] = 2 >Cơ sở</label>
-          <label nz-radio [nzValue] = 3 >Phòng ban</label>
+          <label nz-radio [nzValue]=1>Chung</label>
+          <label nz-radio [nzValue]=2>Cơ sở</label>
+          <label nz-radio [nzValue]=3>Phòng ban</label>
         </nz-radio-group>
       </div>
     </div>
@@ -38,8 +38,8 @@
         Phòng ban
       </div>
       <div class="col-sm-9 ">
-        <nz-select nzMode="multiple" nzShowSearch [(ngModel)]="SelectedPhongBans" class="form-control" nzPlaceHolder="Chọn"
-          formControlName="idsPhongBan">
+        <nz-select nzMode="multiple" nzShowSearch [(ngModel)]="SelectedPhongBans" class="form-control"
+          nzPlaceHolder="Chọn" formControlName="idsPhongBan">
           <nz-option *ngFor="let itemPhongBan of phongBanList" nzCustomContent [nzValue]="itemPhongBan.id"
             [nzLabel]="itemPhongBan.tenLoaiPhongBan">
             {{itemPhongBan.tenLoaiPhongBan}}
@@ -55,14 +55,13 @@
       <div class="col-sm-9 ">
         <nz-select nzMode="multiple" nzShowSearch [(ngModel)]="SelectedCoSos" class="form-control" nzPlaceHolder="Chọn"
           formControlName="idsCoSo">
-          <nz-option *ngFor="let itemCoSo of coSoList" nzCustomContent [nzValue]="itemCoSo.id" [nzLabel]="itemCoSo.tenCoSo">
+          <nz-option *ngFor="let itemCoSo of coSoList" nzCustomContent [nzValue]="itemCoSo.id"
+            [nzLabel]="itemCoSo.tenCoSo">
             {{itemCoSo.tenCoSo}}
           </nz-option>
         </nz-select>
       </div>
     </div>
-
-
     <div class="row form-group">
       <div class="col-sm-3 form-label">Mã tra cứu</div>
       <div class="col-sm-3"> <input type="text" placeholder="Mã tra cứu" class="form-control"
@@ -79,8 +78,8 @@
       <div class="col-sm-9">
         <nz-select nzShowSearch [(ngModel)]="SelectedTinhChat" class="form-control" nzPlaceHolder="Chọn"
           formControlName="idTinhChat">
-          <nz-option *ngFor="let itemTinhChat of thongBaoTinhChatsList" nzCustomContent
-            [nzValue]="itemTinhChat.id" [nzLabel]="itemTinhChat.tenTinhChat">
+          <nz-option *ngFor="let itemTinhChat of thongBaoTinhChatsList" nzCustomContent [nzValue]="itemTinhChat.id"
+            [nzLabel]="itemTinhChat.tenTinhChat">
             <i class='bx bx-radio-circle-marked' [style.color]="itemTinhChat.maMau"></i> {{itemTinhChat.tenTinhChat}}
           </nz-option>
         </nz-select>
@@ -91,7 +90,7 @@
         Đính kèm
       </div>
       <div class="col-sm-9">
-        <nz-upload [nzMultiple]="true" (nzChange)="handleChange($event)" class="form-control" >
+        <nz-upload [nzMultiple]="true" (nzChange)="handleChange($event)" class="form-control">
           <p class="ant-upload-drag-icon d-flex align-items-center justify-content-center">
             <i class='bx bx-upload btn-upload' style="font-size: 14px;"></i>
             <span class="text-upload" style="margin-left: 8px; font-size: 14px;">Đính kèm</span>

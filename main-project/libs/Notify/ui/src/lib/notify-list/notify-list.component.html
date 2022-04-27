@@ -3,11 +3,11 @@
     <div class="btn-inbox_checkbox">
         <input type="checkbox"  (change) ="chooseAll($event)">
     </div>
-    <div class= "btn-star bx"  (change) = "flagAllThongBao(thongBaosList.flag)" [ngClass]="{ 'bx-star' :btnStar ===true , 'bxs-star': btnStar === false}">
-     </div>
+    <button class= "btn-star bx"  (click) = "flagAllThongBao($event)"  [ngClass]="{ 'bx-star' :thongBaosList.flag === 1 , 'bxs-star': thongBaosList.flag === 2}" >
+     </button>
 
-    <div *ngIf="chooseIdThongBao.size != 0" class = "hover-btn" style = "color: red"> <i class='bx bx-trash-alt'></i> Xóa</div>
-    <div *ngIf="chooseIdThongBao.size != 0" class = "hover-btn" > <i class='bx bx-envelope-open'></i> Đánh dấu đã đọc</div>
+    <div *ngIf="chooseIdThongBao.size != 0" class = "hover-btn"(click) = "showComfirmDelete()"style = "color: red"> <i class='bx bx-trash-alt'></i> Xóa</div>
+    <div *ngIf="chooseIdThongBao.size != 0" class = "hover-btn" (click) = "danhDauChuaDoc()"> <i class='bx bx-envelope-open'></i> Đánh dấu đã đọc</div>
 
   </div>
   <div class="tool-pagination">
@@ -19,7 +19,7 @@
 
 <div class="notify-list">
   <div class="list-titles">
-    <div class="row-list_title inbox-list_checkbox" style ="width: 36px"> <button (click) = "search()"></button> </div>
+    <div class="row-list_title inbox-list_checkbox" style ="width: 36px"></div>
     <div class="row-list_title inbox-list_star" style ="width: 36px"></div>
     <div class="row-list_title inbox-list_action" style ="width: 40px"></div>
     <div class="row-list_title inbox-list_title" style ="width: 178px">Tiêu đề</div>
@@ -45,7 +45,7 @@
         </a>
         <nz-dropdown-menu #menu="nzDropdownMenu" class="dropdownMenu">
           <ul nz-menu nzSelectable>
-            <li nz-menu-item> <button class="btn-modal" (click)="updateComponentModal()">Chỉnh sửa</button></li>
+            <li nz-menu-item> <button class="btn-modal" (click)="updateComponentModal(data)">Chỉnh sửa</button></li>
             <li nz-menu-item><button class="btn-modal" (click)="showDeleteConfirm(data.idGuid)">Delete</button></li>
           </ul>
         </nz-dropdown-menu>

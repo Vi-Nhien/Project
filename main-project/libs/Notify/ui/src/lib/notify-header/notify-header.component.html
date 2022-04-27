@@ -2,10 +2,16 @@
   <div class="navbar-title">
     Báo cáo Chuyên đề
   </div>
+  <!-- <div class="navbar-title" *ngIf="router.url === '/notify/tb-tc'">
+    Tính chât
+  </div>
+  <div class="navbar-title" *ngIf="router.url === '/notify/star'">
+    Đánh dấu sao
+  </div> -->
   <div class="navbar-search">
     <div class="search-box">
       <span><i class='bx bx-search-alt-2'></i></span>
-      <input type="text" placeholder="Tìm Kiếm thông báo" class="input-search"  [(ngModel)]="filterBy" (keyup)="filter()">
+      <input type="text" placeholder="Tìm Kiếm thông báo" class="input-search" >
       <button nz-button nzType="primary" (click)="open()">
         <span><i class='bx bx-slider'></i></span>
       </button>
@@ -14,7 +20,7 @@
 </div>
 
 
-<form [formGroup]="filterForm!" (ngSubmit)="searchSubmit()">
+<form [formGroup]="filterForm!">
   <nz-drawer [nzClosable]="true" [nzVisible]="visible" nzPlacement="right" nzTitle="Bộ lọc tìm kiếm"
     (nzOnClose)="close()" nzWidth="560px" [nzFooter]="footerTpl" [nzBodyStyle]="{ overflow: 'auto' }"
     [nzMaskClosable]="false">
@@ -36,7 +42,6 @@
           <nz-date-picker class="form-control" formControlName="ngayTaoTu"></nz-date-picker>
         </div>
       </div>
-
       <div class="form-group row">
         <div class="col-4">
           <label for="">Đến ngày</label>
