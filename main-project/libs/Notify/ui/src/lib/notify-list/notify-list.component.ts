@@ -48,8 +48,34 @@ export class NotifyListComponent implements OnInit,  OnDestroy {
     this.getThongBaos();
     registerLocaleData(vi);
   }
+<<<<<<< HEAD
   ngOnDestroy() {
     this.subscription?.unsubscribe();
+=======
+
+
+
+  // searchSubmit() {
+  //   this.notifyService.filterThongBao(this.filterForm?.value).subscribe(
+  //     (res: any= []) => {
+  //       this.filterList = res.result.items;
+  //       console.log(this.filterList);
+  //     }
+  //   )
+  // }
+
+
+  search() {
+    // let params: any;
+    this.route.params.subscribe(
+      (res: any) => {
+        this.filterList = res
+        // this.filterList = res;
+        console.log(this.filterList)
+      }
+    )
+
+>>>>>>> e517fc52698f13f1068b9f99b04a1175a155f03a
   }
 
   getThongBaos() {

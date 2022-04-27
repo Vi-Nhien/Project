@@ -55,7 +55,19 @@ export class NotifyHeaderComponent implements OnInit {
     this.visible = false;
   }
   searchSubmit() {
+<<<<<<< HEAD
     this.notifyService.filterThongBao(this.filterForm?.value)
+=======
+    // this.notifyService.filterThongBao(this.filterForm?.value).subscribe(
+    //   (res: any= []) => {
+    //     this.filterList = res.result.items;
+    //     console.log(this.filterList);
+    //   }
+    // )
+    this.filterList = this.filterForm;
+    // console.log("search: ", this.filterList)
+    this.router.navigate(['/notify/page', this.filterList]);
+>>>>>>> e517fc52698f13f1068b9f99b04a1175a155f03a
     this.visible = false;
   }
 }
