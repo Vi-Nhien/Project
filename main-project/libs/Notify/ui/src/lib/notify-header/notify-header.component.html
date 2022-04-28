@@ -11,7 +11,7 @@
   <div class="navbar-search">
     <div class="search-box">
       <span><i class='bx bx-search-alt-2'></i></span>
-      <input type="text" placeholder="Tìm Kiếm thông báo" class="input-search" >
+      <input type="text" placeholder="Tìm Kiếm thông báo" class="input-search" (keydown.enter)="searchInput($event)" >
       <button nz-button nzType="primary" (click)="open()">
         <span><i class='bx bx-slider'></i></span>
       </button>

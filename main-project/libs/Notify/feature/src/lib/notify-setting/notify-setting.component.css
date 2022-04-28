@@ -6,8 +6,8 @@ overflow-x: hidden;
 }
 
 .left-side{
-  flex:25%;
+  flex:20%;
 }
 .right-side{
-  flex: 75%;
+  flex: 80%;
 }

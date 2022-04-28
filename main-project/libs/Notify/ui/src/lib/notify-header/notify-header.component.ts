@@ -15,15 +15,15 @@ export class NotifyHeaderComponent implements OnInit {
   visible = false;
   ThongBaoTinhChatList: any[] = [];
   filterForm?: FormGroup;
-  filterList ?: ThongBaoList;
+  filterList?: ThongBaoList;
   selectThongBaoTinhChat = null;
   selectTrangThaiHetHan = null;
   selectTrangThaiXem = null;
-  filterBy : any;
+  filterBy: any;
   constructor(
     private notifyService: NotifyService,
     private fb: FormBuilder
-  ) {}
+  ) { }
   ngOnInit(): void {
     registerLocaleData(vi);
     this.getThongBaoTinhChat();
@@ -36,7 +36,7 @@ export class NotifyHeaderComponent implements OnInit {
       ngayHetHanTu: null,
       ngayHetHanDen: null,
       trangThaiHetHan: this.selectTrangThaiHetHan,
-      trangThaiXem : this.selectTrangThaiXem,
+      trangThaiXem: this.selectTrangThaiXem,
       idTinhChat: this.selectThongBaoTinhChat,
     });
   }
@@ -55,19 +55,16 @@ export class NotifyHeaderComponent implements OnInit {
     this.visible = false;
   }
   searchSubmit() {
-<<<<<<< HEAD
     this.notifyService.filterThongBao(this.filterForm?.value)
-=======
-    // this.notifyService.filterThongBao(this.filterForm?.value).subscribe(
-    //   (res: any= []) => {
-    //     this.filterList = res.result.items;
-    //     console.log(this.filterList);
-    //   }
-    // )
-    this.filterList = this.filterForm;
-    // console.log("search: ", this.filterList)
-    this.router.navigate(['/notify/page', this.filterList]);
->>>>>>> e517fc52698f13f1068b9f99b04a1175a155f03a
     this.visible = false;
+  }
+  searchInput(event: any ) {
+    const search : any = {
+      keyword: event.target.value,
+      pageNumber: 1,
+      pageSize: 20,
+    }
+    console.log("You entered: ", search);
+    this.notifyService.filterThongBao(search);
   }
 }

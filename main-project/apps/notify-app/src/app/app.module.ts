@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 
-import { ServiceInterceptor } from '@main-project/notify/data-access/services'
+import { ServiceInterceptor } from './service-interceptor'
 
 import { RouterModule, Routes } from '@angular/router';
 

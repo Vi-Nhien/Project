@@ -6,11 +6,11 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-catalog-quocgia',
-  templateUrl: './catalog-quocgia.component.html',
-  styleUrls: ['./catalog-quocgia.component.scss']
+  selector: 'app-catalog-dantoc',
+  templateUrl: './catalog-dantoc.component.html',
+  styleUrls: ['./catalog-dantoc.component.scss']
 })
-export class CatalogQuocgiaComponent implements OnInit, OnDestroy {
+export class CatalogDantocComponent implements OnInit, OnDestroy {
 
   quocGias?: QuocGia[];
   subscription: Subscription | undefined;

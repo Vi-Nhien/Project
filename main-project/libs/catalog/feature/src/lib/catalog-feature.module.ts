@@ -4,6 +4,7 @@ import { QuocGiaComponent } from './quoc-gia/quoc-gia.component';
 import { RouterModule, Routes } from '@angular/router';
 import { CatalogUiModule } from '@main-project/catalog/ui';
 import { TonGiaoComponent } from './ton-giao/ton-giao.component';
+import { DanTocComponent } from './dan-toc/quoc-gia.component';
 
 
 const routes : Routes =[
@@ -15,6 +16,9 @@ const routes : Routes =[
   },
   {
     path: 'ton-giao', component: TonGiaoComponent
+  },
+  {
+    path: 'dan-toc', component: DanTocComponent
   }
 
 ]
@@ -26,12 +30,13 @@ const routes : Routes =[
   ],
   declarations:[
     QuocGiaComponent,
-    TonGiaoComponent
-
+    TonGiaoComponent,
+    DanTocComponent
   ],
   exports:[
     QuocGiaComponent,
-    TonGiaoComponent
+    TonGiaoComponent,
+    DanTocComponent
   ]
 })
 export class CatalogFeatureModule {}
