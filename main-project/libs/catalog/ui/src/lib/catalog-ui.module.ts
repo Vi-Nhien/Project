@@ -16,6 +16,7 @@ import { NzNotificationModule } from 'ng-zorro-antd/notification';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CatalogDantocComponent } from './catalog-dantoc/catalog-dantoc.component';
+import { CatalogKhoinganhComponent } from './catalog-khoinganh/catalog-khoinganh.component';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import { CatalogDantocComponent } from './catalog-dantoc/catalog-dantoc.componen
     CatalogMenuComponent,
     CatalogQuocgiaComponent,
     CatalogTongiaoComponent,
-    CatalogDantocComponent
+    CatalogDantocComponent,
+    CatalogKhoinganhComponent
   ],
 
   exports:[
@@ -46,7 +48,8 @@ import { CatalogDantocComponent } from './catalog-dantoc/catalog-dantoc.componen
     CatalogMenuComponent,
     CatalogQuocgiaComponent,
     CatalogTongiaoComponent,
-    CatalogDantocComponent
+    CatalogDantocComponent,
+    CatalogKhoinganhComponent
   ]
 })
 export class CatalogUiModule {}

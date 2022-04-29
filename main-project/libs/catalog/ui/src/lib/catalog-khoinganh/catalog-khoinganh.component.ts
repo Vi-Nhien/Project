@@ -1,18 +1,19 @@
 import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
-import { CatalogService, List, TonGiao } from '@main-project/catalog/data-access/services'
+import { CatalogService, List, KhoiNganh } from '@main-project/catalog/data-access/services'
 import { Subscription } from 'rxjs';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-catalog-tongiao',
-  templateUrl: './catalog-tongiao.component.html',
-  styleUrls: ['./catalog-tongiao.component.scss']
+  selector: 'app-catalog-khoinganh',
+  templateUrl: './catalog-khoinganh.component.html',
+  styleUrls: ['./catalog-khoinganh.component.scss']
 })
-export class CatalogTongiaoComponent implements OnInit {
+export class CatalogKhoinganhComponent implements OnInit {
 
-  tonGiaos?: TonGiao[];
+
+  khoiNganhs?: KhoiNganh[];
   subscription: Subscription | undefined;
   ModalAdd = false;
   isVisibleModalUpdate = false;
@@ -32,10 +33,10 @@ export class CatalogTongiaoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getListTonGiaos();
+    this.getListKhoiNganhs();
     this.formAdd = this.fb.group({
-      maTonGiao: ['', Validators.required],
-      tenTonGiao: ['', Validators.required],
+      maKhoiNganh: ['', Validators.required],
+      tenKhoiNganh: ['', Validators.required],
       soThuTu: [''],
       isVisible: true,
       ghiChu: ['']
@@ -43,8 +44,8 @@ export class CatalogTongiaoComponent implements OnInit {
     });
     this.formUpdate =this.fbr.group({
       id: [''],
-      maTonGiao: ['', Validators.required],
-      tenTonGiao: ['', Validators.required],
+      maKhoiNganh: ['', Validators.required],
+      tenKhoiNganh: ['', Validators.required],
       soThuTu: [''],
       isVisible: true,
       ghiChu: ['']
@@ -55,7 +56,7 @@ export class CatalogTongiaoComponent implements OnInit {
   }
   get f() { return this.formAdd!.controls; }
   get g() { return this.formUpdate!.controls; }
-  getListTonGiaos() {
+  getListKhoiNganhs() {
     const list: List = {
       pageSize: 20,
       pageNumber: 1,
@@ -64,10 +65,10 @@ export class CatalogTongiaoComponent implements OnInit {
       keyword: '',
       isVisible: true
     }
-    this.catalogService.getListTonGiao(list).subscribe(
+    this.catalogService.getListKhoiNganh(list).subscribe(
       (res: any) => {
-        this.tonGiaos = res.result.items;
-        console.log(this.tonGiaos);
+        this.khoiNganhs = res.result.items;
+        console.log(this.khoiNganhs);
       });
   }
   searchInput(event: any) {
@@ -79,24 +80,24 @@ export class CatalogTongiaoComponent implements OnInit {
       keyword: event.target.value,
     }
     console.log(search)
-    this.catalogService.getListTonGiao(search).subscribe(
+    this.catalogService.getListKhoiNganh(search).subscribe(
       (res: any) => {
-        this.tonGiaos = res.result.items;
-        console.log("after filter: ",this.tonGiaos);
+        this.khoiNganhs = res.result.items;
+        console.log("after filter: ",this.khoiNganhs);
         event.target.value = '';
       });
   }
   updateModal(id: number): void {
     this.isVisibleModalUpdate = true;
-    this.catalogService.getTonGiaoById(id).subscribe(
+    this.catalogService.getKhoiNganhById(id).subscribe(
       (res: any)=>{
         this.formUpdate?.patchValue(res.result);
       });
   }
   handleUpdateOk(): void {
-    this.catalogService.updateTonGiao(this.formUpdate?.value).subscribe(
+    this.catalogService.updateKhoiNganh(this.formUpdate?.value).subscribe(
       ()=>{
-        this.getListTonGiaos();
+        this.getListKhoiNganhs();
         this.isVisibleModalUpdate = false;
         this.notification.success('Thông báo !!!', 'Cập nhật thành công!!!');
       },
@@ -113,9 +114,9 @@ export class CatalogTongiaoComponent implements OnInit {
   }
   handleAddOk(): void {
     console.log(this.formAdd?.value);
-    this.catalogService.createTonGiao(this.formAdd?.value).subscribe(
+    this.catalogService.createKhoiNganh(this.formAdd?.value).subscribe(
       (res) => {
-        this.getListTonGiaos();
+        this.getListKhoiNganhs();
         this.ModalAdd = false;
         this.notification.success('Thông báo !!!', 'Thêm mới thành công!!!');
       },
@@ -130,7 +131,7 @@ export class CatalogTongiaoComponent implements OnInit {
   showDeleteConfirm(itemQuoscGia: string, id: number, tplContent: TemplateRef<{}>) {
     if (id) {
       this.modal.confirm({
-        nzTitle: 'Xóa Tôn Giáo?',
+        nzTitle: 'Xóa dân tộc?',
         nzContent: tplContent,
         nzComponentParams: {
           value: itemQuoscGia
@@ -138,18 +139,18 @@ export class CatalogTongiaoComponent implements OnInit {
         nzOkText: 'Yes',
         nzOkType: 'primary',
         nzOkDanger: true,
-        nzOnOk: () => this.deleteTonGiaos(id),
+        nzOnOk: () => this.deleteKhoiNganhs(id),
         nzCancelText: 'No',
         nzOnCancel: () => console.log('Cancel')
       });
     }
   }
-  deleteTonGiaos(id: number) {
+  deleteKhoiNganhs(id: number) {
     this.ids.push(id);
     console.log(this.ids)
-    this.catalogService.deleteTonGiaos(this.ids).subscribe(
+    this.catalogService.deleteKhoiNganhs(this.ids).subscribe(
       (res) => {
-        this.getListTonGiaos();
+        this.getListKhoiNganhs();
         this.notification.success('Thông báo !!!', 'Xóa thành công!!!');
       },
       (err) => {
@@ -157,11 +158,11 @@ export class CatalogTongiaoComponent implements OnInit {
       }
     )
   }
-  deleteListTonGiaos() {
+  deleteListKhoiNganhs() {
     this.ids  = Array.from(this.listCheckBox);
-    this.catalogService.deleteTonGiaos(this.ids).subscribe(
+    this.catalogService.deleteKhoiNganhs(this.ids).subscribe(
       (res) => {
-        this.getListTonGiaos();
+        this.getListKhoiNganhs();
         this.listCheckBox = new Set<number>();
         this.notification.success('Thông báo !!!', 'Xóa thành công!!!');
       },
@@ -172,13 +173,13 @@ export class CatalogTongiaoComponent implements OnInit {
   }
   checkBoxList(event: any) {
     if (event.target.checked == true) {
-      for (let i = 0; i < this.tonGiaos!.length; i++) {
-        this.listCheckBox.add(this.tonGiaos![i].id);
+      for (let i = 0; i < this.khoiNganhs!.length; i++) {
+        this.listCheckBox.add(this.khoiNganhs![i].id);
       }
     }
     else {
-      for (let i = 0; i < this.tonGiaos!.length; i++) {
-        this.listCheckBox.delete(this.tonGiaos![i].id);
+      for (let i = 0; i < this.khoiNganhs!.length; i++) {
+        this.listCheckBox.delete(this.khoiNganhs![i].id);
 
       }
     }
@@ -196,12 +197,12 @@ export class CatalogTongiaoComponent implements OnInit {
   }
   showConfrimTrash(): void{
     this.modal.confirm({
-      nzTitle: 'Xóa Tôn Giáo?',
+      nzTitle: 'Xóa dân tộc?',
       nzContent: 'Bạn muốn xóa các mục đã chọn',
       nzOkText: 'Yes',
       nzOkType: 'primary',
       nzOkDanger: true,
-      nzOnOk: () => this.deleteListTonGiaos(),
+      nzOnOk: () => this.deleteListKhoiNganhs(),
       nzCancelText: 'No',
       nzOnCancel: () => console.log('Cancel')
     });

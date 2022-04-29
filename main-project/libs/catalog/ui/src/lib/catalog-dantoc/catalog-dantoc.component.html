@@ -1,4 +1,4 @@
-<div class="container-catalog_quocgia">
+<div class="container-catalog">
   <div class="gird-item_head">
     <div class="">
       <div class="header-label"> Dân tộc</div>
@@ -61,7 +61,7 @@
       </div>
     </div>
     <div class="gird-table">
-      <nz-table #quocGiaTable [nzData]="quocGias!" [nzFrontPagination]="false" [nzScroll]="{ y: '487px' }">
+      <nz-table #quocGiaTable [nzData]="danTocs!" [nzFrontPagination]="false" [nzScroll]="{ y: '487px' }">
         <thead>
           <tr>
             <th class="gird-table_header" style="text-align: center;" nzWidth="45px">
@@ -70,20 +70,20 @@
             <th class="gird-table_header" style="text-align: center;" nzWidth="80px">Thao tác</th>
             <th class="gird-table_header" style="text-align: center;" nzWidth="70px">STT</th>
             <th class="gird-table_header" style="text-align: center;" nzWidth="100px">Mã</th>
-            <th class="gird-table_header" nzWidth="400px">Tên quốc gia</th>
+            <th class="gird-table_header" nzWidth="400px">Tên dân tộc</th>
             <th class="gird-table_header" nzWidth="286px">Ghi chú</th>
             <th class="gird-table_header" style="text-align: center;" nzWidth="100px">Hiển thị</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let itemQuocGia of quocGias">
-            <td class="item-center"> <input type="checkbox" [checked]="listCheckBox.has(itemQuocGia.id)"
-                class="checkbox-list" (click)="checkBoxValue(itemQuocGia.id, $event)"></td>
+          <tr *ngFor="let itemDanToc of danTocs">
+            <td class="item-center"> <input type="checkbox" [checked]="listCheckBox.has(itemDanToc.id)"
+                class="checkbox-list" (click)="checkBoxValue(itemDanToc.id, $event)"></td>
             <td class="item-center"><a nz-dropdown [nzDropdownMenu]="menu" [nzClickHide]="false">
                 <nz-dropdown-menu #menu="nzDropdownMenu">
                   <ul nz-menu>
-                    <li nz-menu-item nz-button (click)="updateModal(itemQuocGia.id)">Chỉnh sửa</li>
-                    <li nz-menu-item (click)="showDeleteConfirm(itemQuocGia.tenQuocGia, itemQuocGia.id,  tplContent)">
+                    <li nz-menu-item nz-button (click)="updateModal(itemDanToc.id)">Chỉnh sửa</li>
+                    <li nz-menu-item (click)="showDeleteConfirm(itemDanToc.tenDanToc, itemDanToc.id,  tplContent)">
                       Xóa</li>
                   </ul>
                 </nz-dropdown-menu>
@@ -93,11 +93,11 @@
                 </svg>
               </a>
             </td>
-            <td class="item-center">{{itemQuocGia.soThuTu}}</td>
-            <td class="item-center">{{itemQuocGia.maQuocGia}}</td>
-            <td>{{itemQuocGia.tenQuocGia}}</td>
-            <td>{{itemQuocGia.ghiChu}}</td>
-            <td class="item-center" *ngIf="itemQuocGia.isVisible === true"><i class='bx bxs-check-circle'
+            <td class="item-center">{{itemDanToc.soThuTu}}</td>
+            <td class="item-center">{{itemDanToc.maDanToc}}</td>
+            <td> <a (click)="updateModal(itemDanToc.id)">{{itemDanToc.tenDanToc}}</a></td>
+            <td>{{itemDanToc.ghiChu}}</td>
+            <td class="item-center" *ngIf="itemDanToc.isVisible === true"><i class='bx bxs-check-circle'
                 style="font-size: 18px; color: #28a745;"></i></td>
           </tr>
         </tbody>
@@ -121,9 +121,9 @@
                 Mã <sup class="required-asterisk text-danger"> (*)</sup>
               </label>
               <div class="col-md-8">
-                <input nz-input class="form-control" formControlName="maQuocGia" required />
-                <div *ngIf="g['maQuocGia'].touched && g['maQuocGia'].invalid" class="alert-required">
-                  <div *ngIf="g['maQuocGia'].errors && g['maQuocGia'].errors['required']">Mã quốc gia không được trống</div>
+                <input nz-input class="form-control" formControlName="maDanToc" required />
+                <div *ngIf="g['maDanToc'].touched && g['maDanToc'].invalid" class="alert-required">
+                  <div *ngIf="g['maDanToc'].errors && g['maDanToc'].errors['required']">Mã dân tộc không được trống</div>
                 </div>
               </div>
             </div>
@@ -134,9 +134,9 @@
                 Tên <sup class="required-asterisk text-danger"> (*)</sup>
               </label>
               <div class="col-md-8">
-                <input nz-input class="form-control" formControlName="tenQuocGia" required />
-                <div *ngIf="g['tenQuocGia'].touched && g['tenQuocGia'].invalid" class="alert-required">
-                  <div *ngIf="g['tenQuocGia'].errors && g['tenQuocGia'].errors['required']">Mã quốc gia không được trống</div>
+                <input nz-input class="form-control" formControlName="tenDanToc" required />
+                <div *ngIf="g['tenDanToc'].touched && g['tenDanToc'].invalid" class="alert-required">
+                  <div *ngIf="g['tenDanToc'].errors && g['tenDanToc'].errors['required']">Mã dân tộc không được trống</div>
                 </div>
               </div>
             </div>
@@ -191,9 +191,9 @@
                 Mã <sup class="required-asterisk text-danger"> (*)</sup>
               </label>
               <div class="col-md-8">
-                <input nz-input class="form-control" formControlName="maQuocGia" required  [ngClass]="{ 'is-invalid': f['maQuocGia'].errors }"/>
-                <div *ngIf="f['maQuocGia'].touched && f['maQuocGia'].invalid" class="alert-required">
-                  <div *ngIf="f['maQuocGia'].errors && f['maQuocGia'].errors['required']">Mã quốc gia không được trống</div>
+                <input nz-input class="form-control" formControlName="maDanToc" required  [ngClass]="{ 'is-invalid': f['maDanToc'].errors }"/>
+                <div *ngIf="f['maDanToc'].touched && f['maDanToc'].invalid" class="alert-required">
+                  <div *ngIf="f['maDanToc'].errors && f['maDanToc'].errors['required']">Mã dân tộc không được trống</div>
                 </div>
               </div>
             </div>
@@ -204,9 +204,9 @@
                 Tên <sup class="required-asterisk text-danger"> (*)</sup>
               </label>
               <div class="col-md-8">
-                <input nz-input class="form-control" formControlName="tenQuocGia" [ngClass]="{ 'is-invalid': f['tenQuocGia'].errors }" />
-                <div *ngIf="f['tenQuocGia'].touched && f['tenQuocGia'].invalid" class="alert-required">
-                  <div *ngIf="f['tenQuocGia'].errors && f['tenQuocGia'].errors['required']">Tên quốc gia không được trống</div>
+                <input nz-input class="form-control" formControlName="tenDanToc" [ngClass]="{ 'is-invalid': f['tenDanToc'].errors }" />
+                <div *ngIf="f['tenDanToc'].touched && f['tenDanToc'].invalid" class="alert-required">
+                  <div *ngIf="f['tenDanToc'].errors && f['tenDanToc'].errors['required']">Tên dân tộc không được trống</div>
                 </div>
               </div>
             </div>

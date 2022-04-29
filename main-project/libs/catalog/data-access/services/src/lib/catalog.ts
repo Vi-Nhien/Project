@@ -6,8 +6,6 @@ export interface List {
   keyword: string,
   isVisible: boolean,
 }
-
-
 export interface QuocGia {
   id: number,
   maQuocGia: string,
@@ -16,7 +14,6 @@ export interface QuocGia {
   isVisible: true,
   ghiChu: string
 }
-
 export interface createQuocGia {
   maQuocGia: string,
   tenQuocGia: string,
@@ -24,8 +21,6 @@ export interface createQuocGia {
   isVisible: boolean,
   ghiChu: string
 }
-
-
 export interface QuocGiaById {
   id: number,
   maQuocGia: string,
@@ -34,8 +29,6 @@ export interface QuocGiaById {
   isVisible: boolean,
   ghiChu: string
 }
-
-
 export interface createDanToc {
   maDanToc: string,
   tenDanToc: string,
@@ -48,6 +41,36 @@ export interface DanToc{
   id: number,
   maDanToc: string,
   tenDanToc: string,
+  soThuTu: number,
+  isVisible: boolean,
+  ghiChu: string
+}
+export interface createTonGiao{
+  maTonGiao: string,
+  tenTonGiao: string,
+  soThuTu: number,
+  isVisible: boolean,
+  ghiChu: string
+}
+export interface TonGiao{
+  id: number,
+  maTonGiao: string,
+  tenTonGiao: string,
+  soThuTu: number,
+  isVisible: boolean,
+  ghiChu: string
+}
+export interface createKhoiNganh{
+  maKhoiNganh: string,
+  tenKhoiNganh: string,
+  soThuTu: number,
+  isVisible: boolean,
+  ghiChu: string
+}
+export interface KhoiNganh{
+  id: number,
+  maKhoiNganh: string,
+  tenKhoiNganh: string,
   soThuTu: number,
   isVisible: boolean,
   ghiChu: string

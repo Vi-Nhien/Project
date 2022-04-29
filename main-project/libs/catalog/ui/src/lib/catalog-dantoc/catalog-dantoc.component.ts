@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
-import { CatalogService, QuocGia, List } from '@main-project/catalog/data-access/services'
+import { CatalogService, List, DanToc } from '@main-project/catalog/data-access/services'
 import { Subscription } from 'rxjs';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
@@ -12,7 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CatalogDantocComponent implements OnInit, OnDestroy {
 
-  quocGias?: QuocGia[];
+  danTocs?: DanToc[];
   subscription: Subscription | undefined;
   ModalAdd = false;
   isVisibleModalUpdate = false;
@@ -32,18 +32,19 @@ export class CatalogDantocComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.getListQuocGias();
+    this.getListDanTocs();
     this.formAdd = this.fb.group({
-      maQuocGia: ['', Validators.required],
-      tenQuocGia: ['', Validators.required],
+      maDanToc: ['', Validators.required],
+      tenDanToc: ['', Validators.required],
       soThuTu: [''],
       isVisible: true,
       ghiChu: ['']
+
     });
     this.formUpdate =this.fbr.group({
       id: [''],
-      maQuocGia: ['', Validators.required],
-      tenQuocGia: ['', Validators.required],
+      maDanToc: ['', Validators.required],
+      tenDanToc: ['', Validators.required],
       soThuTu: [''],
       isVisible: true,
       ghiChu: ['']
@@ -54,7 +55,7 @@ export class CatalogDantocComponent implements OnInit, OnDestroy {
   }
   get f() { return this.formAdd!.controls; }
   get g() { return this.formUpdate!.controls; }
-  getListQuocGias() {
+  getListDanTocs() {
     const list: List = {
       pageSize: 20,
       pageNumber: 1,
@@ -63,10 +64,10 @@ export class CatalogDantocComponent implements OnInit, OnDestroy {
       keyword: '',
       isVisible: true
     }
-    this.catalogService.getListQuocGia(list).subscribe(
+    this.catalogService.getListDanToc(list).subscribe(
       (res: any) => {
-        this.quocGias = res.result.items;
-        console.log(this.quocGias);
+        this.danTocs = res.result.items;
+        console.log(this.danTocs);
       });
   }
   searchInput(event: any) {
@@ -78,24 +79,24 @@ export class CatalogDantocComponent implements OnInit, OnDestroy {
       keyword: event.target.value,
     }
     console.log(search)
-    this.catalogService.getListQuocGia(search).subscribe(
+    this.catalogService.getListDanToc(search).subscribe(
       (res: any) => {
-        this.quocGias = res.result.items;
-        console.log("after filter: ",this.quocGias);
+        this.danTocs = res.result.items;
+        console.log("after filter: ",this.danTocs);
         event.target.value = '';
       });
   }
   updateModal(id: number): void {
     this.isVisibleModalUpdate = true;
-    this.catalogService.getQuocGiaById(id).subscribe(
+    this.catalogService.getDanTocById(id).subscribe(
       (res: any)=>{
         this.formUpdate?.patchValue(res.result);
       });
   }
   handleUpdateOk(): void {
-    this.catalogService.updateQuocGia(this.formUpdate?.value).subscribe(
+    this.catalogService.updateDanToc(this.formUpdate?.value).subscribe(
       ()=>{
-        this.getListQuocGias();
+        this.getListDanTocs();
         this.isVisibleModalUpdate = false;
         this.notification.success('Thông báo !!!', 'Cập nhật thành công!!!');
       },
@@ -112,9 +113,9 @@ export class CatalogDantocComponent implements OnInit, OnDestroy {
   }
   handleAddOk(): void {
     console.log(this.formAdd?.value);
-    this.catalogService.createQuocGia(this.formAdd?.value).subscribe(
+    this.catalogService.createDanToc(this.formAdd?.value).subscribe(
       (res) => {
-        this.getListQuocGias();
+        this.getListDanTocs();
         this.ModalAdd = false;
         this.notification.success('Thông báo !!!', 'Thêm mới thành công!!!');
       },
@@ -129,7 +130,7 @@ export class CatalogDantocComponent implements OnInit, OnDestroy {
   showDeleteConfirm(itemQuoscGia: string, id: number, tplContent: TemplateRef<{}>) {
     if (id) {
       this.modal.confirm({
-        nzTitle: 'Xóa quốc gia?',
+        nzTitle: 'Xóa dân tộc?',
         nzContent: tplContent,
         nzComponentParams: {
           value: itemQuoscGia
@@ -137,18 +138,18 @@ export class CatalogDantocComponent implements OnInit, OnDestroy {
         nzOkText: 'Yes',
         nzOkType: 'primary',
         nzOkDanger: true,
-        nzOnOk: () => this.deleteQuocGias(id),
+        nzOnOk: () => this.deleteDanTocs(id),
         nzCancelText: 'No',
         nzOnCancel: () => console.log('Cancel')
       });
     }
   }
-  deleteQuocGias(id: number) {
+  deleteDanTocs(id: number) {
     this.ids.push(id);
     console.log(this.ids)
-    this.catalogService.deleteQuocGias(this.ids).subscribe(
+    this.catalogService.deleteDanTocs(this.ids).subscribe(
       (res) => {
-        this.getListQuocGias();
+        this.getListDanTocs();
         this.notification.success('Thông báo !!!', 'Xóa thành công!!!');
       },
       (err) => {
@@ -156,11 +157,11 @@ export class CatalogDantocComponent implements OnInit, OnDestroy {
       }
     )
   }
-  deleteListQuocGias() {
+  deleteListDanTocs() {
     this.ids  = Array.from(this.listCheckBox);
-    this.catalogService.deleteQuocGias(this.ids).subscribe(
+    this.catalogService.deleteDanTocs(this.ids).subscribe(
       (res) => {
-        this.getListQuocGias();
+        this.getListDanTocs();
         this.listCheckBox = new Set<number>();
         this.notification.success('Thông báo !!!', 'Xóa thành công!!!');
       },
@@ -171,13 +172,13 @@ export class CatalogDantocComponent implements OnInit, OnDestroy {
   }
   checkBoxList(event: any) {
     if (event.target.checked == true) {
-      for (let i = 0; i < this.quocGias!.length; i++) {
-        this.listCheckBox.add(this.quocGias![i].id);
+      for (let i = 0; i < this.danTocs!.length; i++) {
+        this.listCheckBox.add(this.danTocs![i].id);
       }
     }
     else {
-      for (let i = 0; i < this.quocGias!.length; i++) {
-        this.listCheckBox.delete(this.quocGias![i].id);
+      for (let i = 0; i < this.danTocs!.length; i++) {
+        this.listCheckBox.delete(this.danTocs![i].id);
 
       }
     }
@@ -195,12 +196,12 @@ export class CatalogDantocComponent implements OnInit, OnDestroy {
   }
   showConfrimTrash(): void{
     this.modal.confirm({
-      nzTitle: 'Xóa quốc gia?',
+      nzTitle: 'Xóa dân tộc?',
       nzContent: 'Bạn muốn xóa các mục đã chọn',
       nzOkText: 'Yes',
       nzOkType: 'primary',
       nzOkDanger: true,
-      nzOnOk: () => this.deleteListQuocGias(),
+      nzOnOk: () => this.deleteListDanTocs(),
       nzCancelText: 'No',
       nzOnCancel: () => console.log('Cancel')
     });
