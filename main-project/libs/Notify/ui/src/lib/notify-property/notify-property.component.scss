@@ -54,7 +54,7 @@
 
     }
 
-    .btn-delete_all{
+    .btn-delete_all {
       border: none;
       outline: none;
       background-color: inherit;
@@ -90,21 +90,10 @@
       border-bottom: 1px solid #2125291a;
       cursor: pointer;
       padding: .75rem 1.25rem;
-
-
       .btn-dropdown {
         color: inherit;
       }
-
-
-
-
-
     }
-
-
-
-
   }
 
   .inbox-title {
@@ -162,7 +151,7 @@
 }
 
 
-.dropdownMenu{
+.dropdownMenu {
 
   .btn-modal {
     border: none;
@@ -179,3 +168,27 @@
   outline: none;
   color: black;
 }
+
+.tool-pagination {
+  display: flex;
+  text-align: center;
+
+  .page-number {
+    color: #6c757d;
+    font-size: .875rem;
+    margin-right: 1rem;
+  }
+
+  .btn-arrow_pagination {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    padding: .25rem;
+    font-size: 1rem;
+    background: transparent;
+    color: #6c757d;
+
+  }
+}
+
+

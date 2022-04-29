@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { NzMessageService } from 'ng-zorro-antd/message'
-// import { NotifyService, ThongBaoTinhChat } from 'libs/Notify/data-access/services/src/lib/notify.service';
+
 import { NotifyService  } from '@main-project/notify/data-access/services'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzModalRef  } from 'ng-zorro-antd/modal';
@@ -18,6 +18,7 @@ export class NotifyAddModalComponent implements OnInit {
   SelectedCoSos : number [] =[];
   SelectedTinhChat ?: number;
   radioValue  : number = 1;
+  submitted = false;
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -89,7 +90,7 @@ export class NotifyAddModalComponent implements OnInit {
     console.log(num)
   }
   getThongBaoTinhChats() {
-    this.notifyService.getAllThongBaoTinhChats().subscribe(
+    this.notifyService.getAllThongBaoTinhChats(1, 50).subscribe(
       (res: any) => {
         this.thongBaoTinhChatsList = res.result.items;
         console.log(this.thongBaoTinhChatsList)
@@ -119,7 +120,8 @@ export class NotifyAddModalComponent implements OnInit {
     }
   }
   submit(){
-    console.log(this.form?.value)
+    this.submitted = true;
+    if(this.form!.invalid){return}
     this.notifyService.createThongBao(this.form?.value).subscribe(
       res => {
         console.log('sucess');
@@ -129,4 +131,5 @@ export class NotifyAddModalComponent implements OnInit {
   cancel() {
     this.modalRef.destroy();
   }
+  get f() { return this.form!.controls; }
 }

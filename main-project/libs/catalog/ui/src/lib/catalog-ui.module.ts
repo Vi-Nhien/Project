@@ -13,10 +13,13 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CatalogDantocComponent } from './catalog-dantoc/catalog-dantoc.component';
 import { CatalogKhoinganhComponent } from './catalog-khoinganh/catalog-khoinganh.component';
+import { CatalogNganhhocComponent } from './catalog-nganhhoc/catalog-nganhhoc.component';
 
 @NgModule({
   imports: [
@@ -31,7 +34,9 @@ import { CatalogKhoinganhComponent } from './catalog-khoinganh/catalog-khoinganh
     NzCheckboxModule,
     NzNotificationModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NzSelectModule,
+    NzPaginationModule
   ],
 
   declarations:[
@@ -40,7 +45,8 @@ import { CatalogKhoinganhComponent } from './catalog-khoinganh/catalog-khoinganh
     CatalogQuocgiaComponent,
     CatalogTongiaoComponent,
     CatalogDantocComponent,
-    CatalogKhoinganhComponent
+    CatalogKhoinganhComponent,
+    CatalogNganhhocComponent
   ],
 
   exports:[
@@ -49,7 +55,8 @@ import { CatalogKhoinganhComponent } from './catalog-khoinganh/catalog-khoinganh
     CatalogQuocgiaComponent,
     CatalogTongiaoComponent,
     CatalogDantocComponent,
-    CatalogKhoinganhComponent
+    CatalogKhoinganhComponent,
+    CatalogNganhhocComponent
   ]
 })
 export class CatalogUiModule {}

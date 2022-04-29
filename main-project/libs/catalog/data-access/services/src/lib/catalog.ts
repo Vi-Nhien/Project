@@ -75,3 +75,42 @@ export interface KhoiNganh{
   isVisible: boolean,
   ghiChu: string
 }
+
+
+export interface NganhHocList{
+  pageSize: number,
+  pageNumber: number,
+  sortName: string,
+  sortASC: boolean,
+  keyword: string,
+  idPhongBan: number,
+  idKhoiNganh: number
+}
+
+export interface createNganhHoc{
+  maNganh: string,
+  tenNganh: string,
+  tenVietTat: string,
+  tenTiengAnh: string,
+  maTuyenSinh: string,
+  idPhongBan: number,
+  idKhoiNganh: number,
+  soThuTu: number,
+  isVisible: boolean,
+  ghiChu: string
+}
+
+export interface NganhHoc{
+  id: number,
+  maNganh: string,
+  tenNganh: string,
+  tenVietTat: string,
+  tenTiengAnh: string,
+  maTuyenSinh: string,
+  idPhongBan: number,
+  idKhoiNganh: number,
+  soThuTu: number,
+  isVisible: boolean,
+  ghiChu: string
+}
+

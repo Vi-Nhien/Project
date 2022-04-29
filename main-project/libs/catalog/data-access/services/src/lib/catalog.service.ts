@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { createQuocGia, QuocGia, List,
   DanToc, createDanToc, TonGiao,
-  createTonGiao, KhoiNganh, createKhoiNganh } from './catalog';
+  createTonGiao, KhoiNganh, createKhoiNganh, NganhHocList, createNganhHoc, NganhHoc } from './catalog';
 
 @Injectable({
   providedIn: 'root'
@@ -102,6 +102,30 @@ export class CatalogService {
 
 
 
-
+  getListNganhHoc(nganhHoc : NganhHocList){
+    return this.httpClient.post(this.apiUrlDanhMuc+'Nganhs/List', nganhHoc)
+  }
+  deleteNganhHocs(ids: number[]){
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body:{ids}
+    };
+    return this.httpClient.delete(this.apiUrlDanhMuc+'Nganhs', options)
+  }
+  updateNganhHoc(nganhHoc : NganhHoc){
+    return this.httpClient.put(this.apiUrlDanhMuc+'Nganhs', nganhHoc)
+  }
+  createNganhHoc(nganhHoc: createNganhHoc){
+    return this.httpClient.post(this.apiUrlDanhMuc+'Nganhs', nganhHoc)
+  }
+  getNganhHocById(id: number){
+    return this.httpClient.post(this.apiUrlDanhMuc+'Nganhs/ById', {id})
+  }
+  getListPhongBans(list: any){
+    let url = 'https://gateway.ascvn.vn/api/v1/HRM_SDTC/PhongBans/List'
+    return this.httpClient.post(url, list)
+  }
 
 }

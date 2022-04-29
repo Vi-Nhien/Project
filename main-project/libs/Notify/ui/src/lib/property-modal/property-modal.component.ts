@@ -1,6 +1,6 @@
 
 import { NotifyService } from '@main-project/notify/data-access/services'
-import { FormBuilder, FormGroup  } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators  } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalRef } from 'ng-zorro-antd/modal';
@@ -16,6 +16,8 @@ export class PropertyModalComponent implements OnInit {
   @Input() item : any;
   thongBaoTinhChatsList: any[] | undefined;
   formUpdateThongBaoTinhChat?: FormGroup;
+  submitted : boolean = false;
+  pageNumbers: number = 1;
   constructor(
     private notifyService: NotifyService,
     private fb: FormBuilder,
@@ -26,8 +28,8 @@ export class PropertyModalComponent implements OnInit {
   ngOnInit(): void {
     this.formUpdateThongBaoTinhChat = this.fb.group({
       id: this.item.id,
-      maTinhChat: this.item.maTinhChat,
-      tenTinhChat: this.item.tenTinhChat,
+      maTinhChat: [this.item.maTinhChat, Validators.required],
+      tenTinhChat: [this.item.tenTinhChat, Validators.required],
       maMau: this.item.maMau,
       ghiChu: this.item.ghiChu,
       soThuTu: this.item.soThuTu,
@@ -46,16 +48,15 @@ export class PropertyModalComponent implements OnInit {
   }
 
   getThongBaoTinhChats() {
-    this.notifyService.getAllThongBaoTinhChats().subscribe(
+    this.notifyService.getAllThongBaoTinhChats(this.pageNumbers, 20).subscribe(
       res => {
         this.thongBaoTinhChatsList = res;
-        console.log(this.thongBaoTinhChatsList)
-      },
-      (err) => {
-        console.log(err)
       });
   }
+
   onSubmit() {
+    this.submitted = true;
+    if(this.formUpdateThongBaoTinhChat?.invalid){return}
     console.log(this.formUpdateThongBaoTinhChat)
     this.notifyService.updateThongBaoTinhChat(this.formUpdateThongBaoTinhChat?.value).subscribe(
       response => {
@@ -64,6 +65,9 @@ export class PropertyModalComponent implements OnInit {
         this.modalRef.close();
         this.cancel();
       });
+  }
+  get a() {
+    return this.formUpdateThongBaoTinhChat!.controls;
   }
   cancel() {
     this.modalRef.destroy()

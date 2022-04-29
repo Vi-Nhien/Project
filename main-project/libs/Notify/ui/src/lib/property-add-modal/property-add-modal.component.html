@@ -9,10 +9,11 @@
         <sup>(*)</sup>
       </div>
       <div class="col-sm-9 ">
-        <input type="text" class="form-control" id="maTinhChat" name = "maTinhChat" formControlName="maTinhChat" required>
-        <div *ngIf="a['maTinhChat'].touched && a['maTinhChat'].invalid" class="alert alert-danger">
-          <div *ngIf="a['maTinhChat'].errors && a['maTinhChat'].errors['required']">Mã tính chất is required.</div>
-      </div>
+        <input type="text" class="form-control" id="maTinhChat" name="maTinhChat" formControlName="maTinhChat"
+          class="form-control" [ngClass]="{ 'is-invalid': submitted && a['maTinhChat'].errors }">
+          <div *ngIf="submitted && a['maTinhChat'].errors" class="invalid-feedback">
+            <div *ngIf="a['maTinhChat'].errors['required']">Tên tính chất không được để trống. !!!</div>
+          </div>
       </div>
     </div>
     <div class="row form-group">
@@ -21,10 +22,11 @@
         <sup>(*)</sup>
       </label>
       <div class="col-sm-9 ">
-        <input type="text" class="form-control" formControlName="tenTinhChat">
-        <div *ngIf="a['tenTinhChat'].touched && a['tenTinhChat'].invalid" class="alert alert-danger">
-          <div *ngIf="a['tenTinhChat'].errors && a['tenTinhChat'].errors['required']">Tên tính chất is required.</div>
-      </div>
+        <input type="text" class="form-control" formControlName="tenTinhChat" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && a['tenTinhChat'].errors }">
+        <div *ngIf="submitted && a['tenTinhChat'].errors" class="invalid-feedback">
+          <div *ngIf="a['tenTinhChat'].errors['required']">Tên tính chất không được để trống. !!!</div>
+        </div>
       </div>
     </div>
     <div class="row form-group d-flex align-items-center">
@@ -57,7 +59,7 @@
 
   </div>
   <div class="add-btn_footer right">
-    <button class="btn-footer_modal btn-cancel" type="button" (click) = "cancel()">Trở về</button>
-    <button class="btn-footer_modal btn-submit" type="submit" [disabled]="!newThongBaoTinhChat.valid">Lưu</button>
+    <button class="btn-footer_modal btn-cancel" type="button" (click)="cancel()">Trở về</button>
+    <button class="btn-footer_modal btn-submit" type="submit">Lưu</button>
   </div>
 </form>

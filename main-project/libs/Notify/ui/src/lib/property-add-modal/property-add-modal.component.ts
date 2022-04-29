@@ -14,6 +14,7 @@ export class PropertyAddModalComponent implements OnInit {
 
   newThongBaoTinhChat !: FormGroup;
   thongBaoTinhChatsList: any;
+  submitted : boolean = false;
   constructor(
     private fb: FormBuilder,
     private notifyService: NotifyService,
@@ -32,7 +33,7 @@ export class PropertyAddModalComponent implements OnInit {
     });
   }
   getThongBaoTinhChats() {
-    this.notifyService.getAllThongBaoTinhChats().subscribe(
+    this.notifyService.getAllThongBaoTinhChats(1, 20).subscribe(
       res => {
         this.thongBaoTinhChatsList = res;
         console.log(this.thongBaoTinhChatsList)
@@ -42,6 +43,8 @@ export class PropertyAddModalComponent implements OnInit {
       });
   }
   onSubmit() {
+    this.submitted = true;
+    if(this.newThongBaoTinhChat.invalid){return}
     console.log(this.newThongBaoTinhChat);
     this.notifyService.createThongBaoTinhChat(this.newThongBaoTinhChat?.value).subscribe(
       Response => {

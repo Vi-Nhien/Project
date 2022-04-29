@@ -47,7 +47,7 @@ export class SidebarComponent implements OnInit {
     this.getThongBaoTinhChats();
   }
   getThongBaoTinhChats() {
-    this.notifyService.getAllThongBaoTinhChats().subscribe(
+    this.notifyService.getAllThongBaoTinhChats(1, 20).subscribe(
       res => {
         this.thongBaoTinhChatsList = res;
         this.ThongBaoTinhChatArray = this.thongBaoTinhChatsList.result.items

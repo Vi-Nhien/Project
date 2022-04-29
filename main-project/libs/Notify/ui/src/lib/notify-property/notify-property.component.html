@@ -4,8 +4,7 @@
     <div class="tools-bar">
       <div class="btn">
         <div class="btn-inbox_checkbox">
-          <input type = "checkbox"  (change)="checkAllBox($event)"
-        >
+          <input type = "checkbox"  (change)="checkAllBox($event)">
         </div>
         <button type="button" class="btn-add" (click)="propertyAddModal()">
           <i class='bx bx-add-to-queue'></i>
@@ -18,8 +17,11 @@
               class='bx bx-trash-alt'></i>Xóa</button> -->
       </div>
       <div class="tool-pagination">
-        <nz-pagination [nzPageIndex]="2" [nzTotal]="50" nzSimple></nz-pagination>
+        <div class = "page-number"> {{pageNumbers}} / {{totalPages}} - {{thongBaosPagination}}</div>
+        <button class = "btn btn-arrow_pagination"    (click) = "prevPage()" [disabled]="pageNumbers === 1"><i class='bx bxs-chevron-left'></i></button>
+        <button class = "btn btn-arrow_pagination"  (click) ="nextPage()" [disabled]="pageNumbers === totalPages"><i class='bx bxs-chevron-right' ></i></button>
       </div>
+     
     </div>
     <div class="list-title">
       <div class="list-title_header">
@@ -67,3 +69,4 @@
       </div>
     </div>
   </div>
+

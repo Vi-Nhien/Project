@@ -1,13 +1,16 @@
 <div class="container-header">
-  <div class="navbar-title">
-    Báo cáo Chuyên đề
-  </div>
-  <!-- <div class="navbar-title" *ngIf="router.url === '/notify/tb-tc'">
-    Tính chât
-  </div>
-  <div class="navbar-title" *ngIf="router.url === '/notify/star'">
-    Đánh dấu sao
+  <!-- <div class="navbar-title" *ngIf="url != '/notify/page'">
+    Đọc thông báo
   </div> -->
+  <div class="navbar-title" *ngIf="url === '/notify/page'">
+    Danh sách thông báo
+  </div>
+  <div class="navbar-title" *ngIf="url === '/notify/tb-tc'">
+    Tính chất
+  </div>
+  <div class="navbar-title" *ngIf="url === '/notify/star'">
+    Đánh dấu sao
+  </div>
   <div class="navbar-search">
     <div class="search-box">
       <span><i class='bx bx-search-alt-2'></i></span>
@@ -22,8 +25,7 @@
 
 <form [formGroup]="filterForm!">
   <nz-drawer [nzClosable]="true" [nzVisible]="visible" nzPlacement="right" nzTitle="Bộ lọc tìm kiếm"
-    (nzOnClose)="close()" nzWidth="560px" [nzFooter]="footerTpl" [nzBodyStyle]="{ overflow: 'auto' }"
-    [nzMaskClosable]="false">
+    (nzOnClose)="close()" nzWidth="560px" [nzFooter]="footerTpl" [nzBodyStyle]="{ overflow: 'auto' }">
     <ng-container *nzDrawerContent>
       <div class="form-group row">
         <div class="col-4">
@@ -39,7 +41,7 @@
           <label for="">Từ ngày</label>
         </div>
         <div class="col-8">
-          <nz-date-picker class="form-control" formControlName="ngayTaoTu"></nz-date-picker>
+          <nz-date-picker class="form-control" formControlName="ngayTaoTu" nzformat="dd-MM-yyyy"></nz-date-picker>
         </div>
       </div>
       <div class="form-group row">
@@ -47,7 +49,7 @@
           <label for="">Đến ngày</label>
         </div>
         <div class="col-8">
-          <nz-date-picker class="form-control" formControlName="ngayTaoDen"></nz-date-picker>
+          <nz-date-picker class="form-control" formControlName="ngayTaoDen" nzFormat="dd-MM-yyyy"></nz-date-picker>
         </div>
       </div>
       <div class="form-group row">
@@ -55,7 +57,7 @@
           <label for="">Hết hạn từ ngày</label>
         </div>
         <div class="col-8">
-          <nz-date-picker class="form-control" formControlName="ngayHetHanTu"></nz-date-picker>
+          <nz-date-picker class="form-control" formControlName="ngayHetHanTu" nzFormat="dd-MM-yyyy"></nz-date-picker>
         </div>
       </div>
       <div class="form-group row">
@@ -63,7 +65,7 @@
           <label for="">Hết hạn đến ngày</label>
         </div>
         <div class="col-8">
-          <nz-date-picker class="form-control" formControlName="ngayHetHanDen"></nz-date-picker>
+          <nz-date-picker class="form-control" formControlName="ngayHetHanDen" nzformat="dd-MM-yyyy"></nz-date-picker>
         </div>
       </div>
 

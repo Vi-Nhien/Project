@@ -8,7 +8,10 @@
         <sup>(*)</sup>
       </div>
       <div class="col-sm-9 ">
-        <input type="text" class = "form-control" formControlName="maTinhChat" >
+        <input type="text" class = "form-control" formControlName="maTinhChat"  [ngClass]="{ 'is-invalid': submitted && a['maTinhChat'].errors }">
+        <div *ngIf="submitted && a['maTinhChat'].errors" class="invalid-feedback">
+          <div *ngIf="a['maTinhChat'].errors['required']">Tên tính chất không được để trống. !!!</div>
+        </div>
       </div>
     </div>
     <div class="row form-group">
@@ -17,7 +20,10 @@
         <sup>(*)</sup>
       </label>
       <div class="col-sm-9 ">
-        <input type="text" class = "form-control" formControlName="tenTinhChat"  >
+        <input type="text" class = "form-control" formControlName="tenTinhChat"  [ngClass]="{ 'is-invalid': submitted && a['maTinhChat'].errors }" >
+        <div *ngIf="submitted && a['tenTinhChat'].errors" class="invalid-feedback">
+          <div *ngIf="a['tenTinhChat'].errors['required']">Tên tính chất không được để trống. !!!</div>
+        </div>
       </div>
     </div>
     <div class="row form-group d-flex align-items-center">

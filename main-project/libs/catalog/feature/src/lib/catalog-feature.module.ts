@@ -6,6 +6,7 @@ import { CatalogUiModule } from '@main-project/catalog/ui';
 import { TonGiaoComponent } from './ton-giao/ton-giao.component';
 import { DanTocComponent } from './dan-toc/dan-toc.component';
 import { KhoiNganhComponent } from './khoi-nganh/khoi-nganh.component';
+import { NganhHocComponent } from './nganh-hoc/nganh-hoc.component';
 
 
 const routes : Routes =[
@@ -23,6 +24,9 @@ const routes : Routes =[
   },
   {
     path: 'khoi-nganh', component: KhoiNganhComponent
+  },
+  {
+    path: 'nganh-hoc', component: NganhHocComponent
   }
 
 ]
@@ -36,13 +40,15 @@ const routes : Routes =[
     QuocGiaComponent,
     TonGiaoComponent,
     DanTocComponent,
-    KhoiNganhComponent
+    KhoiNganhComponent,
+    NganhHocComponent
   ],
   exports:[
     QuocGiaComponent,
     TonGiaoComponent,
     DanTocComponent,
-    KhoiNganhComponent
+    KhoiNganhComponent,
+    NganhHocComponent
   ]
 })
 export class CatalogFeatureModule {}

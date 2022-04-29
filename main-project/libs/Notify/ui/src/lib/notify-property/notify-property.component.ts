@@ -17,6 +17,9 @@ export class NotifyPropertyComponent implements OnInit {
   idn : number[] = [];
   thongBaoTinhChatsList ?: ThongBaoTinhChat[] = [];
   selectThongBaoTinhChats: any;
+  thongBaosPagination?: number;
+  pageNumbers: number = 1;
+  totalPages?: number;
   constructor(private modal: NzModalService,
     private message: NzMessageService,
     private notifyService: NotifyService,
@@ -54,14 +57,38 @@ export class NotifyPropertyComponent implements OnInit {
 
   }
   getThongBaoTinhChats() {
-    let thongBaoTinhChatArray : any;
-    this.notifyService.getAllThongBaoTinhChats().subscribe(
-      res => {
-        thongBaoTinhChatArray = res;
-        this.thongBaoTinhChatsList = thongBaoTinhChatArray.result.items;
-        console.log(this.thongBaoTinhChatsList)
+    this.notifyService.getAllThongBaoTinhChats(this.pageNumbers , 20).subscribe(
+      (res:any) => {
+        this.thongBaosPagination = res.result.pagingInfo.totalItems;
+        this.thongBaoTinhChatsList = res.result.items;
+        this.getTotalPage()
+      });
+  }
+  nextPage() {
+    this.pageNumbers = this.pageNumbers + 1;
+    this.notifyService.getAllThongBaos(this.pageNumbers, 20).subscribe(
+      (res: any) => {
+        this.thongBaoTinhChatsList = res.result.items;
+      });
+  }
+  prevPage() {
+    this.pageNumbers = this.pageNumbers - 1;
+    let ThongBaos: any = [];
+    this.notifyService.getAllThongBaos(this.pageNumbers, 20).subscribe(
+      (res) => {
+        ThongBaos = res;
+        this.thongBaoTinhChatsList = ThongBaos.result.items;
       }
-    )
+    );
+  }
+  getTotalPage() {
+    let num = this.thongBaosPagination
+    this.totalPages = num! / 20;
+    if (num! % 20 == 0) {
+    }
+    else {
+      this.totalPages = Math.floor(this.totalPages) + 1;
+    }
   }
   updateThongBaoTinhChat(thongBaoTinhChat: any) {
     if (thongBaoTinhChat) {

@@ -3,7 +3,7 @@
     <div class="btn-inbox_checkbox">
         <input type="checkbox"  (change) ="chooseAll($event)">
     </div>
-    <button class= "btn-star bx"  (click) = "flagAllThongBao($event)"  [ngClass]="{ 'bx-star' :thongBaosList.flag === 1 , 'bxs-star': thongBaosList.flag === 2}" >
+    <button class= "btn-star bx"  (click) = "flagAllThongBao($event)"  [ngClass]="{ 'bx-star' :thongBaosList.flag === 1, 'bxs-star': thongBaosList.flag === 2}" >
      </button>
 
     <div *ngIf="chooseIdThongBao.size != 0" class = "hover-btn"(click) = "showComfirmDelete()"style = "color: red"> <i class='bx bx-trash-alt'></i> Xóa</div>
@@ -36,7 +36,9 @@
         <input type="checkbox"  [checked] = "chooseIdThongBao.has(data.idGuid)" [id] = "data.idGuid" (change) ="chooseSingle($event, data.idGuid) ">
       </div>
       <div class="row-list_content inbox-list_star" style ="width: 36px">
-        <div (click)="changeflag(data.flag, data.idGuid)" class ="bx" [ngClass]="{'bx-star ':data.flag === 1 , 'bxs-star ': data.flag === 2}">
+        <div *ngIf="data.flag != 0" (click)="changeflag(data.flag, data.idGuid)" class ="bx" [ngClass]="{'bx-star ':data.flag === 1 ,'bxs-star ': data.flag === 2}">
+        </div>
+        <div *ngIf="data.flag == null" (click)="changeflag(data.flag, data.idGuid)" class ="bx" [ngClass]="{ 'bx-star ':data.flag === null, 'bxs-star ': data.flag === 2}">
         </div>
       </div>
       <div class="row-list_content inbox-list_action align-items-center" style ="width: 40px">

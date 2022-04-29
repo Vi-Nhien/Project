@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message'
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
@@ -64,6 +64,7 @@ export class NotifyModalComponent implements OnInit {
   phongBanList: any;
   coSoList: any;
   thongBaoTinhChatsList : any;
+  submitted: boolean = false;
   constructor(
     private message: NzMessageService,
     private fb: FormBuilder,
@@ -78,7 +79,7 @@ export class NotifyModalComponent implements OnInit {
       idGuid: this.item.idGuid,
       loaiThongBao: this.item.loaiThongBao,
       maTraCuu: this.item.maTraCuu,
-      tieuDe: this.item.tieuDe,
+      tieuDe: [this.item.tieuDe, Validators.required],
       noiDung: this.item.noiDung,
       ngayHetHan: this.item.ngayHetHan,
       idTinhChat: this.item.idTinhChat,
@@ -88,6 +89,7 @@ export class NotifyModalComponent implements OnInit {
     });
   }
   ////handle upload file
+  get f() { return this.updateForm!.controls; }
   handleChange({ file, fileList }: NzUploadChangeParam): void {
     const status = file.status;
     if (status !== 'uploading') {
@@ -112,17 +114,17 @@ export class NotifyModalComponent implements OnInit {
       });
   }
   getThongBaoTinhChats() {
-    this.notifyService.getAllThongBaoTinhChats().subscribe(
+    this.notifyService.getAllThongBaoTinhChats(1, 50).subscribe(
       (res: any) => {
         this.thongBaoTinhChatsList = res.result.items
         console.log(this.thongBaoTinhChatsList)
       });
   }
   onSubmit() {
-    console.log(this.updateForm?.value)
+    this.submitted = true;
+    if(this.updateForm!.invalid){return}
     this.notifyService.updateThongBao(this.updateForm?.value).subscribe(
-      response => {
-        console.log(response);
+      () => {
         this.message.success('Cập nhật thành công !!!');
         this.modalRef.close();
         this.cancel();

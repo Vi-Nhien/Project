@@ -29,9 +29,9 @@ export class NotifyService   {
     const headers = { 'content-type': 'application/json'}
     return this.httpClient.post(this.apiUrlCoSo, {headers : headers});
   }
-  getAllThongBaoTinhChats(): Observable<ThongBaoTinhChat[]> {
-    const headers = { 'content-type': 'application/json'}
-    return this.httpClient.post<ThongBaoTinhChat[]>(this.apiUrlThongBaoTinhChats+'/List', {headers : headers});
+  getAllThongBaoTinhChats(pageNumber: number, pageSize: number): Observable<ThongBaoTinhChat[]> {
+    let body = {pageNumber, pageSize}
+    return this.httpClient.post<ThongBaoTinhChat[]>(this.apiUrlThongBaoTinhChats+'/List', body);
   }
   getThongBaoThinhChatById(id: string) {
     return this.httpClient.post(this.apiUrlThongBaoTinhChats+'/ById', {id});

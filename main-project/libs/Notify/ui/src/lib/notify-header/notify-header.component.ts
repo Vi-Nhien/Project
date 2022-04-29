@@ -4,6 +4,7 @@ import { NotifyService } from '@main-project/notify/data-access/services';
 import { ThongBaoList } from '@main-project/notify/data-access/services';
 import vi from '@angular/common/locales/vi';
 import { registerLocaleData } from '@angular/common';
+import { Router } from '@angular/router';
 @Component({
   selector: 'main-project-notify-header',
   templateUrl: './notify-header.component.html',
@@ -20,10 +21,14 @@ export class NotifyHeaderComponent implements OnInit {
   selectTrangThaiHetHan = null;
   selectTrangThaiXem = null;
   filterBy: any;
+  url ?: string;
   constructor(
     private notifyService: NotifyService,
-    private fb: FormBuilder
-  ) { }
+    private fb: FormBuilder,
+    private router: Router
+  ) {
+    this.url = this.router.url;
+  }
   ngOnInit(): void {
     registerLocaleData(vi);
     this.getThongBaoTinhChat();
@@ -42,7 +47,7 @@ export class NotifyHeaderComponent implements OnInit {
   }
   getThongBaoTinhChat() {
     let thongBaoTinhChat: any;
-    this.notifyService.getAllThongBaoTinhChats().subscribe(
+    this.notifyService.getAllThongBaoTinhChats(1, 20).subscribe(
       res => {
         thongBaoTinhChat = res;
         this.ThongBaoTinhChatList = thongBaoTinhChat.result.items;
@@ -62,7 +67,7 @@ export class NotifyHeaderComponent implements OnInit {
     const search : any = {
       keyword: event.target.value,
       pageNumber: 1,
-      pageSize: 20,
+      pageSize: 5,
     }
     console.log("You entered: ", search);
     this.notifyService.filterThongBao(search);

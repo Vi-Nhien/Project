@@ -45,6 +45,7 @@ button {
   border: none;
   height: 35px;
   background: #f1f3f4;
+  outline: none;
 }
 
 nz-date-picker {

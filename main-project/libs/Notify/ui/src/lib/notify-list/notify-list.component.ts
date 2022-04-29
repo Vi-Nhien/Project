@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './notify-list.component.html',
   styleUrls: ['./notify-list.component.scss']
 })
-export class NotifyListComponent implements OnInit,  OnDestroy {
+export class NotifyListComponent implements OnInit, OnDestroy {
 
   selectedValue = null;
   thongBaosList: any = [];
@@ -35,14 +35,16 @@ export class NotifyListComponent implements OnInit,  OnDestroy {
     private message: NzMessageService,
     private notifyService: NotifyService,
     private router: Router) {
-      this.subscription = this.notifyService.getFilter().subscribe(data => {
-        console.log("list: ",data.filterThongBao);
-        this.notifyService.filterThongBaos(data.filterThongBao).subscribe(
-          (res: any) =>{
-              this.thongBaosList = res.result.items;
-              console.log(this.thongBaosList);
-          })
-      });
+    this.subscription = this.notifyService.getFilter().subscribe(data => {
+      console.log("list: ", data.filterThongBao);
+      this.notifyService.filterThongBaos(data.filterThongBao).subscribe(
+        (res: any) => {
+          this.thongBaosPagination = res.result.pagingInfo.totalItems;
+          this.thongBaosList = res.result.items;
+          console.log(this.thongBaosList);
+          this.getTotalPage();
+        })
+    });
   }
   ngOnInit(): void {
     this.getThongBaos();
@@ -53,24 +55,19 @@ export class NotifyListComponent implements OnInit,  OnDestroy {
   }
 
   getThongBaos() {
-    let ThongBaos: any = [];
     this.notifyService.getAllThongBaos(this.pageNumbers, 20).subscribe(
-      res => {
-        ThongBaos = res;
-        this.thongBaosPagination = ThongBaos.result.pagingInfo.totalItems;
-        this.thongBaosList = ThongBaos.result.items;
+      (res: any) => {
+        this.thongBaosPagination = res.result.pagingInfo.totalItems;
+        this.thongBaosList = res.result.items;
         this.getTotalPage()
       });
   }
   nextPage() {
     this.pageNumbers = this.pageNumbers + 1;
-    let ThongBaos: any = [];
     this.notifyService.getAllThongBaos(this.pageNumbers, 20).subscribe(
-      res => {
-        ThongBaos = res;
-        this.thongBaosList = ThongBaos.result.items;
-      }
-    );
+      (res: any) => {
+        this.thongBaosList = res.result.items;
+      });
   }
   prevPage() {
     this.pageNumbers = this.pageNumbers - 1;
@@ -79,8 +76,7 @@ export class NotifyListComponent implements OnInit,  OnDestroy {
       (res) => {
         ThongBaos = res;
         this.thongBaosList = ThongBaos.result.items;
-      }
-    );
+      });
   }
   getTotalPage() {
     let num = this.thongBaosPagination
@@ -139,12 +135,12 @@ export class NotifyListComponent implements OnInit,  OnDestroy {
     }
   }
   deleteMessage(): void {
-    this.message.success('Delete successfully',{
+    this.message.success('Delete successfully', {
       nzDuration: 3000
     });
   }
-  updateComponentModal(thongBao: any ){
-    if(thongBao){
+  updateComponentModal(thongBao: any) {
+    if (thongBao) {
       this.modal.create({
         nzContent: NotifyModalComponent,
         nzComponentParams: {
@@ -179,7 +175,7 @@ export class NotifyListComponent implements OnInit,  OnDestroy {
       });
   }
 
-  danhDauChuaDoc(){
+  danhDauChuaDoc() {
     this.listChooseThongBaos = Array.from(this.chooseIdThongBao);
     this.notifyService.updateViewed(this.listChooseThongBaos, 1).subscribe(
       () => {
@@ -187,7 +183,7 @@ export class NotifyListComponent implements OnInit,  OnDestroy {
       });
   }
 
-  showComfirmDelete(){
+  showComfirmDelete() {
     this.modal.confirm({
       nzTitle: 'Are you sure delete this task?',
       nzContent: '<b style="color: red;">Some descriptions</b>',
@@ -264,7 +260,7 @@ export class NotifyListComponent implements OnInit,  OnDestroy {
       console.log("true")
 
     }
-    else{
+    else {
       // for (let i = 0; i < this.thongBaosList.length; i++) {
       //   this.flagStar.delete(this.thongBaosList[i].idsGuidThongBao);
       //   this.flagIdThongBao = Array.from(this.flagStar);
