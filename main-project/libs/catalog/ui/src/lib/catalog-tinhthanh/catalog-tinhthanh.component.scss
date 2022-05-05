@@ -1,0 +1,80 @@
+.container-catalog {
+  padding: 24px;
+  max-width: 100%;
+  max-height: 100vh;
+
+  .title-header {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .sub-title_header {
+    height: 36px;
+    font-size: 14px;
+    display: flex;
+    align-items: center
+  }
+
+  .tool-header {
+
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    justify-content: space-between;
+    flex-direction: row;
+    padding-bottom: 12px;
+
+    .btn-add_new {
+
+      display: flex;
+      align-items: center;
+      column-gap: 12px;
+
+      .btn-add {
+        border: none;
+        outline: none;
+        color: #fff;
+        background-color: #0075e1;
+        border-color: #0075e1;
+        display: inline-block;
+        font-weight: 400;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        user-select: none;
+        border: 1px solid transparent;
+        padding: .375rem .75rem;
+        font-size: 14px;
+        line-height: 1.5;
+        border-radius: 8px;
+        transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        cursor: pointer;
+
+      }
+    }
+  }
+
+  .sreach-box {
+    display: flex;
+    align-items: center;
+    height: 35px;
+    border-radius: 4px;
+    border: 1px solid #e4e9f4;
+    outline: 0;
+    padding: 0 12px;
+    width: 340px;
+    background-color: #fff;
+  }
+
+}
+
+
+
+[subTable] {
+  width: 400px;
+  background: #fff;
+  margin: 32px;
+}
+li{
+  width: 150px;
+}

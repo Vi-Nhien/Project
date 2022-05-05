@@ -7,6 +7,7 @@ import { TonGiaoComponent } from './ton-giao/ton-giao.component';
 import { DanTocComponent } from './dan-toc/dan-toc.component';
 import { KhoiNganhComponent } from './khoi-nganh/khoi-nganh.component';
 import { NganhHocComponent } from './nganh-hoc/nganh-hoc.component';
+import { TinhThanhComponent } from './tinh-thanh/tinh-thanh.component';
 
 
 const routes : Routes =[
@@ -27,6 +28,9 @@ const routes : Routes =[
   },
   {
     path: 'nganh-hoc', component: NganhHocComponent
+  },
+  {
+    path: 'tinh-thanh', component: TinhThanhComponent
   }
 
 ]
@@ -41,14 +45,16 @@ const routes : Routes =[
     TonGiaoComponent,
     DanTocComponent,
     KhoiNganhComponent,
-    NganhHocComponent
+    NganhHocComponent,
+    TinhThanhComponent
   ],
   exports:[
     QuocGiaComponent,
     TonGiaoComponent,
     DanTocComponent,
     KhoiNganhComponent,
-    NganhHocComponent
+    NganhHocComponent,
+    TinhThanhComponent
   ]
 })
 export class CatalogFeatureModule {}

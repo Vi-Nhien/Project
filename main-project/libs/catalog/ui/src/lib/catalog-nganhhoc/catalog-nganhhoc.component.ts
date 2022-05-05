@@ -27,7 +27,7 @@ export class CatalogNganhhocComponent implements OnInit {
   listPhongBan?: any[];
   selectPageSize : number = 20;
   curentPageNumber : number = 1;
-  pageSize : number[] = [10, 20, 50, 100];
+  nganhHocById!: NganhHoc;
   constructor(
     private catalogService: CatalogService,
     private modal: NzModalService,
@@ -66,9 +66,7 @@ export class CatalogNganhhocComponent implements OnInit {
       ghiChu: ['']
     })
   }
-  nzPage(){
-    console.log(this.pageSize)
-  }
+
   ngOnDestroy() {
     this.subscription?.unsubscribe();
   }
@@ -87,7 +85,6 @@ export class CatalogNganhhocComponent implements OnInit {
     this.catalogService.getListNganhHoc(list).subscribe(
       (res: any) => {
         this.nganhHocs = res.result.items;
-        console.log(this.nganhHocs);
       });
   }
   searchInput(event: any) {
@@ -102,7 +99,6 @@ export class CatalogNganhhocComponent implements OnInit {
     this.catalogService.getListNganhHoc(search).subscribe(
       (res: any) => {
         this.nganhHocs = res.result.items;
-        console.log("after filter: ", this.nganhHocs);
         event.target.value = '';
       });
   }
@@ -145,7 +141,6 @@ export class CatalogNganhhocComponent implements OnInit {
       });
   }
   handleUpdateCancel(): void {
-    console.log('Button cancel clicked!');
     this.isVisibleModalUpdate = false;
   }
   addModal() {
@@ -183,7 +178,6 @@ export class CatalogNganhhocComponent implements OnInit {
       });
   }
   handleAddCancel(): void {
-    console.log('Button cancel clicked!');
     this.ModalAdd = false;
   }
   showDeleteConfirm(itemQuoscGia: string, id: number, tplContent: TemplateRef<{}>) {
@@ -241,7 +235,6 @@ export class CatalogNganhhocComponent implements OnInit {
 
       }
     }
-    console.log(this.listCheckBox);
   }
   checkBoxValue(id: number, event: any) {
 
@@ -251,7 +244,6 @@ export class CatalogNganhhocComponent implements OnInit {
     else {
       this.listCheckBox.delete(id);
     }
-    console.log(this.listCheckBox)
   }
   showConfrimTrash(): void {
     this.modal.confirm({
@@ -274,5 +266,14 @@ export class CatalogNganhhocComponent implements OnInit {
     } else {
       this.expandSet.delete(id);
     }
+  }
+  NganhHocById(id : number){
+    console.log(id);
+    this.catalogService.getNganhHocById(id).subscribe(
+      (res:any) =>{
+        this.nganhHocById = res.result!;
+        console.log(this.nganhHocById);
+      }
+    )
   }
 }

@@ -1,416 +1,583 @@
-<div class="container-catalog">
-  <div class="gird-item_head">
-    <div class="">
-      <div class="header-label">Ngành học</div>
-      <div class="header-note">Quản lý các vị trí công việc mà bạn cần tuyển dụng</div>
-    </div>
-    <div class="btn">
-      <button class="btn_add" nz-button (click)="addModal()">
-        <span class="btn__icon bx bxs-add-to-queue"></span>
-        <span class="btn__text">Thêm mới</span>
-      </button>
-    </div>
-  </div>
-
-  <div class="grid-item_body">
-    <div class="gird-item_subheader">
-      <div class="area-action_left">
-        <div *ngIf="listCheckBox.size === 0">
-          <div class="search-icon bx bx-search"> </div>
-          <input type="text" placeholder="Nhập từ khóa" class="input-search" (keydown.enter)="searchInput($event)">
+<div class="layout-wrapper">
+  <div class="row">
+    <div class="container-catalog col-6">
+      <div class="gird-item_head">
+        <div class="">
+          <div class="header-label">Ngành học</div>
+          <div class="header-note">Quản lý các vị trí công việc mà bạn cần tuyển dụng</div>
         </div>
-        <div *ngIf="listCheckBox.size >= 1" class="tool-delete">
-          <span><b>{{listCheckBox.size}}</b> đang chọn</span>
-          <span style="color: #2a7efc; cursor: pointer;" (click)="boChon()"> bỏ chọn </span>
-          <button class="btn-delete" (click)="showConfrimTrash()"> <i class='bx bx-trash-alt'></i>xóa</button>
-        </div>
-      </div>
-      <div class="area-action_right">
-        <div class="box_btn">
-          <button class="btn">
-            <div class="btn__icon">
-              <i class='bx bx-cog'></i>
-            </div>
-          </button>
-          <button class="btn">
-            <div class="btn__icon">
-              <i class='bx bx-printer'></i>
-            </div>
-          </button>
-          <button class="btn">
-            <div class="btn__icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="19px" height="19px">
-                <path fill="#169154" d="M29,6H15.744C14.781,6,14,6.781,14,7.744v7.259h15V6z" />
-                <path fill="#18482a" d="M14,33.054v7.202C14,41.219,14.781,42,15.743,42H29v-8.946H14z" />
-                <path fill="#0c8045" d="M14 15.003H29V24.005000000000003H14z" />
-                <path fill="#17472a" d="M14 24.005H29V33.055H14z" />
-                <g>
-                  <path fill="#29c27f" d="M42.256,6H29v9.003h15V7.744C44,6.781,43.219,6,42.256,6z" />
-                  <path fill="#27663f" d="M29,33.054V42h13.257C43.219,42,44,41.219,44,40.257v-7.202H29z" />
-                  <path fill="#19ac65" d="M29 15.003H44V24.005000000000003H29z" />
-                  <path fill="#129652" d="M29 24.005H44V33.055H29z" />
-                </g>
-                <path fill="#0c7238"
-                  d="M22.319,34H5.681C4.753,34,4,33.247,4,32.319V15.681C4,14.753,4.753,14,5.681,14h16.638 C23.247,14,24,14.753,24,15.681v16.638C24,33.247,23.247,34,22.319,34z" />
-                <path fill="#fff"
-                  d="M9.807 19L12.193 19 14.129 22.754 16.175 19 18.404 19 15.333 24 18.474 29 16.123 29 14.013 25.07 11.912 29 9.526 29 12.719 23.982z" />
-              </svg>
-            </div>
+        <div class="btn">
+          <button class="btn_add" nz-button (click)="addModal()">
+            <span class="btn__icon bx bxs-add-to-queue"></span>
+            <span class="btn__text">Thêm mới</span>
           </button>
         </div>
       </div>
-    </div>
-    <div class="gird-table">
-      <nz-table #quocGiaTable [nzData]="nganhHocs!" [nzFrontPagination]="false" [nzScroll]="{ y: '487px' }">
-        <thead>
-          <tr>
-            <th class="gird-table_header" style="text-align: center;" nzWidth="32px"></th>
-            <th class="gird-table_header" style="text-align: center;" nzWidth="45px">
-              <input type="checkbox" name="" id="" class="checkbox-list" (change)="checkBoxList($event)">
-            </th>
-            <th class="gird-table_header" style="text-align: center;" nzWidth="80px">Thao tác</th>
-            <th class="gird-table_header" style="text-align: center;" nzWidth="70px">STT</th>
-            <th class="gird-table_header" style="text-align: center;" nzWidth="100px">Mã</th>
-            <th class="gird-table_header" nzWidth="400px">Tên ngành</th>
-            <!-- <th class="gird-table_header" nzWidth="286px">Ghi chú</th> -->
-            <!-- <th class="gird-table_header" style="text-align: center;" nzWidth="100px">Hiển thị</th> -->
-          </tr>
-        </thead>
-        <tbody>
-          <ng-container *ngFor="let itemNganhHoc of nganhHocs, let i = index">
-            <tr>
-              <td [nzExpand]="expandSet.has(itemNganhHoc.id)"
-                (nzExpandChange)="onExpandChange(itemNganhHoc.id, $event)"></td>
-              <td class="item-center"> <input type="checkbox" [checked]="listCheckBox.has(itemNganhHoc.id)"
-                  class="checkbox-list" (click)="checkBoxValue(itemNganhHoc.id, $event)"></td>
-              <td class="item-center"><a nz-dropdown [nzDropdownMenu]="menu" [nzClickHide]="false">
-                  <nz-dropdown-menu #menu="nzDropdownMenu">
-                    <ul nz-menu>
-                      <li nz-menu-item nz-button (click)="updateModal(itemNganhHoc.id)">Chỉnh sửa</li>
-                      <li nz-menu-item (click)="showDeleteConfirm(itemNganhHoc.tenNganh, itemNganhHoc.id,  tplContent)">
-                        Xóa</li>
-                    </ul>
-                  </nz-dropdown-menu>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" viewBox="0 0 32 32" width="24px" height="24px">
-                    <path
-                      d="M 4 5 L 4 11 L 5 11 L 5 27 L 27 27 L 27 11 L 28 11 L 28 5 Z M 6 7 L 26 7 L 26 9 L 6 9 Z M 7 11 L 25 11 L 25 25 L 7 25 Z M 12.8125 13 C 12.261719 13.050781 11.855469 13.542969 11.90625 14.09375 C 11.957031 14.644531 12.449219 15.050781 13 15 L 19 15 C 19.359375 15.003906 19.695313 14.816406 19.878906 14.503906 C 20.058594 14.191406 20.058594 13.808594 19.878906 13.496094 C 19.695313 13.183594 19.359375 12.996094 19 13 L 13 13 C 12.96875 13 12.9375 13 12.90625 13 C 12.875 13 12.84375 13 12.8125 13 Z" />
+      <div class="grid-item_body">
+        <div class="gird-item_subheader">
+          <div class="area-action_left">
+            <div *ngIf="listCheckBox.size === 0">
+              <div class="search-icon bx bx-search"> </div>
+              <input type="text" placeholder="Nhập từ khóa" class="input-search" (keydown.enter)="searchInput($event)">
+            </div>
+            <div *ngIf="listCheckBox.size >= 1" class="tool-delete">
+              <span><b>{{listCheckBox.size}}</b> đang chọn</span>
+              <span style="color: #2a7efc; cursor: pointer;" (click)="boChon()"> bỏ chọn </span>
+              <button class="btn-delete" (click)="showConfrimTrash()"> <i class='bx bx-trash-alt'></i>xóa</button>
+            </div>
+          </div>
+          <div class="area-action_right">
+            <div class="box_btn">
+              <button class="btn">
+                <div class="btn__icon">
+                  <i class='bx bx-cog'></i>
+                </div>
+              </button>
+              <button class="btn">
+                <div class="btn__icon">
+                  <i class='bx bx-printer'></i>
+                </div>
+              </button>
+              <button class="btn">
+                <div class="btn__icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="19px" height="19px">
+                    <path fill="#169154" d="M29,6H15.744C14.781,6,14,6.781,14,7.744v7.259h15V6z" />
+                    <path fill="#18482a" d="M14,33.054v7.202C14,41.219,14.781,42,15.743,42H29v-8.946H14z" />
+                    <path fill="#0c8045" d="M14 15.003H29V24.005000000000003H14z" />
+                    <path fill="#17472a" d="M14 24.005H29V33.055H14z" />
+                    <g>
+                      <path fill="#29c27f" d="M42.256,6H29v9.003h15V7.744C44,6.781,43.219,6,42.256,6z" />
+                      <path fill="#27663f" d="M29,33.054V42h13.257C43.219,42,44,41.219,44,40.257v-7.202H29z" />
+                      <path fill="#19ac65" d="M29 15.003H44V24.005000000000003H29z" />
+                      <path fill="#129652" d="M29 24.005H44V33.055H29z" />
+                    </g>
+                    <path fill="#0c7238"
+                      d="M22.319,34H5.681C4.753,34,4,33.247,4,32.319V15.681C4,14.753,4.753,14,5.681,14h16.638 C23.247,14,24,14.753,24,15.681v16.638C24,33.247,23.247,34,22.319,34z" />
+                    <path fill="#fff"
+                      d="M9.807 19L12.193 19 14.129 22.754 16.175 19 18.404 19 15.333 24 18.474 29 16.123 29 14.013 25.07 11.912 29 9.526 29 12.719 23.982z" />
                   </svg>
-                </a>
-              </td>
-              <td class="item-center">{{i + 1}}</td>
-              <td class="item-center">{{itemNganhHoc.maNganh}}</td>
-              <td><a (click)="updateModal(itemNganhHoc.id)">{{itemNganhHoc.tenNganh}}</a></td>
-              <!-- <td>{{itemNganhHoc.ghiChu}}</td> -->
-              <!-- <td class="item-center" *ngIf="itemNganhHoc.isVisible === true"><i class='bx bxs-check-circle'
-                style="font-size: 18px; color: #28a745;"></i></td> -->
-            </tr>
-            <tr [nzExpand]="expandSet.has(itemNganhHoc.id)">
-              <div class="row">
-                <label class="col-4">
-                  Mã
-                  <span style="float: right;">:</span>
-                </label>
-                <div class="col-8">
-                  {{itemNganhHoc.maNganh}}
                 </div>
-              </div>
-              <div class="row">
-                <label class="col-4">
-                  Tên ngành
-                  <span style="float: right;">:</span>
-                </label>
-                <div class="col-8">
-                  {{itemNganhHoc.tenNganh}}
-                </div>
-              </div>
-              <div class="row">
-                <label class="col-4">
-                  Khối ngành
-                  <span style="float: right;">:</span>
-                </label>
-                <div class="col-8">
-
-                </div>
-              </div>
-              <div class="row">
-                <label class="col-4">
-                  Khoa chủ quản
-                  <span style="float: right;">:</span>
-                </label>
-                <div class="col-8">
-                </div>
-              </div>
-              <div class="row">
-                <label class="col-4">
-                  Mã tuyển sinh
-                  <span style="float: right;">:</span>
-                </label>
-                <div class="col-8">
-                  {{itemNganhHoc.maTuyenSinh}}
-                </div>
-              </div>
-              <div class="row">
-                <label class="col-4">
-                  Tên viết tắt
-                  <span style="float: right;">:</span>
-                </label>
-                <div class="col-8">
-                  {{itemNganhHoc.tenVietTat}}
-                </div>
-              </div>
-              <div class="row">
-                <label class="col-4">
-                  Tên Tiếng Anh
-                  <span style="float: right;">:</span>
-                </label>
-                <div class="col-8">
-                  {{itemNganhHoc.tenTiengAnh}}
-                </div>
-              </div>
-              <div class="row">
-                <label class="col-4">
-                  Ghi chú
-                  <span style="float: right;">:</span>
-                </label>
-                <div class="col-8">
-                  {{itemNganhHoc.ghiChu}}
-                </div>
-              </div>
-            </tr>
-          </ng-container>
-
-        </tbody>
-
-      </nz-table>
-      <nz-pagination
-      [(nzPageIndex)]="curentPageNumber"
-      [nzTotal]="50"
-      [nzSize]="'small'"
-      nzShowSizeChanger
-      [nzPageSizeOptions] = "pageSize"
-      (click) = "nzPage()"  ></nz-pagination>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="gird-table">
+          <nz-table #quocGiaTable [nzData]="nganhHocs!" [nzFrontPagination]="false" [nzScroll]="{ y: '487px' }">
+            <thead>
+              <tr>
+                <th class="gird-table_header" style="text-align: center;" nzWidth="32px"></th>
+                <th class="gird-table_header" style="text-align: center;" nzWidth="45px">
+                  <input type="checkbox" name="" id="" class="checkbox-list" (change)="checkBoxList($event)">
+                </th>
+                <th class="gird-table_header" style="text-align: center;" nzWidth="80px">Thao tác</th>
+                <th class="gird-table_header" style="text-align: center;" nzWidth="70px">STT</th>
+                <th class="gird-table_header" style="text-align: center;" nzWidth="100px">Mã</th>
+                <th class="gird-table_header" nzWidth="400px">Tên ngành</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let itemNganhHoc of nganhHocs, let i = index">
+                <tr nz-button (click)="NganhHocById(itemNganhHoc.id)">
+                  <td [nzExpand]="expandSet.has(itemNganhHoc.id)"
+                    (nzExpandChange)="onExpandChange(itemNganhHoc.id, $event)"></td>
+                  <td class="item-center"> <input type="checkbox" [checked]="listCheckBox.has(itemNganhHoc.id)"
+                      class="checkbox-list" (click)="checkBoxValue(itemNganhHoc.id, $event)"></td>
+                  <td class="item-center"><a nz-dropdown [nzDropdownMenu]="menu" [nzClickHide]="false">
+                      <nz-dropdown-menu #menu="nzDropdownMenu">
+                        <ul nz-menu>
+                          <li nz-menu-item nz-button (click)="updateModal(itemNganhHoc.id)">Chỉnh sửa</li>
+                          <li nz-menu-item (click)="showDeleteConfirm(itemNganhHoc.tenNganh, itemNganhHoc.id,  tplContent)">
+                            Xóa</li>
+                        </ul>
+                      </nz-dropdown-menu>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" viewBox="0 0 32 32" width="24px" height="24px">
+                        <path
+                          d="M 4 5 L 4 11 L 5 11 L 5 27 L 27 27 L 27 11 L 28 11 L 28 5 Z M 6 7 L 26 7 L 26 9 L 6 9 Z M 7 11 L 25 11 L 25 25 L 7 25 Z M 12.8125 13 C 12.261719 13.050781 11.855469 13.542969 11.90625 14.09375 C 11.957031 14.644531 12.449219 15.050781 13 15 L 19 15 C 19.359375 15.003906 19.695313 14.816406 19.878906 14.503906 C 20.058594 14.191406 20.058594 13.808594 19.878906 13.496094 C 19.695313 13.183594 19.359375 12.996094 19 13 L 13 13 C 12.96875 13 12.9375 13 12.90625 13 C 12.875 13 12.84375 13 12.8125 13 Z" />
+                      </svg>
+                    </a>
+                  </td>
+                  <td class="item-center">{{i + 1}}</td>
+                  <td class="item-center">{{itemNganhHoc.maNganh}}</td>
+                  <td><a (click)="updateModal(itemNganhHoc.id)">{{itemNganhHoc.tenNganh}}</a></td>
+                </tr>
+                <tr [nzExpand]="expandSet.has(itemNganhHoc.id)">
+                  <div class="row">
+                    <label class="col-4">
+                      Mã
+                      <span style="float: right;">:</span>
+                    </label>
+                    <div class="col-8">
+                      {{itemNganhHoc.maNganh}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <label class="col-4">
+                      Tên ngành
+                      <span style="float: right;">:</span>
+                    </label>
+                    <div class="col-8">
+                      {{itemNganhHoc.tenNganh}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <label class="col-4">
+                      Khối ngành
+                      <span style="float: right;">:</span>
+                    </label>
+                    <div class="col-8">{{itemNganhHoc.idKhoiNganh}}</div>
+                  </div>
+                  <div class="row">
+                    <label class="col-4">
+                      Khoa chủ quản
+                      <span style="float: right;">:</span>
+                    </label>
+                    <div class="col-8">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <label class="col-4">
+                      Mã tuyển sinh
+                      <span style="float: right;">:</span>
+                    </label>
+                    <div class="col-8">
+                      {{itemNganhHoc.maTuyenSinh}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <label class="col-4">
+                      Tên viết tắt
+                      <span style="float: right;">:</span>
+                    </label>
+                    <div class="col-8">
+                      {{itemNganhHoc.tenVietTat}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <label class="col-4">
+                      Tên Tiếng Anh
+                      <span style="float: right;">:</span>
+                    </label>
+                    <div class="col-8">
+                      {{itemNganhHoc.tenTiengAnh}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <label class="col-4">
+                      Ghi chú
+                      <span style="float: right;">:</span>
+                    </label>
+                    <div class="col-8">
+                      {{itemNganhHoc.ghiChu}}
+                    </div>
+                  </div>
+                </tr>
+              </ng-container>
+            </tbody>
+          </nz-table>
+        </div>
+      </div>
     </div>
+    <ng-template #tplContent let-params>
+      <p>Bạn có muốn xóa <b>{{ params.value }}</b> không?</p>
+    </ng-template>
+    <nz-modal nzWidth="900px" [(nzVisible)]="isVisibleModalUpdate" nzTitle="Cập nhật ngành học" [nzFooter]="modalFooter"
+      (nzOnCancel)="handleUpdateCancel()">
+      <form [formGroup]="formUpdate!">
+        <ng-container *nzModalContent>
+          <div class="container-content">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-form-label col-md-4">
+                    Mã <sup class="required-asterisk text-danger"> (*)</sup>
+                  </label>
+                  <div class="col-md-8">
+                    <input nz-input class="form-control" formControlName="maNganh" required />
+                    <div *ngIf="g['maNganh'].touched && g['maNganh'].invalid" class="alert-required">
+                      <div *ngIf="g['maNganh'].errors && g['maNganh'].errors['required']">Mã ngành học không được trống
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-form-label col-md-4">
+                    Tên <sup class="required-asterisk text-danger"> (*)</sup>
+                  </label>
+                  <div class="col-md-8">
+                    <input nz-input class="form-control" formControlName="tenNganh" required />
+                    <div *ngIf="g['tenNganh'].touched && g['tenNganh'].invalid" class="alert-required">
+                      <div *ngIf="g['tenNganh'].errors && g['tenNganh'].errors['required']">Mã ngành học không được trống
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-form-label col-md-4">
+                    Khối ngành <sup class="required-asterisk text-danger"> (*)</sup>
+                  </label>
+                  <div class="col-md-8">
+                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Khối ngành" [(ngModel)]="selectIdKhoiNganh"
+                      class="form-control" [nzBorderless]=true nzPlaceHolder="Khối ngành" formControlName="idKhoiNganh">
+                      <nz-option *ngFor="let item of listKhoiNganh" nzCustomContent [nzLabel]="item.tenKhoiNganh"
+                        [nzValue]="item.id">{{item.tenKhoiNganh}}</nz-option>
+                    </nz-select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-form-label col-md-4">
+                    Khoa chủ quản <sup class="required-asterisk text-danger"> (*)</sup>
+                  </label>
+                  <div class="col-md-8">
+                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Khoa chủ quản" [(ngModel)]="selectIdPhongBan"
+                      class="form-control" [nzBorderless]=true nzPlaceHolder="Khoa chủ quản" formControlName="idPhongBan">
+                      <nz-option *ngFor="let item of listPhongBan" nzCustomContent [nzLabel]="item.tenPhongBan"
+                        [nzValue]="item.id">{{item.tenPhongBan}}</nz-option>
+                    </nz-select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class=" form-group row d-flex align-items-center">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-form-label col-md-4">
+                    Mã tuyển sinh
+                  </label>
+                  <div class="col-md-8">
+                    <input nz-input class="form-control" formControlName="maTuyenSinh" required />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-form-label col-md-4">
+                    Số thứ tự
+                  </label>
+                  <div class="col-md-5">
+                    <nz-input-number class="form-control" [nzMin]="1" [nzMax]="10" [nzStep]="1" formControlName="soThuTu">
+                    </nz-input-number>
+                  </div>
+                  <div class="col-md-3">
+                    <label nz-checkbox formControlName="isVisible">Hiển thị</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-form-label col-md-2">Ghi chú</label>
+              <div class="col-md-10">
+                <textarea style="height: auto" rows="4" nz-input class="form-control" formControlName="ghiChu"></textarea>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-template #modalFooter>
+          <button nz-button class="btn-footer" (click)="handleUpdateCancel()">Đóng</button>
+          <button nz-button class="btn-footer btn-save" (click)="handleUpdateOk()">Lưu thay đổi</button>
+        </ng-template>
+      </form>
+    </nz-modal>
+    <nz-modal nzWidth="900px" [(nzVisible)]="ModalAdd" nzTitle="Thêm ngành học" [nzFooter]="Footer"
+      (nzOnCancel)="handleAddCancel()">
+      <form [formGroup]='formAdd!'>
+        <ng-container *nzModalContent>
+          <div class="container-content">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-form-label col-md-4">
+                    Mã <sup class="required-asterisk text-danger"> (*)</sup>
+                  </label>
+                  <div class="col-md-8">
+                    <input nz-input class="form-control" formControlName="maNganh" required
+                      [ngClass]="{ 'is-invalid': f['maNganh'].errors }" />
+                    <div *ngIf="f['maNganh'].touched && f['maNganh'].invalid" class="alert-required">
+                      <div *ngIf="f['maNganh'].errors && f['maNganh'].errors['required']">Mã ngành học không được trống
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-form-label col-md-4">
+                    Tên <sup class="required-asterisk text-danger"> (*)</sup>
+                  </label>
+                  <div class="col-md-8">
+                    <input nz-input class="form-control" formControlName="tenNganh"
+                      [ngClass]="{ 'is-invalid': f['tenNganh'].errors }" />
+                    <div *ngIf="f['tenNganh'].touched && f['tenNganh'].invalid" class="alert-required">
+                      <div *ngIf="f['tenNganh'].errors && f['tenNganh'].errors['required']">Tên ngành học không được trống
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-form-label col-md-4">
+                    Khối ngành <sup class="required-asterisk text-danger"> (*)</sup>
+                  </label>
+                  <div class="col-md-8">
+                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Khối ngành" [(ngModel)]="selectIdKhoiNganh"
+                      class="form-control" [nzBorderless]=true formControlName="idKhoiNganh">
+                      <nz-option *ngFor="let item of listKhoiNganh" nzCustomContent [nzLabel]="item.tenKhoiNganh"
+                        [nzValue]="item.id">{{item.tenKhoiNganh}}</nz-option>
+                    </nz-select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-form-label col-md-4">
+                    Khoa chủ quản <sup class="required-asterisk text-danger"> (*)</sup>
+                  </label>
+                  <div class="col-md-8">
+                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Khoa chủ quản" [(ngModel)]="selectIdPhongBan"
+                      class="form-control" [nzBorderless]=true formControlName="idPhongBan">
+                      <nz-option *ngFor="let item of listPhongBan" nzCustomContent [nzLabel]="item.tenPhongBan"
+                        [nzValue]="item.id">{{item.tenPhongBan}}</nz-option>
+                    </nz-select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class=" form-group row d-flex align-items-center">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-form-label col-md-4">
+                    Mã tuyển sinh
+                  </label>
+                  <div class="col-md-8">
+                    <input nz-input class="form-control" formControlName="maTuyenSinh" required />
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-form-label col-md-4">
+                    Số thứ tự
+                  </label>
+                  <div class="col-md-5">
+                    <nz-input-number class="form-control" [nzMin]="1" [nzMax]="10" [nzStep]="1" formControlName="soThuTu">
+                    </nz-input-number>
+                  </div>
+                  <div class="col-md-3">
+                    <label nz-checkbox formControlName="isVisible">Hiển thị</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-form-label col-md-2">Ghi chú</label>
+              <div class="col-md-10">
+                <textarea style="height: auto" rows="4" nz-input class="form-control" formControlName="ghiChu"></textarea>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-template #Footer>
+          <button nz-button class="btn-footer" (click)="handleAddCancel()">Đóng</button>
+          <button nz-button class="btn-footer btn-save" (click)="handleAddOk()">Lưu thay đổi</button>
+        </ng-template>
+      </form>
+    </nz-modal>
+
+
+
+    <!-- <div class="container-catalog col-6">
+      <div class="gird-item_head">
+        <div class="">
+          <div class="header-label">bla bla bla</div>
+          <div class="header-note">Quản lý các vị trí công việc mà bạn cần tuyển dụng</div>
+        </div>
+        <div class="btn">
+          <button class="btn_add" nz-button (click)="addModal()">
+            <span class="btn__icon bx bxs-add-to-queue"></span>
+            <span class="btn__text">Thêm mới</span>
+          </button>
+        </div>
+      </div>
+      <div class="grid-item_body">
+        <div class="gird-item_subheader">
+          <div class="area-action_left">
+            <div *ngIf="listCheckBox.size === 0">
+              <div class="search-icon bx bx-search"> </div>
+              <input type="text" placeholder="Nhập từ khóa" class="input-search" (keydown.enter)="searchInput($event)">
+            </div>
+            <div *ngIf="listCheckBox.size >= 1" class="tool-delete">
+              <span><b>{{listCheckBox.size}}</b> đang chọn</span>
+              <span style="color: #2a7efc; cursor: pointer;" (click)="boChon()"> bỏ chọn </span>
+              <button class="btn-delete" (click)="showConfrimTrash()"> <i class='bx bx-trash-alt'></i>xóa</button>
+            </div>
+          </div>
+          <div class="area-action_right">
+            <div class="box_btn">
+              <button class="btn" >
+                <div class="btn__icon">
+                  <i class='bx bx-cog'></i>
+                </div>
+              </button>
+              <button class="btn">
+                <div class="btn__icon">
+                  <i class='bx bx-printer'></i>
+                </div>
+              </button>
+              <button class="btn">
+                <div class="btn__icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="19px" height="19px">
+                    <path fill="#169154" d="M29,6H15.744C14.781,6,14,6.781,14,7.744v7.259h15V6z" />
+                    <path fill="#18482a" d="M14,33.054v7.202C14,41.219,14.781,42,15.743,42H29v-8.946H14z" />
+                    <path fill="#0c8045" d="M14 15.003H29V24.005000000000003H14z" />
+                    <path fill="#17472a" d="M14 24.005H29V33.055H14z" />
+                    <g>
+                      <path fill="#29c27f" d="M42.256,6H29v9.003h15V7.744C44,6.781,43.219,6,42.256,6z" />
+                      <path fill="#27663f" d="M29,33.054V42h13.257C43.219,42,44,41.219,44,40.257v-7.202H29z" />
+                      <path fill="#19ac65" d="M29 15.003H44V24.005000000000003H29z" />
+                      <path fill="#129652" d="M29 24.005H44V33.055H29z" />
+                    </g>
+                    <path fill="#0c7238"
+                      d="M22.319,34H5.681C4.753,34,4,33.247,4,32.319V15.681C4,14.753,4.753,14,5.681,14h16.638 C23.247,14,24,14.753,24,15.681v16.638C24,33.247,23.247,34,22.319,34z" />
+                    <path fill="#fff"
+                      d="M9.807 19L12.193 19 14.129 22.754 16.175 19 18.404 19 15.333 24 18.474 29 16.123 29 14.013 25.07 11.912 29 9.526 29 12.719 23.982z" />
+                  </svg>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="gird-table">
+          <nz-table #quocGiaTable [nzScroll]="{ y: '487px' }">
+            <thead>
+              <tr>
+                <th class="gird-table_header" style="text-align: center;" nzWidth="32px"></th>
+                <th class="gird-table_header" style="text-align: center;" nzWidth="45px">
+                  <input type="checkbox" class="checkbox-list" (change)="checkBoxList($event)">
+                </th>
+                <th class="gird-table_header" style="text-align: center;" nzWidth="80px">Thao tác</th>
+                <th class="gird-table_header" style="text-align: center;" nzWidth="70px">STT</th>
+                <th class="gird-table_header" style="text-align: center;" nzWidth="100px">Mã</th>
+                <th class="gird-table_header" nzWidth="400px">Tên ngành</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container >
+                <tr>
+                  <td [nzExpand]="expandSet.has(nganhHocById.id)"
+                    (nzExpandChange)="onExpandChange(nganhHocById.id, $event)"></td>
+                  <td class="item-center"> <input type="checkbox" [checked]="listCheckBox.has(nganhHocById.id)"
+                      class="checkbox-list" (click)="checkBoxValue(nganhHocById!.id, $event)"></td>
+                  <td class="item-center"><a nz-dropdown [nzDropdownMenu]="menu" [nzClickHide]="false">
+                      <nz-dropdown-menu #menu="nzDropdownMenu">
+                        <ul nz-menu>
+                          <li nz-menu-item nz-button (click)="updateModal(nganhHocById.id)">Chỉnh sửa</li>
+                          <li nz-menu-item (click)="showDeleteConfirm(nganhHocById.tenNganh, nganhHocById.id,  tplContent)">
+                            Xóa</li>
+                        </ul>
+                      </nz-dropdown-menu>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" viewBox="0 0 32 32" width="24px" height="24px">
+                        <path
+                          d="M 4 5 L 4 11 L 5 11 L 5 27 L 27 27 L 27 11 L 28 11 L 28 5 Z M 6 7 L 26 7 L 26 9 L 6 9 Z M 7 11 L 25 11 L 25 25 L 7 25 Z M 12.8125 13 C 12.261719 13.050781 11.855469 13.542969 11.90625 14.09375 C 11.957031 14.644531 12.449219 15.050781 13 15 L 19 15 C 19.359375 15.003906 19.695313 14.816406 19.878906 14.503906 C 20.058594 14.191406 20.058594 13.808594 19.878906 13.496094 C 19.695313 13.183594 19.359375 12.996094 19 13 L 13 13 C 12.96875 13 12.9375 13 12.90625 13 C 12.875 13 12.84375 13 12.8125 13 Z" />
+                      </svg>
+                    </a>
+                  </td>
+                  <td class="item-center">1</td>
+                  <td class="item-center">{{nganhHocById?.maNganh | json}}</td>
+                  <td><a (click)="updateModal(nganhHocById.id)">{{nganhHocById?.tenNganh | json}}</a></td>
+                </tr>
+                <tr [nzExpand]="expandSet.has(nganhHocById.id)">
+                  <div class="row">
+                    <label class="col-4">
+                      Mã
+                      <span style="float: right;">:</span>
+                    </label>
+                    <div class="col-8">
+                      {{nganhHocById?.maNganh | json}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <label class="col-4">
+                      Tên ngành
+                      <span style="float: right;">:</span>
+                    </label>
+                    <div class="col-8">
+                      {{nganhHocById?.tenNganh | json}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <label class="col-4">
+                      Khối ngành
+                      <span style="float: right;">:</span>
+                    </label>
+                    <div class="col-8">
+
+                    </div>
+                  </div>
+                  <div class="row">
+                    <label class="col-4">
+                      Khoa chủ quản
+                      <span style="float: right;">:</span>
+                    </label>
+                    <div class="col-8">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <label class="col-4">
+                      Mã tuyển sinh
+                      <span style="float: right;">:</span>
+                    </label>
+                    <div class="col-8">
+                      {{nganhHocById?.maTuyenSinh | json}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <label class="col-4">
+                      Tên viết tắt
+                      <span style="float: right;">:</span>
+                    </label>
+                    <div class="col-8">
+                      {{nganhHocById?.tenVietTat | json}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <label class="col-4">
+                      Tên Tiếng Anh
+                      <span style="float: right;">:</span>
+                    </label>
+                    <div class="col-8">
+                      {{nganhHocById?.tenTiengAnh | json}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <label class="col-4">
+                      Ghi chú
+                      <span style="float: right;">:</span>
+                    </label>
+                    <div class="col-8">
+                      {{nganhHocById?.ghiChu | json}}
+                    </div>
+                  </div>
+                </tr>
+              </ng-container>
+            </tbody>
+          </nz-table>
+        </div>
+      </div>
+    </div> -->
 
   </div>
 </div>
-<ng-template #tplContent let-params>
-  <p>Bạn có muốn xóa <b>{{ params.value }}</b> không?</p>
-</ng-template>
-<nz-modal nzWidth="900px" [(nzVisible)]="isVisibleModalUpdate" nzTitle="Cập nhật ngành học" [nzFooter]="modalFooter"
-  (nzOnCancel)="handleUpdateCancel()">
-  <form [formGroup]="formUpdate!">
-    <ng-container *nzModalContent>
-      <div class="container-content">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group row">
-              <label class="col-form-label col-md-4">
-                Mã <sup class="required-asterisk text-danger"> (*)</sup>
-              </label>
-              <div class="col-md-8">
-                <input nz-input class="form-control" formControlName="maNganh" required />
-                <div *ngIf="g['maNganh'].touched && g['maNganh'].invalid" class="alert-required">
-                  <div *ngIf="g['maNganh'].errors && g['maNganh'].errors['required']">Mã ngành học không được trống
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group row">
-              <label class="col-form-label col-md-4">
-                Tên <sup class="required-asterisk text-danger"> (*)</sup>
-              </label>
-              <div class="col-md-8">
-                <input nz-input class="form-control" formControlName="tenNganh" required />
-                <div *ngIf="g['tenNganh'].touched && g['tenNganh'].invalid" class="alert-required">
-                  <div *ngIf="g['tenNganh'].errors && g['tenNganh'].errors['required']">Mã ngành học không được trống
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group row">
-              <label class="col-form-label col-md-4">
-                Khối ngành <sup class="required-asterisk text-danger"> (*)</sup>
-              </label>
-              <div class="col-md-8">
-                <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Khối ngành" [(ngModel)]="selectIdKhoiNganh"
-                class="form-control" [nzBorderless] = true
-                nzPlaceHolder="Khối ngành" formControlName="idKhoiNganh" >
-                  <nz-option  *ngFor="let item of listKhoiNganh"  nzCustomContent [nzLabel]="item.tenKhoiNganh" [nzValue]="item.id">{{item.tenKhoiNganh}}</nz-option>
-                </nz-select>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group row">
-              <label class="col-form-label col-md-4">
-                Khoa chủ quản <sup class="required-asterisk text-danger"> (*)</sup>
-              </label>
-              <div class="col-md-8">
-                <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Khoa chủ quản" [(ngModel)]="selectIdPhongBan"
-                class="form-control" [nzBorderless] = true
-                nzPlaceHolder="Khoa chủ quản" formControlName="idPhongBan" >
-                  <nz-option  *ngFor="let item of listPhongBan"  nzCustomContent [nzLabel]="item.tenPhongBan" [nzValue]="item.id">{{item.tenPhongBan}}</nz-option>
-                </nz-select>
-
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class=" form-group row d-flex align-items-center">
-          <div class="col-md-6">
-            <div class="form-group row">
-              <label class="col-form-label col-md-4">
-                Mã tuyển sinh
-              </label>
-              <div class="col-md-8">
-                <input nz-input class="form-control" formControlName="maTuyenSinh" required />
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <div class="form-group row">
-              <label class="col-form-label col-md-4">
-                Số thứ tự
-              </label>
-              <div class="col-md-5">
-                <nz-input-number class="form-control" [nzMin]="1" [nzMax]="10" [nzStep]="1" formControlName="soThuTu">
-                </nz-input-number>
-              </div>
-              <div class="col-md-3">
-                <label nz-checkbox formControlName="isVisible">Hiển thị</label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-md-2">Ghi chú</label>
-          <div class="col-md-10">
-            <textarea style="height: auto" rows="4" nz-input class="form-control" formControlName="ghiChu"></textarea>
-          </div>
-        </div>
-      </div>
-    </ng-container>
-    <ng-template #modalFooter>
-      <button nz-button class="btn-footer" (click)="handleUpdateCancel()">Đóng</button>
-      <button nz-button class="btn-footer btn-save" (click)="handleUpdateOk()">Lưu thay đổi</button>
-    </ng-template>
-  </form>
-</nz-modal>
 
 
-<nz-modal nzWidth="900px" [(nzVisible)]="ModalAdd" nzTitle="Thêm ngành học" [nzFooter]="Footer"
-  (nzOnCancel)="handleAddCancel()">
-  <form [formGroup]='formAdd!'>
-    <ng-container *nzModalContent>
-      <div class="container-content">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group row">
-              <label class="col-form-label col-md-4">
-                Mã <sup class="required-asterisk text-danger"> (*)</sup>
-              </label>
-              <div class="col-md-8">
-                <input nz-input class="form-control" formControlName="maNganh" required
-                  [ngClass]="{ 'is-invalid': f['maNganh'].errors }" />
-                <div *ngIf="f['maNganh'].touched && f['maNganh'].invalid" class="alert-required">
-                  <div *ngIf="f['maNganh'].errors && f['maNganh'].errors['required']">Mã ngành học không được trống
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group row">
-              <label class="col-form-label col-md-4">
-                Tên <sup class="required-asterisk text-danger"> (*)</sup>
-              </label>
-              <div class="col-md-8">
-                <input nz-input class="form-control" formControlName="tenNganh"
-                  [ngClass]="{ 'is-invalid': f['tenNganh'].errors }" />
-                <div *ngIf="f['tenNganh'].touched && f['tenNganh'].invalid" class="alert-required">
-                  <div *ngIf="f['tenNganh'].errors && f['tenNganh'].errors['required']">Tên ngành học không được trống
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group row">
-              <label class="col-form-label col-md-4">
-                Khối ngành <sup class="required-asterisk text-danger"> (*)</sup>
-              </label>
-              <div class="col-md-8">
-                <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Khối ngành" [(ngModel)]="selectIdKhoiNganh"
-                class="form-control" [nzBorderless] = true formControlName="idKhoiNganh" >
-                  <nz-option  *ngFor="let item of listKhoiNganh"  nzCustomContent [nzLabel]="item.tenKhoiNganh" [nzValue]="item.id">{{item.tenKhoiNganh}}</nz-option>
-                </nz-select>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group row">
-              <label class="col-form-label col-md-4">
-                Khoa chủ quản <sup class="required-asterisk text-danger"> (*)</sup>
-              </label>
-              <div class="col-md-8">
-                <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Khoa chủ quản" [(ngModel)]="selectIdPhongBan"
-                class="form-control" [nzBorderless] = true formControlName="idPhongBan" >
-                  <nz-option  *ngFor="let item of listPhongBan"  nzCustomContent [nzLabel]="item.tenPhongBan" [nzValue]="item.id">{{item.tenPhongBan}}</nz-option>
-                </nz-select>
 
-              </div>
-            </div>
-          </div>
-        </div>
-
-      <div class=" form-group row d-flex align-items-center">
-        <div class="col-md-6">
-          <div class="form-group row">
-            <label class="col-form-label col-md-4">
-              Mã tuyển sinh
-            </label>
-            <div class="col-md-8">
-              <input nz-input class="form-control" formControlName="maTuyenSinh" required />
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="form-group row">
-            <label class="col-form-label col-md-4">
-              Số thứ tự
-            </label>
-            <div class="col-md-5">
-              <nz-input-number class="form-control" [nzMin]="1" [nzMax]="10" [nzStep]="1" formControlName="soThuTu">
-              </nz-input-number>
-            </div>
-            <div class="col-md-3">
-              <label nz-checkbox formControlName="isVisible">Hiển thị</label>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-form-label col-md-2">Ghi chú</label>
-        <div class="col-md-10">
-          <textarea style="height: auto" rows="4" nz-input class="form-control" formControlName="ghiChu"></textarea>
-        </div>
-      </div>
-    </div>
-    </ng-container>
-    <ng-template #Footer>
-      <button nz-button class="btn-footer" (click)="handleAddCancel()">Đóng</button>
-      <button nz-button class="btn-footer btn-save" (click)="handleAddOk()">Lưu thay đổi</button>
-    </ng-template>
-  </form>
-</nz-modal>

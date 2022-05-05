@@ -1,0 +1,77 @@
+<div class="tool-header">
+  <div class="sreach-box">
+    <i nz-icon nzType="search" nzTheme="outline"></i>
+    <nz-input-group nzSearch>
+      <input type="text" nz-input placeholder="input search text" nzBorderless=true />
+    </nz-input-group>
+  </div>
+  <div class="btn-add_new">
+    <button class=" btn-add" (click) = "addTinhThanh()"> <i class='bx bx-add-to-queue'></i> Thêm mới</button>
+  </div>
+</div>
+<nz-table #basicTable [nzData]="ListTinhThanh" [nzScroll]="{ y: '400px' }" [nzShowPagination]=false>
+  <thead>
+    <tr>
+      <th nzWidth="150px" style="text-align: center;">Thao tác</th>
+      <th style="text-align: center;">Mã tỉnh thành</th>
+      <th>Tên Tỉnh Thành</th>
+      <th>Ghi chú</th>
+      <th style="text-align: center;">Hiển thị</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let dataTinhThanh of ListTinhThanh">
+      <tr>
+        <td [nzExpand]="expandSet.has(dataTinhThanh.id)"
+          (nzExpandChange)="onExpandChange(dataTinhThanh.id, $event)"
+          style="display: flex; justify-content: center; align-items: center; column-gap: 16px;">
+
+          <label nz-checkbox></label>
+          <svg nz-dropdown [nzDropdownMenu]="menu" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <rect x="0" y="0" width="24" height="24"></rect>
+              <path
+                d="M5.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L5.5,11 C4.67157288,11 4,10.3284271 4,9.5 L4,5.5 C4,4.67157288 4.67157288,4 5.5,4 Z M11,6 C10.4477153,6 10,6.44771525 10,7 C10,7.55228475 10.4477153,8 11,8 L13,8 C13.5522847,8 14,7.55228475 14,7 C14,6.44771525 13.5522847,6 13,6 L11,6 Z"
+                fill="#000000" opacity="0.3"></path>
+              <path
+                d="M5.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M11,15 C10.4477153,15 10,15.4477153 10,16 C10,16.5522847 10.4477153,17 11,17 L13,17 C13.5522847,17 14,16.5522847 14,16 C14,15.4477153 13.5522847,15 13,15 L11,15 Z"
+                fill="#767676"></path>
+            </g>
+          </svg>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu nzSelectable>
+              <li nz-menu-item>chỉnh sửa</li>
+              <li nz-menu-item (click)="deleteConfirm(dataTinhThanh.id)" >xóa</li>
+            </ul>
+          </nz-dropdown-menu>
+        </td>
+        <td style="text-align: center;">{{ dataTinhThanh.maTinhThanh }}</td>
+        <td>{{ dataTinhThanh.tenTinhThanh }}</td>
+        <td>{{ dataTinhThanh.ghiChu }}</td>
+        <td style="text-align: center;" *ngIf="dataTinhThanh.isVisible === true"><i class='bx bxs-check-circle'
+            style="color: #52c41a; font-size: 16px"></i></td>
+      </tr>
+      <tr [nzExpand]="expandSet.has(dataTinhThanh.id)">
+        <div style="margin: 24px">
+          <nz-table #subTable [nzData]="ListQuanHuyen" [nzScroll]="{ y: '240px' }" [nzShowPagination]=false>
+            <thead>
+                <tr>
+                  <th nzWidth="150px" style="text-align: center;">Mã quận huyện</th>
+                  <th nzWidth="500px">Tên quận huyện</th>
+                  <th nzWidth="100px" style="text-align: center;">Hiển thị</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let dataQuanHuyen of ListQuanHuyen">
+                  <td style="text-align: center;">{{ dataQuanHuyen.maQuanHuyen }}</td>
+                  <td>{{ dataQuanHuyen.tenQuanHuyen }}</td>
+                  <td style="text-align: center;" *ngIf="dataQuanHuyen.isVisible === true"><i class='bx bxs-check-circle'
+                      style="color: #52c41a; font-size: 16px"></i></td>
+                </tr>
+            </tbody>
+          </nz-table>
+        </div>
+      </tr>
+    </ng-container>
+  </tbody>
+</nz-table>

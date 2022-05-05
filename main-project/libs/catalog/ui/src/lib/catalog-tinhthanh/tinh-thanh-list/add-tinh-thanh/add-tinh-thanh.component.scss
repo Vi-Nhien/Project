@@ -1,0 +1,51 @@
+.modal-body {
+  padding: 0 20px;
+  line-height: 26px;
+  max-height: 75vh;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+sup {
+  color: red;
+}
+
+.col-form-label {
+  font-weight: 500;
+  font-size: 13px;
+  color: #201e1e;
+  margin-bottom: 0;
+}
+
+.form-control {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: .375rem .75rem;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  height: 35px;
+  border-radius: 8px;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.btn {
+  border: none;
+  outline: none;
+  background-color: inherit;
+  font-size: .8rem;
+  background: transparent;
+  cursor: pointer;
+}
+
+.btn-ok{
+  background-color: #006fc9;
+  color: #fff;
+}

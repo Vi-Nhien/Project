@@ -1,0 +1,15 @@
+.container-catalog{
+  max-width: 100%;
+}
+.catalog-content{
+  display: flex;
+}
+
+.left-side{
+  /* flex: auto; */
+  width: 220px;
+}
+
+.right-side{
+  flex: auto;
+}

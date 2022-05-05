@@ -37,7 +37,7 @@ export interface createDanToc {
   ghiChu: string
 }
 
-export interface DanToc{
+export interface DanToc {
   id: number,
   maDanToc: string,
   tenDanToc: string,
@@ -45,14 +45,14 @@ export interface DanToc{
   isVisible: boolean,
   ghiChu: string
 }
-export interface createTonGiao{
+export interface createTonGiao {
   maTonGiao: string,
   tenTonGiao: string,
   soThuTu: number,
   isVisible: boolean,
   ghiChu: string
 }
-export interface TonGiao{
+export interface TonGiao {
   id: number,
   maTonGiao: string,
   tenTonGiao: string,
@@ -60,14 +60,14 @@ export interface TonGiao{
   isVisible: boolean,
   ghiChu: string
 }
-export interface createKhoiNganh{
+export interface createKhoiNganh {
   maKhoiNganh: string,
   tenKhoiNganh: string,
   soThuTu: number,
   isVisible: boolean,
   ghiChu: string
 }
-export interface KhoiNganh{
+export interface KhoiNganh {
   id: number,
   maKhoiNganh: string,
   tenKhoiNganh: string,
@@ -75,9 +75,7 @@ export interface KhoiNganh{
   isVisible: boolean,
   ghiChu: string
 }
-
-
-export interface NganhHocList{
+export interface NganhHocList {
   pageSize: number,
   pageNumber: number,
   sortName: string,
@@ -87,7 +85,7 @@ export interface NganhHocList{
   idKhoiNganh: number
 }
 
-export interface createNganhHoc{
+export interface createNganhHoc {
   maNganh: string,
   tenNganh: string,
   tenVietTat: string,
@@ -100,7 +98,7 @@ export interface createNganhHoc{
   ghiChu: string
 }
 
-export interface NganhHoc{
+export interface NganhHoc {
   id: number,
   maNganh: string,
   tenNganh: string,
@@ -114,3 +112,40 @@ export interface NganhHoc{
   ghiChu: string
 }
 
+export interface TinhThanhList {
+  pageSize: number,
+  pageNumber: number,
+  sortName: string,
+  sortASC: boolean,
+  keyword: string,
+  idQuocGia: number,
+}
+
+export interface QuanHuyenList {
+  pageSize: number,
+  pageNumber: number,
+  sortName: string,
+  sortASC: boolean,
+  keyword: string,
+  idTinhThanh: number,
+}
+
+export interface TinhThanh {
+  id: number,
+  idQuocGia: number,
+  maTinhThanh: string,
+  tenTinhThanh: string,
+  soThuTu: number,
+  isVisible: boolean,
+  ghiChu: string
+}
+
+export interface QuanHuyen{
+  id: number,
+  idTinhThanh: number,
+  maQuanHuyen: string,
+  tenQuanHuyen: string,
+  soThuTu: number,
+  isVisible: boolean,
+  ghiChu: string
+}

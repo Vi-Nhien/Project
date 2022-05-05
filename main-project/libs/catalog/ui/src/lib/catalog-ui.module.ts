@@ -15,11 +15,16 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CatalogDantocComponent } from './catalog-dantoc/catalog-dantoc.component';
 import { CatalogKhoinganhComponent } from './catalog-khoinganh/catalog-khoinganh.component';
 import { CatalogNganhhocComponent } from './catalog-nganhhoc/catalog-nganhhoc.component';
+import { CatalogTinhthanhComponent } from './catalog-tinhthanh/catalog-tinhthanh.component';
+import { AddTinhThanhComponent } from './catalog-tinhthanh/tinh-thanh-list/add-tinh-thanh/add-tinh-thanh.component';
+import { TinhThanhListComponent } from './catalog-tinhthanh/tinh-thanh-list/tinh-thanh-list.component';
 
 @NgModule({
   imports: [
@@ -36,7 +41,9 @@ import { CatalogNganhhocComponent } from './catalog-nganhhoc/catalog-nganhhoc.co
     FormsModule,
     ReactiveFormsModule,
     NzSelectModule,
-    NzPaginationModule
+    NzPaginationModule,
+    NzIconModule,
+    NzTabsModule
   ],
 
   declarations:[
@@ -46,7 +53,10 @@ import { CatalogNganhhocComponent } from './catalog-nganhhoc/catalog-nganhhoc.co
     CatalogTongiaoComponent,
     CatalogDantocComponent,
     CatalogKhoinganhComponent,
-    CatalogNganhhocComponent
+    CatalogNganhhocComponent,
+    CatalogTinhthanhComponent,
+    AddTinhThanhComponent,
+    TinhThanhListComponent
   ],
 
   exports:[
@@ -56,7 +66,10 @@ import { CatalogNganhhocComponent } from './catalog-nganhhoc/catalog-nganhhoc.co
     CatalogTongiaoComponent,
     CatalogDantocComponent,
     CatalogKhoinganhComponent,
-    CatalogNganhhocComponent
+    CatalogNganhhocComponent,
+    CatalogTinhthanhComponent,
+    AddTinhThanhComponent,
+    TinhThanhListComponent
   ]
 })
 export class CatalogUiModule {}
