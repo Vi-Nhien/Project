@@ -7,3 +7,7 @@ https://www.itsolutionstuff.com/post/how-to-check-all-and-uncheck-all-checkboxes
 
 https://www.freakyjolly.com/check-uncheck-all-checkbox-list-in-angular/
 -------------------------------------------
+
+https://codelearn.io/sharing/lap-trinh-tro-ly-ao-tieng-viet-python
+
+https://pyimagesearch.com/2016/10/03/bubble-sheet-multiple-choice-scanner-and-test-grader-using-omr-python-and-opencv/
