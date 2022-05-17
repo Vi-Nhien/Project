@@ -37,7 +37,15 @@
         "libs/notify/data-access/state/src/index.ts"
       ],
       "@main-project/notify/feature": ["libs/notify/feature/src/index.ts"],
-      "@main-project/notify/ui": ["libs/notify/ui/src/index.ts"]
+      "@main-project/notify/ui": ["libs/notify/ui/src/index.ts"],
+      "@main-project/task/data-access/models": [
+        "libs/task/data-access/models/src/index.ts"
+      ],
+      "@main-project/task/data-access/services": [
+        "libs/task/data-access/services/src/index.ts"
+      ],
+      "@main-project/task/feature": ["libs/task/feature/src/index.ts"],
+      "@main-project/task/ui": ["libs/task/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

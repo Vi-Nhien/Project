@@ -4,6 +4,15 @@
     <nz-input-group nzSearch>
       <input type="text" nz-input placeholder="input search text" nzBorderless=true />
     </nz-input-group>
+    <div *ngIf="listIds.size === 0">
+      <div class="search-icon bx bx-search"> </div>
+      <!-- <input type="text" placeholder="Nhập từ khóa" class="input-search" (keydown.enter)="searchInput($event)"> -->
+    </div>
+    <div *ngIf="listIds.size >= 1" class="tool-delete">
+      <span><b>{{listIds.size}}</b> đang chọn</span>
+      <span style="color: #2a7efc; cursor: pointer;" (click)="boChon()"> bỏ chọn </span>
+      <button class="btn-delete" (click)="showConfrimTrash()"> <i class='bx bx-trash-alt'></i>xóa</button>
+    </div>
   </div>
   <div class="btn-add_new">
     <button class=" btn-add" (click) = "addTinhThanh()"> <i class='bx bx-add-to-queue'></i> Thêm mới</button>
@@ -12,6 +21,9 @@
 <nz-table #basicTable [nzData]="ListTinhThanh" [nzScroll]="{ y: '400px' }" [nzShowPagination]=false>
   <thead>
     <tr>
+      <th nzWidth="50px">
+        <label nz-checkbox ></label>
+      </th>
       <th nzWidth="150px" style="text-align: center;">Thao tác</th>
       <th style="text-align: center;">Mã tỉnh thành</th>
       <th>Tên Tỉnh Thành</th>
@@ -22,11 +34,14 @@
   <tbody>
     <ng-container *ngFor="let dataTinhThanh of ListTinhThanh">
       <tr>
+        <td>
+          <label nz-checkbox  (click)="checkBoxValue(dataTinhThanh.id, $event)"></label>
+        </td>
         <td [nzExpand]="expandSet.has(dataTinhThanh.id)"
           (nzExpandChange)="onExpandChange(dataTinhThanh.id, $event)"
           style="display: flex; justify-content: center; align-items: center; column-gap: 16px;">
 
-          <label nz-checkbox></label>
+
           <svg nz-dropdown [nzDropdownMenu]="menu" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
               <rect x="0" y="0" width="24" height="24"></rect>
@@ -42,6 +57,7 @@
             <ul nz-menu nzSelectable>
               <li nz-menu-item>chỉnh sửa</li>
               <li nz-menu-item (click)="deleteConfirm(dataTinhThanh.id)" >xóa</li>
+              <li nz-menu-item (click)="themQuanHuyen(dataTinhThanh)">Thêm Quận/Huyện</li>
             </ul>
           </nz-dropdown-menu>
         </td>
@@ -75,3 +91,5 @@
     </ng-container>
   </tbody>
 </nz-table>
+
+

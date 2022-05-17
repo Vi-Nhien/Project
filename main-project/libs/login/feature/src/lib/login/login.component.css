@@ -1,6 +1,9 @@
 .container-login{
   display: flex;
   margin: auto;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .notify-btn{
@@ -22,6 +25,18 @@
   font-weight: 500;
   padding: 20px;
   background-color: #0075e1;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+.task-btn{
+  margin: auto;
+  border: none;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 20px;
+  background-color: #16744d;
   color: white;
   border-radius: 6px;
   text-decoration: none;

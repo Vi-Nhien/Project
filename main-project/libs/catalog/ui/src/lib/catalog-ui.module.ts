@@ -25,6 +25,10 @@ import { CatalogNganhhocComponent } from './catalog-nganhhoc/catalog-nganhhoc.co
 import { CatalogTinhthanhComponent } from './catalog-tinhthanh/catalog-tinhthanh.component';
 import { AddTinhThanhComponent } from './catalog-tinhthanh/tinh-thanh-list/add-tinh-thanh/add-tinh-thanh.component';
 import { TinhThanhListComponent } from './catalog-tinhthanh/tinh-thanh-list/tinh-thanh-list.component';
+import { AddQuanHuyenComponent } from './catalog-tinhthanh/tinh-thanh-list/add-tinh-thanh/add-quan-huyen/add-quan-huyen.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   imports: [
@@ -43,7 +47,10 @@ import { TinhThanhListComponent } from './catalog-tinhthanh/tinh-thanh-list/tinh
     NzSelectModule,
     NzPaginationModule,
     NzIconModule,
-    NzTabsModule
+    NzTabsModule,
+    DragDropModule,
+    MatButtonModule,
+    MatCheckboxModule
   ],
 
   declarations:[
@@ -56,7 +63,8 @@ import { TinhThanhListComponent } from './catalog-tinhthanh/tinh-thanh-list/tinh
     CatalogNganhhocComponent,
     CatalogTinhthanhComponent,
     AddTinhThanhComponent,
-    TinhThanhListComponent
+    TinhThanhListComponent,
+    AddQuanHuyenComponent
   ],
 
   exports:[
@@ -69,7 +77,8 @@ import { TinhThanhListComponent } from './catalog-tinhthanh/tinh-thanh-list/tinh
     CatalogNganhhocComponent,
     CatalogTinhthanhComponent,
     AddTinhThanhComponent,
-    TinhThanhListComponent
+    TinhThanhListComponent,
+    AddQuanHuyenComponent
   ]
 })
 export class CatalogUiModule {}

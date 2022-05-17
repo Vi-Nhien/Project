@@ -2,21 +2,26 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { CatalogService, QuanHuyen, QuanHuyenList, TinhThanh, TinhThanhList } from '@main-project/catalog/data-access/services';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { AddQuanHuyenComponent } from './add-tinh-thanh/add-quan-huyen/add-quan-huyen.component';
 import { AddTinhThanhComponent } from './add-tinh-thanh/add-tinh-thanh.component';
 
 
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'app-tinh-thanh-list',
   templateUrl: './tinh-thanh-list.component.html',
   styleUrls: ['./tinh-thanh-list.component.scss']
 })
 export class TinhThanhListComponent implements OnInit {
 
+  countCheckBox  = 0;
   ListTinhThanh: TinhThanh[] = [];
   ListQuanHuyen: QuanHuyen[] = [];
   expandSet = new Set<number>();
   listIds = new Set<number>();
+  allChecked = true;
+  isVisible = false;
   constructor(
     private catalogService: CatalogService,
     private modal: NzModalService,
@@ -28,7 +33,7 @@ export class TinhThanhListComponent implements OnInit {
   }
 
   danhSachTinhThanh() {
-    let listTinhthanh: TinhThanhList = {
+    const listTinhthanh: TinhThanhList = {
       idQuocGia: 1001,
       keyword: "",
       pageNumber: 1,
@@ -39,7 +44,6 @@ export class TinhThanhListComponent implements OnInit {
     this.catalogService.getTinhThanhList(listTinhthanh).subscribe(
       (res: any) => {
         this.ListTinhThanh = res.result.items
-        console.log(this.ListTinhThanh);
       }
     )
   }
@@ -48,7 +52,7 @@ export class TinhThanhListComponent implements OnInit {
     console.log(id);
     if (checked) {
       this.expandSet.add(id);
-      let listQuanHuyen: QuanHuyenList = {
+      const listQuanHuyen: QuanHuyenList = {
         pageSize: 50,
         pageNumber: 1,
         sortName: "id",
@@ -59,7 +63,6 @@ export class TinhThanhListComponent implements OnInit {
       this.catalogService.getQuanhuyenList(listQuanHuyen).subscribe(
         (res: any) => {
           this.ListQuanHuyen = res.result.items;
-          console.log(this.ListQuanHuyen)
         }
       )
     } else {
@@ -71,7 +74,7 @@ export class TinhThanhListComponent implements OnInit {
       nzTitle: 'Thêm mới tỉnh thành',
       nzContent: AddTinhThanhComponent,
       nzFooter: null,
-      nzMaskClosable: false,
+      nzMaskClosable: true,
       nzClosable: true,
       nzWidth: '600px',
     });
@@ -93,4 +96,49 @@ export class TinhThanhListComponent implements OnInit {
       })
     }
   }
+  boChon(){
+    this.listIds  = new Set<number>();
+  }
+  showConfrimTrash(): void{
+    this.modal.confirm({
+      nzTitle: 'Xóa quốc gia?',
+      nzContent: 'Bạn muốn xóa các mục đã chọn',
+      nzOkText: 'Yes',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: () => console.log('OK'),
+      nzCancelText: 'No',
+      nzOnCancel: () => console.log('Cancel')
+    });
+  }
+
+  checkBoxValue(id: number, event: any){
+
+    if(event.target.checked == true){
+      this.listIds.add(id);
+    }
+    else{
+      this.listIds.delete(id);
+    }
+    console.log(this.listIds)
+  }
+  themQuanHuyen(dataTinhThanh: any){
+    if(dataTinhThanh){
+      this.modal.create({
+        nzTitle: 'Thêm mới Quận/Huyện',
+        nzContent: AddQuanHuyenComponent,
+        nzComponentParams: {
+          itemTinhThanh : dataTinhThanh
+        },
+        nzFooter: null,
+        nzMaskClosable: false,
+        nzClosable: true,
+        nzWidth: '900px',
+      });
+      this.modal.afterAllClose.subscribe(
+        () => { this.danhSachTinhThanh(); }
+      )
+    }
+  }
+
 }

@@ -25,9 +25,12 @@ export class CatalogNganhhocComponent implements OnInit {
   expandSet = new Set<number>();
   listKhoiNganh?: KhoiNganh[];
   listPhongBan?: any[];
-  selectPageSize : number = 20;
-  curentPageNumber : number = 1;
+  selectPageSize: number = 20;
+  curentPageNumber: number = 1;
+  total: any;
   nganhHocById!: NganhHoc;
+
+
   constructor(
     private catalogService: CatalogService,
     private modal: NzModalService,
@@ -66,6 +69,37 @@ export class CatalogNganhhocComponent implements OnInit {
       ghiChu: ['']
     })
   }
+  change() {
+    const list: any = {
+      pageSize: this.selectPageSize,
+      pageNumber: this.curentPageNumber,
+      sortName: "id",
+      sortASC: true,
+      keyword: '',
+    }
+    console.log(list)
+    this.catalogService.getListNganhHoc(list).subscribe(
+      (res: any) => {
+        this.nganhHocs = res.result.items;
+        this.total = res.result.pagingInfo;
+      });
+  }
+
+  changeSize() {
+    const list: any = {
+      pageSize: this.selectPageSize,
+      pageNumber: this.curentPageNumber,
+      sortName: "id",
+      sortASC: true,
+      keyword: '',
+    }
+    console.log(list)
+    this.catalogService.getListNganhHoc(list).subscribe(
+      (res: any) => {
+        this.nganhHocs = res.result.items;
+        this.total = res.result.pagingInfo;
+      });
+  }
 
   ngOnDestroy() {
     this.subscription?.unsubscribe();
@@ -85,6 +119,8 @@ export class CatalogNganhhocComponent implements OnInit {
     this.catalogService.getListNganhHoc(list).subscribe(
       (res: any) => {
         this.nganhHocs = res.result.items;
+        console.log(res.result)
+        this.total = res.result.pagingInfo;
       });
   }
   searchInput(event: any) {
@@ -108,25 +144,25 @@ export class CatalogNganhhocComponent implements OnInit {
       (res: any) => {
         this.formUpdate?.patchValue(res.result);
       });
-      const list: List = {
-        pageSize: this.selectPageSize,
-        pageNumber: this.curentPageNumber,
-        sortName: "id",
-        sortASC: false,
-        keyword: '',
-        isVisible: true
-      }
-      this.catalogService.getListKhoiNganh(list).subscribe(
-        (res: any) => {
-          this.listKhoiNganh = res.result.items;
-          console.log(this.listKhoiNganh);
-        });
+    const list: List = {
+      pageSize: this.selectPageSize,
+      pageNumber: this.curentPageNumber,
+      sortName: "id",
+      sortASC: false,
+      keyword: '',
+      isVisible: true
+    }
+    this.catalogService.getListKhoiNganh(list).subscribe(
+      (res: any) => {
+        this.listKhoiNganh = res.result.items;
+        console.log(this.listKhoiNganh);
+      });
 
-      this.catalogService.getListPhongBans(list).subscribe(
-        (res: any) => {
-          this.listPhongBan = res.result.items;
-          console.log(this.listPhongBan);
-        });
+    this.catalogService.getListPhongBans(list).subscribe(
+      (res: any) => {
+        this.listPhongBan = res.result.items;
+        console.log(this.listPhongBan);
+      });
   }
   handleUpdateOk(): void {
     console.log(this.formUpdate?.value)
@@ -267,10 +303,10 @@ export class CatalogNganhhocComponent implements OnInit {
       this.expandSet.delete(id);
     }
   }
-  NganhHocById(id : number){
+  NganhHocById(id: number) {
     console.log(id);
     this.catalogService.getNganhHocById(id).subscribe(
-      (res:any) =>{
+      (res: any) => {
         this.nganhHocById = res.result!;
         console.log(this.nganhHocById);
       }

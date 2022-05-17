@@ -61,7 +61,7 @@
             </div>
           </div>
         </div>
-        <div class="gird-table">
+        <div class="gird-table" style = "background-color: #fff;">
           <nz-table #quocGiaTable [nzData]="nganhHocs!" [nzFrontPagination]="false" [nzScroll]="{ y: '487px' }">
             <thead>
               <tr>
@@ -96,7 +96,7 @@
                       </svg>
                     </a>
                   </td>
-                  <td class="item-center">{{i + 1}}</td>
+                  <td class="item-center">{{(i + 1) + ((total.pageNumber - 1) * total.pageSize)}}</td>
                   <td class="item-center">{{itemNganhHoc.maNganh}}</td>
                   <td><a (click)="updateModal(itemNganhHoc.id)">{{itemNganhHoc.tenNganh}}</a></td>
                 </tr>
@@ -174,6 +174,16 @@
               </ng-container>
             </tbody>
           </nz-table>
+          <div style ="display: flex; justify-content: space-between; align-items: center; padding-bottom: 16px; margin-top: -16px;">
+            <nz-pagination  [nzSize]="'small'" [(nzPageIndex)]="curentPageNumber" (nzPageIndexChange)="change()" [nzTotal]="total.totalItems" nzShowSizeChanger [(nzPageSize)]	="selectPageSize" (nzPageSizeChange) = "changeSize()" ></nz-pagination>
+            <div style ="color: #5f6d91; outline: 0;" >
+              <!-- <ng-template #rangeTemplate let-range="range" style ="color: #5f6d91; outline: 0;">
+                {{ range[0] }}-{{ range[1] }} / {{ total.totalItems }} dòng
+              </ng-template> -->
+              {{(1) + ((total.pageNumber - 1) * total.pageSize)}} - {{((total.pageNumber) * total.pageSize)}} / {{ total.totalItems }} dòng
+            </div>
+
+          </div>
         </div>
       </div>
     </div>

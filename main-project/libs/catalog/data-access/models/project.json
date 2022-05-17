@@ -6,7 +6,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/catalog/data-access/models"],
+      "outputs": [
+        "coverage/libs/catalog/data-access/models"
+      ],
       "options": {
         "jestConfig": "libs/catalog/data-access/models/jest.config.js",
         "passWithNoTests": true

@@ -11,8 +11,9 @@ import {  NzModalRef,  NzModalService } from 'ng-zorro-antd/modal';
 })
 export class AddTinhThanhComponent implements OnInit {
   quocGias?: QuocGia[];
-  formGroup ?: FormGroup;
+  form ?: FormGroup;
   selectedQuocGia ?: number;
+  submitted = false;
   constructor(
     private catalogService : CatalogService,
     private formBuilder : FormBuilder,
@@ -23,7 +24,7 @@ export class AddTinhThanhComponent implements OnInit {
 
   ngOnInit() {
     this.getListQuocGias();
-    this.formGroup = this.formBuilder.group({
+    this.form = this.formBuilder.group({
       idQuocGia: [this.selectedQuocGia, Validators.required],
       maTinhThanh: ['', Validators.required],
       tenTinhThanh: ['', Validators.required],
@@ -48,13 +49,17 @@ export class AddTinhThanhComponent implements OnInit {
       });
   }
   onSubmit(){
-    // console.log(this.formGroup?.value);
-    this.catalogService.createTinhThanh(this.formGroup?.value).subscribe(
+    this.submitted = true;
+    if(this.form!.invalid){return}
+    this.catalogService.createTinhThanh(this.form?.value).subscribe(
       () =>{
         this.notification.success('Thêm mới', 'Thêm tỉnh thành mới thành công');
         this.modelRef.destroy();
       }
     )
   }
-
+  onCancel(){
+    this.modelRef.destroy();
+  }
+  get f() { return this.form!.controls; }
 }

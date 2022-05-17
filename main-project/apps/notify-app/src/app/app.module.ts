@@ -28,6 +28,10 @@ const routes: Routes = [
   {
     path: 'catalog',
     loadChildren: async () =>await import ('@main-project/catalog/feature').then(catalog => catalog.CatalogFeatureModule)
+  },
+  {
+    path: 'task',
+    loadChildren: async () => await import ('@main-project/task/feature').then(task => task.TaskFeatureModule)
   }
 
 ];

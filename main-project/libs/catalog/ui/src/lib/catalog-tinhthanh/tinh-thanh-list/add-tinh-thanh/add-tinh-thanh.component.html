@@ -1,51 +1,59 @@
-<form [formGroup]="formGroup!">
+<form [formGroup]="form!" (ngSubmit)="onSubmit()">
   <div class="modal-body">
     <div class="row form-group">
       <label class="col-md-2 col-form-label">Quốc gia <sup>(*)</sup></label>
       <div class="col-md-10">
-    <nz-select nzShowSearch nzAllowClear  [(ngModel)]="selectedQuocGia" class = "form-control" [nzBorderless]=" true" formControlName="idQuocGia">
-          <nz-option *ngFor="let item of quocGias" [nzLabel]="item.tenQuocGia" [nzValue]="item.id" nzCustomContent>{{item.tenQuocGia}}</nz-option>
+        <nz-select nzShowSearch nzAllowClear [(ngModel)]="selectedQuocGia" class="form-control" [nzBorderless]=" true"
+          formControlName="idQuocGia" [ngClass]="{ 'is-invalid': submitted && f['idQuocGia'].errors }">
+          <nz-option *ngFor="let item of quocGias" [nzLabel]="item.tenQuocGia" [nzValue]="item.id" nzCustomContent>
+            {{item.tenQuocGia}}</nz-option>
         </nz-select>
-      </div>
-    </div>
-    <div class="row form-group">
-      <div class="col-md-6">
-        <div class="row form-group">
-          <label class="col-md-4 col-form-label">Mã<sup>(*)</sup></label>
-          <div class="col-md-8">  <input nz-input class = "form-control" formControlName ="maTinhThanh"/></div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="row form-group">
-          <label class="col-md-4 col-form-label">Tên<sup>(*)</sup></label>
-          <div class="col-md-8"> <input nz-input  class = "form-control" formControlName ="tenTinhThanh" /></div>
+        <div *ngIf="submitted && f['idQuocGia'].errors" class="invalid-feedback">
+          <div *ngIf="f['idQuocGia'].errors['required']">Không được bỏ trống !!!</div>
         </div>
       </div>
     </div>
-    <div class="row form-group">
-      <div class="col-md-6">
-        <div class="row form-group">
-          <label class="col-md-4 col-form-label">Số thứ tự</label>
-          <div class="col-md-8">  <nz-input-number class = "form-control" [nzMin]="1" [nzMax]="100" [nzStep]="1" formControlName = "soThuTu"></nz-input-number></div>
+      <div class="row form-group">
+        <div class="col-md-6">
+          <div class="row form-group">
+            <label class="col-md-4 col-form-label">Mã<sup>(*)</sup></label>
+            <div class="col-md-8"> <input nz-input class="form-control" formControlName="maTinhThanh" /></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row form-group">
+            <label class="col-md-4 col-form-label">Tên<sup>(*)</sup></label>
+            <div class="col-md-8"> <input nz-input class="form-control" formControlName="tenTinhThanh" /></div>
+          </div>
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="row form-group">
-          <label class="col-md-4 col-form-label"></label>
-          <div class="col-md-8"> <label nz-checkbox formControlName = "isVisible" >Hiển thị</label></div>
+      <div class="row form-group">
+        <div class="col-md-6">
+          <div class="row form-group">
+            <label class="col-md-4 col-form-label">Số thứ tự</label>
+            <div class="col-md-8">
+              <nz-input-number class="form-control" [nzMin]="1" [nzMax]="100" [nzStep]="1" formControlName="soThuTu">
+              </nz-input-number>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row form-group">
+            <label class="col-md-4 col-form-label"></label>
+            <div class="col-md-8"> <label nz-checkbox formControlName="isVisible">Hiển thị</label></div>
+          </div>
+        </div>
+      </div>
+      <div class="row form-group">
+        <label class="col-md-2 col-form-label">Ghi chú</label>
+        <div class="col-md-10">
+          <textarea rows="4" nz-input class="form-control" style="height: auto" formControlName="ghiChu"></textarea>
         </div>
       </div>
     </div>
-    <div class="row form-group">
-      <label class="col-md-2 col-form-label">Ghi chú</label>
-      <div class="col-md-10">
-        <textarea rows="4" nz-input class = "form-control" style = "height: auto" formControlName = "ghiChu"></textarea>
-      </div>
+    <div class="modal-footer">
+      <button class="btn btn-cancel" (click)="onCancel()">Đóng</button>
+      <button class="btn btn-ok" type="submit">Lưu thay đổi</button>
     </div>
-  </div>
-  <div class="modal-footer">
-    <button class = "btn btn-cancel">Đóng</button>
-    <button class = "btn btn-ok" (click) = 'onSubmit()'>Lưu thay đổi</button>
-  </div>
-</form>
 
+</form>

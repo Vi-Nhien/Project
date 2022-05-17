@@ -6,7 +6,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/notify/data-access/models"],
+      "outputs": [
+        "coverage/libs/notify/data-access/models"
+      ],
       "options": {
         "jestConfig": "libs/notify/data-access/models/jest.config.js",
         "passWithNoTests": true

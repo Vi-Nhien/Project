@@ -6,7 +6,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/login/feature"],
+      "outputs": [
+        "coverage/libs/login/feature"
+      ],
       "options": {
         "jestConfig": "libs/login/feature/jest.config.js",
         "passWithNoTests": true

@@ -1,0 +1,28 @@
+{
+  "projectType": "library",
+  "root": "libs/task/ui",
+  "sourceRoot": "libs/task/ui/src",
+  "prefix": "main-project",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "coverage/libs/task/ui"
+      ],
+      "options": {
+        "jestConfig": "libs/task/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/task/ui/src/**/*.ts",
+          "libs/task/ui/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

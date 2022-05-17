@@ -6,7 +6,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/notify-app",
         "index": "apps/notify-app/src/index.html",
@@ -18,6 +20,7 @@
           "apps/notify-app/src/assets"
         ],
         "styles": [
+          "apps/notify-app/src/custom-theme.scss",
           "node_modules/ng-zorro-antd/ng-zorro-antd.css",
           "apps/notify-app/src/styles.css"
         ],
@@ -85,7 +88,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/notify-app"],
+      "outputs": [
+        "coverage/apps/notify-app"
+      ],
       "options": {
         "jestConfig": "apps/notify-app/jest.config.js",
         "passWithNoTests": true

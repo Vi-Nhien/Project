@@ -13,6 +13,10 @@
     "notify-data-access-services": "libs/notify/data-access/services",
     "notify-data-access-state": "libs/notify/data-access/state",
     "notify-feature": "libs/notify/feature",
-    "notify-ui": "libs/notify/ui"
+    "notify-ui": "libs/notify/ui",
+    "task-data-access-models": "libs/task/data-access/models",
+    "task-data-access-services": "libs/task/data-access/services",
+    "task-feature": "libs/task/feature",
+    "task-ui": "libs/task/ui"
   }
 }

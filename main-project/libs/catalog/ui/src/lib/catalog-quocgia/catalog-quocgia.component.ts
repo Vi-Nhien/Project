@@ -171,7 +171,7 @@ export class CatalogQuocgiaComponent implements OnInit, OnDestroy {
   }
   checkBoxList(event: any) {
     if (event.target.checked == true) {
-      for (let i = 0; i < this.quocGias!.length; i++) {
+      for (let i = 0; i < this.quocGias!.length; i++ ) {
         this.listCheckBox.add(this.quocGias![i].id);
       }
     }
