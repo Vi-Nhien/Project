@@ -130,6 +130,7 @@ export class TinhThanhListComponent implements OnInit {
         nzComponentParams: {
           itemTinhThanh : dataTinhThanh
         },
+      
         nzFooter: null,
         nzMaskClosable: false,
         nzClosable: true,

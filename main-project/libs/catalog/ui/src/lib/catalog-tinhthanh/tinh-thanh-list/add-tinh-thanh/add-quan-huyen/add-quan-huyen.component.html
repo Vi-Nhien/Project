@@ -1,65 +1,72 @@
-<form [formGroup]="form!" (ngSubmit)="onSubmit()">
-      <div class="modal-body">
-        <div class="row form-group">
-          <label class="col-md-2 col-form-label">Tỉnh/Thành</label>
-          <div class="col-md-10">
-            <input nz-input class="form-control" formControlName="tenTinhThanh" [disabled]="true" />
-          </div>
-        </div>
-        <div cdkDropList class="drog-list" (cdkDropListDropped)="drop($event)">
-          <div class="example-box" formArrayName="createQuanHuyen" *ngFor="let creds of getControls(); let i = index" cdkDrag>
-            <ng-container [formGroupName]="i">
-              <i class='bx bx-grid-vertical'></i>
-              <div class="w-100 drag-content">
-                <div class="row form-group">
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label class="col-md-12 col-form-label">Mã Quận/Huyện<sup>(*)</sup></label>
-                      <div class="col-md-12">
-                        <input nz-input class="form-control" formControlName="maQuanHuyen"/>
-                           <!-- [ngClass]="{ 'is-invalid': submitted && f['maQuanHuyen'].errors }" -->
-                        <!-- <div *ngIf="submitted && f['maQuanHuyen'].errors" class="invalid-feedback">
-                          <div *ngIf="f['maQuanHuyen'].errors['required']">Vui lòng không bỏ trống !!!</div>
-                        </div> -->
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class=" form-group">
-                      <label class="col-md-12 col-form-label">Tên Quận/Huyện<sup>(*)</sup></label>
-                      <div class="col-md-12">
-                        <input nz-input class="form-control" formControlName="tenQuanHuyen"/>
-                           <!-- [ngClass]="{ 'is-invalid': submitted && f['tenQuanHuyen'].errors }" -->
-                        <!-- <div *ngIf="submitted && f['tenQuanHuyen'].errors" class="invalid-feedback">
-                          <div *ngIf="f['tenQuanHuyen'].errors['required']">Vui lòng không bỏ trống !!!</div>
-                        </div> -->
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label class="col-md-12 col-form-label">Ghi chú</label>
-                      <div class="col-md-12"> <input nz-input class="form-control" formControlName="ghiChu" /></div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="modal-body">
+    <div class="row form-group">
+      <label class="col-md-2 col-form-label">Tỉnh/Thành</label>
+      <div class="col-md-10">
+        <input nz-input class="form-control" formControlName="tenTinhThanh" [disabled]="true" />
+      </div>
+    </div>
+    <div cdkDropList class="drog-list" (cdkDropListDropped)="drop($event)">
+
+
+
+      <div class="example-box" formArrayName="createQuanHuyen" *ngFor="let creds of getControls(); let i = index"
+        cdkDrag>
+
+        <ng-container [formGroupName]="i">
+          <i class='bx bx-grid-vertical'></i>
+          <div class="w-100 drag-content">
+            <div class="row form-group">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="col-md-12 col-form-label">Mã Quận/Huyện<sup>(*)</sup></label>
+                  <div class="col-md-12">
+                    <input nz-input class="form-control" formControlName="maQuanHuyen" [ngClass]="{ 'is-invalid': submitted && f.controls[i].status }"/>
+                    <div *ngIf="submitted && f.controls[i].status === 'INVALID'" class="invalid-feedback">
+                      <div *ngIf="f.controls[i].status === 'INVALID'">Vui lòng không bỏ trống !!!</div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="w-10 delete-icon">
-                <button class="btn">
-                  <i class='bx bx-trash-alt' (click)="delete(creds)"></i>
-                </button>
+              <div class="col-md-4">
+                <div class=" form-group">
+                  <label class="col-md-12 col-form-label">Tên Quận/Huyện<sup>(*)</sup></label>
+                  <div class="col-md-12">
+                    <input nz-input class="form-control" formControlName="tenQuanHuyen"  [ngClass]="{ 'is-invalid': submitted && f.controls[i].status  }" />
+
+                    <div *ngIf="submitted && f.controls[i].status === 'INVALID'" class="invalid-feedback">
+                          <div *ngIf="f.controls[i].status === 'INVALID'">Vui lòng không bỏ trống !!!</div>
+                        </div>
+                        <div *ngIf="submitted && f.controls[i]?.value.tenQuanHuyen === f.controls[i+1]?.value.tenQuanHuyen" class="invalid-feedback">
+                          <div *ngIf="f.controls[i]?.value.tenQuanHuyen === f.controls[i+1]?.value.tenQuanHuyen">Trùng !!!</div>
+                        </div>
+                  </div>
+                </div>
               </div>
-            </ng-container>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="col-md-12 col-form-label">Ghi chú</label>
+                  <div class="col-md-12"> <input nz-input class="form-control" formControlName="ghiChu" /></div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-        <button type ="button" class = "btn btn-ok" (click)="addNew()">
-          <i class='bx bx-plus'></i>
-        </button>
+          <div class="w-10 delete-icon">
+            <button class="btn" type="button">
+              <i class='bx bx-trash-alt' (click)="delete(i)"></i>
+            </button>
+          </div>
+        </ng-container>
       </div>
-      <div class="modal-footer">
-        <button class="btn btn-cancel" (click)="onCancel()">Đóng</button>
-        <button class="btn btn-ok" type="submit">Lưu thay đổi</button>
-      </div>
+    </div>
+    <button type="button" class="btn btn-ok" (click)="addNew()">
+      <i class='bx bx-plus'></i>
+    </button>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-cancel" type="button" (click)="onCancel()">Đóng</button>
+    <button class="btn btn-ok" type="submit">Lưu thay đổi</button>
+  </div>
 
 
 </form>

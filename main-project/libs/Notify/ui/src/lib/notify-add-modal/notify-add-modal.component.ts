@@ -16,7 +16,7 @@ import { NzModalRef  } from 'ng-zorro-antd/modal';
 export class NotifyAddModalComponent implements OnInit {
   SelectedPhongBans : number[] = [];
   SelectedCoSos : number [] =[];
-  SelectedTinhChat ?: number;
+  SelectedTinhChat?: number;
   radioValue  : number = 1;
   submitted = false;
   editorConfig: AngularEditorConfig = {
@@ -60,7 +60,7 @@ export class NotifyAddModalComponent implements OnInit {
   thongBaoTinhChatsList: any;
   phongBanList: any;
   coSoList: any;
-  form?: FormGroup;
+  form!: FormGroup;
 
   constructor(
     private message: NzMessageService,
@@ -121,7 +121,7 @@ export class NotifyAddModalComponent implements OnInit {
   }
   submit(){
     this.submitted = true;
-    if(this.form!.invalid){return}
+    if(this.form.invalid){return}
     this.notifyService.createThongBao(this.form?.value).subscribe(
       res => {
         console.log('sucess');
@@ -131,5 +131,5 @@ export class NotifyAddModalComponent implements OnInit {
   cancel() {
     this.modalRef.destroy();
   }
-  get f() { return this.form!.controls; }
+  get f() { return this.form.controls; }
 }

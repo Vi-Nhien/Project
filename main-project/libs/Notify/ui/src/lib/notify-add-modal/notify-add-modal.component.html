@@ -1,5 +1,5 @@
 <ng-template [nzModalTitle] class="modal-header_update">Cập nhật</ng-template>
-<form [formGroup]="form!" (ngSubmit)="submit()">
+<form [formGroup]="form" (ngSubmit)="submit()">
   <div class="form-update scroll-bar">
     <div class="row form-group">
       <label class="col-sm-3 form-label">
@@ -9,7 +9,7 @@
       <div class="col-sm-9">
         <input type="text" placeholder="Tiêu đề" class='form-control' formControlName="tieuDe" [ngClass]="{ 'is-invalid': submitted && f['tieuDe'].errors }">
         <div *ngIf="submitted && f['tieuDe'].errors" class="invalid-feedback">
-          <div *ngIf="f['tieuDe'].errors['required']">Tiêu đề không được bỏ trống !!!</div>
+          <div *ngIf="f['tieuDe']?.errors?.['required']">Tiêu đề không được bỏ trống !!!</div>
       </div>
       </div>
     </div>

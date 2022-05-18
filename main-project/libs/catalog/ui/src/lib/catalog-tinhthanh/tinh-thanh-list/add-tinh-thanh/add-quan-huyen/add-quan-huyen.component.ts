@@ -14,7 +14,7 @@ export class AddQuanHuyenComponent implements OnInit {
 
   @Input() itemTinhThanh: any;
   quocGias?: QuocGia[];
-  form?: FormGroup;
+  form!: FormGroup;
   selectedQuocGia?: number;
   submitted = false;
   QuanHuyen: any = [];
@@ -28,17 +28,11 @@ export class AddQuanHuyenComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getListQuocGias();
-    // this.form = this.formBuilder.group({
-    //
-    //   maQuanHuyen: ['', Validators.required],
-    //   tenQuanHuyen: ['', Validators.required],
-    //   ghiChu: ['']
-    // });
+
     this.form = this.formBuilder.group({
       maTinhThanh: [this.itemTinhThanh.maTinhThanh, Validators.required],
       tenTinhThanh: [this.itemTinhThanh.tenTinhThanh, Validators.required],
-      createQuanHuyen :  this.formBuilder.array([this.addProductFormGroup]),
+      createQuanHuyen :  this.formBuilder.array([this.addProductFormGroup()]),
     });
   }
   getListQuocGias() {
@@ -59,37 +53,27 @@ export class AddQuanHuyenComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     if (this.form?.invalid) { return }
-    // const creds = this.form?.controls['createQuanHuyen'] as FormArray;
-    // console.log(creds)
-    console.log(this.form?.value.createQuanHuyen)
+    this.QuanHuyen = this.form?.value;
+    console.log("Quận huyện add list:",this.QuanHuyen);
+    console.log(this.f)
   }
   onCancel() {
     this.modelRef.destroy();
   }
-  get f() { return this.form?.controls; }
+  get f() { return (this.form?.get("createQuanHuyen") as FormArray); }
 
   delete(i: any) {
     const creds = this.form?.controls['createQuanHuyen'] as FormArray;
-      creds.removeAt(i);
+    creds.removeAt(i);
   }
 
   addNew() {
-    // const creds = this.form?.controls['createQuanHuyen'] as FormArray;
-    // creds.push(this.formBuilder.group({
-    //   maTinhThanh: [this.itemTinhThanh.maTinhThanh, Validators.required],
-    //   tenTinhThanh: [this.itemTinhThanh.tenTinhThanh, Validators.required],
-    //   maQuanHuyen: ['', Validators.required],
-    //   tenQuanHuyen: ['', Validators.required],
-    //   ghiChu: ['']
-    // }));
     (<FormArray>this.form?.get("createQuanHuyen")).push(
       this.addProductFormGroup());
   }
 
   addProductFormGroup(): FormGroup {
     return this.formBuilder.group({
-      maTinhThanh: [this.itemTinhThanh.maTinhThanh, Validators.required],
-      tenTinhThanh: [this.itemTinhThanh.tenTinhThanh, Validators.required],
       maQuanHuyen: ['', Validators.required],
       tenQuanHuyen: ['', Validators.required],
       ghiChu: ['']
@@ -100,6 +84,7 @@ export class AddQuanHuyenComponent implements OnInit {
     return (this.form?.get('createQuanHuyen') as FormArray).controls;
   }
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.QuanHuyen, event.previousIndex, event.currentIndex);
+    const i  = this.getControls();
+    moveItemInArray(i, event.previousIndex, event.currentIndex);
   }
 }
