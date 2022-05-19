@@ -42,3 +42,14 @@
   text-decoration: none;
 }
 
+.course-btn{
+  margin: auto;
+  border: none;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 20px;
+  background-color: rgb(241, 125, 22);
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+}

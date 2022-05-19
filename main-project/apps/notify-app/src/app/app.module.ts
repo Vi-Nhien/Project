@@ -32,6 +32,10 @@ const routes: Routes = [
   {
     path: 'task',
     loadChildren: async () => await import ('@main-project/task/feature').then(task => task.TaskFeatureModule)
+  },
+  {
+    path : 'course',
+    loadChildren : async () => await import ('@main-project/course/feature').then(course => course.CourseFeatureModule)
   }
 
 ];

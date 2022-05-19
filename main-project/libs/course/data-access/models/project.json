@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/course/data-access/models",
+  "sourceRoot": "libs/course/data-access/models/src",
+  "prefix": "main-project",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/course/data-access/models"],
+      "options": {
+        "jestConfig": "libs/course/data-access/models/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/course/data-access/models/src/**/*.ts",
+          "libs/course/data-access/models/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

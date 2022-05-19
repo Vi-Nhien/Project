@@ -1,0 +1,56 @@
+<div class="container-course">
+  <div class="gird-item_head">
+    <div class="">
+      <div class="header-label">Khối ngành</div>
+      <div class="header-note">Quản lý các vị trí công việc mà bạn cần tuyển dụng</div>
+    </div>
+    <div class="btn">
+      <button class="btn_add" nz-button>
+        <span class="btn__icon bx bxs-add-to-queue"></span>
+        <span class="btn__text">Thêm mới</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="gird-item_body">
+    <div class="grid__item_subheader">
+      <div class="box__action-left">
+        <div class="box__search ng-star-inserted">
+          <div class="box__search_content">
+            <span class="search_submit">
+              <i class='bx bx-search'></i>
+            </span>
+            <input type="text" class="ui-input--search" placeholder="Nhập từ khóa">
+          </div>
+        </div>
+      </div>
+      <div class="box__action-right"></div>
+    </div>
+    <div class="grid-wrapper">
+      <nz-table #basicTable>
+        <thead style = "height: 40px">
+          <tr>
+            <th class = "item-center" nzWidth = "45px"></th>
+            <th class = "item-center" nzWidth = "100px">Thao tác</th>
+            <th class = "item-center" nzWidth = "70px">STT</th>
+            <th  nzWidth = "200px">Mã khóa học</th>
+            <th  nzWidth = "375px">Tên khóa học</th>
+            <th  nzWidth = "350px">Mô tả</th>
+            <th  nzWidth = "150px">Hiển thị</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class = "item-center"><label nz-checkbox ></label></td>
+            <td class = "item-center"></td>
+            <td class = "item-center">1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</div>

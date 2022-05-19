@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/course/ui",
+  "sourceRoot": "libs/course/ui/src",
+  "prefix": "main-project",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/course/ui"],
+      "options": {
+        "jestConfig": "libs/course/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/course/ui/src/**/*.ts",
+          "libs/course/ui/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

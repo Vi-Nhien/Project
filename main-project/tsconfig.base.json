@@ -23,6 +23,14 @@
       ],
       "@main-project/catalog/feature": ["libs/catalog/feature/src/index.ts"],
       "@main-project/catalog/ui": ["libs/catalog/ui/src/index.ts"],
+      "@main-project/course/data-access/models": [
+        "libs/course/data-access/models/src/index.ts"
+      ],
+      "@main-project/course/data-access/services": [
+        "libs/course/data-access/services/src/index.ts"
+      ],
+      "@main-project/course/feature": ["libs/course/feature/src/index.ts"],
+      "@main-project/course/ui": ["libs/course/ui/src/index.ts"],
       "@main-project/login/data-access": [
         "libs/login/data-access/src/index.ts"
       ],
