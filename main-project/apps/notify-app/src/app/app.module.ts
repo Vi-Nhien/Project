@@ -1,5 +1,5 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
+import { ErrorIntercept } from './error.interceptor';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -55,8 +55,19 @@ const routes: Routes = [
   ],
 
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ServiceInterceptor, multi: true },
-    { provide: NZ_I18N, useValue: vi_VN }],
+    {
+      provide: HTTP_INTERCEPTORS, useClass: ServiceInterceptor, multi: true
+    },
+    {
+      provide: NZ_I18N, useValue: vi_VN
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorIntercept,
+      multi: true
+    }
+
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -1,6 +1,9 @@
+
+
 .container-course{
   padding: 24px;
   background-color: rgba($color: #000000, $alpha: 0.1);
+  height: 100%;
   .gird-item_head {
     display: flex;
     align-items: center;
@@ -91,4 +94,8 @@
 
 .item-center{
   text-align: center;
+}
+
+.grid-wrapper{
+  max-height: 100%;
 }

@@ -8,6 +8,7 @@ import { registerLocaleData } from '@angular/common';
 import { NotifyService } from '@main-project/notify/data-access/services'
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { error } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'main-project-notify-list',
@@ -47,21 +48,39 @@ export class NotifyListComponent implements OnInit, OnDestroy {
     });
   }
   ngOnInit(): void {
-    this.getThongBaos();
+    // this.getThongBaos();
     registerLocaleData(vi);
+    try{
+      this.getThongBaos();
+    }
+    catch (error){
+      console.log('error')
+    }
   }
   ngOnDestroy() {
     this.subscription?.unsubscribe();
   }
 
   getThongBaos() {
-    this.notifyService.getAllThongBaos(this.pageNumbers, 20).subscribe(
-      (res: any) => {
-        this.thongBaosPagination = res.result.pagingInfo.totalItems;
-        this.thongBaosList = res.result.items;
+    const myObserver = {
+      next: (x: any) => {
+        this.thongBaosPagination = x.result.pagingInfo.totalItems;
+        this.thongBaosList = x.result.items;
         this.getTotalPage()
-      });
+      },
+      error: (err: Error) => {console.error('Observer got an error: ' ); throw err},
+    };
+    this.notifyService.getAllThongBaos(this.pageNumbers, 20).subscribe(
+      // (res: any) => {
+      //   this.thongBaosPagination = res.result.pagingInfo.totalItems;
+      //   this.thongBaosList = res.result.items;
+      //   this.getTotalPage()
+      // }
+      myObserver
+      );
   }
+
+
   nextPage() {
     this.pageNumbers = this.pageNumbers + 1;
     this.notifyService.getAllThongBaos(this.pageNumbers, 20).subscribe(

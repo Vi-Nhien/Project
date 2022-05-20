@@ -1,56 +1,83 @@
-<div class="container-course">
-  <div class="gird-item_head">
-    <div class="">
-      <div class="header-label">Khối ngành</div>
-      <div class="header-note">Quản lý các vị trí công việc mà bạn cần tuyển dụng</div>
+<div *ngIf="errorMessage">
+  <nz-result nzStatus="403" nzTitle="401" nzSubTitle="Sorry, you are not authorized to access this page.">
+    <div nz-result-extra style="display: flex; justify-content: center;">
+      <button nz-button class="btn_add" (click)="routerHome()">Back Home</button>
     </div>
-    <div class="btn">
-      <button class="btn_add" nz-button>
-        <span class="btn__icon bx bxs-add-to-queue"></span>
-        <span class="btn__text">Thêm mới</span>
-      </button>
+  </nz-result>
+</div>
+
+
+<div *ngIf="!idGuild">
+  <div class="container-course" *ngIf="!errorMessage ">
+    <div class="gird-item_head">
+      <div class="">
+        <div class="header-label">Khối ngành</div>
+        <div class="header-note">Quản lý các vị trí công việc mà bạn cần tuyển dụng</div>
+      </div>
+      <div class="btn">
+        <button class="btn_add" nz-button (click)="addCourse()">
+          <span class="btn__icon bx bxs-add-to-queue"></span>
+          <span class="btn__text">Thêm mới</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="gird-item_body">
+      <div class="grid__item_subheader">
+        <div class="box__action-left">
+          <div class="box__search ng-star-inserted">
+            <div class="box__search_content">
+              <span class="search_submit">
+                <i class='bx bx-search'></i>
+              </span>
+              <input type="text" class="ui-input--search" placeholder="Nhập từ khóa">
+            </div>
+          </div>
+        </div>
+        <div class="box__action-right"></div>
+      </div>
+      <div class="grid-wrapper max-height">
+        <nz-table #basicTable [nzData]="listCourse.items" [nzPageSize]="20" [nzLoading]="loading" nzShowPagination=false
+          nzSize="small" [nzScroll]="{y: '600px' }">
+          <thead style="height: 40px">
+            <tr>
+              <th class="item-center" nzWidth="45px"></th>
+              <th class="item-center" nzWidth="100px">Thao tác</th>
+              <th class="item-center" nzWidth="70px">STT</th>
+              <th nzWidth="200px">Mã khóa học</th>
+              <th nzWidth="375px">Tên khóa học</th>
+              <th nzWidth="350px">Mô tả</th>
+              <th nzWidth="150px" class="item-center">Hiển thị</th>
+            </tr>
+          </thead>
+          <tbody nzMaxHeight="100%">
+            <tr *ngFor="let course of listCourse.items; index as i">
+              <td class="item-center"><label nz-checkbox></label></td>
+              <td class="item-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" viewBox="0 0 32 32" width="24px" height="24px">
+                  <path
+                    d="M 4 5 L 4 11 L 5 11 L 5 27 L 27 27 L 27 11 L 28 11 L 28 5 Z M 6 7 L 26 7 L 26 9 L 6 9 Z M 7 11 L 25 11 L 25 25 L 7 25 Z M 12.8125 13 C 12.261719 13.050781 11.855469 13.542969 11.90625 14.09375 C 11.957031 14.644531 12.449219 15.050781 13 15 L 19 15 C 19.359375 15.003906 19.695313 14.816406 19.878906 14.503906 C 20.058594 14.191406 20.058594 13.808594 19.878906 13.496094 C 19.695313 13.183594 19.359375 12.996094 19 13 L 13 13 C 12.96875 13 12.9375 13 12.90625 13 C 12.875 13 12.84375 13 12.8125 13 Z" />
+                </svg>
+              </td>
+              <td>{{i + 1}}</td>
+              <td>{{course.maKhoaHoc}}</td>
+              <td style="font-weight: 700;"><a (click)="courseDetail(course.idGuid)"
+                  style="font-size: 14px; color: black">{{course.tenKhoaHoc}}</a> </td>
+              <td>{{course.moTaNgan | nzSafeNull: '-'}}</td>
+              <td class="item-center">
+                <div *ngIf="course.isVisible === true">
+                  <i class='bx bxs-check-circle' style="font-size: 18px; color: #28a745;"></i>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </div>
     </div>
   </div>
 
-  <div class="gird-item_body">
-    <div class="grid__item_subheader">
-      <div class="box__action-left">
-        <div class="box__search ng-star-inserted">
-          <div class="box__search_content">
-            <span class="search_submit">
-              <i class='bx bx-search'></i>
-            </span>
-            <input type="text" class="ui-input--search" placeholder="Nhập từ khóa">
-          </div>
-        </div>
-      </div>
-      <div class="box__action-right"></div>
-    </div>
-    <div class="grid-wrapper">
-      <nz-table #basicTable>
-        <thead style = "height: 40px">
-          <tr>
-            <th class = "item-center" nzWidth = "45px"></th>
-            <th class = "item-center" nzWidth = "100px">Thao tác</th>
-            <th class = "item-center" nzWidth = "70px">STT</th>
-            <th  nzWidth = "200px">Mã khóa học</th>
-            <th  nzWidth = "375px">Tên khóa học</th>
-            <th  nzWidth = "350px">Mô tả</th>
-            <th  nzWidth = "150px">Hiển thị</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class = "item-center"><label nz-checkbox ></label></td>
-            <td class = "item-center"></td>
-            <td class = "item-center">1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-          </tr>
-        </tbody>
-      </nz-table>
-    </div>
-  </div>
+</div>
+
+<div *ngIf="idGuild">
+  <app-course-detail idGuild="{{idGuild}}"></app-course-detail>
 </div>

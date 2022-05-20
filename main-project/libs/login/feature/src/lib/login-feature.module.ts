@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { RouterModule, Routes } from '@angular/router';
+import { NzResultModule } from 'ng-zorro-antd/result';
 
 const routes: Routes = [
   {
@@ -13,7 +14,8 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    NzResultModule
   ],
   declarations: [
     LoginComponent
