@@ -24,7 +24,9 @@
           "node_modules/ng-zorro-antd/ng-zorro-antd.css",
           "apps/notify-app/src/styles.css"
         ],
-        "scripts": []
+        "scripts": [
+
+        ]
       },
       "configurations": {
         "production": {

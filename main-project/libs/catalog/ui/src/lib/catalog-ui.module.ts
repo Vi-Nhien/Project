@@ -50,7 +50,10 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     NzTabsModule,
     DragDropModule,
     MatButtonModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    DragDropModule,
+    DragDropModule,
+    MatButtonModule,
   ],
 
   declarations:[

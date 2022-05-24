@@ -1,0 +1,57 @@
+.container-IC {
+  width: 100%;
+  border-radius: 8px 8px 0 0;
+  background: #FFFF;
+  margin-bottom: 10px;
+  z-index: 4;
+  box-shadow: 6px 9px 54px 7px #00000014;
+  height: auto;
+}
+
+.anchor-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+
+  nz-link {
+    padding: 13px 16px;
+    line-height: 1.143;
+    // background-color: #fff;
+  }
+}
+
+.course-infor-body {
+  .body-item {
+    background: #FFFF;
+    padding: 20px 27px 26px 26px;
+  }
+
+  .body-item-title {
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+}
+
+.btn {
+  border: none;
+  outline: none;
+}
+
+.drop-add {
+  border: 1px dashed #0075e1;
+  text-align: center;
+  line-height: 50px;
+  color: #d3dcfc;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 15px;
+  -webkit-user-select: none;
+  user-select: none;
+  margin-bottom: 10px;
+  outline: invert;
+}
+.drag-content{
+  padding-bottom: 12px;
+}

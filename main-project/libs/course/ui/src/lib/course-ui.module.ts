@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderCourseComponent } from './header-course/header-course.component';
-
+import { InformationCourseComponent } from './table-list-course/course-detail/information-course/information-course.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { TableListCourseComponent } from './table-list-course/table-list-course.component';
@@ -16,7 +17,11 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
-import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzAnchorModule } from 'ng-zorro-antd/anchor';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { QuillModule } from 'ngx-quill'
+import { ReactiveFormsModule } from "@angular/forms";
 @NgModule({
   imports: [
     CommonModule,
@@ -32,18 +37,25 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
     NzResultModule,
     NzDrawerModule,
     NzTabsModule,
-    NzMenuModule
-
+    NzAnchorModule,
+    NzSelectModule,
+    NzInputModule,
+    QuillModule.forRoot(),
+    QuillModule,
+    ReactiveFormsModule,
+    DragDropModule
   ],
-  declarations:[
+  declarations: [
     HeaderCourseComponent,
     TableListCourseComponent,
-    CourseDetailComponent
+    CourseDetailComponent,
+    InformationCourseComponent,
   ],
-  exports:[
+  exports: [
     HeaderCourseComponent,
     TableListCourseComponent,
-    CourseDetailComponent
+    CourseDetailComponent,
+    InformationCourseComponent
   ],
 })
-export class CourseUiModule {}
+export class CourseUiModule { }

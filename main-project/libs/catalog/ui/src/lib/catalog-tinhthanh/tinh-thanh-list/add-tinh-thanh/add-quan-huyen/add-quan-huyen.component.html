@@ -21,7 +21,8 @@
                 <div class="form-group">
                   <label class="col-md-12 col-form-label">Mã Quận/Huyện<sup>(*)</sup></label>
                   <div class="col-md-12">
-                    <input nz-input class="form-control" formControlName="maQuanHuyen" [ngClass]="{ 'is-invalid': submitted && f.controls[i].status }"/>
+                    <input nz-input class="form-control" formControlName="maQuanHuyen"
+                      [ngClass]="{ 'is-invalid': submitted && f.controls[i].status }" />
                     <div *ngIf="submitted && f.controls[i].status === 'INVALID'" class="invalid-feedback">
                       <div *ngIf="f.controls[i].status === 'INVALID'">Vui lòng không bỏ trống !!!</div>
                     </div>
@@ -32,14 +33,17 @@
                 <div class=" form-group">
                   <label class="col-md-12 col-form-label">Tên Quận/Huyện<sup>(*)</sup></label>
                   <div class="col-md-12">
-                    <input nz-input class="form-control" formControlName="tenQuanHuyen"  [ngClass]="{ 'is-invalid': submitted && f.controls[i].status  }" />
+                    <input nz-input class="form-control" formControlName="tenQuanHuyen"
+                      [ngClass]="{ 'is-invalid': submitted && f.controls[i].status  }" />
 
                     <div *ngIf="submitted && f.controls[i].status === 'INVALID'" class="invalid-feedback">
-                          <div *ngIf="f.controls[i].status === 'INVALID'">Vui lòng không bỏ trống !!!</div>
-                        </div>
-                        <div *ngIf="submitted && f.controls[i]?.value.tenQuanHuyen === f.controls[i+1]?.value.tenQuanHuyen" class="invalid-feedback">
-                          <div *ngIf="f.controls[i]?.value.tenQuanHuyen === f.controls[i+1]?.value.tenQuanHuyen">Trùng !!!</div>
-                        </div>
+                      <div *ngIf="f.controls[i].status === 'INVALID'">Vui lòng không bỏ trống !!!</div>
+                    </div>
+                    <div *ngIf="submitted && f.controls[i]?.value.tenQuanHuyen === f.controls[i+1]?.value.tenQuanHuyen"
+                      class="invalid-feedback">
+                      <div *ngIf="f.controls[i]?.value.tenQuanHuyen === f.controls[i+1]?.value.tenQuanHuyen">Trùng !!!
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

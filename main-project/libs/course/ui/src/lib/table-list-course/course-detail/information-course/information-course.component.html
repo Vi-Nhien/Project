@@ -1,0 +1,107 @@
+<div class="container-IC">
+  <nz-anchor style="background-color: #fff; margin-bottom: 20px;">
+    <div class="anchor-nav">
+      <nz-link nzHref="#tt-co-ban" nzTitle="Thông tin cơ bản"></nz-link>
+      <nz-link nzHref="#yeu-cau" nzTitle="yêu cầu"></nz-link>
+      <nz-link nzHref="#mo-ta-ct" nzTitle="Mô tả chi tiết"></nz-link>
+      <nz-link nzHref="#kh-bao-gom" nzTitle="Khóa học bao gồm"></nz-link>
+      <nz-link nzHref="#muc-tieu-kh" nzTitle="Mục tiêu khóa học"></nz-link>
+      <nz-link nzHref="#doi-tuong-kh" nzTitle="Đối tượng khóa học"></nz-link>
+      <nz-link nzHref="#kh-lien-quan" nzTitle="Khóa học liên quan"></nz-link>
+    </div>
+  </nz-anchor>
+
+  <div class="course-infor-body">
+    <div id="tt-co-ban" style="padding: 28px 0;">
+      <div class="body-item">
+        <div class="body-item-title"><span>Thông tin cơ bản</span></div>
+        <div class="body-item-content">
+          <div class="row" style="padding-bottom: 12px;">
+            <div class="col-md-12">
+              <label class="control-label">Tên khóa học</label>
+              <input nz-input placeholder="Tên khóa học" class="form-control" />
+            </div>
+          </div>
+          <div class="row" style="padding-bottom: 12px;">
+            <div class="col-md-6">
+              <label class="control-label">Chủ đề</label>
+              <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Chọn" class="form-control">
+                <nz-option></nz-option>
+                <nz-option></nz-option>
+                <nz-option></nz-option>
+              </nz-select>
+            </div>
+            <div class="col-md-6">
+              <label class="control-label">Thời lượng</label>
+              <input nz-input placeholder="Thời lượng" class="form-control" />
+            </div>
+          </div>
+          <div class="row" style="padding-bottom: 12px;">
+            <div class="col-md-12">
+              <label class="control-label">Mô Tả</label>
+              <textarea rows="4" nz-input class="form-control"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="yeu-cau" style="padding: 28px 0;">
+      <div class="body-item">
+        <div class="body-item-title"><span>yêu cầu</span></div>
+        <div class="body-item-content">
+          <div class="row">
+            <div class="col-md-12">
+              <quill-editor class="content-editor" [placeholder]="'Nhập nội dung'" [modules]="quillConfiguration"
+                [styles]="{'min-height': '120px'}">
+              </quill-editor>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="mo-ta-ct" style="padding: 28px 0;">
+      <div class="body-item">
+        <div class="body-item-title"><span>Mô tả chi tiết</span></div>
+        <div class="body-item-content">
+          <div class="row">
+            <div class="col-md-12">
+              <quill-editor class="content-editor" [placeholder]="''" [modules]="quillConfiguration"
+                [styles]="{'min-height': '120px'}">
+              </quill-editor>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="kh-bao-gom"  style="padding: 28px 0;">
+      <div class="body-item">
+        <div class="body-item-title"><span>Mô tả chi tiết</span></div>
+        <div class="body-item-content">
+          <div class="row">
+            <div class="col-md-12">
+              <quill-editor class="content-editor" [placeholder]="''" [modules]="quillConfiguration"
+                [styles]="{'min-height': '120px'}">
+              </quill-editor>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="muc-tieu-kh" class="body-item">
+      <div class="body-item-title"><span></span></div>
+      <div class="body-item-content"></div>
+    </div>
+    <div id="doi-tuong-kh" class="body-item">
+      <div class="body-item-title"><span></span></div>
+      <div class="body-item-content"></div>
+    </div>
+    <div id="kh-lien-quan" class="body-item">
+      <div class="body-item-title"><span></span></div>
+      <div class="body-item-content"></div>
+    </div>
+  </div>
+
+
+</div>

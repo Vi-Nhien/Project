@@ -11,6 +11,7 @@ export class CourseDetailComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.idGuild);
   }
 
 }

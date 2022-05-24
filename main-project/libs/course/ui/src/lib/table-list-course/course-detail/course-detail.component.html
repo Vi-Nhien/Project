@@ -1,18 +1,16 @@
-<p>
-  {{idGuild}}
-</p>
+
 <div class="container-detail">
-  <nz-tabset nzType="card">
-    <nz-tab [nzTitle]="TabThongBao">
+  <nz-tabset nzType="card" nzSize="small" nzCentered>
+    <nz-tab [nzTitle]="TabThongBao" style="padding-bottom:64px;">
       <ng-template #TabThongBao class = "f-14">
         Thông báo
       </ng-template>
-      <nz-tabset nzTabPosition=left>
+      <nz-tabset nzTabPosition=left style = "background-color: #fff;" style="min-height:100vh;">
         <nz-tab [nzTitle]="ThongBao">
           <ng-template #ThongBao>
             <i class='bx bx-book-open'></i> Thông tin khóa học
           </ng-template>
-          
+          <app-information-course  idGuild="{{idGuild}}"></app-information-course>
         </nz-tab>
         <nz-tab [nzTitle]="AnhVideo">
           <ng-template #AnhVideo>
@@ -39,6 +37,5 @@
       </ng-template>
     </nz-tab>
   </nz-tabset>
-
 
 </div>
