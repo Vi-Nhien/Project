@@ -43,7 +43,7 @@ import { ReactiveFormsModule } from "@angular/forms";
     QuillModule.forRoot(),
     QuillModule,
     ReactiveFormsModule,
-    DragDropModule
+    DragDropModule,
   ],
   declarations: [
     HeaderCourseComponent,

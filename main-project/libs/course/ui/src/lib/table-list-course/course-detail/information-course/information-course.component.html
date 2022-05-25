@@ -1,107 +1,212 @@
 <div class="container-IC">
-  <nz-anchor style="background-color: #fff; margin-bottom: 20px;">
-    <div class="anchor-nav">
-      <nz-link nzHref="#tt-co-ban" nzTitle="Thông tin cơ bản"></nz-link>
-      <nz-link nzHref="#yeu-cau" nzTitle="yêu cầu"></nz-link>
-      <nz-link nzHref="#mo-ta-ct" nzTitle="Mô tả chi tiết"></nz-link>
-      <nz-link nzHref="#kh-bao-gom" nzTitle="Khóa học bao gồm"></nz-link>
-      <nz-link nzHref="#muc-tieu-kh" nzTitle="Mục tiêu khóa học"></nz-link>
-      <nz-link nzHref="#doi-tuong-kh" nzTitle="Đối tượng khóa học"></nz-link>
-      <nz-link nzHref="#kh-lien-quan" nzTitle="Khóa học liên quan"></nz-link>
-    </div>
-  </nz-anchor>
+  <ng-template #indicatorTemplate><i nz-icon nzType="loading"></i></ng-template>
+  <nz-spin  [nzIndicator]="indicatorTemplate" [nzSpinning]="loading">
+    <nz-anchor style="background-color: #fff; margin-bottom: 20px;">
+      <div class="anchor-nav">
+        <nz-link nzHref="#tt-co-ban" nzTitle="Thông tin cơ bản"></nz-link>
+        <nz-link nzHref="#yeu-cau" nzTitle="yêu cầu"></nz-link>
+        <nz-link nzHref="#mo-ta-ct" nzTitle="Mô tả chi tiết"></nz-link>
+        <nz-link nzHref="#kh-bao-gom" nzTitle="Khóa học bao gồm"></nz-link>
+        <nz-link nzHref="#muc-tieu-kh" nzTitle="Mục tiêu khóa học"></nz-link>
+        <nz-link nzHref="#doi-tuong-kh" nzTitle="Đối tượng khóa học"></nz-link>
+        <nz-link nzHref="#kh-lien-quan" nzTitle="Khóa học liên quan"></nz-link>
+      </div>
+    </nz-anchor>
 
-  <div class="course-infor-body">
-    <div id="tt-co-ban" style="padding: 28px 0;">
-      <div class="body-item">
-        <div class="body-item-title"><span>Thông tin cơ bản</span></div>
-        <div class="body-item-content">
-          <div class="row" style="padding-bottom: 12px;">
-            <div class="col-md-12">
-              <label class="control-label">Tên khóa học</label>
-              <input nz-input placeholder="Tên khóa học" class="form-control" />
+    <div class="course-infor-body">
+      <div id="tt-co-ban" style="padding-top: 28px;">
+        <div class="body-item">
+          <div class="body-item-title"><span>Thông tin cơ bản</span></div>
+          <div class="body-item-content">
+            <div class="row" style="padding-bottom: 12px;">
+              <div class="col-md-12">
+                <label class="control-label">Tên khóa học</label>
+                <input nz-input placeholder="Tên khóa học" class="form-control" />
+              </div>
             </div>
-          </div>
-          <div class="row" style="padding-bottom: 12px;">
-            <div class="col-md-6">
-              <label class="control-label">Chủ đề</label>
-              <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Chọn" class="form-control">
-                <nz-option></nz-option>
-                <nz-option></nz-option>
-                <nz-option></nz-option>
-              </nz-select>
+            <div class="row" style="padding-bottom: 12px;">
+              <div class="col-md-6">
+                <label class="control-label">Chủ đề</label>
+                <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Chọn" class="form-control">
+                  <nz-option></nz-option>
+                  <nz-option></nz-option>
+                  <nz-option></nz-option>
+                </nz-select>
+              </div>
+              <div class="col-md-6">
+                <label class="control-label">Thời lượng</label>
+                <input nz-input placeholder="Thời lượng" class="form-control" />
+              </div>
             </div>
-            <div class="col-md-6">
-              <label class="control-label">Thời lượng</label>
-              <input nz-input placeholder="Thời lượng" class="form-control" />
-            </div>
-          </div>
-          <div class="row" style="padding-bottom: 12px;">
-            <div class="col-md-12">
-              <label class="control-label">Mô Tả</label>
-              <textarea rows="4" nz-input class="form-control"></textarea>
+            <div class="row" style="padding-bottom: 12px;">
+              <div class="col-md-12">
+                <label class="control-label">Mô Tả</label>
+                <textarea rows="4" nz-input class="form-control"></textarea>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div id="yeu-cau" style="padding: 28px 0;">
-      <div class="body-item">
-        <div class="body-item-title"><span>yêu cầu</span></div>
-        <div class="body-item-content">
-          <div class="row">
-            <div class="col-md-12">
-              <quill-editor class="content-editor" [placeholder]="'Nhập nội dung'" [modules]="quillConfiguration"
-                [styles]="{'min-height': '120px'}">
-              </quill-editor>
+      <div id="yeu-cau" style="padding-top: 28px;">
+        <div class="body-item">
+          <div class="body-item-title"><span>yêu cầu</span></div>
+          <div class="body-item-content">
+            <div class="row">
+              <div class="col-md-12">
+                <quill-editor class="content-editor" [placeholder]="'Nhập nội dung'" [modules]="quillConfiguration"
+                  [styles]="{'min-height': '120px'}">
+                </quill-editor>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div id="mo-ta-ct" style="padding: 28px 0;">
-      <div class="body-item">
-        <div class="body-item-title"><span>Mô tả chi tiết</span></div>
-        <div class="body-item-content">
-          <div class="row">
-            <div class="col-md-12">
-              <quill-editor class="content-editor" [placeholder]="''" [modules]="quillConfiguration"
-                [styles]="{'min-height': '120px'}">
-              </quill-editor>
+      <div id="mo-ta-ct" style="padding-top: 28px;">
+        <div class="body-item">
+          <div class="body-item-title"><span>Mô tả chi tiết</span></div>
+          <div class="body-item-content">
+            <div class="row">
+              <div class="col-md-12">
+                <quill-editor class="content-editor" [placeholder]="''" [modules]="quillConfiguration"
+                  [styles]="{'min-height': '120px'}">
+                </quill-editor>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div id="kh-bao-gom"  style="padding: 28px 0;">
-      <div class="body-item">
-        <div class="body-item-title"><span>Mô tả chi tiết</span></div>
-        <div class="body-item-content">
-          <div class="row">
-            <div class="col-md-12">
-              <quill-editor class="content-editor" [placeholder]="''" [modules]="quillConfiguration"
-                [styles]="{'min-height': '120px'}">
-              </quill-editor>
+      <div id="kh-bao-gom" style="padding-top: 28px;">
+        <div class="body-item">
+          <div class="body-item-title"><span>Khóa học bao gồm</span></div>
+          <div class="body-item-content">
+            <div cdkDropList class="text-list mt-20" (cdkDropListDropped)="drop($event)">
+              <div class="text-box" *ngFor="let KH_BaoGom of KH_BaoGoms, index as i" cdkDrag>
+                <div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="10" height="19" viewBox="0 0 10 19" fill="none">
+                    <circle r="1.58182" transform="matrix(1 0 0 -1 2.3157 16.9107)" fill="#C5CACC"></circle>
+                    <circle r="1.58182" transform="matrix(1 0 0 -1 8.16824 16.9107)" fill="#C5CACC"></circle>
+                    <circle r="1.58182" transform="matrix(1 0 0 -1 2.3157 9.49253)" fill="#C5CACC"></circle>
+                    <circle r="1.58182" transform="matrix(1 0 0 -1 8.16824 9.49253)" fill="#C5CACC"></circle>
+                    <circle r="1.58182" transform="matrix(1 0 0 -1 2.3157 2.07443)" fill="#C5CACC"></circle>
+                    <circle r="1.58182" transform="matrix(1 0 0 -1 8.16824 2.07443)" fill="#C5CACC"></circle>
+                  </svg>
+                </div>
+                <div class="w-100 drag-content">
+                  <textarea rows="3" nz-input placeholder="Nhập tên cấu trúc"></textarea>
+                </div>
+                <div class="w-10 delete-icon">
+                  <button class="btn" (click)="delete(i)">
+                    <svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em"
+                      data-icon="delete" aria-hidden="true">
+                      <path
+                        d="M360 184h-8c4.4 0 8-3.6 8-8v8h304v-8c0 4.4 3.6 8 8 8h-8v72h72v-80c0-35.3-28.7-64-64-64H352c-35.3 0-64 28.7-64 64v80h72v-72zm504 72H160c-17.7 0-32 14.3-32 32v32c0 4.4 3.6 8 8 8h60.4l24.7 523c1.6 34.1 29.8 61 63.9 61h454c34.2 0 62.3-26.8 63.9-61l24.7-523H888c4.4 0 8-3.6 8-8v-32c0-17.7-14.3-32-32-32zM731.3 840H292.7l-24.2-512h487l-24.2 512z">
+                      </path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
+            <button class="btn drop-add" (click)="addNew()">
+              Thêm cấu trúc
+            </button>
           </div>
         </div>
       </div>
-    </div>
 
+      <div id="muc-tieu-kh" style="padding-top: 28px;">
+        <div class="body-item">
+          <div class="body-item-title"><span>Mục tiêu khóa học</span></div>
+          <div class="body-item-content">
+            <div cdkDropList class="text-list mt-20" (cdkDropListDropped)="drop($event)">
+              <div class="text-box" *ngFor="let KH_BaoGom of KH_BaoGoms, index as i" cdkDrag>
+                <div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="10" height="19" viewBox="0 0 10 19" fill="none">
+                    <circle r="1.58182" transform="matrix(1 0 0 -1 2.3157 16.9107)" fill="#C5CACC"></circle>
+                    <circle r="1.58182" transform="matrix(1 0 0 -1 8.16824 16.9107)" fill="#C5CACC"></circle>
+                    <circle r="1.58182" transform="matrix(1 0 0 -1 2.3157 9.49253)" fill="#C5CACC"></circle>
+                    <circle r="1.58182" transform="matrix(1 0 0 -1 8.16824 9.49253)" fill="#C5CACC"></circle>
+                    <circle r="1.58182" transform="matrix(1 0 0 -1 2.3157 2.07443)" fill="#C5CACC"></circle>
+                    <circle r="1.58182" transform="matrix(1 0 0 -1 8.16824 2.07443)" fill="#C5CACC"></circle>
+                  </svg>
+                </div>
+                <div class="w-100 drag-content">
+                  <textarea rows="3" nz-input placeholder="Nhập tên cấu trúc"></textarea>
+                </div>
+                <div class="w-10 delete-icon">
+                  <button class="btn" (click)="delete(i)">
+                    <svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em"
+                      data-icon="delete" aria-hidden="true">
+                      <path
+                        d="M360 184h-8c4.4 0 8-3.6 8-8v8h304v-8c0 4.4 3.6 8 8 8h-8v72h72v-80c0-35.3-28.7-64-64-64H352c-35.3 0-64 28.7-64 64v80h72v-72zm504 72H160c-17.7 0-32 14.3-32 32v32c0 4.4 3.6 8 8 8h60.4l24.7 523c1.6 34.1 29.8 61 63.9 61h454c34.2 0 62.3-26.8 63.9-61l24.7-523H888c4.4 0 8-3.6 8-8v-32c0-17.7-14.3-32-32-32zM731.3 840H292.7l-24.2-512h487l-24.2 512z">
+                      </path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <button class="btn drop-add" (click)="addNew()">
+              Thêm cấu trúc
+            </button>
+          </div>
+        </div>
 
-    <div id="muc-tieu-kh" class="body-item">
-      <div class="body-item-title"><span></span></div>
-      <div class="body-item-content"></div>
-    </div>
-    <div id="doi-tuong-kh" class="body-item">
-      <div class="body-item-title"><span></span></div>
-      <div class="body-item-content"></div>
-    </div>
-    <div id="kh-lien-quan" class="body-item">
-      <div class="body-item-title"><span></span></div>
-      <div class="body-item-content"></div>
-    </div>
-  </div>
+      </div>
 
+      <div id="doi-tuong-kh" style="padding-top: 28px;">
+        <div class="body-item">
+          <div class="body-item-title"><span>Đối tượng khóa học</span></div>
+          <div class="body-item-content">
+            <div cdkDropList class="text-list mt-20" (cdkDropListDropped)="drop($event)">
+              <div class="text-box" *ngFor="let KH_BaoGom of KH_BaoGoms, index as i" cdkDrag>
+                <div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="10" height="19" viewBox="0 0 10 19" fill="none">
+                    <circle r="1.58182" transform="matrix(1 0 0 -1 2.3157 16.9107)" fill="#C5CACC"></circle>
+                    <circle r="1.58182" transform="matrix(1 0 0 -1 8.16824 16.9107)" fill="#C5CACC"></circle>
+                    <circle r="1.58182" transform="matrix(1 0 0 -1 2.3157 9.49253)" fill="#C5CACC"></circle>
+                    <circle r="1.58182" transform="matrix(1 0 0 -1 8.16824 9.49253)" fill="#C5CACC"></circle>
+                    <circle r="1.58182" transform="matrix(1 0 0 -1 2.3157 2.07443)" fill="#C5CACC"></circle>
+                    <circle r="1.58182" transform="matrix(1 0 0 -1 8.16824 2.07443)" fill="#C5CACC"></circle>
+                  </svg>
+                </div>
+                <div class="w-100 drag-content">
+                  <textarea rows="3" nz-input placeholder="Nhập tên cấu trúc"></textarea>
+                </div>
+                <div class="w-10 delete-icon">
+                  <button class="btn" (click)="delete(i)">
+                    <svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em"
+                      data-icon="delete" aria-hidden="true">
+                      <path
+                        d="M360 184h-8c4.4 0 8-3.6 8-8v8h304v-8c0 4.4 3.6 8 8 8h-8v72h72v-80c0-35.3-28.7-64-64-64H352c-35.3 0-64 28.7-64 64v80h72v-72zm504 72H160c-17.7 0-32 14.3-32 32v32c0 4.4 3.6 8 8 8h60.4l24.7 523c1.6 34.1 29.8 61 63.9 61h454c34.2 0 62.3-26.8 63.9-61l24.7-523H888c4.4 0 8-3.6 8-8v-32c0-17.7-14.3-32-32-32zM731.3 840H292.7l-24.2-512h487l-24.2 512z">
+                      </path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <button class="btn drop-add" (click)="addNew()">
+              Thêm cấu trúc
+            </button>
+          </div>
+        </div>
+      </div>
+      <div id="kh-lien-quan" style="padding-top: 28px;">
+        <div class="body-item">
+          <div class="body-item-title"><span>Khóa học liên quan</span></div>
+          <div class="body-item-content">
+            <nz-select nzMode="tags" nzPlaceHolder="Chọn" class="form-control">
+              <nz-option></nz-option>
+              <nz-option></nz-option>
+              <nz-option></nz-option>
+            </nz-select>
+          </div>
+        </div>
+      </div>
 
+    </div>
+  </nz-spin>
+
+</div>
+
+<div class = "body-footer">
+    <button class = "btn btn-save">Lưu thay đổi</button>
 </div>
