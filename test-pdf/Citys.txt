@@ -1,0 +1,10 @@
+A: Thành Phố A diện tích 1200km2.
+B: Thành Phố B diên tích 1435km2.
+C: Thành Phố C diện tích 1320km2.
+D: Thành Phố D diên tích 1506km2.
+E: Thành Phố E diện tích 1223km2.
+F: Thành Phố F diên tích 1492km2.
+g: Thành Phố G diện tích 1151km2.
+H: Thành Phố H diên tích 1441km2.
+I: Thành Phố I diện tích 1312km2.
+J: Thành Phố J diên tích 1623km2.
