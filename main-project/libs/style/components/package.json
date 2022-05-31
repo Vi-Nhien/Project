@@ -1,0 +1,42 @@
+{
+  "name": "ng-zorro-antd",
+  "version": "13.2.2",
+  "license": "MIT",
+  "description": "An enterprise-class UI components based on Ant Design and Angular",
+  "schematics": "./schematics/collection.json",
+  "ng-update": {
+    "migrations": "./schematics/migration.json",
+    "packageGroup": [
+      "ng-zorro-antd"
+    ]
+  },
+  "keywords": [
+    "ant",
+    "design",
+    "angular",
+    "ui",
+    "framework",
+    "frontend"
+  ],
+  "homepage": "https://ng.ant.design",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NG-ZORRO/ng-zorro-antd"
+  },
+  "bugs": {
+    "url": "https://github.com/NG-ZORRO/ng-zorro-antd/issues"
+  },
+  "dependencies": {
+    "@angular/cdk": "^13.0.1",
+    "@ant-design/icons-angular": "^13.0.1",
+    "date-fns": "^2.16.1"
+  },
+  "peerDependencies": {
+    "@angular/animations": "^13.0.1",
+    "@angular/common": "^13.0.1",
+    "@angular/forms": "^13.0.1",
+    "@angular/core": "^13.0.1",
+    "@angular/platform-browser": "^13.0.1",
+    "@angular/router": "^13.0.1"
+  }
+}
